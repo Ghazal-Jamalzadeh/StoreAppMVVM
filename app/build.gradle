@@ -1,15 +1,20 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs'
+    id 'kotlin-parcelize'
+//    id 'com.google.gms.google-services'
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.jmzd.ghazal.storeappmvvm"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -29,6 +34,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        viewBinding true
+        dataBinding true
+    }
 }
 
 dependencies {
@@ -40,7 +50,54 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-
+    //Navigation
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+    //Dagger - Hilt
+    implementation 'com.google.dagger:hilt-android:2.45'
+    kapt 'com.google.dagger:hilt-compiler:2.45'
+    //DataStore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    //OkHTTP client
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
+    //Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+    //Lifecycle
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+    //Image Loading
+    implementation "io.coil-kt:coil:2.1.0"
+    //Gson
+    implementation 'com.google.code.gson:gson:2.9.1'
+    //Calligraphy
+    implementation 'io.github.inflationx:calligraphy3:3.1.1'
+    implementation 'io.github.inflationx:viewpump:2.0.3'
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    //Receive OTP
+    implementation 'com.google.android.gms:play-services-base:18.2.0'
+    implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.1'
+    //Other
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation 'com.todkars:shimmer-recyclerview:0.4.1'
+    implementation 'com.airbnb.android:lottie:5.2.0'
     implementation 'com.github.MrNouri:DynamicSizes:1.0'
+    implementation 'com.github.GoodieBag:Pinview:v1.5'
+    implementation 'me.relex:circleindicator:2.1.6'
+    implementation 'kr.co.prnd:readmore-textview:1.0.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    implementation 'com.github.aliab:Persian-Date-Picker-Dialog:1.8.0'
+    implementation 'com.github.SimformSolutionsPvtLtd:SSImagePicker:2.1'
+    implementation 'com.github.sparrow007:carouselrecyclerview:1.2.6'
+}
 
+kapt {
+    correctErrorTypes true
 }
