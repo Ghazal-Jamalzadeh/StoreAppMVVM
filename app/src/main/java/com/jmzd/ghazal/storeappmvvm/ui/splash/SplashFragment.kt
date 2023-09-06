@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.jmzd.ghazal.storeappmvvm.BuildConfig
 import com.jmzd.ghazal.storeappmvvm.R
+import com.jmzd.ghazal.storeappmvvm.data.stored.SessionManager
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentSplashBinding
 import dagger.hilt.android.AndroidEntryPoint
 
