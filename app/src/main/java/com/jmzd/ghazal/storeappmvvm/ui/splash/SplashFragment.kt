@@ -6,11 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.lifecycle.lifecycleScope
 import com.jmzd.ghazal.storeappmvvm.BuildConfig
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.stored.SessionManager
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentSplashBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SplashFragment : Fragment() {
@@ -18,6 +22,9 @@ class SplashFragment : Fragment() {
     //binding
     private var _binding : FragmentSplashBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,6 +66,15 @@ class SplashFragment : Fragment() {
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 //check user
+                lifecycleScope.launch {
+                val token : String? = sessionManager.getToken.first()
+                    if (token.isNullOrEmpty()){
+                        //login
+                    }else{
+                        //main
+                    }
+                }
+
             }
 
             override fun onTransitionTrigger(
