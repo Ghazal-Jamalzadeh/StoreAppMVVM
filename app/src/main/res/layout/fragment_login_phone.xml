@@ -1,14 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.login.LoginPhoneFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    android:background="@color/white"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+    <!--Title-->
     <TextView
+        android:id="@+id/titleTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/loginToApp"
+        android:textColor="@color/darkTurquoise"
+        android:textSize="@dimen/_16font_mdp"
+        app:fontPath="fonts/iransans_bold.ttf"
+        android:layout_marginTop="@dimen/_30mdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!--Info-->
+    <TextView
+        android:id="@+id/infoTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10mdp"
+        android:text="@string/enterYourPhone"
+        android:textColor="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTxt" />
+    <!--Animation-->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="@dimen/_180mdp"
+        android:layout_marginTop="@dimen/_10mdp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:layout_constraintTop_toBottomOf="@id/infoTxt"
+        app:lottie_rawRes="@raw/lottie_phone" />
+    <!--Phone number-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/phoneInpLay"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20mdp"
+        android:hint="@string/phoneNumber"
+        app:boxBackgroundColor="@color/aliceBlue"
+        app:boxCornerRadiusBottomEnd="@dimen/_10mdp"
+        app:boxCornerRadiusBottomStart="@dimen/_10mdp"
+        app:boxCornerRadiusTopEnd="@dimen/_10mdp"
+        app:boxCornerRadiusTopStart="@dimen/_10mdp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:hintAnimationEnabled="true"
+        app:hintTextColor="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/animationView"
+        app:startIconDrawable="@drawable/mobile"
+        app:startIconTint="@color/mediumTurquoise">
 
-</FrameLayout>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phoneEdt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:textColor="@color/darkTurquoise"
+            android:textSize="@dimen/_12font_mdp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <!--Button-->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/sendPhoneBtn"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40mdp"
+        android:layout_marginTop="@dimen/_20mdp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        android:text="@string/sendPhoneNumber"
+        android:textColor="@color/white"
+        app:backgroundTint="@null"
+        android:background="@drawable/bg_gradient_rounded"
+        app:layout_constraintEnd_toEndOf="@id/phoneInpLay"
+        app:layout_constraintStart_toStartOf="@id/phoneInpLay"
+        app:layout_constraintTop_toBottomOf="@id/phoneInpLay" />
+    <!--Img-->
+    <ImageView
+        android:id="@+id/bottomImg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:alpha="0.06"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="ContentDescription" />
+</androidx.constraintlayout.widget.ConstraintLayout>
