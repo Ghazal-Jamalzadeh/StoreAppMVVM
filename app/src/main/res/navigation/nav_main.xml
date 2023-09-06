@@ -10,4 +10,9 @@
         android:name="com.jmzd.ghazal.storeappmvvm.ui.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" />
+    <fragment
+        android:id="@+id/loginPhoneFragment"
+        android:name="com.jmzd.ghazal.storeappmvvm.ui.login.LoginPhoneFragment"
+        android:label="LoginPhoneFragment"
+        tools:layout="@layout/fragment_login_phone"/>
 </navigation>
