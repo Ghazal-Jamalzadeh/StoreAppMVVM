@@ -1,6 +1,7 @@
 package com.jmzd.ghazal.storeappmvvm.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
@@ -9,7 +10,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.databinding.ActivityMainBinding
+import com.jmzd.ghazal.storeappmvvm.utils.otp.AppSignatureHelper
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -20,6 +23,10 @@ class MainActivity : AppCompatActivity() {
 
     //nav controller
     private lateinit var navHost : NavHostFragment
+
+    @Inject
+    lateinit var signatureHelper: AppSignatureHelper
+    var hashCode : String = ""
 
 
     @Suppress("DEPRECATION")
@@ -49,6 +56,12 @@ class MainActivity : AppCompatActivity() {
                    else -> bottomNav.isVisible = true
                }
            }
+        }
+
+        //Generate Hashcode
+        signatureHelper.appSignatures.forEach { value : String ->
+            hashCode = value
+            Log.e("HashcodeLogs", "Hashcode : $hashCode")
         }
 
     }
