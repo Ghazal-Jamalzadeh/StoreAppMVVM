@@ -5,7 +5,7 @@ plugins {
     id 'org.jetbrains.kotlin.android' version '1.6.10' apply false
     id 'androidx.navigation.safeargs' version '2.5.0' apply false
     id 'com.google.dagger.hilt.android' version '2.45' apply false
-//    id 'com.google.gms.google-services' version '4.3.14' apply false
+    id 'com.google.gms.google-services' version '4.3.14' apply false
 }
 
 task clean(type: Delete) {

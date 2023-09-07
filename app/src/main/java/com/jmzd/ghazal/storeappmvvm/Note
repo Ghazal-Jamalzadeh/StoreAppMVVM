@@ -105,3 +105,69 @@ then use it like this :
         app:lottie_loop="false"
         app:layout_constraintTop_toBottomOf="@id/infoTxt"
         app:lottie_rawRes="@raw/lottie_phone" />
+
+SMS & HashCode--------------------------------------------------------------------------------------
+خب برای اوتو فیل شدن اس ام اس ها یک هش کد نیاز داریم
+هش کد یک کد یوتنیک هست
+ما توسط این کد متوجه می شیم که ای اس ام اس برای اپلیکیشن ما اومده
+ما این هش کد رو باید کاملا اختصاصی برای اپلیکیشن خودمون درست کنیم  و بفرستیم سمت سرور
+وقتی شماره موبایل رو وارد مکینیم این هش کد رو هم میفرستیم برای سرور
+توی اس ام اسی که برای ما فرستاده میشه بک این هش کد ته اس ام اس فرستاده میشه
+هش کد کاملا یونیک و از ۸ تا ۱۲ کاراکتر هست
+جلوتر توسط برادکست رسیورها این اس ام اس ها رو میخونیم
+و میبینیم آیا انتهاش یک هش کد مانندی داره
+و اگه داره همون هش کدیه که من میخوام یا نه
+اگه همونی که دنبالش هستیم باشه متن اس ام اس رو توسط برادکست رسیور میگیریم و کدی که میخوایم رو دستی از توش در میاریم
+اگه ایمیل باشه نیازی به هش کد نیست چون اوتو فیل نداریم
+
+پیاده سازی--------------------------------------
+برای پیاده سازی این سازوکار باید از سرویس های گوگل استفاده کنیم
+این هش کدها توسط یک سری الگوریتم های خیلی پیچیده و خاص توسط خود گوگل تولید میشن
+
+1- add dependencies to gradle
+    //Receive OTP
+    implementation 'com.google.android.gms:play-services-base:18.2.0'
+    implementation 'com.google.android.gms:play-services-auth-api-phone:18.0.1'
+
+2- add this plugin to gradle
+plugins {
+    id 'com.google.gms.google-services'
+}
+
+3- add this line of code to build.gradle (module level)
+plugins {
+    id 'com.google.gms.google-services' version '4.3.14' apply false
+}
+
+4- sync project
+چون سرویس های خود گوگل هستن باید وی پی ان خوبی برای دور زدن تحریم هاش داشته باشید
+
+5- error: file google-services.json is missing
+چون زمانی که میخوااید از پلی سرویس ها استفاده کنید باید اپلیکیشنتون رو توی فایربیس معرفی کنید
+بعد معرفی اون یک فایل جیسون میده به ما
+که نشون میده اپلیکیشن ما توی fcm یا فایربیس ثبت شده
+و ما بتونیم استفاده کنیم
+تحریم های فایربیس یکی از شدید ترین تحریم هاست
+
+6- open firebase console
+https://console.firebase.google.com/u/0/?pli=1
+create project -> choose a delkhah name -> create project
+or -> go to console (to visit your previous projects)
+https://console.firebase.google.com/u/0/project/storeapp-ed947/overview
+
+7- now choose a platform (circular icons)(ios | android | flutter | unity |...)
+-> android ->
+package name : gradle -> application id -> com.jmzd.ghazal.storeappmvvm
+nickname (optional) : delkhah name -> StoreAndroidApp
+SHA1 debug (optional) : nazdim felan
+-> register app
+
+8- download json
+project view -> app -> paste json file here
+
+9-
+پیشنهاد میده یک سری دپندنسی ها رو اضافه کنیم که ما قبلا کردیم
+-> next
+
+10-
+

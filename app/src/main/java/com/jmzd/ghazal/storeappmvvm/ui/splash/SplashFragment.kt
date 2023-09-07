@@ -52,7 +52,7 @@ class SplashFragment : Fragment() {
                 startId: Int,
                 endId: Int,
             ) {
-                TODO("Not yet implemented")
+
             }
 
             override fun onTransitionChange(
@@ -61,7 +61,7 @@ class SplashFragment : Fragment() {
                 endId: Int,
                 progress: Float,
             ) {
-                TODO("Not yet implemented")
+
             }
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
@@ -83,7 +83,7 @@ class SplashFragment : Fragment() {
                 positive: Boolean,
                 progress: Float,
             ) {
-                TODO("Not yet implemented")
+
             }
 
         })

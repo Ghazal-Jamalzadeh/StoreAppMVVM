@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "156842030943",
+    "project_id": "storeapp-ed947",
+    "storage_bucket": "storeapp-ed947.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156842030943:android:755c82fa899408ba03e8ea",
+        "android_client_info": {
+          "package_name": "com.jmzd.ghazal.storeappmvvm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "156842030943-qrno1447fetuk4mejgtkv24tb9pb7c28.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3kSlrSPDTXLfdr0SsnyoRkzBxnhbkKmI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "156842030943-qrno1447fetuk4mejgtkv24tb9pb7c28.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
