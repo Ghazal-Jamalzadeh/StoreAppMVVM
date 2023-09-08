@@ -1,13 +1,14 @@
 package com.jmzd.ghazal.storeappmvvm.ui
 
+import academy.nouri.storeapp.utils.otp.SMSBroadcastReceiver
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.databinding.ActivityMainBinding
 import com.jmzd.ghazal.storeappmvvm.utils.otp.AppSignatureHelper
@@ -26,7 +27,13 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var signatureHelper: AppSignatureHelper
+
+    @Inject
+    lateinit var smsBroadcastReceiver : SMSBroadcastReceiver
+
+    //other
     var hashCode : String = ""
+    private var intentFilter : IntentFilter? = null
 
 
     @Suppress("DEPRECATION")
@@ -65,6 +72,29 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+    private fun initBroadCast(){
+        intentFilter = IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION)
+        smsBroadcastReceiver.onReceiveMessage {
+            Log.e("SMSLogs", "SMS : $hashCode")
+        }
+    }
+
+    private fun smsReceiver(){
+        val client = SmsRetriever.getClient(this)
+        client.startSmsRetriever()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        registerReceiver(smsBroadcastReceiver , intentFilter)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(smsBroadcastReceiver)
+    }
+
 
     override fun onNavigateUp(): Boolean {
         return navHost.navController.navigateUp() || super.onNavigateUp()
