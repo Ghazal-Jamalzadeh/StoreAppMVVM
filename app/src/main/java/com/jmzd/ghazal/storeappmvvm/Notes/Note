@@ -112,3 +112,10 @@ then use it like this :
         app:lottie_loop="false"
         app:layout_constraintTop_toBottomOf="@id/infoTxt"
         app:lottie_rawRes="@raw/lottie_phone" />
+
+Hilt named and qualifiers---------------------------------------------------------------------------
+کوالیفایرها که یکم سختن و باید فایل جدا براشون ساخت و این ها
+برای named ها
+چون هیلت از روی دیتا تایپ تشخیص میده چیزا رو
+وقتی مثلا دو تا لانگ داریم باید یکیش نیمد باشه
+وقتی ۱۰ تا لانگ داریم باید ۹ تاش نیمد باشه
