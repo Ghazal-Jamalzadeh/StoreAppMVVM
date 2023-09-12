@@ -167,3 +167,36 @@ Handle Dynamic Errors-----------------------------------------------------------
 در نهایت ارور رو در قالب نتورک ریکوعست میدیم بیرون
                 NetworkRequest.Error(errorMessage)
             }
+
+ViewModel & LiveData--------------------------------------------------------------------------------
+کار جدیدی که در این پروژه کردیم استفاده از انکپسولیشن در لایو دیتاهاست
+همچنین ویومدل رو قبلا به این شکل تعریف میکردیم توی صفحه
+    private val viewModel : LoginViewModel by viewModels()
+    private val viewModel by viewModels<LoginViewModel>()
+عینا شبیه هم هستن و برتری خاصی به هم ندارن اصلا
+
+-------------------------------------------------------------------------تزریق وابستگی در دیتا کلاس ها
+فرض کنید این کلاس رو داریم و میخوایم بتونیم تزریقش کنیم
+data class BodyLogin(
+    @SerializedName("login")
+    val login: String?, //09120174757
+    @SerializedName("hash_code")
+    val hashCode: String?, //hjfvhzdbg#+
+)
+
+روش اول :
+data class BodyLogin @Inject constructor(
+    @SerializedName("login")
+    val login: String?, //09120174757
+    @SerializedName("hash_code")
+    val hashCode: String?, //hjfvhzdbg#+
+)
+
+روش دوم: (اصولی تر)
+بهتره بیایم این ها رو در قالب یک ماژول در نظر بگیریم
+چرا؟
+چون یک سری دیتا دارن معمولا که باید توی ورودی بهشون بدیم
+مجبور نباشیم دستی هندل کنیم
+به این منظور FragmentModule رو می سازیم
+لایف سسایکل این ماژول هم به جای سینگل تون فرگمنت خواهد بود
+دقت کنید چون باید مقداردهی اولیه صورت بگیرد مقادیر var بوده و مقدار اولیه null رو میدیم

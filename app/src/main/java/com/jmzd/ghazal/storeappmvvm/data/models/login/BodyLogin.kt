@@ -2,10 +2,11 @@ package com.jmzd.ghazal.storeappmvvm.data.models.login
 
 
 import com.google.gson.annotations.SerializedName
+import javax.inject.Inject
 
-data class BodyLogin(
+data class BodyLogin @Inject constructor(
     @SerializedName("login")
-    val login: String?, //09120174757
+    var login: String? = null, //09120174757
     @SerializedName("hash_code")
-    val hashCode: String?, //hjfvhzdbg#+
+    var hashCode: String? = null, //hjfvhzdbg#+
 )
