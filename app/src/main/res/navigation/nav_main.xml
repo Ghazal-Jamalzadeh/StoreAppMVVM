@@ -5,14 +5,34 @@
     android:id="@+id/nav_main"
     app:startDestination="@id/splashFragment">
 
+    <!-- splash -->
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.jmzd.ghazal.storeappmvvm.ui.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" />
-    <fragment
-        android:id="@+id/loginPhoneFragment"
-        android:name="com.jmzd.ghazal.storeappmvvm.ui.login.LoginPhoneFragment"
-        android:label="LoginPhoneFragment"
-        tools:layout="@layout/fragment_login_phone"/>
+
+    <!-- splash action -->
+    <action
+        android:id="@+id/action_splashFragment_to_nav_login"
+        app:destination="@id/nav_login"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    <!-- login nav graph -->
+    <navigation android:id="@+id/nav_login"
+        app:startDestination="@id/loginVerifyFragment">
+        <fragment
+            android:id="@+id/loginVerifyFragment"
+            android:name="com.jmzd.ghazal.storeappmvvm.ui.login.LoginVerifyFragment"
+            android:label="LoginVerifyFragment"
+            tools:layout="@layout/fragment_login_verify" />
+        <fragment
+            android:id="@+id/loginPhoneFragment"
+            android:name="com.jmzd.ghazal.storeappmvvm.ui.login.LoginPhoneFragment"
+            android:label="LoginPhoneFragment"
+            tools:layout="@layout/fragment_login_phone" />
+    </navigation>
 </navigation>

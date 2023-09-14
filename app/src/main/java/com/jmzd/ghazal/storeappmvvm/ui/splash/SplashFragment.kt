@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.jmzd.ghazal.storeappmvvm.BuildConfig
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.stored.SessionManager
@@ -69,7 +70,7 @@ class SplashFragment : Fragment() {
                 lifecycleScope.launch {
                 val token : String? = sessionManager.getToken.first()
                     if (token.isNullOrEmpty()){
-                        //login
+                        findNavController().navigate(R.id.action_splashFragment_to_nav_login)
                     }else{
                         //main
                     }
