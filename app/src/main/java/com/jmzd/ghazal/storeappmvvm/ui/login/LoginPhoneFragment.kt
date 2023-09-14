@@ -2,6 +2,7 @@ package com.jmzd.ghazal.storeappmvvm.ui.login
 
 import android.animation.Animator
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.login.BodyLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseLogin
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginPhoneBinding
 import com.jmzd.ghazal.storeappmvvm.ui.MainActivity
+import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.hideKeyboard
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
@@ -25,10 +27,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginPhoneFragment : Fragment() {
+class LoginPhoneFragment : BaseFragment() {
 
     //binding
-    private var _binding : FragmentLoginPhoneBinding? = null
+    private var _binding: FragmentLoginPhoneBinding? = null
     private val binding get() = _binding!!
 
     //viewModel
@@ -40,7 +42,7 @@ class LoginPhoneFragment : Fragment() {
     }
 
     @Inject
-    private lateinit var body : BodyLogin
+    private lateinit var body: BodyLogin
 
     //other
     private var phone = ""
@@ -70,22 +72,29 @@ class LoginPhoneFragment : Fragment() {
             observeLoginData()
 
             //--- clicks ---//
-            binding.sendPhoneBtn.setOnClickListener{
+            binding.sendPhoneBtn.setOnClickListener {
                 //hide keyboard
                 root.hideKeyboard()
 
                 //call api
                 phone = phoneEdt.text.toString()
-                if (phone.length == 11){
+                if (phone.length == 11) {
                     body.login = phone
-                    viewModel.login(body)
-                }else{
+                    if (isNetworkAvailable) {
+                        viewModel.login(body)
+                    }
+                } else {
                     root.showSnackBar("تعداد ارقام موبایل وارد شده نادرست است")
                 }
             }
 
         }
     }
+
+    override fun onNetworkLost() {
+        Snackbar.make(requireView(), "network lost :))))))", Snackbar.LENGTH_SHORT).show()
+    }
+
     private fun handleAnimation() {
 
         //لوپ انیمین رو خودمون فالس کردیم چون تکرار سریعش آزار دهنده هس
@@ -110,10 +119,10 @@ class LoginPhoneFragment : Fragment() {
         }
     }
 
-    private fun observeLoginData(){
+    private fun observeLoginData() {
         binding.apply {
             viewModel.loginLiveData.observe(viewLifecycleOwner) { response: MyResponse<ResponseLogin>? ->
-                when(response){
+                when (response) {
                     is MyResponse.Loading -> {
                     }
                     is MyResponse.Error -> {
