@@ -67,7 +67,7 @@ object NetworkModule {
                 chain.proceed(chain.request().newBuilder()
                     .also {
                         it.addHeader(AUTHORIZATION, "$BEARER $token")
-                        it.addHeader(ACCEPT, APPLICATION_JSON)
+//                        it.addHeader(ACCEPT, APPLICATION_JSON)
                     }.build())
             }
             .also { client ->

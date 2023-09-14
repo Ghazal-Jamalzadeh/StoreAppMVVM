@@ -9,8 +9,6 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 
 interface ApiServices {
-
-    @Headers("ACCEPT : APPLICATION/JSON")
     @POST("auth/login")
     suspend fun postLogin(@Body body : BodyLogin) : Response<ResponseLogin>
 }
