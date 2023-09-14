@@ -17,6 +17,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseLogin
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginPhoneBinding
 import com.jmzd.ghazal.storeappmvvm.ui.MainActivity
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.enableLoading
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.hideKeyboard
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
@@ -124,11 +125,14 @@ class LoginPhoneFragment : BaseFragment() {
             viewModel.loginLiveData.observe(viewLifecycleOwner) { response: MyResponse<ResponseLogin>? ->
                 when (response) {
                     is MyResponse.Loading -> {
+                        sendPhoneBtn.enableLoading(true)
                     }
                     is MyResponse.Error -> {
+                        sendPhoneBtn.enableLoading(false)
                         root.showSnackBar(response.message!!)
                     }
                     is MyResponse.Success -> {
+                        sendPhoneBtn.enableLoading(false)
                         response.data.let {
                             //navigate to next page
                         }
