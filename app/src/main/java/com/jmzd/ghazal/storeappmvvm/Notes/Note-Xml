@@ -1,0 +1,59 @@
+Lottie----------------------------------------------------------------------------------------------
+res -> RClick -> new android resource directory -> raw -> insert your animation here
+
+then use it like this :
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_180mdp"
+        android:layout_marginTop="@dimen/_10mdp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:layout_constraintTop_toBottomOf="@id/infoTxt"
+        app:lottie_rawRes="@raw/lottie_phone" />
+
+Focusable Attr--------------------------------------------------------------------------------------
+این ویژگی ها که داخل لایه روت صفحات لاگین گذاشتیم به چه دردی میخورن؟
+
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+
+توی صفحاتی که ما ادیت تکست داریم
+زمانی که صفحه من ساخته میشه به صورت خودکار کیبورد میاد بالا
+این ممکنه چیزی نباشه که خیلی جالب باشه
+این کدها رو میزنیم که از این اتفاق جلوگیری کنیم
+میایم این دو تا فوکوس رو روی یک ویوی خنثی میذاریم
+همون اول کار روی اینا فوکوس میشه
+دیگه کیبورد اینا الکی باز نمیشن
+
+PinView----------------------------------------------------------------------------------------------
+    <com.goodiebag.pinview.Pinview
+        android:id="@+id/pinView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15mdp"
+        app:forceKeyboard="false"
+        app:hint="0"
+        app:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/animationView"
+        app:pinBackground="@drawable/bg_otp" // این یک بک گراند است که با سلکتور ساخته شده
+        app:pinHeight="@dimen/_35mdp"
+        app:pinLength="4"
+        app:pinWidth="@dimen/_35mdp"
+        app:textSize="@dimen/_6font_mdp" />
+
+LinearProgressIndicator-----------------------------------------------------------------------------
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/timerProgress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:indeterminate="false"
+            android:max="60" // چون ۶۰ ثانیه هست تایمرمون
+            android:progress="60"
+            app:indicatorColor="@color/darkTurquoise" //رنگ ها
+            app:trackColor="@color/lightTurquoise" // رنگ ها
+            app:trackCornerRadius="@dimen/_8mdp"
+            app:trackThickness="@dimen/_40mdp" />
