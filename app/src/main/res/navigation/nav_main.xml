@@ -23,7 +23,7 @@
 
     <!-- login nav graph -->
     <navigation android:id="@+id/nav_login"
-        app:startDestination="@id/loginVerifyFragment">
+        app:startDestination="@id/loginPhoneFragment">
         <fragment
             android:id="@+id/loginVerifyFragment"
             android:name="com.jmzd.ghazal.storeappmvvm.ui.login.LoginVerifyFragment"
@@ -33,6 +33,10 @@
             android:id="@+id/loginPhoneFragment"
             android:name="com.jmzd.ghazal.storeappmvvm.ui.login.LoginPhoneFragment"
             android:label="LoginPhoneFragment"
-            tools:layout="@layout/fragment_login_phone" />
+            tools:layout="@layout/fragment_login_phone" >
+            <action
+                android:id="@+id/action_loginPhoneFragment_to_loginVerifyFragment"
+                app:destination="@id/loginVerifyFragment" />
+        </fragment>
     </navigation>
 </navigation>

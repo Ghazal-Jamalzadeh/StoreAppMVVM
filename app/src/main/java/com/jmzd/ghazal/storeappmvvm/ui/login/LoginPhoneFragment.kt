@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import coil.load
 import com.google.android.material.snackbar.Snackbar
 import com.jmzd.ghazal.storeappmvvm.R
@@ -43,7 +44,7 @@ class LoginPhoneFragment : BaseFragment() {
     }
 
     @Inject
-    private lateinit var body: BodyLogin
+    lateinit var body: BodyLogin
 
     //other
     private var phone = ""
@@ -134,7 +135,7 @@ class LoginPhoneFragment : BaseFragment() {
                     is MyResponse.Success -> {
                         sendPhoneBtn.enableLoading(false)
                         response.data.let {
-                            //navigate to next page
+                            findNavController().navigate(R.id.action_loginPhoneFragment_to_loginVerifyFragment)
                         }
                     }
 
