@@ -416,6 +416,4 @@ fun MaterialButton.enableLoading(loading: Boolean) {
 آیکون رو نال کن که دیگه نشون نده
 آلفا رو هم برگردون به حالت اولیه
 
-
-
 }
