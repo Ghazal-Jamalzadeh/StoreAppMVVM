@@ -9,15 +9,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import coil.load
+import com.goodiebag.pinview.Pinview
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.login.BodyLogin
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginPhoneBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginVerifyBinding
+import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -25,7 +28,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginVerifyFragment : Fragment() {
+class LoginVerifyFragment : BaseFragment() {
 
     //binding
     private var _binding: FragmentLoginVerifyBinding? = null
@@ -74,9 +77,25 @@ class LoginVerifyFragment : Fragment() {
             //Bottom image
             bottomImg.load(R.drawable.bg_circle)
 
+            //Customize pin view text color
+            pinView.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+
+            //Complete code
+            pinView.setPinViewEventListener(object : Pinview.PinViewEventListener {
+                override fun onDataEntered(pinview: Pinview?, fromUser: Boolean) {
+                    body.code = pinview?.value?.toInt()
+                    if (isNetworkAvailable)
+                        viewModel.verify(body)
+                }
+            })
+
 
         }
 
+    }
+
+    override fun onNetworkLost() {
+        Log.d("onNetworkLost", "onNetworkLost: yoyo ")
     }
 
 
@@ -115,6 +134,8 @@ class LoginVerifyFragment : Fragment() {
         intentFilter = IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION)
         smsBroadcastReceiver.onReceiveMessage { sms : String ->
             Log.e("SMSLogs", "SMS : $sms")
+            val code = sms.split(":")[1].trim().subSequence(0, 4)
+            binding.pinView.value = code.toString()
         }
     }
 
