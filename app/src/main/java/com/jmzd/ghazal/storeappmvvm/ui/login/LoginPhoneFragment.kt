@@ -2,8 +2,6 @@ package com.jmzd.ghazal.storeappmvvm.ui.login
 
 import android.animation.Animator
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -71,7 +69,7 @@ class LoginPhoneFragment : BaseFragment() {
             body.hashCode = parentActivity.hashCode
 
             //--- observers ---//
-            observeLoginData()
+            observeLoginLiveData()
 
             //--- clicks ---//
             binding.sendPhoneBtn.setOnClickListener {
@@ -121,7 +119,7 @@ class LoginPhoneFragment : BaseFragment() {
         }
     }
 
-    private fun observeLoginData() {
+    private fun observeLoginLiveData() {
         binding.apply {
             viewModel.loginLiveData.observe(viewLifecycleOwner) { response: MyResponse<ResponseLogin>? ->
                 when (response) {
