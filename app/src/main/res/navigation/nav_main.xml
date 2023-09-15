@@ -28,7 +28,11 @@
             android:id="@+id/loginVerifyFragment"
             android:name="com.jmzd.ghazal.storeappmvvm.ui.login.LoginVerifyFragment"
             android:label="LoginVerifyFragment"
-            tools:layout="@layout/fragment_login_verify" />
+            tools:layout="@layout/fragment_login_verify" >
+            <argument
+                android:name="mobile"
+                app:argType="string" />
+        </fragment>
         <fragment
             android:id="@+id/loginPhoneFragment"
             android:name="com.jmzd.ghazal.storeappmvvm.ui.login.LoginPhoneFragment"

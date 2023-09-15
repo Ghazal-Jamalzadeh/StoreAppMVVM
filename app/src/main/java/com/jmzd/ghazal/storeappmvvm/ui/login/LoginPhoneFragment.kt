@@ -135,7 +135,9 @@ class LoginPhoneFragment : BaseFragment() {
                     is MyResponse.Success -> {
                         sendPhoneBtn.enableLoading(false)
                         response.data.let {
-                            findNavController().navigate(R.id.action_loginPhoneFragment_to_loginVerifyFragment)
+                            val direction = LoginPhoneFragmentDirections.actionLoginPhoneFragmentToLoginVerifyFragment(phone)
+                            findNavController().navigate(direction)
+//                            findNavController().navigate(R.id.action_loginPhoneFragment_to_loginVerifyFragment)
                         }
                     }
 
