@@ -237,3 +237,7 @@ select fragments -> RClick -> move to nested group -> new graph -> rename it
 چالشی که این مدل درست میکنه دسترسی به فرگمنت های دخلی این ها هست
 ارتباط بین نویگشن ها و ...
 همه رو یاد میگیریم
+
+Custom animation for navigation--------------------------------------------------------------------
+Res -> R click -> new android resource directory -> anim
+

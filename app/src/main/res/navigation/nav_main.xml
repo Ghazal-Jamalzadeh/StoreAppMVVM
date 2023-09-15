@@ -36,7 +36,11 @@
             tools:layout="@layout/fragment_login_phone" >
             <action
                 android:id="@+id/action_loginPhoneFragment_to_loginVerifyFragment"
-                app:destination="@id/loginVerifyFragment" />
+                app:destination="@id/loginVerifyFragment"
+                app:enterAnim="@anim/from_left"
+                app:exitAnim="@anim/to_right"
+                app:popEnterAnim="@anim/from_right"
+                app:popExitAnim="@anim/to_left" />
         </fragment>
     </navigation>
 </navigation>
