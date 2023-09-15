@@ -9,4 +9,6 @@ data class BodyLogin(
     var login: String? = null, //09120174757
     @SerializedName("hash_code")
     var hashCode: String? = null, //hjfvhzdbg#+
+    @SerializedName("code")
+    var code: Int? = null, //8547
 )
