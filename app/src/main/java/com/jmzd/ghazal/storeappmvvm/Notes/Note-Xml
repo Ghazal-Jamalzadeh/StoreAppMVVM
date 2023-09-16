@@ -57,3 +57,54 @@ LinearProgressIndicator---------------------------------------------------------
             app:trackColor="@color/lightTurquoise" // رنگ ها
             app:trackCornerRadius="@dimen/_8mdp"
             app:trackThickness="@dimen/_40mdp" />
+
+Customize Bottom Nav--------------------------------------------------------------------------------
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_30mdp"
+        android:layout_marginBottom="@dimen/_20mdp"
+        android:background="@drawable/bg_bottom_menu" // بک گراند دلخواه
+        android:outlineAmbientShadowColor="@color/eerieBlack" //سایه رنگی توی api های زیر ۲۸ دیده نمیشه و طوسیه
+        android:outlineSpotShadowColor="@color/eerieBlack" // سایه رنگی توی api های زیر ۲۸ دیده نمیشه و طوسیه
+        android:paddingVertical="@dimen/_3mdp"
+        app:elevation="@dimen/_50mdp"
+        app:itemIconSize="@dimen/_15mdp" // سایز آیکون های منو
+        app:itemIconTint="@color/item_bottom_nav_tint"// رنگ آیکون ها (سلکتور)
+        app:itemRippleColor="@color/darkStrategy" // وقتی روی آیتم ها کلیک میشه ریپل چه رنگی باشه
+        app:itemTextAppearanceActive="@style/BottomNavigationViewFont" // برای ست کردن فونت باید اسستایل بدیم چون اینجا از کالی گرافی نمیخونه
+        app:itemTextColor="@color/item_bottom_nav_tint" //برای ایجاد رنگ هایی که تو حالت سلکت رنگ متفاوتی دارن توی پوشه کالر باید تعریف کنیم تا با حالت سلکتور باشن
+        app:labelVisibilityMode="selected" // فقط وقتی سلکت است لیبل رو ببینیم
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_home"
+        tools:targetApi="p" />
+
+استایل
+    <!--Bottom navigation font-->
+    <style name="BottomNavigationViewFont" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">@dimen/_8font_mdp</item>
+        <item name="fontFamily">@font/iransans</item>
+    </style>
+برای فهمیدن پرنت ها از داکیومنت های متریال ۲ یا ۳ برید بخونید
+یادآوری:
+وقتی استایل مینویسیم
+اونا که اندروید هست رو باید بنویسیم
+اونا که اپ هست رو لازم نیست بنویسیم
+فونت:
+فونت فمیلی رو از اپ بردارید
+(چون برای اندروید هم داره ولی اگه بخوایم روی همه دستگاه ها اعمال شه از اپ استفاده کنید)
+کلا اتریبیوت هایی که هم اندروید دارن هم اپ اگه بیاید از اندرویدش استفاده کنید
+میاد از اون ورژنی که واقعا داره ساپورت میشه به بعد رو نشون میده
+ولی اپ نه
+همه ورژن ها رو پوشش میده
+دایرکتوری فونت:
+باید بسازیمش و فونت ها رو بندازیم توش
+توی کالی گرافی نیاز نبود این فولدر ساخته شه
+
+        app:itemTextAppearanceActive="@style/BottomNavigationViewFont.Active"
+        app:itemTextAppearanceInactive="@style/BottomNavigationViewFont"
+        میشه دو تا استایل جداگانه برای حالت اکتیو و دی اکتیو ساخت حتی
