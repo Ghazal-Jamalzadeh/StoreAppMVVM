@@ -2,6 +2,7 @@ package com.jmzd.ghazal.storeappmvvm.ui.login
 
 import android.animation.Animator
 import android.os.Bundle
+import android.provider.SyncStateContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.login.BodyLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseLogin
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginPhoneBinding
 import com.jmzd.ghazal.storeappmvvm.ui.MainActivity
+import com.jmzd.ghazal.storeappmvvm.utils.IS_CALLED_VERIFY
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.enableLoading
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.hideKeyboard
@@ -81,6 +83,7 @@ class LoginPhoneFragment : BaseFragment() {
                 if (phone.length == 11) {
                     body.login = phone
                     if (isNetworkAvailable) {
+                        IS_CALLED_VERIFY = true
                         viewModel.login(body)
                     }
                 } else {
@@ -133,9 +136,13 @@ class LoginPhoneFragment : BaseFragment() {
                     is MyResponse.Success -> {
                         sendPhoneBtn.enableLoading(false)
                         response.data.let {
-                            val direction = LoginPhoneFragmentDirections.actionLoginPhoneFragmentToLoginVerifyFragment(phone)
-                            findNavController().navigate(direction)
+                            if (IS_CALLED_VERIFY) {
+                                val direction =
+                                    LoginPhoneFragmentDirections.actionLoginPhoneFragmentToLoginVerifyFragment()
+                                        .setMobile(phone)
+                                findNavController().navigate(direction)
 //                            findNavController().navigate(R.id.action_loginPhoneFragment_to_loginVerifyFragment)
+                            }
                         }
                     }
 

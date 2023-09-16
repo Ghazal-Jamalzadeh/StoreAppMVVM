@@ -23,7 +23,7 @@
 
     <!-- login nav graph -->
     <navigation android:id="@+id/nav_login"
-        app:startDestination="@id/loginVerifyFragment">
+        app:startDestination="@id/loginPhoneFragment">
         <fragment
             android:id="@+id/loginVerifyFragment"
             android:name="com.jmzd.ghazal.storeappmvvm.ui.login.LoginVerifyFragment"
@@ -31,11 +31,11 @@
             tools:layout="@layout/fragment_login_verify" >
             <argument
                 android:name="mobile"
-                app:argType="string" />
+                app:argType="string"
+                android:defaultValue=""/>
         </fragment>
         <fragment
-            android:id="@+id/loginPhoneFragment"
-            android:name="com.jmzd.ghazal.storeappmvvm.ui.login.LoginPhoneFragment"
+            android:id="@+id/loginPhoneFragment"            android:name="com.jmzd.ghazal.storeappmvvm.ui.login.LoginPhoneFragment"
             android:label="LoginPhoneFragment"
             tools:layout="@layout/fragment_login_phone" >
             <action

@@ -18,3 +18,6 @@ const val APPLICATION_JSON = "application/json"
 //Session
 const val SESSION_AUTH_DATA = "session_auth_data"
 const val USER_TOKEN_DATA = "user_token_data"
+
+//Flags
+var IS_CALLED_VERIFY = false

@@ -23,10 +23,14 @@ import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.login.BodyLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseLogin
+import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseVerify
+import com.jmzd.ghazal.storeappmvvm.data.stored.SessionManager
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginPhoneBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginVerifyBinding
+import com.jmzd.ghazal.storeappmvvm.utils.IS_CALLED_VERIFY
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.enableLoading
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.hideKeyboard
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
@@ -51,6 +55,9 @@ class LoginVerifyFragment : BaseFragment() {
     @Inject
     lateinit var body: BodyLogin
 
+    @Inject
+    lateinit var sessionManager: SessionManager
+
     //sms receiver
     @Inject
     lateinit var smsBroadcastReceiver: SMSBroadcastReceiver
@@ -67,6 +74,10 @@ class LoginVerifyFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //flags
+        IS_CALLED_VERIFY = false
+
         //sms receiver
         initBroadCast()
         smsReceiver()
@@ -87,7 +98,7 @@ class LoginVerifyFragment : BaseFragment() {
 
         //observers
         observeLoginLiveData()
-
+        observeVerifyLiveData()
 
         //init views
         binding.apply {
@@ -140,6 +151,38 @@ class LoginVerifyFragment : BaseFragment() {
             }
         }
     }
+
+    private fun observeVerifyLiveData() {
+        binding.apply {
+            viewModel.verifyLiveData.observe(viewLifecycleOwner) { response: MyResponse<ResponseVerify>? ->
+                when (response) {
+                    is MyResponse.Loading -> {
+                        timerLay.alpha = 0.3f
+                    }
+                    is MyResponse.Error -> {
+                        timerLay.alpha = 1.0f
+
+                        root.showSnackBar(response.message!!)
+                    }
+                    is MyResponse.Success -> {
+                        timerLay.alpha = 1.0f
+
+                        response.data.let { data :ResponseVerify?  ->
+                            lifecycleScope.launch{
+                                sessionManager.saveToken(data!!.accessToken.toString())
+                            }
+                            root.hideKeyboard()
+                            findNavController().popBackStack(R.id.loginVerifyFragment , true)
+                            findNavController().popBackStack(R.id.loginPhoneFragment , true)
+                            //TODO : navigate to home
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     //--- animation ---//
     private fun handleAnimation() {
