@@ -135,7 +135,6 @@
     <string name="ok">باشه</string>
     <string name="withoutName">بدون نام</string>
     <string name="shouldExistsProductInStore">این محصول در فروشگاه موجود نمیباشد</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

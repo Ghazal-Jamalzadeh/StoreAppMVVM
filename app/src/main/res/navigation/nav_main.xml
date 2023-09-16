@@ -14,7 +14,7 @@
 
     <!-- splash action -->
     <action
-        android:id="@+id/action_splashFragment_to_nav_login"
+        android:id="@+id/action_to_nav_login"
         app:destination="@id/nav_login"
         app:enterAnim="@anim/nav_default_enter_anim"
         app:exitAnim="@anim/nav_default_exit_anim"
@@ -22,22 +22,24 @@
         app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     <!-- login nav graph -->
-    <navigation android:id="@+id/nav_login"
+    <navigation
+        android:id="@+id/nav_login"
         app:startDestination="@id/loginPhoneFragment">
         <fragment
             android:id="@+id/loginVerifyFragment"
             android:name="com.jmzd.ghazal.storeappmvvm.ui.login.LoginVerifyFragment"
             android:label="LoginVerifyFragment"
-            tools:layout="@layout/fragment_login_verify" >
+            tools:layout="@layout/fragment_login_verify">
             <argument
                 android:name="mobile"
-                app:argType="string"
-                android:defaultValue=""/>
+                android:defaultValue=""
+                app:argType="string" />
         </fragment>
         <fragment
-            android:id="@+id/loginPhoneFragment"            android:name="com.jmzd.ghazal.storeappmvvm.ui.login.LoginPhoneFragment"
+            android:id="@+id/loginPhoneFragment"
+            android:name="com.jmzd.ghazal.storeappmvvm.ui.login.LoginPhoneFragment"
             android:label="LoginPhoneFragment"
-            tools:layout="@layout/fragment_login_phone" >
+            tools:layout="@layout/fragment_login_phone">
             <action
                 android:id="@+id/action_loginPhoneFragment_to_loginVerifyFragment"
                 app:destination="@id/loginVerifyFragment"
@@ -47,4 +49,41 @@
                 app:popExitAnim="@anim/to_left" />
         </fragment>
     </navigation>
+
+    <!-- main nav graph -->
+    <navigation android:id="@+id/nav_home"
+        app:startDestination="@id/categoriesFragment">
+        <fragment
+            android:id="@+id/categoriesFragment"
+            android:name="com.jmzd.ghazal.storeappmvvm.ui.categories.CategoriesFragment"
+            android:label="fragment_categories"
+            tools:layout="@layout/fragment_categories" />
+        <fragment
+            android:id="@+id/homeFragment"
+            android:name="com.jmzd.ghazal.storeappmvvm.ui.home.HomeFragment"
+            android:label="fragment_home"
+            tools:layout="@layout/fragment_home" />
+        <fragment
+            android:id="@+id/profileFragment"
+            android:name="com.jmzd.ghazal.storeappmvvm.ui.profile.ProfileFragment"
+            android:label="fragment_profile"
+            tools:layout="@layout/fragment_profile" />
+        <fragment
+            android:id="@+id/cartFragment"
+            android:name="com.jmzd.ghazal.storeappmvvm.ui.cart.CartFragment"
+            android:label="CartFragment"
+            tools:layout="@layout/fragment_cart" />
+    </navigation>
+
+    <!-- main actions -->
+    <action
+        android:id="@+id/action_to_nav_home"
+        app:destination="@id/nav_home"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+
+
 </navigation>

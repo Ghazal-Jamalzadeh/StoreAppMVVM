@@ -14,7 +14,7 @@ import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginVerifyFragment : Fragment() {
+class CartFragment : Fragment() {
 
     //binding
     private var _binding: FragmentCartBinding? = null

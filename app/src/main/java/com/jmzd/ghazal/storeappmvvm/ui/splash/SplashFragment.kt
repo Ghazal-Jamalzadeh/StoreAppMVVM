@@ -62,7 +62,6 @@ class SplashFragment : Fragment() {
                 endId: Int,
                 progress: Float,
             ) {
-
             }
 
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
@@ -70,9 +69,11 @@ class SplashFragment : Fragment() {
                 lifecycleScope.launch {
                 val token : String? = sessionManager.getToken.first()
                     if (token.isNullOrEmpty()){
-                        findNavController().navigate(R.id.action_splashFragment_to_nav_login)
+                        findNavController().navigate(R.id.action_to_nav_login)
                     }else{
                         //main
+                        findNavController().navigate(R.id.action_to_nav_home)
+
                     }
                 }
 

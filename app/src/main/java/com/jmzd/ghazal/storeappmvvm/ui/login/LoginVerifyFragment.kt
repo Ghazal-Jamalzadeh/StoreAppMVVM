@@ -174,7 +174,7 @@ class LoginVerifyFragment : BaseFragment() {
                             root.hideKeyboard()
                             findNavController().popBackStack(R.id.loginVerifyFragment , true)
                             findNavController().popBackStack(R.id.loginPhoneFragment , true)
-                            //TODO : navigate to home
+                            findNavController().navigate(R.id.action_to_nav_home)
 
                         }
                     }
@@ -239,6 +239,12 @@ class LoginVerifyFragment : BaseFragment() {
         intentFilter = IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION)
         smsBroadcastReceiver.onReceiveMessage { sms: String ->
             Log.e("SMSLogs", "SMS : $sms")
+            /*
+            سلام.
+            کد ورود : 3204
+            نوری آکادمی shop.nouri-api.ir
+            mngx1fgshu+
+                    */
             val code = sms.split(":")[1].trim().subSequence(0, 4)
             binding.pinView.value = code.toString()
         }
