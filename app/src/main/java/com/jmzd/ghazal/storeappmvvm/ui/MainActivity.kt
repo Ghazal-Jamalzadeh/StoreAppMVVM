@@ -51,7 +51,10 @@ class MainActivity : BaseActivity() {
         navHost.navController.addOnDestinationChangedListener { controller, destination, arguments ->
            binding.apply {
                when(destination.id){
-                   R.id.splashFragment -> bottomNav.isVisible = false
+                   R.id.splashFragment ,
+                   R.id.loginPhoneFragment ,
+                   R.id.loginVerifyFragment
+                   -> bottomNav.isVisible = false
                    else -> bottomNav.isVisible = true
                }
            }
