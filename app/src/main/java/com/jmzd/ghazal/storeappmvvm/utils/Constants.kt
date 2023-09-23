@@ -1,5 +1,7 @@
 package com.jmzd.ghazal.storeappmvvm.utils
 
+//TAG
+const val TAG = "TagTest"
 //Base URL
 const val BASE_URL = "https://shop.nouri-api.ir/api/v1/"
 const val CONNECTION_TIME_OUT = 60L

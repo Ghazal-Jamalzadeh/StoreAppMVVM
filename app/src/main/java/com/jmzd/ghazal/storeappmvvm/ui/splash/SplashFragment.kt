@@ -1,6 +1,8 @@
 package com.jmzd.ghazal.storeappmvvm.ui.splash
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -68,6 +70,7 @@ class SplashFragment : Fragment() {
                 //check user
                 lifecycleScope.launch {
                 val token : String? = sessionManager.getToken.first()
+                    Log.d(TAG, "token: $token")
                     if (token.isNullOrEmpty()){
                         findNavController().navigate(R.id.action_to_nav_login)
                     }else{

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/_110mdp"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5mdp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/_5mdp"
+    app:cardElevation="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_5mdp">
+        <!--Image-->
+        <View
+            android:id="@+id/itemImg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100mdp"
+            android:background="@color/silver"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--Title-->
+        <View
+            android:id="@+id/itemTitle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_20mdp"
+            android:layout_margin="@dimen/_5mdp"
+            android:background="@color/silver"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemImg" />
+        <!--ProgressBar-->
+        <View
+            android:id="@+id/itemProgress"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_4mdp"
+            android:layout_marginTop="@dimen/_5mdp"
+            android:background="@color/silver"
+            app:layout_constraintEnd_toEndOf="@+id/itemTitle"
+            app:layout_constraintStart_toStartOf="@id/itemTitle"
+            app:layout_constraintTop_toBottomOf="@+id/itemTitle" />
+        <!--Price-->
+        <View
+            android:id="@+id/constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_25mdp"
+            android:layout_marginTop="@dimen/_5mdp"
+            android:background="@color/silver"
+            app:layout_constraintEnd_toEndOf="@id/itemTitle"
+            app:layout_constraintStart_toStartOf="@id/itemTitle"
+            app:layout_constraintTop_toBottomOf="@id/itemProgress" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
