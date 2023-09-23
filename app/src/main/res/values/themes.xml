@@ -22,4 +22,30 @@
         <item name="android:textSize">@dimen/_8font_mdp</item>
         <item name="fontFamily">@font/iransans_bold</item>
     </style>
+
+    <!--Colored shadows-->
+    <style name="ColoredShadowDark">
+        <item name="android:outlineSpotShadowColor" tools:targetApi="p">@color/royalBlue</item>
+        <item name="android:outlineAmbientShadowColor" tools:targetApi="p">@color/royalBlue</item>
+    </style>
+
+    <style name="ColoredShadowLight">
+        <item name="android:outlineSpotShadowColor" tools:targetApi="p">@color/cornflowerBlue</item>
+        <item name="android:outlineAmbientShadowColor" tools:targetApi="p">@color/cornflowerBlue</item>
+    </style>
+    <!--Shaped images-->
+    <style name="CircleImage">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+    <!--ProgressBar-->
+    <style name="DarkProgressbar">
+        <item name="colorAccent">@color/darkStrategy</item>
+    </style>
+
+    <style name="SalmonProgressbar">
+        <item name="colorAccent">@color/salmon</item>
+    </style>
+
+
 </resources>

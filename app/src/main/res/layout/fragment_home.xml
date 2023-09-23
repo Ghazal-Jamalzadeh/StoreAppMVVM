@@ -1,13 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cultured"
     tools:context=".ui.home.HomeFragment">
-
+    <!--Avatar-->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/avatarImg"
+        style="@style/ColoredShadowDark"
+        android:layout_width="@dimen/_35mdp"
+        android:layout_height="@dimen/_35mdp"
+        android:layout_marginTop="@dimen/_10mdp"
+        android:layout_marginEnd="@dimen/_15mdp"
+        android:background="@color/white"
+        android:elevation="@dimen/_15mdp"
+        android:padding="@dimen/_1mdp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="@style/CircleImage"
+        app:strokeColor="@color/water"
+        app:strokeWidth="@dimen/_1mdp" />
+    <!--Loading-->
+    <ProgressBar
+        android:id="@+id/avatarLoading"
+        android:layout_width="@dimen/_20mdp"
+        android:layout_height="@dimen/_20mdp"
+        android:elevation="@dimen/_16mdp"
+        android:theme="@style/DarkProgressbar"
+        app:layout_constraintBottom_toBottomOf="@id/avatarImg"
+        app:layout_constraintEnd_toEndOf="@id/avatarImg"
+        app:layout_constraintStart_toStartOf="@id/avatarImg"
+        app:layout_constraintTop_toTopOf="@id/avatarImg" />
+    <!--Badge-->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/avatarBadgeImg"
+        android:layout_width="@dimen/_8mdp"
+        android:layout_height="@dimen/_8mdp"
+        android:layout_margin="@dimen/_2mdp"
+        android:background="@color/salmon"
+        android:elevation="@dimen/_16mdp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/avatarImg"
+        app:layout_constraintTop_toTopOf="@id/avatarImg"
+        app:shapeAppearance="@style/CircleImage" />
+    <!--Search-->
+    <ImageView
+        android:id="@+id/searchImg"
+        style="@style/ColoredShadowDark"
+        android:layout_width="@dimen/_35mdp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_10mdp"
+        android:layout_marginEnd="@dimen/_10mdp"
+        android:background="@drawable/bg_circle_white"
+        android:contentDescription="@string/app_name"
+        android:elevation="@dimen/_15mdp"
+        android:padding="@dimen/_11mdp"
+        android:src="@drawable/magnifying_glass_duo"
+        app:layout_constraintBottom_toBottomOf="@id/avatarImg"
+        app:layout_constraintEnd_toStartOf="@id/avatarImg"
+        app:layout_constraintTop_toTopOf="@id/avatarImg"
+        app:strokeColor="@color/water"
+        app:strokeWidth="@dimen/_1mdp"
+        app:tint="@color/darkStrategy" />
+    <!--App name-->
     <TextView
+        android:id="@+id/appNameTxt"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/_15mdp"
+        android:gravity="center_vertical"
+        android:text="@string/app_name"
+        android:textColor="@color/eerieBlack"
+        android:textSize="@dimen/_20font_mdp"
+        app:fontPath="fonts/nasalization.ttf"
+        app:layout_constraintBottom_toBottomOf="@id/avatarImg"
+        app:layout_constraintEnd_toStartOf="@+id/searchImg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!--Scroll-->
+    <ScrollView
+        android:id="@+id/scrollLay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_5mdp"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:paddingTop="@dimen/_10mdp"
+        android:paddingBottom="@dimen/_90mdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appNameTxt">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!--Banner-->
+            <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+                android:id="@+id/bannerList"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_145mdp"
+                android:visibility="gone" />
+            <!--Loading-->
+            <ProgressBar
+                android:id="@+id/bannerLoading"
+                android:layout_width="@dimen/_20mdp"
+                android:layout_height="@dimen/_20mdp"
+                android:layout_gravity="center_horizontal"
+                android:theme="@style/SalmonProgressbar" />
+            <!--Banner indicator-->
+            <me.relex.circleindicator.CircleIndicator2
+                android:id="@+id/bannerIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_10mdp"
+                android:layout_gravity="center_horizontal"
+                app:ci_drawable="@drawable/indicator_selected"
+                app:ci_drawable_unselected="@drawable/indicator_unselected"
+                app:ci_margin="@dimen/_3mdp"
+                app:circularflow_defaultRadius="@dimen/_5mdp" />
+            <!--Discount-->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/discountCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_15mdp"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:outlineAmbientShadowColor="@color/salmon"
+                android:outlineSpotShadowColor="@color/salmon"
+                app:cardBackgroundColor="@color/salmon"
+                app:cardCornerRadius="@dimen/_5mdp"
+                app:cardElevation="@dimen/_10mdp"
+                tools:targetApi="p">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <!--Title-->
+                    <TextView
+                        android:id="@+id/discountTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_10mdp"
+                        android:text="@string/discount"
+                        android:textColor="@color/cultured"
+                        android:textSize="@dimen/_11font_mdp"
+                        app:fontPath="fonts/iransans_bold.ttf"
+                        app:layout_constraintBottom_toBottomOf="@id/discountTimerContainer"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/discountTimerContainer" />
+                    <!--Timer-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/discountTimerContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <include
+                            android:id="@+id/timerLay"
+                            layout="@layout/discount_timer" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <!--List-->
+                    <com.todkars.shimmer.ShimmerRecyclerView
+                        android:id="@+id/discountList"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5mdp"
+                        android:layout_marginBottom="@dimen/_5mdp"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/_11mdp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/discountTimerContainer"
+                        app:layout_constraintVertical_bias="0.0"
+                        app:shimmer_recycler_auto_start="true"
+                        app:shimmer_recycler_item_count="1"
+                        app:shimmer_recycler_layout="@layout/item_discount_shimmer"
+                        app:shimmer_recycler_shape="linear" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+            <!--Mobile-->
+            <ViewStub
+                android:id="@+id/mobileLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:layout="@layout/home_mobile" />
+            <!--Shoes-->
+            <ViewStub
+                android:id="@+id/shoesLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:layout="@layout/home_shoes" />
+            <!--Stationery-->
+            <ViewStub
+                android:id="@+id/stationeryLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:layout="@layout/home_stationery" />
+            <!--Laptop-->
+            <ViewStub
+                android:id="@+id/laptopLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:layout="@layout/home_laptop" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

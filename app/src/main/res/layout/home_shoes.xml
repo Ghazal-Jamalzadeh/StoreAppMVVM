@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <!--Title-->
+    <TextView
+        android:id="@+id/menShoesProductsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15mdp"
+        android:gravity="center_vertical"
+        android:text="@string/menShoes"
+        android:textColor="@color/eerieBlack"
+        android:textSize="@dimen/_10font_mdp"
+        app:fontPath="fonts/iransans_bold.ttf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!--Show all-->
+    <TextView
+        android:id="@+id/menShoesProductsShowAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15mdp"
+        android:drawablePadding="@dimen/_5mdp"
+        android:gravity="center_vertical"
+        android:text="@string/showAll"
+        android:textColor="@color/royalBlue"
+        android:textSize="@dimen/_9font_mdp"
+        app:drawableStartCompat="@drawable/chevron_left_mini"
+        app:drawableTint="@color/royalBlue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!--List-->
+    <com.todkars.shimmer.ShimmerRecyclerView
+        android:id="@+id/menShoesProductsList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5mdp"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/_11mdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/menShoesProductsTitle"
+        app:shimmer_recycler_auto_start="true"
+        app:shimmer_recycler_item_count="1"
+        app:shimmer_recycler_layout="@layout/item_products_shimmer"
+        app:shimmer_recycler_shape="linear" />
+</androidx.constraintlayout.widget.ConstraintLayout>

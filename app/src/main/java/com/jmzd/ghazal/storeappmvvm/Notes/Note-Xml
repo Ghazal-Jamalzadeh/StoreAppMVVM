@@ -108,3 +108,83 @@ Customize Bottom Nav------------------------------------------------------------
         app:itemTextAppearanceActive="@style/BottomNavigationViewFont.Active"
         app:itemTextAppearanceInactive="@style/BottomNavigationViewFont"
         میشه دو تا استایل جداگانه برای حالت اکتیو و دی اکتیو ساخت حتی
+
+Shapeable ImageView---------------------------------------------------------------------------------
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/avatarImg"
+        style="@style/ColoredShadowDark" // برای سایه های رنگی توی کل اپ استایل نوشتیم
+        android:layout_width="@dimen/_35mdp"
+        android:layout_height="@dimen/_35mdp"
+        android:layout_marginTop="@dimen/_10mdp"
+        android:layout_marginEnd="@dimen/_15mdp"
+        android:background="@color/white"
+        android:elevation="@dimen/_15mdp"
+        android:padding="@dimen/_1mdp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="@style/CircleImage" // کرنرها
+        app:strokeColor="@color/water"
+        app:strokeWidth="@dimen/_1mdp" />
+
+Progress bar----------------------------------------------------------------------------------------
+    <ProgressBar
+        android:id="@+id/avatarLoading"
+        android:layout_width="@dimen/_20mdp"
+        android:layout_height="@dimen/_20mdp"
+        android:elevation="@dimen/_16mdp"
+        android:theme="@style/DarkProgressbar" // رنگشو با تم عوض میکنیم
+        app:layout_constraintBottom_toBottomOf="@id/avatarImg"
+        app:layout_constraintEnd_toEndOf="@id/avatarImg"
+        app:layout_constraintStart_toStartOf="@id/avatarImg"
+        app:layout_constraintTop_toTopOf="@id/avatarImg" />
+
+CarouselRecyclerview--------------------------------------------------------------------------------
+     <com.jackandphantom.carouselrecyclerview.CarouselRecyclerview
+         android:id="@+id/bannerList"
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/_145mdp"
+         android:visibility="gone" />
+
+         برای حالت افکتی که بنرهامون قراره داشته باشن
+
+CircleIndicator2 -----------------------------------------------------------------------------------
+      <!--Banner indicator-->
+      <me.relex.circleindicator.CircleIndicator2
+          android:id="@+id/bannerIndicator"
+          android:layout_width="wrap_content"
+          android:layout_height="@dimen/_10mdp"
+          android:layout_gravity="center_horizontal"
+          app:ci_drawable="@drawable/indicator_selected" //رنگ ها در حال انتخاب
+          app:ci_drawable_unselected="@drawable/indicator_unselected" // رنگ ها در حالت عادی
+          app:ci_margin="@dimen/_3mdp"
+          app:circularflow_defaultRadius="@dimen/_5mdp" />
+
+View Stub-------------------------------------------------------------------------------------------
+این یک ویوی خیلی ناشناخته هست که پرفورمنس شما رو از ۶۰ میرسونه به ۹۰
+
+include vs viewStub:
+از نظر عملکردی مشابه هم هستن
+جفتشونم ویوهایی که جای دیگه ای ساخته شدن رو میان نشون میدن
+(چون تعداد خط کد توی لایه از 700 800 تا بره بالاتر پرفورمنس میترکه و صفحه دیر لود میشه)
+
+ولی چه فرقی دارن؟
+فرقشون زمین تا آسمونه
+توی پیش نمایش لایه وقتی اینکلود رو سلکت میکنیم نشون میده و سلکت میشه
+ولی ویو استاب رو اصلا نشون نمیده
+چرا؟
+به یک دلیل خیلی مهم
+اینکلود همون اول میاد ویوی من رو جنریت میکنه
+یعنی هم زمان با ساخته شدن ui من اینکلودها هم ساخته میشن
+ولی ویو استاب رو همون اول نمیسازه
+وقتی بهش نیاز پیدا میکنید میسازدش
+شبیه اتفاقی که توی ریسایکر ویو می افته و تا زمانی که ویو توی اسکرین ظاهر نشده جنریت نمیشه
+بی نهایت پرفورمنس رو میبره بالا توی صفحات سنگین
+مثلا تا قبل اینکه دیتا از api بیاد هم چیزی نمیسازه
+ما بهش میگیم کی بساز لایه رو.
+با استفاده از inflate
+جلوتر یاد میگیریم
+
+Styles-----------------------------------------------------------------------------------------------
+به طور کلی وقتی روی ویژگی های عمومی که توی همه ویوها مشترکن استایل مینویسیم
+نیازی به پرنت نداریم
