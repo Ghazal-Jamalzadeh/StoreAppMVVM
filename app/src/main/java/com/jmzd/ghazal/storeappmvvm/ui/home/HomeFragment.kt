@@ -16,6 +16,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseProfile
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentHomeBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginPhoneBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginVerifyBinding
+import com.jmzd.ghazal.storeappmvvm.ui.home.adapters.BannerAdapter
 import com.jmzd.ghazal.storeappmvvm.ui.login.LoginPhoneFragmentDirections
 import com.jmzd.ghazal.storeappmvvm.utils.IS_CALLED_VERIFY
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.enableLoading
@@ -25,6 +26,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -36,6 +38,9 @@ class HomeFragment : Fragment() {
     //viewModel
     private val viewModel by viewModels<LoginViewModel>()
     private val profileViewModel by activityViewModels<ProfileViewModel>()
+
+    @Inject
+    lateinit var bannersAdapter : BannerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
