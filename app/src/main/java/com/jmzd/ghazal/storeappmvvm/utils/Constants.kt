@@ -23,3 +23,6 @@ const val USER_TOKEN_DATA = "user_token_data"
 
 //Flags
 var IS_CALLED_VERIFY = false
+
+//other
+const val GENERAL = "general"
