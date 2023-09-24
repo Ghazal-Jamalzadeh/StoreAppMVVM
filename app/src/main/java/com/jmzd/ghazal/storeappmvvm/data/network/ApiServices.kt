@@ -1,6 +1,7 @@
 package com.jmzd.ghazal.storeappmvvm.data.network
 
 import androidx.datastore.preferences.protobuf.BoolValue
+import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
 import com.jmzd.ghazal.storeappmvvm.data.models.login.BodyLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseVerify
@@ -17,4 +18,7 @@ interface ApiServices {
 
     @GET("auth/detail")
     suspend fun getProfile() : Response<ResponseProfile>
+
+    @GET("ad/swiper/{slug}")
+    suspend fun getBanners(@Path("slug") value : String) : Response<ResponseBanners>
 }
