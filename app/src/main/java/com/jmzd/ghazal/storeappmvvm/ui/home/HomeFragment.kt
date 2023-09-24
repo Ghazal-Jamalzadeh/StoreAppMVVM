@@ -11,6 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.jmzd.ghazal.storeappmvvm.R
+import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
+import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners.ResponseBannersItem
 import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseProfile
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentHomeBinding
@@ -23,6 +25,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.extensions.enableLoading
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.loadImage
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.viewmodel.HomeViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,7 +39,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     //viewModel
-    private val viewModel by viewModels<LoginViewModel>()
+    private val viewModel by viewModels<HomeViewModel>()
     private val profileViewModel by activityViewModels<ProfileViewModel>()
 
     @Inject
@@ -61,6 +64,7 @@ class HomeFragment : Fragment() {
         }
         //observers
         observeProfileLiveData()
+        observeBannersLiveData()
     }
 
 
@@ -102,5 +106,35 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun observeBannersLiveData() {
+        binding.apply {
+            viewModel.bannersLiveData.observe(viewLifecycleOwner) { response: MyResponse<ResponseBanners>? ->
+                when (response) {
+                    is MyResponse.Loading -> {
+                        bannerLoading.isVisible = true
+                    }
+                    is MyResponse.Error -> {
+                        bannerLoading.isVisible = false
 
+                        root.showSnackBar(response.message!!)
+                    }
+                    is MyResponse.Success -> {
+                        bannerLoading.isVisible = false
+
+                        response.data?.let {
+                            //banners
+                            if (it.isNotEmpty()){
+                                initBannerRecycler(it)
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    //--- recyclers ---//
+    private fun initBannerRecycler(data: List<ResponseBannersItem>) {
+    }
 }
