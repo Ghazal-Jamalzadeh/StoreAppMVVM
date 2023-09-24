@@ -49,7 +49,10 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         //init views
         binding.apply {
-
+            //navigate to profile
+            avatarImg.setOnClickListener{
+                findNavController().navigate(R.id.action_to_profile_fragment)
+            }
         }
         //observers
         observeProfileLiveData()
