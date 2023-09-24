@@ -23,7 +23,7 @@ import javax.inject.Inject
 class SplashFragment : Fragment() {
 
     //binding
-    private var _binding : FragmentSplashBinding? = null
+    private var _binding: FragmentSplashBinding? = null
     private val binding get() = _binding!!
 
     @Inject
@@ -48,8 +48,8 @@ class SplashFragment : Fragment() {
         checkSession()
     }
 
-    private fun checkSession(){
-        binding.motionLay.addTransitionListener(object : MotionLayout.TransitionListener{
+    private fun checkSession() {
+        binding.motionLay.addTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionStarted(
                 motionLayout: MotionLayout?,
                 startId: Int,
@@ -69,11 +69,12 @@ class SplashFragment : Fragment() {
             override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
                 //check user
                 lifecycleScope.launch {
-                val token : String? = sessionManager.getToken.first()
+                    val token: String? = sessionManager.getToken.first()
                     Log.d(TAG, "token: $token")
-                    if (token.isNullOrEmpty()){
+                    findNavController().popBackStack(R.id.splashFragment, true)
+                    if (token.isNullOrEmpty()) {
                         findNavController().navigate(R.id.action_to_nav_login)
-                    }else{
+                    } else {
                         //main
                         findNavController().navigate(R.id.action_to_nav_home)
 

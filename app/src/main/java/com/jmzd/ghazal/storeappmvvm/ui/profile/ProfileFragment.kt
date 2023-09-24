@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginPhoneBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginVerifyBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentProfileBinding
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
+import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +24,7 @@ class ProfileFragment : Fragment() {
 
     //viewModel
     private val viewModel by viewModels<LoginViewModel>()
+    private val profileViewModel by activityViewModels<ProfileViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
