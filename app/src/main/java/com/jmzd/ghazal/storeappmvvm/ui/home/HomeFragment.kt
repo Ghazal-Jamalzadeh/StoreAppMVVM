@@ -1,6 +1,7 @@
 package com.jmzd.ghazal.storeappmvvm.ui.home
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +33,9 @@ import com.jmzd.ghazal.storeappmvvm.viewmodel.HomeViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -49,6 +53,9 @@ class HomeFragment : Fragment() {
     private val pagerSnapHelper : PagerSnapHelper by lazy {
         PagerSnapHelper()
     }
+
+    //count down timer
+    private lateinit var countDownTimer: CountDownTimer
 
     @Inject
     lateinit var bannerAdapter : BannerAdapter
@@ -77,12 +84,6 @@ class HomeFragment : Fragment() {
         observeProfileLiveData()
         observeBannersLiveData()
         observeDiscountsLiveData()
-    }
-
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 
     //--- observers ---//
@@ -160,10 +161,17 @@ class HomeFragment : Fragment() {
                     is MyResponse.Success -> {
                         discountList.hideShimmer()
 
-                        response.data?.let {
-                            //banners
-                            if (it.isNotEmpty()){
-                                initDiscountRecycler(it)
+                        response.data?.let { data ->
+                            if (data.isNotEmpty()){
+                                initDiscountRecycler(data)
+                                //Discount
+                                data[0].endTime?.let { value : String ->
+                                    val endTime = value.split("T")[0]
+                                    discountTimer(endTime)
+                                    countDownTimer.start()
+                                }
+                            }else{
+                                discountCard.isVisible = false
                             }
                         }
                     }
@@ -203,4 +211,62 @@ class HomeFragment : Fragment() {
 
         }
     }
+
+    //--- timer ---//
+    private fun discountTimer(fullDate: String) {
+        val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+        val date: Date = formatter.parse(fullDate) as Date
+        val currentMillis = System.currentTimeMillis()
+        val finalMillis = date.time - currentMillis
+        countDownTimer = object : CountDownTimer(finalMillis, 1_000) {
+            override fun onTick(millisUntilFinished: Long) {
+                //Calculate time
+                var timer = millisUntilFinished
+                val day: Long = TimeUnit.MILLISECONDS.toDays(timer)
+                timer -= TimeUnit.DAYS.toMillis(day)
+                val hours: Long = TimeUnit.MILLISECONDS.toHours(timer)
+                timer -= TimeUnit.HOURS.toMillis(hours)
+                val minutes: Long = TimeUnit.MILLISECONDS.toMinutes(timer)
+                timer -= TimeUnit.MINUTES.toMillis(minutes)
+                val seconds: Long = TimeUnit.MILLISECONDS.toSeconds(timer)
+                //View
+                try {
+                    binding.timerLay.apply {
+                        if (day > 0) {
+                            dayLay.isVisible = true
+                            dayTxt.text = day.toString()
+                        } else {
+                            dayLay.isVisible = false
+                        }
+                        hourTxt.text = hours.toString()
+                        minuteTxt.text = minutes.toString()
+                        secondTxt.text = seconds.toString()
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+
+            override fun onFinish() {
+
+            }
+        }
+    }
+
+    //--- life cycle ---//
+    override fun onPause() {
+        super.onPause()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        countDownTimer.cancel()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+
 }
