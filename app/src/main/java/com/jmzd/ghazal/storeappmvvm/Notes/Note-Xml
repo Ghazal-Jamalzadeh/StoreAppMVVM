@@ -50,9 +50,10 @@ LinearProgressIndicator---------------------------------------------------------
             android:id="@+id/timerProgress"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:indeterminate="false"
+            android:indeterminate="false"//
             android:max="60" // چون ۶۰ ثانیه هست تایمرمون
             android:progress="60"
+            android:rotation="180" // RTL
             app:indicatorColor="@color/darkTurquoise" //رنگ ها
             app:trackColor="@color/lightTurquoise" // رنگ ها
             app:trackCornerRadius="@dimen/_8mdp"

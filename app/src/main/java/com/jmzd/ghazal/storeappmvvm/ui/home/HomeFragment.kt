@@ -9,24 +9,24 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import coil.load
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners.ResponseBannersItem
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseDiscount
+import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseDiscount.ResponseDiscountItem
 import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseProfile
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentHomeBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginPhoneBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginVerifyBinding
 import com.jmzd.ghazal.storeappmvvm.ui.home.adapters.BannerAdapter
+import com.jmzd.ghazal.storeappmvvm.ui.home.adapters.DiscountAdapter
 import com.jmzd.ghazal.storeappmvvm.ui.login.LoginPhoneFragmentDirections
 import com.jmzd.ghazal.storeappmvvm.utils.IS_CALLED_VERIFY
-import com.jmzd.ghazal.storeappmvvm.utils.extensions.changeVisibility
-import com.jmzd.ghazal.storeappmvvm.utils.extensions.enableLoading
-import com.jmzd.ghazal.storeappmvvm.utils.extensions.loadImage
-import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.*
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.HomeViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
@@ -52,6 +52,9 @@ class HomeFragment : Fragment() {
 
     @Inject
     lateinit var bannerAdapter : BannerAdapter
+
+    @Inject
+    lateinit var discountAdapter : DiscountAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -160,7 +163,7 @@ class HomeFragment : Fragment() {
                         response.data?.let {
                             //banners
                             if (it.isNotEmpty()){
-
+                                initDiscountRecycler(it)
                             }
                         }
                     }
@@ -187,6 +190,17 @@ class HomeFragment : Fragment() {
         binding.apply {
             pagerSnapHelper.attachToRecyclerView(bannerList)
             bannerIndicator.attachToRecyclerView(bannerList, pagerSnapHelper)
+        }
+    }
+
+    private fun initDiscountRecycler(data: List<ResponseDiscountItem>) {
+        discountAdapter.setData(data)
+        binding.discountList.setupRecyclerview(
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, true), discountAdapter
+        )
+        //Click
+        discountAdapter.setOnItemClickListener {
+
         }
     }
 }

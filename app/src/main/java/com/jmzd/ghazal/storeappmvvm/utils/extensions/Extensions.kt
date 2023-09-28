@@ -5,10 +5,12 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.request.CachePolicy
 import com.google.android.material.snackbar.Snackbar
 import com.jmzd.ghazal.storeappmvvm.R
+import java.text.DecimalFormat
 
 fun View.hideKeyboard() {
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -36,5 +38,17 @@ fun View.changeVisibility(isShownLoading: Boolean, container: View) {
     } else {
         this.isVisible = false
         container.isVisible = true
+    }
+}
+
+fun Int.moneySeparating(): String {
+    return "${DecimalFormat("#,###.##").format(this)} تومان"
+}
+
+fun RecyclerView.setupRecyclerview(myLayoutManager: RecyclerView.LayoutManager, myAdapter: RecyclerView.Adapter<*>) {
+    this.apply {
+        layoutManager = myLayoutManager
+        setHasFixedSize(true)
+        adapter = myAdapter
     }
 }
