@@ -14,6 +14,7 @@ import coil.load
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners.ResponseBannersItem
+import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseDiscount
 import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseProfile
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentHomeBinding
@@ -72,6 +73,7 @@ class HomeFragment : Fragment() {
         //observers
         observeProfileLiveData()
         observeBannersLiveData()
+        observeDiscountsLiveData()
     }
 
 
@@ -132,6 +134,33 @@ class HomeFragment : Fragment() {
                             //banners
                             if (it.isNotEmpty()){
                                 initBannerRecycler(it)
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    private fun observeDiscountsLiveData() {
+        binding.apply {
+            viewModel.discountsLiveData.observe(viewLifecycleOwner) { response: MyResponse<ResponseDiscount>? ->
+                when (response) {
+                    is MyResponse.Loading -> {
+                        discountList.showShimmer()
+                    }
+                    is MyResponse.Error -> {
+                        discountList.hideShimmer()
+                        root.showSnackBar(response.message!!)
+                    }
+                    is MyResponse.Success -> {
+                        discountList.hideShimmer()
+
+                        response.data?.let {
+                            //banners
+                            if (it.isNotEmpty()){
+
                             }
                         }
                     }
