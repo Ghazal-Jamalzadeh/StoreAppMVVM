@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import androidx.core.view.isVisible
 import coil.load
 import coil.request.CachePolicy
 import com.google.android.material.snackbar.Snackbar
@@ -24,5 +25,16 @@ fun ImageView.loadImage(url: String) {
         crossfade(500)
         diskCachePolicy(CachePolicy.ENABLED)
         error(R.drawable.placeholder)
+    }
+}
+
+fun View.changeVisibility(isShownLoading: Boolean, container: View) {
+    //view -> progress bar
+    if (isShownLoading) {
+        this.isVisible = true
+        container.isVisible = false
+    } else {
+        this.isVisible = false
+        container.isVisible = true
     }
 }

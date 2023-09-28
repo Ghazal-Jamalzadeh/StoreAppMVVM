@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.PagerSnapHelper
 import coil.load
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
@@ -21,6 +22,7 @@ import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginVerifyBinding
 import com.jmzd.ghazal.storeappmvvm.ui.home.adapters.BannerAdapter
 import com.jmzd.ghazal.storeappmvvm.ui.login.LoginPhoneFragmentDirections
 import com.jmzd.ghazal.storeappmvvm.utils.IS_CALLED_VERIFY
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.changeVisibility
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.enableLoading
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.loadImage
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
@@ -42,8 +44,13 @@ class HomeFragment : Fragment() {
     private val viewModel by viewModels<HomeViewModel>()
     private val profileViewModel by activityViewModels<ProfileViewModel>()
 
+    //snap helper
+    private val pagerSnapHelper : PagerSnapHelper by lazy {
+        PagerSnapHelper()
+    }
+
     @Inject
-    lateinit var bannersAdapter : BannerAdapter
+    lateinit var bannerAdapter : BannerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -111,15 +118,15 @@ class HomeFragment : Fragment() {
             viewModel.bannersLiveData.observe(viewLifecycleOwner) { response: MyResponse<ResponseBanners>? ->
                 when (response) {
                     is MyResponse.Loading -> {
-                        bannerLoading.isVisible = true
+                        bannerLoading.changeVisibility(true , bannerList)
                     }
                     is MyResponse.Error -> {
-                        bannerLoading.isVisible = false
+                        bannerLoading.changeVisibility(false , bannerList)
 
                         root.showSnackBar(response.message!!)
                     }
                     is MyResponse.Success -> {
-                        bannerLoading.isVisible = false
+                        bannerLoading.changeVisibility(false , bannerList)
 
                         response.data?.let {
                             //banners
@@ -136,5 +143,21 @@ class HomeFragment : Fragment() {
 
     //--- recyclers ---//
     private fun initBannerRecycler(data: List<ResponseBannersItem>) {
+        bannerAdapter.setData(data)
+        binding.bannerList.apply {
+            adapter = bannerAdapter
+            set3DItem(true)
+            setAlpha(true)
+            setInfinite(true)
+        }
+        //Click
+        bannerAdapter.setOnItemClickListener {
+
+        }
+        //Indicator
+        binding.apply {
+            pagerSnapHelper.attachToRecyclerView(bannerList)
+            bannerIndicator.attachToRecyclerView(bannerList, pagerSnapHelper)
+        }
     }
 }
