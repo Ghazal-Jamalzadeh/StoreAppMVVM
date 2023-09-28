@@ -1,6 +1,7 @@
 package com.jmzd.ghazal.storeappmvvm.data.network
 
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
+import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseDiscount
 import com.jmzd.ghazal.storeappmvvm.data.models.login.BodyLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseVerify
@@ -23,4 +24,9 @@ interface ApiServices {
 
     @GET("ad/swiper/{slug}")
     suspend fun getBanners(@Path("slug") value : String) : Response<ResponseBanners>
+
+    @GET("offers/discount/{slug}")
+    suspend fun getDiscounts(@Path("slug") value : String) : Response<ResponseDiscount>
+
+
 }
