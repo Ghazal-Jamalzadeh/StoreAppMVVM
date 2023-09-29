@@ -296,3 +296,46 @@ DecimalFormat :
 این پترن رو از کجا آوردیم؟
 سرچ کنید...
 
+Live Data-------------------------------------------------------------------------------------------
+روش اول
+میومدیم یک لایودیتا تعریف میکردیم
+liveData.value = something
+
+روش دوم
+liveData {
+//do what you want to do - fo example : call api
+
+emit(something)
+
+}
+
+Call Products Api Description (homeViewModel/products)----------------------------------------------
+برای پیمایش اینام ها ما یک کدی داریم به شکل زیر
+enum.values
+خروجی این کد یک "آرایه" هست از اون اینام مورد نظر ما
+    private val categoriesName1 : Array<ProductsCategories> = ProductsCategories.values()
+
+یک مد دیگری هم هست به اسم associateWith در ادامه میتونیم بزنیم به شکل زیر
+    private val categoriesName : Map<ProductsCategories , String> = ProductsCategories.values().associateWith {
+        it.label
+    }
+که میاد هر یک دونه اینام رو با مقداری که ما توی آکلاد ریترن میکنیم مپ میکنه
+
+کارهای دیگه ای هم میشه باش کرد
+چون داره اینام ما روو پیمایش میکنه
+میتونیم به ازای هر آیتم یک عملیاتی رو انجام بدیم مثل صدا زدن api
+
+حالا گفتیم خروجی متغیر بالا یک مپ میشه دیگه؟
+ما وقتی مپ داریم یک متدی هم داریم به اسم getValue
+ورودی این یک کلیده و در ازای اون کلید ولیوی مورد نظر رو برمیگردونه
+
+حالا ما اگه بیایم توی اوم آکلاده api کال کنیم
+    private val categoriesName = ProductsCategories.values().associateWith {
+        getProducts(it)
+    }
+خروجی متد getProducts یک لایو دیتا است
+پس خروجی این میشه
+Map<ProductsCategories , LiveData<MyResponse<ResponseProducts>>>
+
+و ما با اون getValues لایودیتای مورد نظرمون رو با کلیدش دریافت میکنیم
+واقعا هوشمندانه...

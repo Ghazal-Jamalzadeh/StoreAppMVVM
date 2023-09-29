@@ -1,12 +1,13 @@
 package com.jmzd.ghazal.storeappmvvm.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseDiscount
+import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseProducts
 import com.jmzd.ghazal.storeappmvvm.data.repository.HomeRepository
+import com.jmzd.ghazal.storeappmvvm.utils.NEW
+import com.jmzd.ghazal.storeappmvvm.utils.SORT
+import com.jmzd.ghazal.storeappmvvm.utils.enums.ProductsCategories
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.utils.network.ResponseHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,6 +33,7 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
     private val _discountsLiveData = MutableLiveData<MyResponse<ResponseDiscount>>()
     val discountsLiveData: LiveData<MyResponse<ResponseDiscount>> = _discountsLiveData
 
+    //--- api call ---//
     private fun getBanners() = viewModelScope.launch {
 
         _bannersLiveData.value = MyResponse.Loading()
@@ -50,4 +52,31 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
 
         _discountsLiveData.value = ResponseHandler(response).generateResponse()
     }
+
+    //--- Products ---//
+    private fun getProductsQueries(): Map<String, String> {
+        val queries: HashMap<String, String> = HashMap()
+        queries[SORT] = NEW
+        return queries
+    }
+    private val categoriesName : Map<ProductsCategories , LiveData<MyResponse<ResponseProducts>>>
+    = ProductsCategories.values().associateWith {
+        getProducts(it)
+    }
+
+    private fun getProducts(category : ProductsCategories) : LiveData<MyResponse<ResponseProducts>>
+    = liveData {
+
+        val cats : String = category.label
+
+        emit(MyResponse.Loading())
+
+        val response: Response<ResponseProducts> = repository.getProducts(cats , getProductsQueries())
+
+        emit(ResponseHandler(response).generateResponse())
+
+    }
+
+    fun getProductsLiveData(category: ProductsCategories) : LiveData<MyResponse<ResponseProducts>>
+    = categoriesName.getValue(category)
 }
