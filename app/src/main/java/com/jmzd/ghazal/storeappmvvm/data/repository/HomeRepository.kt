@@ -8,4 +8,5 @@ import javax.inject.Inject
 class HomeRepository @Inject constructor(private val api : ApiServices) {
     suspend fun getBanners() = api.getBanners(value = GENERAL)
     suspend fun getDiscounts() = api.getDiscounts(value = ELECTRONIC_DEVICES)
+    suspend fun getProducts(slug : String , queries : Map<String , String>) = api.getProducts(value = slug , map =  queries)
 }
