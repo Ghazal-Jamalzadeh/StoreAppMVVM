@@ -1,6 +1,6 @@
 package com.jmzd.ghazal.storeappmvvm.data.repository
 
-import com.jmzd.ghazal.storeappmvvm.data.network.ApiServices
+import com.jmzd.ghazal.storeappmvvm.data.api.ApiServices
 import com.jmzd.ghazal.storeappmvvm.utils.ELECTRONIC_DEVICES
 import com.jmzd.ghazal.storeappmvvm.utils.GENERAL
 import javax.inject.Inject

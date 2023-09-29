@@ -1,16 +1,14 @@
-package com.jmzd.ghazal.storeappmvvm.data.network
+package com.jmzd.ghazal.storeappmvvm.data.api
 
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseDiscount
+import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseProducts
 import com.jmzd.ghazal.storeappmvvm.data.models.login.BodyLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseVerify
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseProfile
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface ApiServices {
     @POST("auth/login")
@@ -28,5 +26,7 @@ interface ApiServices {
     @GET("offers/discount/{slug}")
     suspend fun getDiscounts(@Path("slug") value : String) : Response<ResponseDiscount>
 
+    @GET("category/pro/{slug}")
+    suspend fun getProducts(@Path("slug") value: String , @QueryMap map : Map<String , String>): Response<ResponseProducts>
 
 }
