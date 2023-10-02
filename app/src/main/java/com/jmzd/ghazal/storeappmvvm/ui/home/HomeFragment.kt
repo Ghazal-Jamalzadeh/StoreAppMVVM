@@ -18,6 +18,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners.ResponseBannersItem
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseDiscount
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseDiscount.ResponseDiscountItem
+import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseProducts
 import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseProfile
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentHomeBinding
@@ -25,13 +26,16 @@ import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginPhoneBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginVerifyBinding
 import com.jmzd.ghazal.storeappmvvm.ui.home.adapters.BannerAdapter
 import com.jmzd.ghazal.storeappmvvm.ui.home.adapters.DiscountAdapter
+import com.jmzd.ghazal.storeappmvvm.ui.home.adapters.ProductsAdapter
 import com.jmzd.ghazal.storeappmvvm.ui.login.LoginPhoneFragmentDirections
 import com.jmzd.ghazal.storeappmvvm.utils.IS_CALLED_VERIFY
+import com.jmzd.ghazal.storeappmvvm.utils.enums.ProductsCategories
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.*
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.HomeViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileViewModel
+import com.todkars.shimmer.ShimmerRecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -57,11 +61,13 @@ class HomeFragment : Fragment() {
     //count down timer
     private lateinit var countDownTimer: CountDownTimer
 
-    @Inject
-    lateinit var bannerAdapter : BannerAdapter
-
-    @Inject
-    lateinit var discountAdapter : DiscountAdapter
+    //adapters
+    @Inject lateinit var bannerAdapter : BannerAdapter
+    @Inject lateinit var discountAdapter : DiscountAdapter
+    @Inject lateinit var mobileProductsAdapter : ProductsAdapter
+    @Inject lateinit var shoesProductsAdapter : ProductsAdapter
+    @Inject lateinit var stationeryProductsAdapter : ProductsAdapter
+    @Inject lateinit var laptopProductsAdapter : ProductsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -84,6 +90,7 @@ class HomeFragment : Fragment() {
         observeProfileLiveData()
         observeBannersLiveData()
         observeDiscountsLiveData()
+        observeProductsLiveData()
     }
 
     //--- observers ---//
@@ -181,6 +188,35 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun observeProductsLiveData() {
+        binding.apply {
+            //Mobile
+            if (mobileLay.parent != null) {
+                val mobileInflate = mobileLay.inflate()
+                viewModel.getProductsLiveData(ProductsCategories.MOBILE).observe(viewLifecycleOwner) {
+                    handleProductsRequest(it, mobileInflate.findViewById(R.id.mobileProductsList), mobileProductsAdapter)
+                }
+            }
+            //Shoes
+            if (shoesLay.parent != null) {
+                val shoesInflate = shoesLay.inflate()
+                viewModel.getProductsLiveData(ProductsCategories.SHOES).observe(viewLifecycleOwner) {
+                    handleProductsRequest(it, shoesInflate.findViewById(R.id.menShoesProductsList), shoesProductsAdapter)
+                }
+            }
+            //Stationery
+            val stationeryInflate = stationeryLay.inflate()
+            viewModel.getProductsLiveData(ProductsCategories.STATIONERY).observe(viewLifecycleOwner) {
+                handleProductsRequest(it, stationeryInflate.findViewById(R.id.stationeryProductsList), stationeryProductsAdapter)
+            }
+            //Laptop
+            val laptopInflate = laptopLay.inflate()
+            viewModel.getProductsLiveData(ProductsCategories.LAPTOP).observe(viewLifecycleOwner) {
+                handleProductsRequest(it, laptopInflate.findViewById(R.id.laptopProductsList), laptopProductsAdapter)
+            }
+        }
+    }
+
     //--- recyclers ---//
     private fun initBannerRecycler(data: List<ResponseBannersItem>) {
         bannerAdapter.setData(data)
@@ -208,6 +244,18 @@ class HomeFragment : Fragment() {
         )
         //Click
         discountAdapter.setOnItemClickListener {
+
+        }
+    }
+
+    private fun initProductsRecyclers(data: List<ResponseProducts.SubCategory.Products.Data>, recyclerView: ShimmerRecyclerView, adapter: ProductsAdapter) {
+        adapter.setData(data)
+        recyclerView.setupRecyclerview(
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, true),
+            adapter
+        )
+        //Click
+        adapter.setOnItemClickListener {
 
         }
     }
@@ -249,6 +297,40 @@ class HomeFragment : Fragment() {
 
             override fun onFinish() {
 
+            }
+        }
+    }
+
+    //--- other ---//
+    private fun handleProductsRequest(
+        request: MyResponse<ResponseProducts>,
+        recyclerView: ShimmerRecyclerView,
+        adapter: ProductsAdapter
+    ) {
+        when (request) {
+            is MyResponse.Loading -> {
+                recyclerView.showShimmer()
+            }
+
+            is MyResponse.Success -> {
+                recyclerView.hideShimmer()
+                request.data?.let { data ->
+                    data.subCategory?.let { subCats ->
+                        subCats.products?.let { products ->
+                            products.data?.let { myData ->
+                                if (myData.isNotEmpty()) {
+                                     initProductsRecyclers(myData, recyclerView, adapter)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            is MyResponse.Error -> {
+                recyclerView.hideShimmer()
+                //TODO
+                binding.root.showSnackBar(request.message!!)
             }
         }
     }
