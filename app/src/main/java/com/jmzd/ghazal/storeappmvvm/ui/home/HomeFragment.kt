@@ -104,7 +104,9 @@ class HomeFragment : Fragment() {
         //Check VPN
         lifecycleScope.launch {
             checkVpn.collect {
-                showVpnDialog()
+                if(it) {
+                    showVpnDialog()
+                }
             }
         }
     }
