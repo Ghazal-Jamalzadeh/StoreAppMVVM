@@ -1,14 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cultured"
     tools:context=".ui.search.SearchFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--Toolbar and search-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerLay"
+        style="@style/ColoredShadowDark"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="@dimen/_8mdp"
+        android:paddingBottom="@dimen/_10mdp"
+        app:layout_constraintTop_toTopOf="parent">
+        <!--Toolbar-->
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_base" />
+        <!--Search-->
+        <EditText
+            android:id="@+id/searchEdt"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_38mdp"
+            android:layout_marginHorizontal="@dimen/_10mdp"
+            android:layout_marginTop="@dimen/_5mdp"
+            android:background="@drawable/bg_circle_cultured"
+            android:drawableEnd="@drawable/magnifying_glass"
+            android:drawablePadding="@dimen/_10mdp"
+            android:gravity="center_vertical|right"
+            android:hint="@string/searchProduct"
+            android:imeOptions="actionDone"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:paddingHorizontal="@dimen/_10mdp"
+            android:textColor="@color/eerieBlack"
+            android:textColorHint="@color/silver"
+            android:textSize="@dimen/_10font_mdp"
+            app:drawableTint="@color/darkStrategy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/filterImg"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            tools:ignore="RtlHardcoded" />
+        <!--Filter-->
+        <ImageView
+            android:id="@+id/filterImg"
+            android:layout_width="@dimen/_38mdp"
+            android:layout_height="@dimen/_38mdp"
+            android:layout_marginStart="@dimen/_10mdp"
+            android:background="@drawable/bg_circle_cultured"
+            android:padding="@dimen/_10mdp"
+            android:src="@drawable/bars_filter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/searchEdt"
+            app:tint="@color/darkStrategy" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--List-->
+    <com.todkars.shimmer.ShimmerRecyclerView
+        android:id="@+id/searchList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/_5mdp"
+        tools:listitem="@layout/item_search_list"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerLay"
+        app:shimmer_recycler_auto_start="true"
+        app:shimmer_recycler_item_count="5"
+        app:shimmer_recycler_layout="@layout/item_search_list_shimmer"
+        app:shimmer_recycler_shape="linear"
+        tools:ignore="RtlSymmetry" />
+    <!--Empty-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/emptyLay"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/searchList"
+        app:layout_constraintTop_toBottomOf="@+id/headerLay">
 
-</FrameLayout>
+        <include layout="@layout/empty" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
