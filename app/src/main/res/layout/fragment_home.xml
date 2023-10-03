@@ -81,7 +81,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <!--Scroll-->
-    <ScrollView
+    <com.jmzd.ghazal.storeappmvvm.utils.gui.SaveLastStateNestedScrollView
         android:id="@+id/scrollLay"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -218,7 +218,7 @@
 
         </LinearLayout>
 
-    </ScrollView>
+    </com.jmzd.ghazal.storeappmvvm.utils.gui.SaveLastStateNestedScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

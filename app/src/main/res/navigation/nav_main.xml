@@ -52,7 +52,7 @@
 
     <!-- main nav graph -->
     <navigation android:id="@+id/nav_home"
-        app:startDestination="@id/categoriesFragment">
+        app:startDestination="@id/homeFragment">
         <fragment
             android:id="@+id/categoriesFragment"
             android:name="com.jmzd.ghazal.storeappmvvm.ui.categories.CategoriesFragment"

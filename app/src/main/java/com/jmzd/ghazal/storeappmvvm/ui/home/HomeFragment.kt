@@ -55,7 +55,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     //viewModel
-    private val viewModel by viewModels<HomeViewModel>()
+    private val viewModel by activityViewModels<HomeViewModel>()
     private val profileViewModel by activityViewModels<ProfileViewModel>()
 
     //snap helper
@@ -88,8 +88,15 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         //init views
         binding.apply {
+
+            //restore state
+            viewModel.lastScrollState.let {
+                scrollLay.onRestoreInstanceState(it)
+            }
+
             //navigate to profile
             avatarImg.setOnClickListener{
                 findNavController().navigate(R.id.action_to_profile_fragment)
@@ -369,6 +376,7 @@ class HomeFragment : Fragment() {
     //--- life cycle ---//
     override fun onPause() {
         super.onPause()
+        viewModel.lastScrollState = binding.scrollLay.onSaveInstanceState()
     }
 
     override fun onStop() {

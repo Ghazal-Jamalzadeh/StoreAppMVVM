@@ -1,5 +1,6 @@
+CustomViews------------------------------------------------------------------------------------------
 
-CustomView------------------------------------------------------------------------------------------
+Loading Buttons-------------------------------------------------------------------------------------
 میخوایم برای دکمه هامون یک حالت کاستوم برای لودینگ ایجاد کنیم
 البته کاستوم ویو نمی نویسیم
 میایم یک اکسستنشن فانکشن برای لودینگش مینویسیم
@@ -113,3 +114,57 @@ fun MaterialButton.enableLoading(loading: Boolean) {
 آلفا رو هم برگردون به حالت اولیه
 
 }
+
+Nested Scroll View----------------------------------------------------------------------------------
+
+class SaveLastStateNestedScrollView : NestedScrollView {
+    constructor(context: Context) : super(context)
+    constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet)
+    constructor(context: Context, attributeSet: AttributeSet, defStyleAttr: Int) : super(context, attributeSet, defStyleAttr)
+
+اکثر ویوها این متد رو دارن
+که میاد اون استیت رو سیو میکنه
+و یک متد هم برای ری استور کردن استیت
+با اورراید این دو تا متد
+این حالت ها رو براش فعال میکنیم
+و فقط سوپرش رو صدا میزنیم
+همین
+صرفا فعال میکنیم
+که بتونیم استفاده کنیم
+    public override fun onSaveInstanceState(): Parcelable {
+        return super.onSaveInstanceState()
+    }
+
+    public override fun onRestoreInstanceState(state: Parcelable?) {
+        super.onRestoreInstanceState(state)
+    }
+}
+
+How to use----------------------------------
+1- XML
+    <com.jmzd.ghazal.storeappmvvm.utils.gui.SaveLastStateNestedScrollView
+
+2- viewModel
+حتما باید به لایف سایکل اکتیویتی وصل باشه
+    private val viewModel by activityViewModels<HomeViewModel>()
+
+داخل ویومدل
+    //save state
+    var lastScrollState : Parcelable? = null
+
+3- fragment
+
+//save
+    override fun onPause() {
+        super.onPause()
+        viewModel.lastScrollState = binding.scrollLay.onSaveInstanceState()
+    }
+
+//restore
+    override fun onViewCreated() {
+   ...
+           //restore state
+           viewModel.lastScrollState.let {
+                   scrollLay.onRestoreInstanceState(it)
+           }
+    }

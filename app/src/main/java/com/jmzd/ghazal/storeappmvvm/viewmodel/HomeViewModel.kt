@@ -1,6 +1,8 @@
 package com.jmzd.ghazal.storeappmvvm.viewmodel
 
+import android.os.Parcelable
 import androidx.lifecycle.*
+import androidx.navigation.NavType
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseDiscount
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseProducts
@@ -25,6 +27,9 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
             getDiscounts()
         }
     }
+
+    //save state
+    var lastScrollState : Parcelable? = null
 
     //banners
     private val _bannersLiveData = MutableLiveData<MyResponse<ResponseBanners>>()
