@@ -7,6 +7,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.login.BodyLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseVerify
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseProfile
+import com.jmzd.ghazal.storeappmvvm.data.models.search.ResponseSearch
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -28,5 +29,8 @@ interface ApiServices {
 
     @GET("category/pro/{slug}")
     suspend fun getProducts(@Path("slug") value: String , @QueryMap map : Map<String , String>): Response<ResponseProducts>
+
+    @GET("search")
+    suspend fun getSearch(@QueryMap map : Map<String , String>) : Response<ResponseSearch>
 
 }
