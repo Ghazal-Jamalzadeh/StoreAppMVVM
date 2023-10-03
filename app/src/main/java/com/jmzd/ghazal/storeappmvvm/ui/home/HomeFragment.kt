@@ -32,6 +32,7 @@ import com.jmzd.ghazal.storeappmvvm.ui.home.adapters.DiscountAdapter
 import com.jmzd.ghazal.storeappmvvm.ui.home.adapters.ProductsAdapter
 import com.jmzd.ghazal.storeappmvvm.ui.login.LoginPhoneFragmentDirections
 import com.jmzd.ghazal.storeappmvvm.utils.IS_CALLED_VERIFY
+import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.enums.ProductsCategories
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.*
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
@@ -48,7 +49,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
     //binding
     private var _binding: FragmentHomeBinding? = null
@@ -116,6 +117,9 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onNetworkLost() {
     }
 
     //--- observers ---//

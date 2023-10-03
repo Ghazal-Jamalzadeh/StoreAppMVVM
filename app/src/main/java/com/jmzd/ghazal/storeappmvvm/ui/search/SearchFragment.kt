@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginVerifyBinding
+import com.jmzd.ghazal.storeappmvvm.databinding.FragmentSearchBinding
+import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginVerifyFragment : Fragment() {
+class SearchFragment : BaseFragment() {
 
     //binding
-    private var _binding: FragmentLoginVerifyBinding? = null
+    private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
     //viewModel
@@ -22,7 +22,7 @@ class LoginVerifyFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentLoginVerifyBinding.inflate(layoutInflater)
+        _binding = FragmentSearchBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -33,6 +33,8 @@ class LoginVerifyFragment : Fragment() {
 
         }
     }
+
+    override fun onNetworkLost() {}
 
 
     override fun onDestroy() {
