@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_rounded_white"
+    android:paddingBottom="@dimen/_10mdp">
+    <!--Title-->
+    <TextView
+        android:id="@+id/titleTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_10mdp"
+        android:layout_marginTop="@dimen/_10mdp"
+        android:gravity="center"
+        android:text="@string/tips"
+        android:textColor="@color/darkStrategy"
+        android:textSize="@dimen/_12font_mdp"
+        app:fontPath="fonts/iransans_bold.ttf" />
+    <!--Line-->
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/titleTxt"
+        android:layout_marginTop="@dimen/_10mdp"
+        android:alpha="0.5"
+        android:background="@color/water" />
+    <!--Info-->
+    <TextView
+        android:id="@+id/infoTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line1"
+        android:layout_marginHorizontal="@dimen/_10mdp"
+        android:layout_marginTop="@dimen/_10mdp"
+        android:gravity="center"
+        android:text="@string/disableYourVPN"
+        android:textColor="@color/eerieBlack"
+        android:textSize="@dimen/_10font_mdp" />
+    <!--Yes-->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/yesBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/infoTxt"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/_20mdp"
+        android:layout_marginHorizontal="@dimen/_20mdp"
+        android:paddingHorizontal="@dimen/_40mdp"
+        android:text="@string/ok"
+        app:backgroundTint="@color/lightSteelBlue"
+        app:cornerRadius="@dimen/_10mdp"
+        tools:ignore="RtlHardcoded" />
+
+</RelativeLayout>

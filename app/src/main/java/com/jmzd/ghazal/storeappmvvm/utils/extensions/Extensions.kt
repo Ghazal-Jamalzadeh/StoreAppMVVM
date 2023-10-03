@@ -1,5 +1,6 @@
 package com.jmzd.ghazal.storeappmvvm.utils.extensions
 
+import android.app.Dialog
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -51,4 +52,9 @@ fun RecyclerView.setupRecyclerview(myLayoutManager: RecyclerView.LayoutManager, 
         setHasFixedSize(true)
         adapter = myAdapter
     }
+}
+
+fun Dialog.transparentCorners() {
+    //this -> Dialog
+    this.window!!.setBackgroundDrawableResource(android.R.color.transparent)
 }

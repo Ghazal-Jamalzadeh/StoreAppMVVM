@@ -1,5 +1,6 @@
 package com.jmzd.ghazal.storeappmvvm.ui.home
 
+import android.app.Dialog
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -21,6 +23,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseDiscount.ResponseDi
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseProducts
 import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseProfile
+import com.jmzd.ghazal.storeappmvvm.databinding.DialogCheckVpnBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentHomeBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginPhoneBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginVerifyBinding
@@ -37,6 +40,8 @@ import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileViewModel
 import com.todkars.shimmer.ShimmerRecyclerView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -69,6 +74,10 @@ class HomeFragment : Fragment() {
     @Inject lateinit var stationeryProductsAdapter : ProductsAdapter
     @Inject lateinit var laptopProductsAdapter : ProductsAdapter
 
+    //check vpn
+    @Inject
+    lateinit var checkVpn: Flow<Boolean>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -91,6 +100,13 @@ class HomeFragment : Fragment() {
         observeBannersLiveData()
         observeDiscountsLiveData()
         observeProductsLiveData()
+
+        //Check VPN
+        lifecycleScope.launch {
+            checkVpn.collect {
+                showVpnDialog()
+            }
+        }
     }
 
     //--- observers ---//
@@ -301,6 +317,18 @@ class HomeFragment : Fragment() {
         }
     }
 
+    //--- Dialog ---//
+    private fun showVpnDialog() {
+        val dialog = Dialog(requireContext())
+        val dialogBinding = DialogCheckVpnBinding.inflate(layoutInflater)
+        dialog.transparentCorners()
+        dialog.setContentView(dialogBinding.root)
+
+        dialogBinding.yesBtn.setOnClickListener { dialog.dismiss() }
+
+        dialog.show()
+    }
+
     //--- other ---//
     private fun handleProductsRequest(
         request: MyResponse<ResponseProducts>,
@@ -334,6 +362,7 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
 
     //--- life cycle ---//
     override fun onPause() {
