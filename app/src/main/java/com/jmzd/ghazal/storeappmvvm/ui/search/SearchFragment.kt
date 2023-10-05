@@ -61,6 +61,11 @@ class SearchFragment : BaseFragment() {
                 toolbarOptionImg.isVisible = false
             }
 
+            //navigate to search filter
+            filterImg.setOnClickListener{
+                findNavController().navigate(R.id.action_to_search_filter_fragment)
+            }
+
             //Auto open keyboard
             lifecycleScope.launch {
                 delay(300)

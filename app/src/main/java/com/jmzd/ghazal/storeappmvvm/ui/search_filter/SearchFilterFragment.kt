@@ -3,12 +3,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentSearchFilterBinding
-import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SearchFilterFragment : BaseFragment() {
+class SearchFilterFragment : BottomSheetDialogFragment() {
 
     //binding
     private var _binding: FragmentSearchFilterBinding? = null
@@ -32,10 +32,6 @@ class SearchFilterFragment : BaseFragment() {
 
         }
     }
-
-    override fun onNetworkLost() {
-    }
-
 
     override fun onDestroy() {
         super.onDestroy()
