@@ -39,7 +39,7 @@ data class ResponseSearch(
             @SerializedName("color_id")
             val colorId: List<String?>?,
             @SerializedName("colors")
-            val colors: List<Color?>?,
+            val colors: List<Color>?,
             @SerializedName("comments_avg_rate")
             val commentsAvgRate: String?, // 5.0000
             @SerializedName("comments_count")

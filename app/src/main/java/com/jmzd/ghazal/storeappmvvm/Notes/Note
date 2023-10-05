@@ -360,3 +360,6 @@ post{
 چون ممکنه گاهی ترد ui ما در دسترس نباشه
 برای اینکه خیالمون از کرش نکردن راحت باشه
 توسط runnable یک کاری رو انجام میده
+
+Convert Hex code to color---------------------------------------------------------------------------
+                itemsColor.setBackgroundColor(android.graphics.Color.parseColor(item.hexCode))
