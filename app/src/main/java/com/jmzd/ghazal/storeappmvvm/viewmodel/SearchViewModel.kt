@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jmzd.ghazal.storeappmvvm.data.models.search.ResponseSearch
+import com.jmzd.ghazal.storeappmvvm.data.models.search_filter.FilterModel
+import com.jmzd.ghazal.storeappmvvm.data.repository.SearchFilterRepository
 import com.jmzd.ghazal.storeappmvvm.data.repository.SearchRepository
 import com.jmzd.ghazal.storeappmvvm.utils.SORT
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
@@ -15,11 +17,19 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchViewModel @Inject constructor(private val repository: SearchRepository) : ViewModel(){
+class SearchViewModel @Inject constructor(
+    private val repository: SearchRepository ,
+    private val serachFilterRepository: SearchFilterRepository
+    ) : ViewModel(){
 
+    //search
     private val _searchLiveData = MutableLiveData<MyResponse<ResponseSearch>>()
     val searchLiveData: LiveData<MyResponse<ResponseSearch>> = _searchLiveData
+    //search filter
+    private val _filterLiveData = MutableLiveData<MutableList<FilterModel>>()
+    val filterLiveData: LiveData<MutableList<FilterModel>> = _filterLiveData
 
+    //--- search ---//
     fun getSearchQueries(search : String , sort : String): Map<String, String> {
         val queries: HashMap<String, String> = HashMap()
         queries[com.jmzd.ghazal.storeappmvvm.utils.Q] = search
@@ -34,5 +44,10 @@ class SearchViewModel @Inject constructor(private val repository: SearchReposito
         val response: Response<ResponseSearch> = repository.search(queries)
 
         _searchLiveData.value = ResponseHandler(response).generateResponse()
+    }
+
+    //--- search filter ---//
+    fun getFilters() = viewModelScope.launch {
+        _filterLiveData.value = serachFilterRepository.getFilterData()
     }
 }

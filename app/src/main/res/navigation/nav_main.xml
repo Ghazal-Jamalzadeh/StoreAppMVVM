@@ -104,7 +104,7 @@
             tools:layout="@layout/fragment_search" />
         <dialog
             android:id="@+id/searchFilterFragment"
-            android:name="com.jmzd.ghazal.storeappmvvm.ui.search_filter.SearchFilterFragment"
+            android:name="com.jmzd.ghazal.storeappmvvm.ui.search.SearchFilterFragment"
             android:label="fragment_search_filter"
             tools:layout="@layout/fragment_search_filter" />
         <action
