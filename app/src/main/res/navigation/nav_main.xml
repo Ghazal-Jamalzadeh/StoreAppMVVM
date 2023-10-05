@@ -92,6 +92,22 @@
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
         app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
+    <!-- search -->
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.jmzd.ghazal.storeappmvvm.ui.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+
+    <!-- search actions -->
+    <action
+        android:id="@+id/action_to_search_fragment"
+        app:destination="@id/searchFragment"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
 
 
 </navigation>

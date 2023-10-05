@@ -102,6 +102,11 @@ class HomeFragment : BaseFragment() {
             avatarImg.setOnClickListener{
                 findNavController().navigate(R.id.action_to_profile_fragment)
             }
+
+            //navigate to search
+            searchImg.setOnClickListener{
+                findNavController().navigate(R.id.action_to_search_fragment)
+            }
         }
         //observers
         observeProfileLiveData()
