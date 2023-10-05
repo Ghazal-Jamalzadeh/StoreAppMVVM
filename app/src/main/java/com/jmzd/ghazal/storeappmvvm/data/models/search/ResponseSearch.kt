@@ -11,7 +11,7 @@ data class ResponseSearch(
         @SerializedName("current_page")
         val currentPage: Int?, // 1
         @SerializedName("data")
-        val `data`: List<Data?>?,
+        val `data`: List<Data>?,
         @SerializedName("first_page_url")
         val firstPageUrl: String?, // https://shop.nouri-api.ir/api/v1/search?page=1
         @SerializedName("from")

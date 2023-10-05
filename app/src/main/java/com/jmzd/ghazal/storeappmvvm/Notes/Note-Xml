@@ -258,3 +258,15 @@ android:rotation="45"
             app:layout_constraintStart_toStartOf="@id/itemImg"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="2400 ت" />
+
+Enter Button in EditText----------------------------------------------------------------------------
+اگه بخوایم به جای دکمه اینتر توی ادیت تکست
+مثلا دکمه done داشته باشیم
+
+android:imeOptions="actionDone"
+
+یا مثلا اگه بخوایم بره روی فیلد بعدی
+
+android:imeOptions="actionNext"
+
+تقریبا ده دوازده تا آپشن داره...

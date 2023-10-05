@@ -9,10 +9,14 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmzd.ghazal.storeappmvvm.R
+import com.jmzd.ghazal.storeappmvvm.data.models.search.ResponseSearch
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentSearchBinding
+import com.jmzd.ghazal.storeappmvvm.ui.search.adapters.SearchAdapter
 import com.jmzd.ghazal.storeappmvvm.utils.NEW
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showKeyboard
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
@@ -20,6 +24,7 @@ import com.jmzd.ghazal.storeappmvvm.viewmodel.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment() {
@@ -30,6 +35,9 @@ class SearchFragment : BaseFragment() {
 
     //viewModel
     private val viewModel by viewModels<SearchViewModel>()
+
+    //adapter
+    @Inject lateinit var searchAdapter : SearchAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -95,7 +103,7 @@ class SearchFragment : BaseFragment() {
                                     emptyLay.isVisible = false
                                     searchList.isVisible = true
                                     //Init recycler
-//                                    initSearchRecycler(products.data)
+                                    initSearchRecycler(products.data)
                                 } else {
                                     emptyLay.isVisible = true
                                     searchList.isVisible = false
@@ -110,6 +118,16 @@ class SearchFragment : BaseFragment() {
                     }
                 }
             }
+        }
+    }
+
+    //--- Recyclers ---//
+    private fun initSearchRecycler(data: List<ResponseSearch.Products.Data>) {
+        searchAdapter.setData(data)
+        binding.searchList.setupRecyclerview(LinearLayoutManager(requireContext()), searchAdapter)
+        //Click
+        searchAdapter.setOnItemClickListener {
+
         }
     }
 
