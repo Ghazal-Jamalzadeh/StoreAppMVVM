@@ -363,3 +363,10 @@ post{
 
 Convert Hex code to color---------------------------------------------------------------------------
                 itemsColor.setBackgroundColor(android.graphics.Color.parseColor(item.hexCode))
+
+BottomSheetDialog round corners---------------------------------------------------------------------
+
+روش های مختلفی برای این کار وجود داره که توی پروژه های قبلی استفاده کردیم
+این هم یک روش خیلی ساده و با پرفورمنس خوب هست
+    //Theme
+    override fun getTheme() = R.style.RemoveDialogBackground

@@ -47,5 +47,11 @@
         <item name="colorAccent">@color/salmon</item>
     </style>
 
+    <!--Bottom sheet dialog-->
+    <style name="RemoveDialogBackground" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@null</item>
+        <item name="android:windowSoftInputMode">adjustResize|stateVisible</item>
+    </style>
+
 
 </resources>

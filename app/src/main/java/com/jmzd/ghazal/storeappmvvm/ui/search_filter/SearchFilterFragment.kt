@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentSearchFilterBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -16,6 +17,9 @@ class SearchFilterFragment : BottomSheetDialogFragment() {
 
     //viewModel
 //    private val viewModel by viewModels<LoginViewModel>()
+
+    //Theme
+    override fun getTheme() = R.style.RemoveDialogBackground
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
