@@ -14,7 +14,7 @@ class ResponseCategories : ArrayList<ResponseCategories.ResponseCategoriesItem>(
         @SerializedName("slug")
         val slug: String?, // electronic-devices
         @SerializedName("sub_categories")
-        val subCategories: List<SubCategory?>?,
+        val subCategories: List<SubCategory>?,
         @SerializedName("title")
         val title: String? // کالای دیجیتال
     ) {

@@ -33,7 +33,6 @@ class CategoriesFragment : BaseFragment() {
     private val viewModel by activityViewModels<CategoriesViewModel>()
 
     //adapter
-    //TODO
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
