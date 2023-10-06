@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -34,10 +35,11 @@ class SearchFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     //viewModel
-    private val viewModel by viewModels<SearchViewModel>()
+    private val viewModel by activityViewModels<SearchViewModel>()
 
     //adapter
-    @Inject lateinit var searchAdapter : SearchAdapter
+    @Inject
+    lateinit var searchAdapter: SearchAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,7 +64,7 @@ class SearchFragment : BaseFragment() {
             }
 
             //navigate to search filter
-            filterImg.setOnClickListener{
+            filterImg.setOnClickListener {
                 findNavController().navigate(R.id.action_to_search_filter_fragment)
             }
 
@@ -89,6 +91,7 @@ class SearchFragment : BaseFragment() {
 
         //observers
         observeSearchLiveData()
+        observeSelectedFilterLiveData()
     }
 
     //--- observers ---//
@@ -121,6 +124,17 @@ class SearchFragment : BaseFragment() {
                         searchList.hideShimmer()
                         root.showSnackBar(response.message!!)
                     }
+                }
+            }
+        }
+    }
+
+    private fun observeSelectedFilterLiveData() {
+        viewModel.selectedFilterLiveData.observe(viewLifecycleOwner) {
+            val searchTxt: String = binding.searchEdt.text.toString()
+            if (searchTxt.length > 3) {
+                if (isNetworkAvailable) {
+                    viewModel.search(viewModel.getSearchQueries(searchTxt, it))
                 }
             }
         }

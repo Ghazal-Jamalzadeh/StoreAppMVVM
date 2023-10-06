@@ -390,7 +390,9 @@ class HomeFragment : BaseFragment() {
 
     override fun onStop() {
         super.onStop()
-        countDownTimer.cancel()
+        if (this::countDownTimer.isInitialized){
+            countDownTimer.cancel()
+        }
     }
 
     override fun onDestroy() {

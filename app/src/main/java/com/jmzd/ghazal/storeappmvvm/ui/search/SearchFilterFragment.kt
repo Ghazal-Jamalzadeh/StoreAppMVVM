@@ -63,7 +63,7 @@ class SearchFilterFragment : BottomSheetDialogFragment() {
         binding.filtersList.setupRecyclerview(LinearLayoutManager(requireContext()), adapter)
         //Click
         adapter.setOnItemClickListener {
-//            viewModel.sendSelectedFilterItem(it)
+            viewModel.sendSelectedFilter(it)
             this.dismiss()
         }
     }

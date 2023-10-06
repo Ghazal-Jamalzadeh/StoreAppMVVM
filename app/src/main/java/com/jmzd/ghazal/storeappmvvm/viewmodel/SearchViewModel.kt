@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val repository: SearchRepository ,
-    private val serachFilterRepository: SearchFilterRepository
+    private val searchFilterRepository: SearchFilterRepository
     ) : ViewModel(){
 
     //search
@@ -28,6 +28,10 @@ class SearchViewModel @Inject constructor(
     //search filter
     private val _filterLiveData = MutableLiveData<MutableList<FilterModel>>()
     val filterLiveData: LiveData<MutableList<FilterModel>> = _filterLiveData
+    //selected filter
+    private val _selectedFilterLiveData = MutableLiveData<String>()
+    val selectedFilterLiveData: LiveData<String> = _selectedFilterLiveData
+
 
     //--- search ---//
     fun getSearchQueries(search : String , sort : String): Map<String, String> {
@@ -48,6 +52,11 @@ class SearchViewModel @Inject constructor(
 
     //--- search filter ---//
     fun getFilters() = viewModelScope.launch {
-        _filterLiveData.value = serachFilterRepository.getFilterData()
+        _filterLiveData.value = searchFilterRepository.getFilterData()
+    }
+
+    //--- select filters ---//
+    fun sendSelectedFilter(item : String){
+        _selectedFilterLiveData.value = item
     }
 }
