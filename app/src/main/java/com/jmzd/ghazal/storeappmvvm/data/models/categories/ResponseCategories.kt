@@ -2,7 +2,7 @@ package com.jmzd.ghazal.storeappmvvm.data.models.categories
 
 
 import com.google.gson.annotations.SerializedName
-
+/* flat json */
 class ResponseCategories : ArrayList<ResponseCategories.ResponseCategoriesItem>(){
     data class ResponseCategoriesItem(
         @SerializedName("icon")

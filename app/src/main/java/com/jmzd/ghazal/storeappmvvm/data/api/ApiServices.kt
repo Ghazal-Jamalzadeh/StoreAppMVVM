@@ -1,5 +1,6 @@
 package com.jmzd.ghazal.storeappmvvm.data.api
 
+import com.jmzd.ghazal.storeappmvvm.data.models.categories.ResponseCategories
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseDiscount
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseProducts
@@ -33,4 +34,6 @@ interface ApiServices {
     @GET("search")
     suspend fun getSearch(@QueryMap map : Map<String , String>) : Response<ResponseSearch>
 
+    @GET("menu")
+    suspend fun getCategories() : Response<ResponseCategories>
 }
