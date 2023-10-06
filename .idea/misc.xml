@@ -9,6 +9,7 @@
         <entry key="..\:/AndroidProjects/StoreAppMVVM/app/src/main/res/layout/dialog_check_vpn.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM/app/src/main/res/layout/discount_timer.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM/app/src/main/res/layout/fragment_cart.xml" value="0.2" />
+        <entry key="..\:/AndroidProjects/StoreAppMVVM/app/src/main/res/layout/fragment_categories.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM/app/src/main/res/layout/fragment_home.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM/app/src/main/res/layout/fragment_login_phone.xml" value="0.14" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM/app/src/main/res/layout/fragment_login_verify.xml" value="0.2" />
@@ -18,6 +19,8 @@
         <entry key="..\:/AndroidProjects/StoreAppMVVM/app/src/main/res/layout/home_mobile.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM/app/src/main/res/layout/home_stationery.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM/app/src/main/res/layout/item_banners.xml" value="0.2" />
+        <entry key="..\:/AndroidProjects/StoreAppMVVM/app/src/main/res/layout/item_categories.xml" value="0.25" />
+        <entry key="..\:/AndroidProjects/StoreAppMVVM/app/src/main/res/layout/item_categories_shimmer.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM/app/src/main/res/layout/item_colors_list.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM/app/src/main/res/layout/item_discount.xml" value="0.1" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM/app/src/main/res/layout/item_filter.xml" value="0.2" />

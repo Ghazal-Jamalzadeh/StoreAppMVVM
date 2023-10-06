@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5mdp"
+    style="@style/ColoredShadowDark"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/_5mdp"
+    app:cardElevation="@dimen/_2mdp"
+    app:layout_constraintBottom_toBottomOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--Title-->
+        <TextView
+            android:id="@+id/itemTitle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30mdp"
+            android:gravity="center_vertical"
+            tools:text = "Title"
+            android:paddingEnd="@dimen/_15mdp"
+            android:textColor="@color/eerieBlack"
+            android:textSize="@dimen/_10font_mdp"
+            app:fontPath="fonts/iransans_bold.ttf"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlSymmetry" />
+        <!--Line-->
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:alpha="0.2"
+            android:background="@color/lightSteelBlue"
+            app:layout_constraintTop_toBottomOf="@+id/itemTitle" />
+        <!--List-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/itemSubCatsList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/_5mdp"
+            android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/_10mdp"
+            tools:listitem="@layout/item_categories_sub"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

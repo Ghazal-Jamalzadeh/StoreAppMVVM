@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/ColoredShadowDark"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5mdp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/_5mdp"
+    app:cardElevation="@dimen/_5mdp"
+    app:layout_constraintBottom_toBottomOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--Title-->
+        <View
+            android:id="@+id/itemTitle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30mdp"
+            android:background="@color/silver"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--List-->
+        <View
+            android:id="@+id/itemSubCatsList"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40mdp"
+            android:layout_marginHorizontal="@dimen/_15mdp"
+            android:layout_marginVertical="@dimen/_5mdp"
+            android:background="@color/silver"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemTitle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

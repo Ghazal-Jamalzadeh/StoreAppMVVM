@@ -11,11 +11,12 @@ import com.jmzd.ghazal.storeappmvvm.databinding.FragmentCartBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentCategoriesBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginPhoneBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginVerifyBinding
+import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CategoriesFragment : Fragment() {
+class CategoriesFragment : BaseFragment() {
 
     //binding
     private var _binding: FragmentCategoriesBinding? = null
@@ -38,6 +39,9 @@ class CategoriesFragment : Fragment() {
         binding.apply {
 
         }
+    }
+
+    override fun onNetworkLost() {
     }
 
 

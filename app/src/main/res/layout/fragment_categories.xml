@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.categories.CategoriesFragment">
-
-    <TextView
+    android:background="@color/ghostWhite">
+    <!--Toolbar-->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/toolbarLay"
+        style="@style/ColoredShadowDark"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="@dimen/_8mdp"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_base" />
+
+    </com.google.android.material.card.MaterialCardView>
+    <!--List-->
+    <com.todkars.shimmer.ShimmerRecyclerView
+        android:id="@+id/categoriesList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/_5mdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingBottom="@dimen/_80mdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarLay"
+        app:shimmer_recycler_auto_start="true"
+        app:shimmer_recycler_item_count="4"
+        app:shimmer_recycler_layout="@layout/item_categories_shimmer"
+        app:shimmer_recycler_shape="linear" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
