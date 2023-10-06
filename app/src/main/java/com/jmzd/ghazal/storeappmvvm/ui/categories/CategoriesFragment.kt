@@ -8,13 +8,17 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.categories.ResponseCategories
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentCartBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentCategoriesBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginPhoneBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginVerifyBinding
+import com.jmzd.ghazal.storeappmvvm.ui.categories.adapters.CategoryAdapter
+import com.jmzd.ghazal.storeappmvvm.ui.search.adapters.FilterAdapter
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.CategoriesViewModel
@@ -33,6 +37,7 @@ class CategoriesFragment : BaseFragment() {
     private val viewModel by activityViewModels<CategoriesViewModel>()
 
     //adapter
+    @Inject lateinit var adapter: CategoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,13 +91,13 @@ class CategoriesFragment : BaseFragment() {
     }
 
     private fun initCategoriesRecycler(data: List<ResponseCategories.ResponseCategoriesItem>) {
-//        categoryAdapter.setData(data.dropLast(1))
-//        binding.categoriesList.setupRecyclerview(LinearLayoutManager(requireContext()), categoryAdapter)
-//        //Click
-//        categoryAdapter.setOnItemClickListener {
+        adapter.setData(data.dropLast(1))
+        binding.categoriesList.setupRecyclerview(LinearLayoutManager(requireContext()), adapter)
+        //Click
+        adapter.setOnItemClickListener {
 //            val direction = CategoriesFragmentDirections.actionToCategoriesProduct(it)
 //            findNavController().navigate(direction)
-//        }
+        }
     }
 
     override fun onNetworkLost() {
