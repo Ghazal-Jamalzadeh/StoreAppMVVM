@@ -1,14 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.categories_filters.CategoriesFiltersFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    android:background="@drawable/bg_top_rounded_white"
+    android:paddingVertical="@dimen/_15mdp">
+    <!--Close-->
+    <ImageView
+        android:id="@+id/closeImg"
+        android:layout_width="@dimen/_20mdp"
+        android:layout_height="@dimen/_20mdp"
+        android:layout_marginEnd="@dimen/_15mdp"
+        android:padding="@dimen/_1mdp"
+        android:src="@drawable/xmark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/darkStrategy" />
+    <!--Title-->
     <TextView
+        android:id="@+id/titleTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/filters"
+        android:textColor="@color/darkStrategy"
+        android:textSize="@dimen/_12font_mdp"
+        app:layout_constraintBottom_toBottomOf="@+id/closeImg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!--Line-->
+    <View
+        android:id="@+id/line1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="@dimen/_15mdp"
+        android:layout_marginTop="@dimen/_15mdp"
+        android:alpha="0.5"
+        android:background="@color/water"
+        app:layout_constraintTop_toBottomOf="@id/titleTxt" />
+    <!--Search-->
+    <EditText
+        android:id="@+id/searchEdt"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_38mdp"
+        android:layout_marginHorizontal="@dimen/_15mdp"
+        android:layout_marginTop="@dimen/_15mdp"
+        android:background="@drawable/bg_circle_cultured"
+        android:drawableEnd="@drawable/magnifying_glass"
+        android:drawablePadding="@dimen/_10mdp"
+        android:gravity="center_vertical|right"
+        android:hint="@string/searchProduct"
+        android:maxLines="1"
+        android:paddingHorizontal="@dimen/_10mdp"
+        android:textColor="@color/eerieBlack"
+        android:textColorHint="@color/silver"
+        android:textSize="@dimen/_10font_mdp"
+        app:drawableTint="@color/darkStrategy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line1"
+        tools:ignore="RtlHardcoded" />
+    <!--Price title-->
+    <TextView
+        android:id="@+id/priceTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15mdp"
+        android:layout_marginEnd="@dimen/_5mdp"
+        android:text="@string/priceRange"
+        android:textColor="@color/eerieBlack"
+        android:textSize="@dimen/_10font_mdp"
+        app:fontPath="fonts/iransans_bold.ttf"
+        app:layout_constraintEnd_toEndOf="@id/searchEdt"
+        app:layout_constraintTop_toBottomOf="@id/searchEdt" />
+    <!--Price range-->
+    <com.google.android.material.slider.RangeSlider
+        android:id="@+id/priceRange"
+        style="@style/MyRangeStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:valueFrom="10"
+        android:valueTo="30000000"
+        app:labelBehavior="withinBounds"
+        app:layout_constraintEnd_toEndOf="@+id/searchEdt"
+        app:layout_constraintStart_toStartOf="@+id/searchEdt"
+        app:layout_constraintTop_toBottomOf="@+id/priceTxt" />
+    <!--Sort-->
+    <TextView
+        android:id="@+id/sortTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/sortBy"
+        android:textColor="@color/eerieBlack"
+        android:textSize="@dimen/_10font_mdp"
+        app:fontPath="fonts/iransans_bold.ttf"
+        app:layout_constraintEnd_toEndOf="@+id/priceTxt"
+        app:layout_constraintStart_toStartOf="@id/priceRange"
+        app:layout_constraintTop_toBottomOf="@id/priceRange" />
+    <!--Sort chips-->
+    <HorizontalScrollView
+        android:id="@+id/sortScroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_3mdp"
+        android:clipToPadding="false"
+        android:fadingEdge="horizontal"
+        android:requiresFadingEdge="horizontal"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/sortTitle">
 
-</FrameLayout>
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/sortChipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_10mdp"
+            app:chipSpacing="0dp"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:singleSelection="true" />
+    </HorizontalScrollView>
+    <!--Available-->
+    <TextView
+        android:id="@+id/availableTitle"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_25mdp"
+        android:layout_marginTop="@dimen/_10mdp"
+        android:text="@string/onlyAvailable"
+        android:gravity="center_vertical"
+        android:textColor="@color/eerieBlack"
+        android:textSize="@dimen/_10font_mdp"
+        app:fontPath="fonts/iransans_bold.ttf"
+        app:layout_constraintEnd_toEndOf="@+id/priceTxt"
+        app:layout_constraintTop_toBottomOf="@id/sortScroll" />
+    <!--Check box-->
+    <CheckBox
+        android:id="@+id/availableCheck"
+        android:layout_width="@dimen/_20mdp"
+        android:layout_height="@dimen/_20mdp"
+        app:buttonTint="@color/dodgerBlue"
+        android:scaleX="0.9"
+        android:scaleY="0.9"
+        android:layout_marginEnd="@dimen/_5mdp"
+        app:layout_constraintBottom_toBottomOf="@+id/availableTitle"
+        app:layout_constraintEnd_toStartOf="@id/availableTitle"
+        app:layout_constraintTop_toTopOf="@id/availableTitle" />
+    <!--Submit-->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/submitBtn"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40mdp"
+        android:layout_marginTop="@dimen/_20mdp"
+        android:background="@drawable/bg_gradient_rounded"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        android:text="@string/submitChanges"
+        android:textColor="@color/white"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toEndOf="@id/searchEdt"
+        app:layout_constraintStart_toStartOf="@id/searchEdt"
+        app:layout_constraintTop_toBottomOf="@+id/availableCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

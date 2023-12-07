@@ -53,5 +53,21 @@
         <item name="android:windowSoftInputMode">adjustResize|stateVisible</item>
     </style>
 
+    <!--Range Slider-->
+    <style name="MyRangeStyle" parent="Widget.MaterialComponents.Slider">
+        <item name="materialThemeOverlay">@style/BlueSlider</item>
+        <item name="labelStyle">@style/Widget.Tooltip</item>
+    </style>
+    <style name="BlueSlider">
+        <item name="colorPrimary">@color/dodgerBlue</item>
+        <item name="colorOnPrimary">@color/lavender</item>
+    </style>
+
+    <style name="Widget.Tooltip" parent="Widget.MaterialComponents.Tooltip">
+        <item name="backgroundTint">@color/dodgerBlue</item>
+        <item name="android:textAppearance">@style/TextAppearance.Tooltip</item>
+    </style>
+
+
 
 </resources>
