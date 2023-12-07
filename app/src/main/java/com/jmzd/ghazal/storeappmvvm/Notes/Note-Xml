@@ -270,3 +270,83 @@ android:imeOptions="actionDone"
 android:imeOptions="actionNext"
 
 تقریبا ده دوازده تا آپشن داره...
+
+angeSlider -----------------------------------------------------------------------------------------
+قبلا گوگل اینو نداشت ولی بالاخره اضافه کردش
+از این اسلایدرها که میشه رنج توش انتخاب کرد و دو تا سر دارن
+شبیه سیک بار اندروید هست
+ولی تفاوت هایی دارن با هم
+
+
+    <com.google.android.material.slider.RangeSlider
+        android:id="@+id/priceRange"
+        style="@style/MyRangeStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:valueFrom="10" // minimum
+        android:valueTo="30000000" //maximum
+        app:labelBehavior="withinBounds" // مربوط به افکت نمایش تولتیپ
+        app:layout_constraintEnd_toEndOf="@+id/searchEdt"
+        app:layout_constraintStart_toStartOf="@+id/searchEdt"
+        app:layout_constraintTop_toBottomOf="@+id/priceTxt" />
+        اگر مایل نباشید تولتیپ نمایش داده شه میتونید کلا بگید gone شه و...
+
+اگه براش استایل اختصاصی ننویسیم زیاد به درد نمیخوره و زشته
+
+    <!--Range Slider-->
+    <style name="MyRangeStyle" parent="Widget.MaterialComponents.Slider"> // پرنتش اسلایدره
+        <item name="materialThemeOverlay">@style/BlueSlider</item> // رنگش - تمش که خودمون تعریف کردیم پایین
+        <item name="labelStyle">@style/Widget.Tooltip</item> // تولتیپ - پایین تعریفش کردیم
+    </style>
+
+    <style name="BlueSlider"> // تم مربوط به اسلایدر رو اینجا تعریف میکنیم
+        <item name="colorPrimary">@color/dodgerBlue</item> // دایره ها
+        <item name="colorOnPrimary">@color/lavender</item> //خط
+    </style>
+
+    <style name="Widget.Tooltip" parent="Widget.MaterialComponents.Tooltip"> // پرنتش تولتیپه
+        <item name="backgroundTint">@color/dodgerBlue</item> // رنگ بک گراندش
+        <item name="android:textAppearance">@style/TextAppearance.Tooltip</item> // فونتش ایران سنس باشه چون به صورت پیش فرض فونت دیفالت داره. پایین تعریف کردیم اینو هم
+    </style>
+
+        <style name="TextAppearance.Tooltip" parent="TextAppearance.MaterialComponents.Tooltip"> // پرنت این هم میشه تولتیپ
+            <item name="android:textColor">@color/white</item>
+            <item name="fontFamily">@font/iransans</item> // دو تا فونت فمیلی هس که هر دو نیم اسپیس اپ و اندروید رو بیارید چون بعضی اندروید ها از این استفاده میکنه بعضیاش از اون
+            <item name="android:fontFamily">@font/iransans</item>
+        </style>
+
+
+Chip Group------------------------------------------------------------------------------------------
+توی آموزش های قبلی بهش پرداخته بودیم اینجا دوباره مرور میکنیم
+ <HorizontalScrollView
+        android:id="@+id/sortScroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_3mdp"
+        android:clipToPadding="false"
+        android:fadingEdge="horizontal"
+        android:requiresFadingEdge="horizontal"
+        android:scrollbars="none" // نمیخوایم اسکرول بارش رو نشون بده
+        app:layout_constraintTop_toBottomOf="@id/sortTitle">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/sortChipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_10mdp"
+            app:chipSpacing="0dp"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:singleSelection="true" />
+    </HorizontalScrollView>
+
+
+Check Box-------------------------------------------------------------------------------------------
+برای کوچیک کردنش از روش زیر استفاده میکنیم
+چون با width & height هیچ تغییری نمیکنه سایز باکسش
+ولی نکته اینه که اسکیل میاد تکست رو هم کوچیک بزرگ میکنه
+پس میایم تکست رو به صورت تکست ویو میاریم توی پروژه
+        android:scaleX="0.9"
+        android:scaleY="0.9"
+برای رنگش
+        app:buttonTint="@color/dodgerBlue"
