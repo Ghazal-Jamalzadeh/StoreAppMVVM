@@ -4,23 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseProducts
-import com.jmzd.ghazal.storeappmvvm.data.models.search.ResponseSearch
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentCategoriesProductsBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.CategoryProductsViewModel
-import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CategoriesProductFragment : BaseFragment() {
@@ -35,6 +32,10 @@ class CategoriesProductFragment : BaseFragment() {
     //args
     private val args by navArgs<CategoriesProductFragmentArgs>()
     private var slug: String = ""
+
+    //adapters
+    @Inject
+    lateinit var productsAdapter: ProductsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -91,6 +92,10 @@ class CategoriesProductFragment : BaseFragment() {
                     is MyResponse.Success -> {
                         productsList.hideShimmer()
                         response.data?.let { data ->
+                            //title
+                            toolbar.toolbarTitleTxt.text = data.subCategory?.title
+
+                            //recycler view
                             data.subCategory?.products?.let { products ->
                                 if (!products.data.isNullOrEmpty()) {
                                     emptyLay.isVisible = false
@@ -116,12 +121,12 @@ class CategoriesProductFragment : BaseFragment() {
 
     //--- Recyclers ---//
     private fun initProductsRecycler(data: List<ResponseProducts.SubCategory.Products.Data>) {
-//        searchAdapter.setData(data)
-//        binding.productsList.setupRecyclerview(LinearLayoutManager(requireContext()), searchAdapter)
-//        //Click
-//        searchAdapter.setOnItemClickListener {
-//
-//        }
+        productsAdapter.setData(data)
+        binding.productsList.setupRecyclerview(LinearLayoutManager(requireContext()), productsAdapter)
+        //Click
+        productsAdapter.setOnItemClickListener {
+
+        }
     }
 
     override fun onNetworkLost() {
