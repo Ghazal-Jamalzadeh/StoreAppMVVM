@@ -2,6 +2,7 @@ package com.jmzd.ghazal.storeappmvvm.data.models.home
 
 
 import com.google.gson.annotations.SerializedName
+import com.jmzd.ghazal.storeappmvvm.data.models.search.ResponseSearch
 
 data class ResponseProducts(
     @SerializedName("subCategory")
@@ -83,7 +84,7 @@ data class ResponseProducts(
                 @SerializedName("color_id")
                 val colorId: List<String?>?,
                 @SerializedName("colors")
-                val colors: List<Color?>?,
+                val colors: List<ResponseSearch.Products.Data.Color>?,
                 @SerializedName("comments_avg_rate")
                 val commentsAvgRate: String?, // 3.1250
                 @SerializedName("comments_count")
@@ -112,12 +113,7 @@ data class ResponseProducts(
                 val title: String?, // مانیتور ایسوس مدل VG27WQ سایز 27 اینچ
                 @SerializedName("title_en")
                 val titleEn: String? // monitor asus VG27WQ 27 inch
-            ) {
-                data class Color(
-                    @SerializedName("hex_code")
-                    val hexCode: String? // #000000
-                )
-            }
+            )
 
             data class Link(
                 @SerializedName("active")
