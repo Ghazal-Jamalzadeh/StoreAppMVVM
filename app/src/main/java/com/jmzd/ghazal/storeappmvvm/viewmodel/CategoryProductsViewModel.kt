@@ -61,7 +61,7 @@ class CategoryProductsViewModel @Inject constructor(private val repository: Cate
     }
 
     //call api
-    private fun getProductsByCategory(slug: String, queries: Map<String, String>) =
+    fun getProductsByCategory(slug: String, queries: Map<String, String>) =
         viewModelScope.launch {
 
             _productsLiveData.value = MyResponse.Loading()

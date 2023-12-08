@@ -153,6 +153,9 @@
             <argument
                 android:name="slug"
                 app:argType="string" />
+            <action
+                android:id="@+id/action_categoriesProductsFragment_to_categoriesFiltersFragment"
+                app:destination="@id/categoriesFiltersFragment" />
         </fragment>
     </navigation>
 
