@@ -58,7 +58,23 @@
             android:id="@+id/categoriesFragment"
             android:name="com.jmzd.ghazal.storeappmvvm.ui.categories.CategoriesFragment"
             android:label="fragment_categories"
-            tools:layout="@layout/fragment_categories" />
+            tools:layout="@layout/fragment_categories" >
+
+            <action
+                android:id="@+id/action_categoriesFragment_to_categoriresProductsFragment"
+                app:destination="@id/nav_categories"
+                app:enterAnim="@anim/from_left"
+                app:exitAnim="@anim/to_right"
+                app:popEnterAnim="@anim/from_right"
+                app:popExitAnim="@anim/to_left" >
+
+                <argument
+                    android:name="slug"
+                    app:argType="string" />
+            </action>
+
+
+        </fragment>
         <fragment
             android:id="@+id/homeFragment"
             android:name="com.jmzd.ghazal.storeappmvvm.ui.home.HomeFragment"
@@ -121,6 +137,24 @@
         app:popEnterAnim="@anim/nav_default_pop_enter_anim"
         app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
+    <!-- nav category -->
+    <navigation android:id="@+id/nav_categories"
+        app:startDestination="@id/categoriesProductsFragment">
+        <fragment
+            android:id="@+id/categoriesFiltersFragment"
+            android:name="com.jmzd.ghazal.storeappmvvm.ui.categories_filters.CategoriesFiltersFragment"
+            android:label="CategoriesFiltersFragment"
+            tools:layout="@layout/fragment_categories_filters" />
+        <fragment
+            android:id="@+id/categoriesProductsFragment"
+            android:name="com.jmzd.ghazal.storeappmvvm.ui.categories_products.CategoriesProductFragment"
+            android:label="CategoriesProductFragment"
+            tools:layout="@layout/fragment_categories_products" >
+            <argument
+                android:name="slug"
+                app:argType="string" />
+        </fragment>
+    </navigation>
 
 
 </navigation>

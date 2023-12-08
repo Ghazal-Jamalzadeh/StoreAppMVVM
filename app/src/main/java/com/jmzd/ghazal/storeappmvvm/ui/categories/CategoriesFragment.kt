@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.categories.ResponseCategories
@@ -95,8 +96,8 @@ class CategoriesFragment : BaseFragment() {
         binding.categoriesList.setupRecyclerview(LinearLayoutManager(requireContext()), adapter)
         //Click
         adapter.setOnItemClickListener {
-//            val direction = CategoriesFragmentDirections.actionToCategoriesProduct(it)
-//            findNavController().navigate(direction)
+            val direction = CategoriesFragmentDirections.actionCategoriesFragmentToCategoriresProductsFragment(it)
+            findNavController().navigate(direction)
         }
     }
 

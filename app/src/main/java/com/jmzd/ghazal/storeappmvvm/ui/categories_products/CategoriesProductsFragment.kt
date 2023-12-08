@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
-import com.jmzd.ghazal.storeappmvvm.databinding.FragmentCategoriesProductBinding
+import androidx.navigation.fragment.navArgs
+import com.jmzd.ghazal.storeappmvvm.databinding.FragmentCategoriesProductsBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,22 +16,30 @@ import dagger.hilt.android.AndroidEntryPoint
 class CategoriesProductFragment : BaseFragment() {
 
     //binding
-    private var _binding: FragmentCategoriesProductBinding? = null
+    private var _binding: FragmentCategoriesProductsBinding? = null
     private val binding get() = _binding!!
 
     //viewModel
     private val viewModel by viewModels<LoginViewModel>()
 
+    //args
+    private val args by navArgs<CategoriesProductFragmentArgs>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentCategoriesProductBinding.inflate(layoutInflater)
+        _binding = FragmentCategoriesProductsBinding.inflate(layoutInflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        args.let {
+            Toast.makeText(requireContext(), "slug is ${it.slug}", Toast.LENGTH_SHORT).show()
+        }
+
         //init views
         binding.apply {
 

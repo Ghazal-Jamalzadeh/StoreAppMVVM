@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentCategoriesFiltersBinding
-import com.jmzd.ghazal.storeappmvvm.databinding.FragmentCategoriesProductBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
