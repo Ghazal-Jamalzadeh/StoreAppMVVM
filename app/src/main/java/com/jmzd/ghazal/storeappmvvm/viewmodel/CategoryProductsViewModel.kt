@@ -8,7 +8,9 @@ import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseDiscount
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseProducts
 import com.jmzd.ghazal.storeappmvvm.data.models.search.ResponseSearch
+import com.jmzd.ghazal.storeappmvvm.data.models.search_filter.FilterModel
 import com.jmzd.ghazal.storeappmvvm.data.repository.CategoryProductsRepository
+import com.jmzd.ghazal.storeappmvvm.data.repository.SearchFilterRepository
 import com.jmzd.ghazal.storeappmvvm.utils.*
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.utils.network.ResponseHandler
@@ -18,12 +20,19 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class CategoryProductsViewModel @Inject constructor(private val repository: CategoryProductsRepository) :
+class CategoryProductsViewModel @Inject constructor(
+    private val repository: CategoryProductsRepository ,
+    private val searchFilterRepository: SearchFilterRepository
+) :
     ViewModel() {
 
     //products live data
     private val _productsLiveData = MutableLiveData<MyResponse<ResponseProducts>>()
     val productsLiveData: LiveData<MyResponse<ResponseProducts>> = _productsLiveData
+
+    //search filter
+    private val _filterLiveData = MutableLiveData<MutableList<FilterModel>>()
+    val filterLiveData: LiveData<MutableList<FilterModel>> = _filterLiveData
 
     //queries
     fun getProductsQueries(
@@ -70,4 +79,9 @@ class CategoryProductsViewModel @Inject constructor(private val repository: Cate
 
             _productsLiveData.value = ResponseHandler(response).generateResponse()
         }
+
+    //--- search filter ---//
+    fun getFilters() = viewModelScope.launch {
+        _filterLiveData.value = searchFilterRepository.getFilterData()
+    }
 }
