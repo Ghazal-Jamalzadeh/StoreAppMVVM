@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jmzd.ghazal.storeappmvvm.data.models.categories.FilterCategoryModel
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseDiscount
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseProducts
@@ -21,8 +22,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CategoryProductsViewModel @Inject constructor(
-    private val repository: CategoryProductsRepository ,
-    private val searchFilterRepository: SearchFilterRepository
+    private val repository: CategoryProductsRepository,
+    private val searchFilterRepository: SearchFilterRepository,
 ) :
     ViewModel() {
 
@@ -33,6 +34,10 @@ class CategoryProductsViewModel @Inject constructor(
     //search filter
     private val _filterLiveData = MutableLiveData<MutableList<FilterModel>>()
     val filterLiveData: LiveData<MutableList<FilterModel>> = _filterLiveData
+
+    //selected filter
+    private val _selectedFilterLiveData = MutableLiveData<FilterCategoryModel>()
+    val selectedFilterLiveData: LiveData<FilterCategoryModel> = _selectedFilterLiveData
 
     //queries
     fun getProductsQueries(
@@ -83,5 +88,17 @@ class CategoryProductsViewModel @Inject constructor(
     //--- search filter ---//
     fun getFilters() = viewModelScope.launch {
         _filterLiveData.value = searchFilterRepository.getFilterData()
+    }
+
+    //--- select filters ---//
+    fun sendSelectedFilter(
+        sort: String? = null,
+        search: String? = null,
+        minPrice: String? = null,
+        maxPrice: String? = null,
+        available: Boolean? = null,
+    ) {
+        _selectedFilterLiveData.value =
+            FilterCategoryModel(sort, search, minPrice, maxPrice, available)
     }
 }

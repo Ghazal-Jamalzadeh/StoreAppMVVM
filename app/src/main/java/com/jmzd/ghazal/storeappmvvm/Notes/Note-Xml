@@ -455,3 +455,10 @@ Check Box-----------------------------------------------------------------------
         android:scaleY="0.9"
 برای رنگش
         app:buttonTint="@color/dodgerBlue"
+
+RTL scroll view-------------------------------------------------------------------------------------
+            //Rtl scrollview
+            lifecycleScope.launch {
+                delay(100)
+                sortScroll.fullScroll(HorizontalScrollView.FOCUS_RIGHT)
+            }

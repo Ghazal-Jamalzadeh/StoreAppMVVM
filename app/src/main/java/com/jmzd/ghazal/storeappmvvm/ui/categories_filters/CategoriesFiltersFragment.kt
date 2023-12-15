@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.HorizontalScrollView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.slider.LabelFormatter
@@ -18,6 +19,8 @@ import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.moneySeparating
 import com.jmzd.ghazal.storeappmvvm.viewmodel.CategoryProductsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CategoriesFiltersFragment : BaseFragment() {
@@ -49,17 +52,29 @@ class CategoriesFiltersFragment : BaseFragment() {
         initPriceRange()
 
         //search filters
-        loadSortData()
+        viewModel.getFilters()
+        observeSearchFilters()
 
 
         //init views
         binding.apply {
 
+            //Rtl scrollview
+            lifecycleScope.launch {
+                delay(100)
+                sortScroll.fullScroll(HorizontalScrollView.FOCUS_RIGHT)
+            }
 
 
         }
     }
 
+    //--- observers ---//
+    private fun observeSearchFilters() {
+        viewModel.filterLiveData.observe(viewLifecycleOwner) {
+            setupChip(it)
+        }
+    }
     //--- range slider ---//
     private fun initPriceRange() {
         //Label format
@@ -85,13 +100,8 @@ class CategoriesFiltersFragment : BaseFragment() {
         }
     }
 
-    //--- search filters ---//
-    private fun loadSortData() {
-        viewModel.filterLiveData.observe(viewLifecycleOwner) {
-            setupChip(it)
-        }
-    }
 
+    //--- search filters chip group ---//
     private fun setupChip(list: MutableList<FilterModel>) {
         var tempList = mutableListOf<FilterModel>()
         tempList.clear()

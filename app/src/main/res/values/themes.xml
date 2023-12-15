@@ -65,6 +65,8 @@
 
     <style name="Widget.Tooltip" parent="Widget.MaterialComponents.Tooltip">
         <item name="backgroundTint">@color/dodgerBlue</item>
+        <item name="backgroundColor">@color/dodgerBlue</item>
+        <item name="background">@color/dodgerBlue</item>
         <item name="android:textAppearance">@style/TextAppearance.Tooltip</item>
     </style>
 
