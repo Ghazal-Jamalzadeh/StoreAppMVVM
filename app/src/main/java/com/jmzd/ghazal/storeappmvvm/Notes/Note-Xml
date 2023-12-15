@@ -340,6 +340,47 @@ Chip Group----------------------------------------------------------------------
             app:singleSelection="true" />
     </HorizontalScrollView>
 
+برای ایجاد این حالت دو تایی باید توی کد بهش بگیم
+که به این منظور متد initPriceRange رو مینویسیم
+
+    private fun initPriceRange() {
+        //Label format
+        val formatter = LabelFormatter { value ->
+            value.toInt().moneySeparating()
+        }
+        //Customize
+        برای پیاده سازی انواع ویژگی هاش از اپلای استفاده میکنیم
+        binding.priceRange.apply {
+
+        توسط ست ولیوز میتونیم مقادیر رنج رو بهش بدیم.
+        مقدار ورودیش varArgs هست. یعنی بیش از یکی...
+        اینا محل قرار گیری اولیه نقطه هامون هستن
+        نه مینموم و ماکسیموم خود نمودار
+        دیفالت ولیو ها میشن
+            setValues(7000000f, 21000000f)
+
+            تغییر دادن مقدار لیبل - سه رقم سه رقم جدا شدن و اینا
+            setLabelFormatter(formatter)
+
+            //Listener
+            addOnSliderTouchListener(object : RangeSlider.OnSliderTouchListener {
+                override fun onStartTrackingTouch(slider: RangeSlider) {
+
+                }
+
+
+                برای دسترسی به مقادیر اسلایدر
+                میدونیم این اسلایدر دو تا مقدار بمون میده
+                با استفاده از متد ولیوز این لیست رو میگیریم
+                و با ایندکس به مقداراشون دسترسی پیدا میکنیم
+                override fun onStopTrackingTouch(slider: RangeSlider) {
+                    val values = slider.values
+                    minPrice = values[0].toInt().toString()
+                    maxPrice = values[1].toInt().toString()
+                }
+            })
+        }
+    }
 
 Check Box-------------------------------------------------------------------------------------------
 برای کوچیک کردنش از روش زیر استفاده میکنیم
