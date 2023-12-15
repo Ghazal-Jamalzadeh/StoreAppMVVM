@@ -41,6 +41,10 @@
 اگه نمیخواستیم دیتا بفرستیم میتونستیم به همون حالت جنرال تعریف کنیم
 
 تهش کدمون این شکلی میشه
+    <!-- main nav graph -->
+    <navigation
+        android:id="@+id/nav_home"
+        app:startDestination="@id/homeFragment">
         <fragment
             android:id="@+id/categoriesFragment"
             android:name="com.jmzd.ghazal.storeappmvvm.ui.categories.CategoriesFragment"
@@ -62,3 +66,26 @@
 
 
         </fragment>
+
+
+        ----------------------------------------------
+         <!-- nav category -->
+            <navigation android:id="@+id/nav_categories"
+                app:startDestination="@id/categoriesProductsFragment">
+                <fragment
+                    android:id="@+id/categoriesProductsFragment"
+                    android:name="com.jmzd.ghazal.storeappmvvm.ui.categories_products.CategoriesProductFragment"
+                    android:label="CategoriesProductFragment"
+                    tools:layout="@layout/fragment_categories_products" >
+                    <argument
+                        android:name="slug"
+                        app:argType="string" />
+                    <action
+                        android:id="@+id/action_categoriesProductsFragment_to_categoriesFiltersFragment"
+                        app:destination="@id/categoriesFiltersFragment" />
+                </fragment>
+            </navigation>
+
+---------------------------------------
+            val direction = CategoriesFragmentDirections.actionCategoriesFragmentToCategoriresProductsFragment(it)
+            findNavController().navigate(direction)
