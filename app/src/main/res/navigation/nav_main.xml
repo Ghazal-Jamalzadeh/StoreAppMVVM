@@ -140,14 +140,14 @@
     <!-- nav category -->
     <navigation android:id="@+id/nav_categories"
         app:startDestination="@id/categoriesProductsFragment">
-        <fragment
+        <dialog
             android:id="@+id/categoriesFiltersFragment"
             android:name="com.jmzd.ghazal.storeappmvvm.ui.categories_filters.CategoriesFiltersFragment"
             android:label="CategoriesFiltersFragment"
             tools:layout="@layout/fragment_categories_filters" />
         <fragment
             android:id="@+id/categoriesProductsFragment"
-            android:name="com.jmzd.ghazal.storeappmvvm.ui.categories_products.CategoriesProductFragment"
+            android:name="com.jmzd.ghazal.storeappmvvm.ui.categories_products.CategoriesProductsFragment"
             android:label="CategoriesProductFragment"
             tools:layout="@layout/fragment_categories_products" >
             <argument

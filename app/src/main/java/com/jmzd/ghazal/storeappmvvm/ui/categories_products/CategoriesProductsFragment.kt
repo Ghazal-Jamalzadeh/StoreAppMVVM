@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -20,17 +21,17 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CategoriesProductFragment : BaseFragment() {
+class CategoriesProductsFragment : BaseFragment() {
 
     //binding
     private var _binding: FragmentCategoriesProductsBinding? = null
     private val binding get() = _binding!!
 
     //viewModel
-    private val viewModel by viewModels<CategoryProductsViewModel>()
+    private val viewModel by activityViewModels<CategoryProductsViewModel>()
 
     //args
-    private val args by navArgs<CategoriesProductFragmentArgs>()
+    private val args by navArgs<CategoriesProductsFragmentArgs>()
     private var slug: String = ""
 
     //adapters
@@ -65,7 +66,7 @@ class CategoriesProductFragment : BaseFragment() {
 //                toolbarTitleTxt.text = getString(R.string.searchInProducts)
                 //Option
                 toolbarOptionImg.setOnClickListener{
-                    findNavController().navigate(CategoriesProductFragmentDirections.actionCategoriesProductsFragmentToCategoriesFiltersFragment())
+                    findNavController().navigate(CategoriesProductsFragmentDirections.actionCategoriesProductsFragmentToCategoriesFiltersFragment())
                 }
             }
 
@@ -76,6 +77,7 @@ class CategoriesProductFragment : BaseFragment() {
 
             //observers
             observeProductsLiveData()
+            observeSelectedFiltersLiveData()
 
         }
     }
@@ -116,6 +118,19 @@ class CategoriesProductFragment : BaseFragment() {
                     }
                 }
             }
+        }
+    }
+
+    private fun observeSelectedFiltersLiveData() {
+        viewModel.selectedFilterLiveData.observe(viewLifecycleOwner) {
+            if (isNetworkAvailable)
+                viewModel.getProductsByCategory(
+                    slug,
+                    viewModel.getProductsQueries(
+                        sort = it.sort, search = it.search, minPrice = it.minPrice, maxPrice = it.maxPrice,
+                        isAvailable = it.available
+                    )
+                )
         }
     }
 

@@ -16,7 +16,6 @@ import com.google.android.material.slider.RangeSlider
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.search_filter.FilterModel
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentCategoriesFiltersBinding
-import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.moneySeparating
 import com.jmzd.ghazal.storeappmvvm.viewmodel.CategoryProductsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,6 +39,9 @@ class CategoriesFiltersFragment : BottomSheetDialogFragment() {
     private var search: String? = null
     private var available: Boolean? = null
 
+    //Theme
+    override fun getTheme() = R.style.RemoveDialogBackground
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -56,11 +58,14 @@ class CategoriesFiltersFragment : BottomSheetDialogFragment() {
 
         //search filters
         viewModel.getFilters()
-        observeSearchFilters()
+        observeSearchFiltersLiveData()
 
 
         //init views
         binding.apply {
+
+            //Close
+            closeImg.setOnClickListener { this@CategoriesFiltersFragment.dismiss() }
 
             //Rtl scrollview
             lifecycleScope.launch {
@@ -86,7 +91,7 @@ class CategoriesFiltersFragment : BottomSheetDialogFragment() {
     }
 
     //--- observers ---//
-    private fun observeSearchFilters() {
+    private fun observeSearchFiltersLiveData() {
         viewModel.filterLiveData.observe(viewLifecycleOwner) {
             setupChip(it)
         }
