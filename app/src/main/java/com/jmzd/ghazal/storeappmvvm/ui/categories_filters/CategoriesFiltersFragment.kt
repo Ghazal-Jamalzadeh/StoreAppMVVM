@@ -8,6 +8,7 @@ import android.widget.HorizontalScrollView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.slider.LabelFormatter
@@ -23,7 +24,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class CategoriesFiltersFragment : BaseFragment() {
+class CategoriesFiltersFragment : BottomSheetDialogFragment() {
 
     //binding
     private var _binding: FragmentCategoriesFiltersBinding? = null
@@ -36,6 +37,8 @@ class CategoriesFiltersFragment : BaseFragment() {
     private var minPrice: String? = null
     private var maxPrice: String? = null
     private var sort: String? = null
+    private var search: String? = null
+    private var available: Boolean? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,6 +68,19 @@ class CategoriesFiltersFragment : BaseFragment() {
                 sortScroll.fullScroll(HorizontalScrollView.FOCUS_RIGHT)
             }
 
+            //Search btn
+            submitBtn.setOnClickListener {
+                //Search
+                if (searchEdt.text.isNotEmpty()) {
+                    search = searchEdt.text.toString()
+                }
+                //Available
+                available = availableCheck.isChecked
+                //Send data
+                viewModel.sendSelectedFilter(sort, search, minPrice, maxPrice, available)
+                //Close
+                this@CategoriesFiltersFragment.dismiss()
+            }
 
         }
     }
@@ -75,6 +91,7 @@ class CategoriesFiltersFragment : BaseFragment() {
             setupChip(it)
         }
     }
+
     //--- range slider ---//
     private fun initPriceRange() {
         //Label format
@@ -130,10 +147,6 @@ class CategoriesFiltersFragment : BaseFragment() {
 
 
     //--- life cycle ---//
-    override fun onNetworkLost() {
-    }
-
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
