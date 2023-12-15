@@ -1,13 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cultured"
     tools:context=".ui.profile.ProfileFragment">
-
-    <TextView
+    <!--Scroll-->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollLay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:fillViewport="true">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/_90mdp">
+            <!--Avatar-->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/avatarImg"
+                style="@style/ColoredShadowDark"
+                android:layout_width="@dimen/_80mdp"
+                android:layout_height="@dimen/_80mdp"
+                android:layout_marginTop="@dimen/_20mdp"
+                android:background="@color/white"
+                android:elevation="@dimen/_20mdp"
+                android:padding="@dimen/_2mdp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/CircleImage"
+                app:strokeColor="@color/white"
+                app:strokeWidth="@dimen/_2mdp"
+                tools:targetApi="p" />
+            <!--Loading-->
+            <ProgressBar
+                android:id="@+id/avatarLoading"
+                android:layout_width="@dimen/_20mdp"
+                android:layout_height="@dimen/_20mdp"
+                android:elevation="@dimen/_25mdp"
+                android:outlineAmbientShadowColor="@color/salmon"
+                android:outlineSpotShadowColor="@color/salmon"
+                android:theme="@style/SalmonProgressbar"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/avatarImg"
+                app:layout_constraintEnd_toEndOf="@id/avatarImg"
+                app:layout_constraintStart_toStartOf="@id/avatarImg"
+                app:layout_constraintTop_toTopOf="@id/avatarImg"
+                tools:targetApi="p" />
+            <!--Edit-->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/avatarEditImg"
+                android:layout_width="@dimen/_20mdp"
+                android:layout_height="@dimen/_20mdp"
+                android:layout_margin="@dimen/_3mdp"
+                android:background="@drawable/bg_circle_white"
+                android:elevation="@dimen/_21mdp"
+                android:outlineAmbientShadowColor="@color/salmon"
+                android:outlineSpotShadowColor="@color/salmon"
+                android:padding="@dimen/_1mdp"
+                android:src="@drawable/pen_circle"
+                app:layout_constraintBottom_toBottomOf="@id/avatarImg"
+                app:layout_constraintEnd_toEndOf="@id/avatarImg"
+                app:shapeAppearance="@style/CircleImage"
+                app:strokeColor="@color/white"
+                app:strokeWidth="@dimen/_1mdp"
+                app:tint="@color/salmon"
+                tools:targetApi="p" />
+            <!--Name-->
+            <TextView
+                android:id="@+id/nameTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_20mdp"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:gravity="center"
+                android:textColor="@color/eerieBlack"
+                android:textSize="@dimen/_12font_mdp"
+                app:fontPath="fonts/iransans_bold.ttf"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/avatarImg" />
+            <!--Info-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/infoContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_15mdp"
+                android:layout_marginTop="@dimen/_10mdp"
+                app:layout_constraintTop_toBottomOf="@id/nameTxt"
+                tools:targetApi="p">
+
+                <include
+                    android:id="@+id/infoLay"
+                    layout="@layout/profile_user_info" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--Menu-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/menuContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_15mdp"
+                android:layout_marginTop="@dimen/_10mdp"
+                app:layout_constraintTop_toBottomOf="@id/infoContainer"
+                tools:targetApi="p">
+
+                <include
+                    android:id="@+id/menuLay"
+                    layout="@layout/profile_user_menu" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--Order-->
+            <LinearLayout
+                android:id="@+id/orderContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_15mdp"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:background="@drawable/bg_rounded_white"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/menuContainer">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_10mdp"
+                    android:layout_marginTop="@dimen/_10mdp"
+                    android:text="@string/yourOrdersStatus"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_10font_mdp" />
+
+                <include
+                    android:id="@+id/orderLay"
+                    layout="@layout/profile_user_order" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+    <!--Loading-->
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="@dimen/_25mdp"
+        android:layout_height="@dimen/_25mdp"
+        android:theme="@style/SalmonProgressbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

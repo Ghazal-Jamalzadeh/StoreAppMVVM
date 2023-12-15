@@ -31,6 +31,10 @@
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/fragment_categories_filters.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/fragment_categories_product.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/fragment_categories_products.xml" value="0.2" />
+        <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/fragment_profile.xml" value="0.2" />
+        <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/profile_user_info.xml" value="0.2" />
+        <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/profile_user_menu.xml" value="0.2" />
+        <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/profile_user_order.xml" value="0.2" />
       </map>
     </option>
   </component>

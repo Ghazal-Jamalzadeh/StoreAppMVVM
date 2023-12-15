@@ -462,3 +462,28 @@ RTL scroll view-----------------------------------------------------------------
                 delay(100)
                 sortScroll.fullScroll(HorizontalScrollView.FOCUS_RIGHT)
             }
+
+ImageFilterView-------------------------------------------------------------------------------------
+برای انداختن انواع طیف رنگی و فیلتر روی تصویر
+ولی یک کار باحال دیگه هم میشه باهاش کرد که معمولا با شیپبل ایمیج ویو انجام میدیم
+app:roundPercent="1"
+اتریبیوت بالا میاد عکس رو کاملا گرد میکنه
+البته خب دستمون توی شیپبل ایمیج ویو بازتره یکم
+درضمن چون حالت درصدی داره میتونید مثلا ۰.۳ بهش بدید گوشه ها رو یکم گرد میکنه
+از صفر تا یک هست مقدارش
+یک گرد
+صفر زاویه دار
+دیگه استایل اینا نمیخواد بنویسید
+خیلی باحاله
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/menuEditImg"
+            android:layout_width="@dimen/_30mdp"
+            android:layout_height="@dimen/_30mdp"
+            android:background="@color/crayola"
+            android:padding="@dimen/_7mdp"
+            android:src="@drawable/user_pen"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:roundPercent="1"
+            app:tint="@color/white" />

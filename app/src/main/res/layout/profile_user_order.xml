@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/_10mdp"
+    android:weightSum="3">
+    <!--Canceled-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menuCanceledLay"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/menuCanceledImg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40mdp"
+            android:background="@color/red"
+            android:padding="@dimen/_12mdp"
+            android:layout_marginEnd="@dimen/_5mdp"
+            android:src="@drawable/cart_circle_xmark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:roundPercent="0.3"
+            app:tint="@color/white" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/canceled"
+            android:textColor="@color/lightSteelBlue"
+            android:textSize="@dimen/_8font_mdp"
+            android:layout_marginTop="@dimen/_5mdp"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="@id/menuCanceledImg"
+            app:layout_constraintEnd_toEndOf="@id/menuCanceledImg"
+            app:layout_constraintTop_toBottomOf="@+id/menuCanceledImg"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--Pending-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menuPendingLay"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/menuPendingImg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40mdp"
+            android:background="@color/chineseYellow"
+            android:padding="@dimen/_12mdp"
+            android:layout_marginHorizontal="@dimen/_3mdp"
+            android:src="@drawable/cart_circle_exclamation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:roundPercent="0.3"
+            app:tint="@color/white" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/pending"
+            android:textColor="@color/lightSteelBlue"
+            android:textSize="@dimen/_8font_mdp"
+            android:layout_marginTop="@dimen/_5mdp"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="@id/menuPendingImg"
+            app:layout_constraintEnd_toEndOf="@id/menuPendingImg"
+            app:layout_constraintTop_toBottomOf="@+id/menuPendingImg"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--Delivered-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menuDeliveredLay"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/menuDeliveredImg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40mdp"
+            android:background="@color/caribbeanGreen"
+            android:padding="@dimen/_12mdp"
+            android:layout_marginStart="@dimen/_5mdp"
+            android:src="@drawable/cart_circle_check"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:roundPercent="0.3"
+            app:tint="@color/white" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/delivered"
+            android:textColor="@color/lightSteelBlue"
+            android:textSize="@dimen/_8font_mdp"
+            android:layout_marginTop="@dimen/_5mdp"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="@id/menuDeliveredImg"
+            app:layout_constraintEnd_toEndOf="@id/menuDeliveredImg"
+            app:layout_constraintTop_toBottomOf="@+id/menuDeliveredImg"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
