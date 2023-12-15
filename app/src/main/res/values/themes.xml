@@ -74,6 +74,19 @@
         <item name="android:fontFamily">@font/iransans</item>
     </style>
 
+    <!--Chips-->
+    <style name="FilterChipsBackground" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/item_chip_background</item>
+        <item name="android:clickable">true</item>
+        <item name="android:checkable">true</item>
+    </style>
+
+    <style name="FilterChipsText">
+        <item name="fontFamily">@font/iransans</item>
+        <item name="android:fontFamily">@font/iransans</item>
+        <item name="android:textSize">@dimen/_9font_mdp</item>
+        <item name="android:textColor">@color/item_chip_text</item>
+    </style>
 
 
 </resources>

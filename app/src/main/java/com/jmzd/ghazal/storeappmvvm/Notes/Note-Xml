@@ -316,30 +316,6 @@ angeSlider ---------------------------------------------------------------------
         </style>
 
 
-Chip Group------------------------------------------------------------------------------------------
-توی آموزش های قبلی بهش پرداخته بودیم اینجا دوباره مرور میکنیم
- <HorizontalScrollView
-        android:id="@+id/sortScroll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_3mdp"
-        android:clipToPadding="false"
-        android:fadingEdge="horizontal"
-        android:requiresFadingEdge="horizontal"
-        android:scrollbars="none" // نمیخوایم اسکرول بارش رو نشون بده
-        app:layout_constraintTop_toBottomOf="@id/sortTitle">
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/sortChipGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/_10mdp"
-            app:chipSpacing="0dp"
-            app:selectionRequired="true"
-            app:singleLine="true"
-            app:singleSelection="true" />
-    </HorizontalScrollView>
-
 برای ایجاد این حالت دو تایی باید توی کد بهش بگیم
 که به این منظور متد initPriceRange رو مینویسیم
 
@@ -381,6 +357,94 @@ Chip Group----------------------------------------------------------------------
             })
         }
     }
+
+Chip Group------------------------------------------------------------------------------------------
+توی آموزش های قبلی بهش پرداخته بودیم اینجا دوباره مرور میکنیم
+ <HorizontalScrollView
+        android:id="@+id/sortScroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_3mdp"
+        android:clipToPadding="false"
+        android:fadingEdge="horizontal"
+        android:requiresFadingEdge="horizontal"
+        android:scrollbars="none" // نمیخوایم اسکرول بارش رو نشون بده
+        app:layout_constraintTop_toBottomOf="@id/sortTitle">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/sortChipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_10mdp"
+            app:chipSpacing="0dp"
+            app:selectionRequired="true"
+            app:singleLine="true"
+            app:singleSelection="true" />
+    </HorizontalScrollView>
+
+
+ ----------------استایل ها --------------------
+     <!--Chips-->
+     <style name="FilterChipsBackground" parent="Widget.MaterialComponents.Chip.Choice">
+     // که این یک سلکتوری هست که در حالت سلکت و غیر سلکت براش رنگ های مختلف دادیم
+         <item name="chipBackgroundColor">@color/item_chip_background</item>
+         <item name="android:clickable">true</item>
+         <item name="android:checkable">true</item>
+     </style>
+
+     <style name="FilterChipsText">
+         <item name="fontFamily">@font/iransans</item>
+         <item name="android:fontFamily">@font/iransans</item>
+         <item name="android:textSize">@dimen/_9font_mdp</item>
+         // که این یک سلکتوری هست که در حالت سلکت و غیر سلکت براش رنگ های مختلف دادیم
+         <item name="android:textColor">@color/item_chip_text</item>
+     </style>
+
+ --------------------کد جاوا ----------------------
+
+ // در مورد چیپ گروپ به طور کامل توی پروژه رسپی توضیحات داده شده
+ واسه همین اینجا خیلی مختصر تر بهش میپردازیم
+
+    private fun setupChip(list: MutableList<FilterModel>) {
+        var tempList = mutableListOf<FilterModel>()
+        tempList.clear() // چون چرخه حیات ویومدل ما به اکتیویتی وابسته هست این کار رو میکنیم که دیتا نمونه از قبل
+        tempList = list
+        tempList.forEach {
+        به ازای هر آیتم لیست میایم یک چیپ جدید می سازیم
+            val chip = Chip(requireContext())
+
+            ظاهر و استایل رو اینجا میدیم بهش
+            val drawable = ChipDrawable.createFromAttributes(
+                requireContext(), null, 0,
+                R.style.FilterChipsBackground
+            )
+            chip.setChipDrawable(drawable)
+
+            رنگ پیش فرض متن
+            chip.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+
+            خود متن
+            chip.text = it.faName
+
+            آیدی
+            chip.id = it.id
+
+            استایل مربوط به رنگ متن ها
+            که زمانی که چیپ انتخاب شده با زمانی که انتخاب نشده رنگ متن فرق کنه
+            برای این کار یک استایل و یک سلکتور نوشتیم
+            chip.setTextAppearanceResource(R.style.FilterChipsText)
+
+            اضافه کردن یه دونه یه دونه چیپ ها به چیپ گروپ و هندل کردن کلیک
+            binding.sortChipGroup.apply {
+                addView(chip)
+                //Click
+                setOnCheckedStateChangeListener { group, _ ->
+                    sort = tempList[group.checkedChipId - 1].enName
+                }
+            }
+        }
+    }
+
 
 Check Box-------------------------------------------------------------------------------------------
 برای کوچیک کردنش از روش زیر استفاده میکنیم
