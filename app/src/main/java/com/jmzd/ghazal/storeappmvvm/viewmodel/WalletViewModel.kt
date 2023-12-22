@@ -21,7 +21,7 @@ class WalletViewModel @Inject constructor(private val repository: WalletReposito
     val walletBalanceLiveData: LiveData<MyResponse<ResponseWallet>> = _walletBalanceLiveData
 
     //--- api call ---//
-    private fun getWalletBalance() = viewModelScope.launch {
+    fun getWalletBalance() = viewModelScope.launch {
 
         _walletBalanceLiveData.value = MyResponse.Loading()
 

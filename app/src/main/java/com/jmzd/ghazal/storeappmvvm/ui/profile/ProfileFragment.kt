@@ -13,15 +13,18 @@ import androidx.fragment.app.viewModels
 import coil.load
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseProfile
+import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseWallet
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginPhoneBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginVerifyBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentProfileBinding
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.changeVisibility
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.loadImage
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.moneySeparating
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileViewModel
+import com.jmzd.ghazal.storeappmvvm.viewmodel.WalletViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,6 +36,7 @@ class ProfileFragment : Fragment() {
 
     //viewModel
     private val viewModel by activityViewModels<ProfileViewModel>()
+    private val walletViewModel by viewModels<WalletViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,10 +54,10 @@ class ProfileFragment : Fragment() {
         }
         //observers
         observeProfileLiveData()
+        observeWalletBalanceLiveData()
     }
 
     //--- observers ---//
-
     @SuppressLint("SetTextI18n")
     private fun observeProfileLiveData() {
         binding.apply {
@@ -99,7 +103,36 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    private fun observeWalletBalanceLiveData() {
+        binding.infoLay.apply {
+            walletViewModel.walletBalanceLiveData.observe(viewLifecycleOwner) { response : MyResponse<ResponseWallet>->
+                when (response) {
+                    is MyResponse.Loading -> {
+                        walletLoading.changeVisibility(true, walletTxt)
+                    }
+
+                    is MyResponse.Success -> {
+                        walletLoading.changeVisibility(false, walletTxt)
+                        response.data?.let { data : ResponseWallet ->
+                            walletTxt.text = data.wallet.toString().toInt().moneySeparating()
+                        }
+                    }
+
+                    is MyResponse.Error -> {
+                        walletLoading.changeVisibility(false, walletTxt)
+                        root.showSnackBar(response.message!!)
+                    }
+                }
+            }
+        }
+    }
+
     //--- life cycle ---//
+    override fun onResume() {
+        super.onResume()
+        walletViewModel.getWalletBalance()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
