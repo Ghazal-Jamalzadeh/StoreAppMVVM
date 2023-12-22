@@ -1,10 +1,8 @@
 package com.jmzd.ghazal.storeappmvvm.ui.profile
 
 import android.annotation.SuppressLint
-import android.net.NetworkRequest
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,26 +10,30 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import coil.load
+import com.app.imagepickerlibrary.ImagePicker
+import com.app.imagepickerlibrary.ImagePicker.Companion.registerImagePicker
 import com.app.imagepickerlibrary.listener.ImagePickerResultListener
+import com.app.imagepickerlibrary.model.PickExtension
+import com.app.imagepickerlibrary.model.PickerType
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseProfile
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseWallet
-import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginPhoneBinding
-import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginVerifyBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentProfileBinding
+import com.jmzd.ghazal.storeappmvvm.utils.*
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
-import com.jmzd.ghazal.storeappmvvm.utils.extensions.changeVisibility
-import com.jmzd.ghazal.storeappmvvm.utils.extensions.loadImage
-import com.jmzd.ghazal.storeappmvvm.utils.extensions.moneySeparating
-import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.*
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
-import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.WalletViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
+import java.net.URLEncoder
 
 @AndroidEntryPoint
-class ProfileFragment : BaseFragment() , ImagePickerResultListener {
+class ProfileFragment : BaseFragment(), ImagePickerResultListener {
 
     //binding
     private var _binding: FragmentProfileBinding? = null
@@ -40,6 +42,9 @@ class ProfileFragment : BaseFragment() , ImagePickerResultListener {
     //viewModel
     private val viewModel by activityViewModels<ProfileViewModel>()
     private val walletViewModel by viewModels<WalletViewModel>()
+
+    //image picker
+    private val imagePicker: ImagePicker by lazy { registerImagePicker(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,7 +58,10 @@ class ProfileFragment : BaseFragment() , ImagePickerResultListener {
         super.onViewCreated(view, savedInstanceState)
         //init views
         binding.apply {
-
+            //Choose image
+            avatarEditImg.setOnClickListener {
+                openImagePicker()
+            }
         }
         //observers
         observeProfileLiveData()
@@ -64,7 +72,7 @@ class ProfileFragment : BaseFragment() , ImagePickerResultListener {
     @SuppressLint("SetTextI18n")
     private fun observeProfileLiveData() {
         binding.apply {
-            viewModel.profileLiveData.observe(viewLifecycleOwner) { response : MyResponse<ResponseProfile>->
+            viewModel.profileLiveData.observe(viewLifecycleOwner) { response: MyResponse<ResponseProfile> ->
                 when (response) {
                     is MyResponse.Loading -> {
                         loading.isVisible = true
@@ -108,7 +116,7 @@ class ProfileFragment : BaseFragment() , ImagePickerResultListener {
 
     private fun observeWalletBalanceLiveData() {
         binding.infoLay.apply {
-            walletViewModel.walletBalanceLiveData.observe(viewLifecycleOwner) { response : MyResponse<ResponseWallet>->
+            walletViewModel.walletBalanceLiveData.observe(viewLifecycleOwner) { response: MyResponse<ResponseWallet> ->
                 when (response) {
                     is MyResponse.Loading -> {
                         walletLoading.changeVisibility(true, walletTxt)
@@ -116,7 +124,7 @@ class ProfileFragment : BaseFragment() , ImagePickerResultListener {
 
                     is MyResponse.Success -> {
                         walletLoading.changeVisibility(false, walletTxt)
-                        response.data?.let { data : ResponseWallet ->
+                        response.data?.let { data: ResponseWallet ->
                             walletTxt.text = data.wallet.toString().toInt().moneySeparating()
                         }
                     }
@@ -131,7 +139,40 @@ class ProfileFragment : BaseFragment() , ImagePickerResultListener {
     }
 
     //--- image picker ---//
+    private fun openImagePicker() {
+        imagePicker
+            .title(getString(R.string.galleryImages))
+            .multipleSelection(false)
+            .showFolder(true)
+            .cameraIcon(true)
+            .doneIcon(true)
+            .allowCropping(true)
+            .compressImage(false)
+            .maxImageSize(2.5f)//mb
+            .extension(PickExtension.ALL)// jpg - png - webp (یک فرمت تصویری هست که توسط گوگل ارایه شده و پرفورمنس خیلی خوبی داره)
+        imagePicker.open(PickerType.GALLERY)
+    }
+
     override fun onImagePick(uri: Uri?) {
+
+        val imageFile = getRealFileFromUri(requireContext(), uri!!)?.let { path -> File(path) }
+
+        val multipart = MultipartBody.Builder().setType(MultipartBody.FORM)
+            .addFormDataPart(METHOD, POST)
+
+        //Image body
+        if (imageFile != null) {
+            val fileName = URLEncoder.encode(imageFile.absolutePath, UTF_8)
+            val reqFile = imageFile.asRequestBody(MULTIPART_FROM_DATA.toMediaTypeOrNull())
+            multipart.addFormDataPart(AVATAR, fileName, reqFile)
+        }
+        //Call api
+        val requestBody = multipart.build()
+
+        if (isNetworkAvailable) {
+            viewModel.uploadAvatar(requestBody)
+        }
+
     }
 
     override fun onMultiImagePick(uris: List<Uri>?) {

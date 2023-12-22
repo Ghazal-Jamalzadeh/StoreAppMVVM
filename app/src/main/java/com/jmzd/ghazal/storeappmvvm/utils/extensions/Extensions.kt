@@ -1,8 +1,11 @@
 package com.jmzd.ghazal.storeappmvvm.utils.extensions
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.net.Uri
+import android.provider.MediaStore
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -68,4 +71,19 @@ fun RecyclerView.setupRecyclerview(myLayoutManager: RecyclerView.LayoutManager, 
 fun Dialog.transparentCorners() {
     //this -> Dialog
     this.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+}
+
+@SuppressLint("Range")
+fun getRealFileFromUri(context: Context, uri: Uri): String? {
+    var result: String? = null
+    val resolver = context.contentResolver.query(uri, null, null, null, null)
+    if (resolver == null) {
+        result = uri.path
+    } else {
+        if (resolver.moveToFirst()) {
+            result = resolver.getString(resolver.getColumnIndex(MediaStore.Images.ImageColumns.DATA))
+        }
+        resolver.close()
+    }
+    return result
 }

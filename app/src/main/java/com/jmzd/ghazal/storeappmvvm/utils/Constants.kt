@@ -53,3 +53,14 @@ const val MIN_PRICE = "minPrice"
 const val MAX_PRICE = "maxPrice"
 const val SELECTED_BRANDS = "selectedBrands"
 const val ONLY_AVAILABLE = "onlyAvailable"
+
+//upload photo
+const val AVATAR = "avatar"
+const val POST = "post"
+const val METHOD = "_method"
+const val MULTIPART_FROM_DATA = "multipart/form-data"
+const val UTF_8 = "UTF-8"
+
+const val PENDING = "pending"
+const val CANCELED = "canceled"
+const val DELIVERED = "delivered"
