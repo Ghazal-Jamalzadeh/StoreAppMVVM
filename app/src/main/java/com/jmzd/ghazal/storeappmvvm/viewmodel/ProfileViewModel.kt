@@ -11,6 +11,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.network.ResponseHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.RequestBody
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -27,7 +28,11 @@ class ProfileViewModel @Inject constructor(private val repository: PofileReposit
     //profile
     private val _profileLiveData = MutableLiveData<MyResponse<ResponseProfile>>()
     val profileLiveData: LiveData<MyResponse<ResponseProfile>> = _profileLiveData
+    //upload avatar
+    private val _avatarLiveData = MutableLiveData<MyResponse<Unit>>()
+    val avatarLiveData: LiveData<MyResponse<Unit>> = _avatarLiveData
 
+    //--- call api ---//
     private fun getProfileData() = viewModelScope.launch {
 
         _profileLiveData.value = MyResponse.Loading()
@@ -35,5 +40,14 @@ class ProfileViewModel @Inject constructor(private val repository: PofileReposit
         val response: Response<ResponseProfile> = repository.getProfile()
 
         _profileLiveData.value = ResponseHandler(response).generateResponse()
+    }
+
+     fun uploadAvatar(body : RequestBody) = viewModelScope.launch {
+
+        _avatarLiveData.value = MyResponse.Loading()
+
+        val response: Response<Unit> = repository.uploadAvatar(body)
+
+        _avatarLiveData.value = ResponseHandler(response).generateResponse()
     }
 }
