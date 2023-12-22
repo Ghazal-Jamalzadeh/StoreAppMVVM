@@ -77,6 +77,7 @@ ok http 3 هم هستن از کتابخونه
     @POST("auth/avatar")
     suspend fun uploadAvatar(@Body body : RequestBody) : Response<Unit>
 
-
+این ریکوعست بادی رو خیلی جدی بگیرید چیز خیلی خفنیه
+برای هندل کردن وضعیت های پیچیده خیلی به تمیز موندن کد کمک میکنه
 
 
