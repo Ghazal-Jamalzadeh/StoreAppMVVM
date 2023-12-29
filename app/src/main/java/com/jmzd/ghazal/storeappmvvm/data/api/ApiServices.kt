@@ -46,7 +46,7 @@ interface ApiServices {
     @POST("auth/avatar")
     suspend fun uploadAvatar(@Body body : RequestBody) : Response<Unit>
 
-    @POST("auth/update")
+    @PUT("auth/update")
     suspend fun updateProfile(@Body body : BodyUpdateProfile) : Response<ResponseProfile>
 
 

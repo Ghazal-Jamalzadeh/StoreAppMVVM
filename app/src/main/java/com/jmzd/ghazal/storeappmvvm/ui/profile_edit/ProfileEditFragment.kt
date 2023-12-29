@@ -8,10 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.BodyUpdateProfile
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentProfileEditBinding
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.enableLoading
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileViewModel
@@ -19,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
 import ir.hamsaa.persiandatepicker.api.PersianPickerDate
 import ir.hamsaa.persiandatepicker.api.PersianPickerListener
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -80,6 +83,7 @@ class ProfileEditFragment : BottomSheetDialogFragment() {
 
         //observers
         observeProfileLiveData()
+        observeUpdateProfileLiveData()
     }
 
     //--- observers ---//
@@ -108,6 +112,33 @@ class ProfileEditFragment : BottomSheetDialogFragment() {
 
                     is MyResponse.Error -> {
                         loading.isVisible = false
+                        root.showSnackBar(response.message!!)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun observeUpdateProfileLiveData() {
+        binding.apply {
+            viewModel.updateProfileLiveData.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is MyResponse.Loading -> {
+                        submitBtn.enableLoading(true)
+                    }
+
+                    is MyResponse.Success -> {
+                        submitBtn.enableLoading(false)
+                        response.data?.let {
+//                            lifecycleScope.launch {
+//                                EventBus.publish(Events.IsUpdateProfile)
+//                            }
+                            this@ProfileEditFragment.dismiss()
+                        }
+                    }
+
+                    is MyResponse.Error -> {
+                        submitBtn.enableLoading(false)
                         root.showSnackBar(response.message!!)
                     }
                 }
