@@ -1,4 +1,4 @@
-package com.jmzd.ghazal.storeappmvvm.ui.search
+package com.jmzd.ghazal.storeappmvvm.ui.search_filter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

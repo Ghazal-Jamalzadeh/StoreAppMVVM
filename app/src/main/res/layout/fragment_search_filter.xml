@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_top_rounded_white"
     android:paddingTop="@dimen/_15mdp"
-    tools:context=".ui.search.SearchFilterFragment">
+    tools:context=".ui.search_filter.SearchFilterFragment">
     <!--Close-->
     <ImageView
         android:id="@+id/closeImg"
