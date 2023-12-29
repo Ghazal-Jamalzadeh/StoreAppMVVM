@@ -33,7 +33,7 @@ class ProfileViewModel @Inject constructor(private val repository: PofileReposit
     val avatarLiveData: LiveData<MyResponse<Unit>> = _avatarLiveData
 
     //--- call api ---//
-    private fun getProfileData() = viewModelScope.launch {
+    fun getProfileData() = viewModelScope.launch {
 
         _profileLiveData.value = MyResponse.Loading()
 

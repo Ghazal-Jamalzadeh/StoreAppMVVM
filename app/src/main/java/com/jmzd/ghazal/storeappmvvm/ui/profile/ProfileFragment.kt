@@ -66,6 +66,7 @@ class ProfileFragment : BaseFragment(), ImagePickerResultListener {
         //observers
         observeProfileLiveData()
         observeWalletBalanceLiveData()
+        observeAvatarLiveData()
     }
 
     //--- observers ---//
@@ -137,6 +138,30 @@ class ProfileFragment : BaseFragment(), ImagePickerResultListener {
             }
         }
     }
+
+    private fun observeAvatarLiveData() {
+        binding.apply {
+            viewModel.avatarLiveData.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is MyResponse.Loading -> {
+                        avatarLoading.isVisible = true
+                    }
+
+                    is MyResponse.Success -> {
+                        avatarLoading.isVisible = false
+                        if (isNetworkAvailable)
+                            viewModel.getProfileData()
+                    }
+
+                    is MyResponse.Error -> {
+                        avatarLoading.isVisible = false
+                        root.showSnackBar(response.message!!)
+                    }
+                }
+            }
+        }
+    }
+
 
     //--- image picker ---//
     private fun openImagePicker() {
