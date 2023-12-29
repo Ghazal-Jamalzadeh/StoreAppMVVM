@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import coil.load
 import com.app.imagepickerlibrary.ImagePicker
 import com.app.imagepickerlibrary.ImagePicker.Companion.registerImagePicker
@@ -61,6 +62,15 @@ class ProfileFragment : BaseFragment(), ImagePickerResultListener {
             //Choose image
             avatarEditImg.setOnClickListener {
                 openImagePicker()
+            }
+
+            //menu items
+            menuLay.apply {
+
+                //edit profile
+                menuEditLay.setOnClickListener {
+                    findNavController().navigate(R.id.action_to_edit_profile_fragment)
+                }
             }
         }
         //observers

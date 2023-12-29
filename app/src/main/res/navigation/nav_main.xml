@@ -98,6 +98,13 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
+        <action
+            android:id="@+id/action_to_edit_profile_fragment"
+            app:destination="@id/profileEditFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </navigation>
 
     <!-- main actions -->
@@ -158,6 +165,11 @@
                 app:destination="@id/categoriesFiltersFragment" />
         </fragment>
     </navigation>
+    <dialog
+        android:id="@+id/profileEditFragment"
+        android:name="com.jmzd.ghazal.storeappmvvm.ui.profile_edit.ProfileEditFragment"
+        android:label="ProfileEditFragment"
+        tools:layout="@layout/fragment_profile_edit"/>
 
 
 </navigation>

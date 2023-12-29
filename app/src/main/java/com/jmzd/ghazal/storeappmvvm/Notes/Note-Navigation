@@ -89,3 +89,30 @@
 ---------------------------------------
             val direction = CategoriesFragmentDirections.actionCategoriesFragmentToCategoriresProductsFragment(it)
             findNavController().navigate(direction)
+
+
+----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+مورد دیگه اینه که چطوری از یک فرگمنتی که داخل یک نستد نویگیشن هست
+نویگیت کنیم به یک فرگمنتی که داخل هیچ نویگیشنی نیست
+
+پروفایل فرگمنت ما توی نستد هوم هست
+ولی صفحه ادیت پروفایل رو بیرون گذاشتیم
+حالا چطوری بین این ها جا به جا شیم
+
+برای این کار میایم یک اکشن جنرال داخل این نستد هوم تعریف میکنیم
+        <action
+            android:id="@+id/action_to_edit_profile_fragment"
+            app:destination="@id/profileEditFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+که یک فلش کامل به اون فرگمنت کشیده میشه
+
+به طور کلی توی این پروژه یاد گرفتیم که تمامی شرایط نویگیشن ها رو پوشش بدیم
+نستد به نستد
+فرگمنت به نستد
+نستد به فرگمنت
+ارسال اطلاعات در این حالت ها
