@@ -3,6 +3,7 @@ package com.jmzd.ghazal.storeappmvvm.ui.profile_edit
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -15,6 +16,9 @@ import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
+import ir.hamsaa.persiandatepicker.api.PersianPickerDate
+import ir.hamsaa.persiandatepicker.api.PersianPickerListener
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -42,6 +46,7 @@ class ProfileEditFragment : BottomSheetDialogFragment() {
         return binding.root
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //call api
@@ -51,6 +56,14 @@ class ProfileEditFragment : BottomSheetDialogFragment() {
         binding.apply {
             //Close
             closeImg.setOnClickListener { this@ProfileEditFragment.dismiss() }
+
+            //Open date picker
+            birthDateEdt.setOnTouchListener { _, event ->
+                if (event.action == MotionEvent.ACTION_DOWN) {
+                    openDatePicker()
+                }
+                false
+            }
 
             //Submit data
             submitBtn.setOnClickListener {
@@ -69,7 +82,7 @@ class ProfileEditFragment : BottomSheetDialogFragment() {
         observeProfileLiveData()
     }
 
-
+    //--- observers ---//
     @SuppressLint("SetTextI18n")
     private fun observeProfileLiveData() {
         binding.apply {
@@ -102,6 +115,28 @@ class ProfileEditFragment : BottomSheetDialogFragment() {
         }
     }
 
+    //--- date picker ---//
+    private fun openDatePicker() {
+        PersianDatePickerDialog(requireContext())
+            .setTodayButtonVisible(true)
+            .setMinYear(1300)
+            .setMaxYear(1400)
+            .setInitDate(1370, 3, 13)
+            .setTitleType(PersianDatePickerDialog.DAY_MONTH_YEAR)
+            .setShowInBottomSheet(true)
+            .setListener(object : PersianPickerListener {
+                override fun onDateSelected(pDate: PersianPickerDate) {
+                    val birthDate = "${pDate.gregorianYear}-${pDate.gregorianMonth}-${pDate.gregorianDay}"
+                    val birthDatePersian = "${pDate.persianYear}-${pDate.persianMonth}-${pDate.persianDay}"
+                    body.gregorianDate = birthDate
+                    binding.birthDateEdt.setText(birthDatePersian)
+                }
+
+                override fun onDismissed() {}
+            }).show()
+    }
+
+    //--- life cycle ---//
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
