@@ -9,11 +9,13 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.jmzd.ghazal.storeappmvvm.R
+import com.jmzd.ghazal.storeappmvvm.data.models.profile.BodyUpdateProfile
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentProfileEditBinding
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProfileEditFragment : BottomSheetDialogFragment() {
@@ -27,6 +29,10 @@ class ProfileEditFragment : BottomSheetDialogFragment() {
 
     //Theme
     override fun getTheme() = R.style.RemoveDialogBackground
+
+    //body
+    @Inject
+    lateinit var body : BodyUpdateProfile
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,6 +51,18 @@ class ProfileEditFragment : BottomSheetDialogFragment() {
         binding.apply {
             //Close
             closeImg.setOnClickListener { this@ProfileEditFragment.dismiss() }
+
+            //Submit data
+            submitBtn.setOnClickListener {
+                if (nameEdt.text.isNullOrEmpty().not())
+                    body.firstName = nameEdt.text.toString()
+                if (familyEdt.text.isNullOrEmpty().not())
+                    body.lastName = familyEdt.text.toString()
+                if (idNumberEdt.text.isNullOrEmpty().not())
+                    body.idNumber = idNumberEdt.text.toString()
+                //Call api
+                viewModel.updateProfile(body)
+            }
         }
 
         //observers
