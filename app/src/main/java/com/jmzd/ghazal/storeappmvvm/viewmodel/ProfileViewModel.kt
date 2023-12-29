@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseProfile
-import com.jmzd.ghazal.storeappmvvm.data.repository.PofileRepository
+import com.jmzd.ghazal.storeappmvvm.data.repository.ProfileRepository
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.utils.network.ResponseHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +16,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor(private val repository: PofileRepository) : ViewModel() {
+class ProfileViewModel @Inject constructor(private val repository: ProfileRepository) : ViewModel() {
 
     init {
         viewModelScope.launch {
