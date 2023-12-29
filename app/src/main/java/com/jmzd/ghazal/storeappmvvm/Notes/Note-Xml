@@ -487,3 +487,30 @@ app:roundPercent="1"
             app:layout_constraintTop_toTopOf="parent"
             app:roundPercent="1"
             app:tint="@color/white" />
+
+Text Input Layout Style-----------------------------------------------------------------------------
+
+    <!--Text input layout-->
+
+اگه یادتون بیاد گفتیم که تکست اینپوت لایوت حالت های مختلفی داره
+باکس دورش باشه - خط زیرش باشه ...
+پرنت این موضوع رو مشخص میکنه که ما فیلد باکس رو انتخاب میکنیم
+    <style name="MediumTurquoiseTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+
+    رنگ بک گراند باکس
+        <item name="boxBackgroundColor">@color/cultured</item>
+
+        کرنر رادیوس های باکس که چهار جهت باید جدا نوشته شوند
+        <item name="boxCornerRadiusTopStart">@dimen/_10mdp</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/_10mdp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/_10mdp</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/_10mdp</item>
+
+        مشخصه این چهار تام چیان
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="hintAnimationEnabled">true</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="hintTextColor">@color/gray</item>
+        <item name="startIconTint">@color/mediumTurquoise</item>
+    </style>
+
