@@ -3,7 +3,7 @@ package com.jmzd.ghazal.storeappmvvm.data.models.profile
 
 import com.google.gson.annotations.SerializedName
 
-data class ResponseUpdateProfile(
+data class BodyUpdateProfile(
     @SerializedName("email")
     val email: String?, // test@nouri-api.ir
     @SerializedName("firstName")
