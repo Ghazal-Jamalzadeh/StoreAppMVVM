@@ -7,6 +7,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseProducts
 import com.jmzd.ghazal.storeappmvvm.data.models.login.BodyLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseVerify
+import com.jmzd.ghazal.storeappmvvm.data.models.profile.BodyUpdateProfile
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseProfile
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseWallet
 import com.jmzd.ghazal.storeappmvvm.data.models.search.ResponseSearch
@@ -44,6 +45,9 @@ interface ApiServices {
 
     @POST("auth/avatar")
     suspend fun uploadAvatar(@Body body : RequestBody) : Response<Unit>
+
+    @POST("auth/update")
+    suspend fun updateProfile(@Body body : BodyUpdateProfile) : Response<ResponseProfile>
 
 
 }
