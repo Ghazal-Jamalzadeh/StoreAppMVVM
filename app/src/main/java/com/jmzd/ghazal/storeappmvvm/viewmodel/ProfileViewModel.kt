@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jmzd.ghazal.storeappmvvm.data.models.profile.BodyUpdateProfile
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseProfile
 import com.jmzd.ghazal.storeappmvvm.data.repository.ProfileRepository
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
@@ -31,6 +32,9 @@ class ProfileViewModel @Inject constructor(private val repository: ProfileReposi
     //upload avatar
     private val _avatarLiveData = MutableLiveData<MyResponse<Unit>>()
     val avatarLiveData: LiveData<MyResponse<Unit>> = _avatarLiveData
+    //update profile
+    private val _updateProfileLiveData = MutableLiveData<MyResponse<ResponseProfile>>()
+    val updateProfileLiveData: LiveData<MyResponse<ResponseProfile>> = _updateProfileLiveData
 
     //--- call api ---//
     fun getProfileData() = viewModelScope.launch {
@@ -50,4 +54,14 @@ class ProfileViewModel @Inject constructor(private val repository: ProfileReposi
 
         _avatarLiveData.value = ResponseHandler(response).generateResponse()
     }
+
+    fun updateProfile(body : BodyUpdateProfile) = viewModelScope.launch {
+
+        _updateProfileLiveData.value = MyResponse.Loading()
+
+        val response: Response<ResponseProfile> = repository.updateProfie(body)
+
+        _updateProfileLiveData.value = ResponseHandler(response).generateResponse()
+    }
+
 }
