@@ -35,7 +35,8 @@ class IncreaseWalletFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         //init views
         binding.apply {
-
+            //Close
+            closeImg.setOnClickListener { this@IncreaseWalletFragment.dismiss() }
         }
     }
 
