@@ -514,3 +514,13 @@ Text Input Layout Style---------------------------------------------------------
         <item name="startIconTint">@color/mediumTurquoise</item>
     </style>
 
+
+BottomSheets and keyboards--------------------------------------------------------------------------
+    <!--Bottom sheet dialog-->
+    <style name="RemoveDialogBackground" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@null</item>
+
+        این استایل باعث میشه کیبور که باز میشه پشت کیبرد نیفته
+        و بره بالا
+        <item name="android:windowSoftInputMode">adjustResize|stateVisible</item>
+    </style>
