@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.app.imagepickerlibrary.ImagePicker
@@ -22,11 +23,14 @@ import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseWallet
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentProfileBinding
 import com.jmzd.ghazal.storeappmvvm.utils.*
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.utils.events.EventBus
+import com.jmzd.ghazal.storeappmvvm.utils.events.Events
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.*
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.WalletViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -77,6 +81,14 @@ class ProfileFragment : BaseFragment(), ImagePickerResultListener {
         observeProfileLiveData()
         observeWalletBalanceLiveData()
         observeAvatarLiveData()
+
+        //Auto update profile
+        lifecycleScope.launch {
+            EventBus.subscribe<Events.IsUpdateProfile> {
+                if (isNetworkAvailable)
+                    viewModel.getProfileData()
+            }
+        }
     }
 
     //--- observers ---//

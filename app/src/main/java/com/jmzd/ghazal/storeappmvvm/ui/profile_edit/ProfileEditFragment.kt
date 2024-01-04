@@ -13,6 +13,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.BodyUpdateProfile
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentProfileEditBinding
+import com.jmzd.ghazal.storeappmvvm.utils.events.EventBus
+import com.jmzd.ghazal.storeappmvvm.utils.events.Events
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.enableLoading
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
@@ -130,9 +132,9 @@ class ProfileEditFragment : BottomSheetDialogFragment() {
                     is MyResponse.Success -> {
                         submitBtn.enableLoading(false)
                         response.data?.let {
-//                            lifecycleScope.launch {
-//                                EventBus.publish(Events.IsUpdateProfile)
-//                            }
+                            lifecycleScope.launch {
+                                EventBus.publish(Events.IsUpdateProfile)
+                            }
                             this@ProfileEditFragment.dismiss()
                         }
                     }
