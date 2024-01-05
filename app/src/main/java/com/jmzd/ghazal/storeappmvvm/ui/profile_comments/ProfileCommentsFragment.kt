@@ -61,6 +61,7 @@ class ProfileCommentsFragment : BaseFragment() {
 
         //observers
         observeProfileCommentsLiveData()
+        observeDeleteCommentsLiveData()
     }
 
 
@@ -94,6 +95,27 @@ class ProfileCommentsFragment : BaseFragment() {
         }
     }
 
+    private fun observeDeleteCommentsLiveData() {
+        binding.apply {
+            viewModel.deleteCommentLiveData.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is MyResponse.Loading -> {}
+
+                    is MyResponse.Success -> {
+                        response.data?.let {
+                            if (isNetworkAvailable)
+                                viewModel.getProfileComments()
+                        }
+                    }
+
+                    is MyResponse.Error -> {
+                        root.showSnackBar(response.message!!)
+                    }
+                }
+            }
+        }
+    }
+
     //--- init recycler ---//
     private fun initCommentsRecycler(data: List<ResponseProfileComments.Data>) {
         binding.apply {
@@ -106,8 +128,8 @@ class ProfileCommentsFragment : BaseFragment() {
 //                //Save state
 //                recyclerviewState = commentsList.layoutManager?.onSaveInstanceState()
 //                //Call delete api
-//                if (isNetworkAvailable)
-//                    viewModel.callDeleteCommentApi(it)
+                if (isNetworkAvailable)
+                    viewModel.deleteComment(it)
             }
         }
     }
