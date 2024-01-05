@@ -524,3 +524,23 @@ BottomSheets and keyboards------------------------------------------------------
         و بره بالا
         <item name="android:windowSoftInputMode">adjustResize|stateVisible</item>
     </style>
+
+RatingBar-------------------------------------------------------------------------------------------
+            <RatingBar
+                android:id="@+id/itemRating"
+
+                این استایل دیفالت خود اندروید هست
+                چون پیش فرضش خیلی زشت و گنده هست
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5mdp"
+
+                ستاره ها وقتی روشن میشن چه شکلی باشن
+                android:progressTint="@color/royalBlue"
+
+                ما میخوایم امتیازات حتما به صورت اینت باشد
+                اکه اینو قرار ندیم عدد خرده دار هم میشه داد بهش
+                android:stepSize="1"
+                app:layout_constraintEnd_toEndOf="@id/line1"
+                app:layout_constraintTop_toBottomOf="@id/line1" />
