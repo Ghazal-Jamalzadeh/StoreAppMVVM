@@ -7,7 +7,7 @@ data class ResponseProfileComments(
     @SerializedName("current_page")
     val currentPage: Int?, // 1
     @SerializedName("data")
-    val `data`: List<Data?>?,
+    val `data`: List<Data?>,
     @SerializedName("first_page_url")
     val firstPageUrl: String?, // http://larashop.site/api/v1/auth/comments?page=1
     @SerializedName("from")
