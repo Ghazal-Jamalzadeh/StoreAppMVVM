@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jmzd.ghazal.storeappmvvm.data.models.categories.ResponseCategories
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseWallet
+import com.jmzd.ghazal.storeappmvvm.data.models.profile_comments.ResponseDeleteComment
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_comments.ResponseProfileComments
 import com.jmzd.ghazal.storeappmvvm.data.repository.ProfileCommentsRepository
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
@@ -22,6 +23,10 @@ class ProfileCommentsViewModel @Inject constructor(private val repository: Profi
     private val _profileCommentsLiveData = MutableLiveData<MyResponse<ResponseProfileComments>>()
     val profileCommentsLiveData: LiveData<MyResponse<ResponseProfileComments>> = _profileCommentsLiveData
 
+    //delete comment
+    private val _deleteCommentLiveData = MutableLiveData<MyResponse<ResponseDeleteComment>>()
+    val deleteCommentLiveData: LiveData<MyResponse<ResponseDeleteComment>> = _deleteCommentLiveData
+
     //--- api call ---//
     fun getProfileComments() = viewModelScope.launch {
 
@@ -31,5 +36,16 @@ class ProfileCommentsViewModel @Inject constructor(private val repository: Profi
 
         _profileCommentsLiveData.value = ResponseHandler(response).generateResponse()
     }
+
+    fun deleteComment(commentId : Int) = viewModelScope.launch {
+
+        _deleteCommentLiveData.value = MyResponse.Loading()
+
+        val response: Response<ResponseDeleteComment> = repository.deleteCommnt(commentId)
+
+        _deleteCommentLiveData.value = ResponseHandler(response).generateResponse()
+    }
+
+
 
 }
