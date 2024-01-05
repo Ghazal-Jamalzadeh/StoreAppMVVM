@@ -12,6 +12,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseProfile
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseWallet
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_comments.ResponseDeleteComment
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_comments.ResponseProfileComments
+import com.jmzd.ghazal.storeappmvvm.data.models.profile_favorite.ResponseProfileFavorites
 import com.jmzd.ghazal.storeappmvvm.data.models.search.ResponseSearch
 import com.jmzd.ghazal.storeappmvvm.data.models.wallet.BodyIncreaseWallet
 import com.jmzd.ghazal.storeappmvvm.data.models.wallet.ResponseIncreaseWallet
@@ -61,5 +62,11 @@ interface ApiServices {
 
     @DELETE("auth/comment/{comment_id}")
     suspend fun deleteComment(@Path("comment_id") commentId :Int) : Response<ResponseDeleteComment>
+
+    @GET("auth/favorites")
+    suspend fun getFavorites() : Response<ResponseProfileFavorites>
+
+    @DELETE("auth/favorites/{id}")
+    suspend fun deleteFavorite(@Path("id") id :Int) : Response<ResponseDeleteComment>
 
 }
