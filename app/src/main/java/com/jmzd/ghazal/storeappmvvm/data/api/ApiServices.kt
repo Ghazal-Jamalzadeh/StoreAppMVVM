@@ -11,6 +11,8 @@ import com.jmzd.ghazal.storeappmvvm.data.models.profile.BodyUpdateProfile
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseProfile
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseWallet
 import com.jmzd.ghazal.storeappmvvm.data.models.search.ResponseSearch
+import com.jmzd.ghazal.storeappmvvm.data.models.wallet.BodyIncreaseWallet
+import com.jmzd.ghazal.storeappmvvm.data.models.wallet.ResponseIncreaseWallet
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -42,6 +44,9 @@ interface ApiServices {
 
     @GET("auth/wallet")
     suspend fun getWalletBalance() : Response<ResponseWallet>
+
+    @POST("auth/wallet")
+    suspend fun increaseWallet(@Body body : BodyIncreaseWallet) : Response<ResponseIncreaseWallet>
 
     @POST("auth/avatar")
     suspend fun uploadAvatar(@Body body : RequestBody) : Response<Unit>
