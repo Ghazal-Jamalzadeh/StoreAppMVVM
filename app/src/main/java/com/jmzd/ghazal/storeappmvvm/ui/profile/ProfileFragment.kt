@@ -86,6 +86,13 @@ class ProfileFragment : BaseFragment(), ImagePickerResultListener {
                     findNavController().navigate(R.id.action_to_profile_comments_fragment)
                 }
 
+                //profile favorites
+                menuFavoritesLay.setOnClickListener {
+                    findNavController().navigate(R.id.action_to_profile_favorites_fragment)
+                }
+
+
+
             }
         }
         //observers

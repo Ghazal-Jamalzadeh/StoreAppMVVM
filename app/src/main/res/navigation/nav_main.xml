@@ -121,6 +121,13 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_to_profile_favorites_fragment"
+            app:destination="@id/profileFavoriteFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </navigation>
 
     <!-- main actions -->
@@ -196,6 +203,11 @@
         android:name="com.jmzd.ghazal.storeappmvvm.ui.profile_comments.ProfileCommentsFragment"
         android:label="ProfileCommentsFragment"
         tools:layout="@layout/fragment_profile_comments"/>
+    <fragment
+        android:id="@+id/profileFavoriteFragment"
+        android:name="com.jmzd.ghazal.storeappmvvm.ui.profile_favorite.ProfileFavoriteFragment"
+        android:label="ProfileFavoriteFragment"
+        tools:layout="@layout/fragment_profile_favorite"/>
 
 
 </navigation>
