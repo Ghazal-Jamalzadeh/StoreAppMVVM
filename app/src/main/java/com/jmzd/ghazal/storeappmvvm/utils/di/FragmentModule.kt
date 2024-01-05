@@ -2,6 +2,7 @@ package com.jmzd.ghazal.storeappmvvm.utils.di
 
 import com.jmzd.ghazal.storeappmvvm.data.models.login.BodyLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.BodyUpdateProfile
+import com.jmzd.ghazal.storeappmvvm.data.models.wallet.BodyIncreaseWallet
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,4 +17,7 @@ object FragmentModule {
 
     @Provides
     fun bodyUpdateProfile() = BodyUpdateProfile()
+
+    @Provides
+    fun bodyIncreaseWallet() = BodyIncreaseWallet()
 }

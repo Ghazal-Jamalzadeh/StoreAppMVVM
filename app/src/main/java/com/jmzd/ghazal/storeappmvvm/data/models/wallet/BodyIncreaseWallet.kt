@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 
 data class BodyIncreaseWallet(
     @SerializedName("amount")
-    val amount: String? // 1200000
+    var amount: String? = null// 1200000
 )
