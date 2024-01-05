@@ -6,4 +6,5 @@ import javax.inject.Inject
 
 class ProfileCommentsRepository @Inject constructor(private val api : ApiServices) {
     suspend fun getProfileComments() = api.getProfileComments()
+    suspend fun deleteCommnt(commentId : Int) = api.deleteComment(commentId)
 }
