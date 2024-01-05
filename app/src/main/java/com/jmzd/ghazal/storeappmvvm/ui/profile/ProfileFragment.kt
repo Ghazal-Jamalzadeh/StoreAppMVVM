@@ -77,6 +77,9 @@ class ProfileFragment : BaseFragment(), ImagePickerResultListener {
                 }
 
                 //increase wallet
+                menuWalletLay.setOnClickListener{
+                    findNavController().navigate(R.id.action_to_increase_wallet_fragment)
+                }
 
             }
         }

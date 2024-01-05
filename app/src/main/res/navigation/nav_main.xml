@@ -105,6 +105,14 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/action_to_increase_wallet_fragment"
+            app:destination="@id/increaseWalletFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </navigation>
 
     <!-- main actions -->
@@ -170,6 +178,11 @@
         android:name="com.jmzd.ghazal.storeappmvvm.ui.profile_edit.ProfileEditFragment"
         android:label="ProfileEditFragment"
         tools:layout="@layout/fragment_profile_edit"/>
+    <dialog
+        android:id="@+id/increaseWalletFragment"
+        android:name="com.jmzd.ghazal.storeappmvvm.ui.wallet.IncreaseWalletFragment"
+        android:label="IncreaseWalletFragment"
+        tools:layout="@layout/fragment_increase_wallet"/>
 
 
 </navigation>
