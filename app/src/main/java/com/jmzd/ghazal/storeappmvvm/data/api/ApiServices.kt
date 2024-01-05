@@ -10,6 +10,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseVerify
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.BodyUpdateProfile
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseProfile
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseWallet
+import com.jmzd.ghazal.storeappmvvm.data.models.profile_comments.ResponseDeleteComment
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_comments.ResponseProfileComments
 import com.jmzd.ghazal.storeappmvvm.data.models.search.ResponseSearch
 import com.jmzd.ghazal.storeappmvvm.data.models.wallet.BodyIncreaseWallet
@@ -57,5 +58,8 @@ interface ApiServices {
 
     @GET("auth/comments")
     suspend fun getProfileComments() : Response<ResponseProfileComments>
+
+    @DELETE("auth/comment/{comment_id}")
+    suspend fun deleteComment(@Path("comment_id") commentId :Int) : Response<ResponseDeleteComment>
 
 }
