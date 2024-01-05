@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <!--Card-->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_7mdp"
+        android:theme="@style/ColoredShadowDark"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/_8mdp"
+        app:cardElevation="@dimen/_5mdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <!--Container-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_10mdp">
+            <!--Image-->
+            <ImageView
+                android:id="@+id/itemImg"
+                android:layout_width="@dimen/_40mdp"
+                android:layout_height="@dimen/_40mdp"
+                android:layout_marginEnd="@dimen/_5mdp"
+                android:padding="@dimen/_5mdp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic" />
+            <!--Title-->
+            <TextView
+                android:id="@+id/itemTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/darkStrategy"
+                android:textSize="@dimen/_10font_mdp"
+                app:fontPath="fonts/iransans_bold.ttf"
+                app:layout_constraintBottom_toBottomOf="@+id/itemImg"
+                app:layout_constraintEnd_toStartOf="@id/itemImg"
+                app:layout_constraintStart_toEndOf="@+id/itemTrashImg"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="عنوان محصول" />
+            <!--Trash-->
+            <ImageView
+                android:id="@+id/itemTrashImg"
+                android:layout_width="@dimen/_25mdp"
+                android:layout_height="@dimen/_25mdp"
+                android:layout_marginStart="@dimen/_5mdp"
+                android:padding="@dimen/_5mdp"
+                android:src="@drawable/trash_can"
+                app:layout_constraintBottom_toBottomOf="@+id/itemImg"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/red" />
+            <!--Line-->
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="@dimen/_15mdp"
+                android:layout_marginTop="@dimen/_5mdp"
+                android:alpha="0.5"
+                android:background="@color/water"
+                app:layout_constraintTop_toBottomOf="@id/itemImg" />
+            <!--Quantity-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/quantityLay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10mdp"
+                app:layout_constraintEnd_toEndOf="@+id/itemTitle"
+                app:layout_constraintStart_toStartOf="@+id/itemTitle"
+                app:layout_constraintTop_toBottomOf="@id/line1">
+
+                <TextView
+                    android:id="@+id/quantityTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/_5mdp"
+                    android:gravity="center"
+                    android:text="@string/quantity"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_7font_mdp"
+                    app:drawableEndCompat="@drawable/cart_flatbed_boxes_mini"
+                    app:drawableTint="@color/gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/quantityTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_5mdp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_9font_mdp"
+                    app:layout_constraintBottom_toBottomOf="@id/quantityTitle"
+                    app:layout_constraintEnd_toStartOf="@id/quantityTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/quantityTitle" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--Price-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/priceLay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10mdp"
+                app:layout_constraintEnd_toEndOf="@+id/itemTitle"
+                app:layout_constraintStart_toStartOf="@+id/itemTitle"
+                app:layout_constraintTop_toBottomOf="@id/quantityLay">
+
+                <TextView
+                    android:id="@+id/priceTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/_5mdp"
+                    android:gravity="center"
+                    android:text="@string/price2"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_7font_mdp"
+                    app:drawableEndCompat="@drawable/coins_mini"
+                    app:drawableTint="@color/gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/priceTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_5mdp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/darkTurquoise"
+                    android:textSize="@dimen/_10font_mdp"
+                    app:fontPath="fonts/iransans_bold.ttf"
+                    app:layout_constraintBottom_toBottomOf="@id/priceTitle"
+                    app:layout_constraintEnd_toStartOf="@id/priceTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/priceTitle" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
