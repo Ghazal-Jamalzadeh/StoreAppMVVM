@@ -75,6 +75,9 @@ class ProfileFragment : BaseFragment(), ImagePickerResultListener {
                 menuEditLay.setOnClickListener {
                     findNavController().navigate(R.id.action_to_edit_profile_fragment)
                 }
+
+                //increase wallet
+
             }
         }
         //observers
