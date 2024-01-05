@@ -1,6 +1,7 @@
 package com.jmzd.ghazal.storeappmvvm.ui.profile_comments
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,9 @@ class ProfileCommentsFragment : BaseFragment() {
     //adapters
     @Inject
     lateinit var commentsAdapter : CommentsAdapter
+
+    //recycler view state
+    private var recyclerviewState: Parcelable? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -122,11 +126,11 @@ class ProfileCommentsFragment : BaseFragment() {
             commentsAdapter.setData(data)
             commentsList.setupRecyclerview(LinearLayoutManager(requireContext()), commentsAdapter)
             //Auto scroll
-//            commentsList.layoutManager?.onRestoreInstanceState(recyclerviewState)
+            commentsList.layoutManager?.onRestoreInstanceState(recyclerviewState)
             //Click
             commentsAdapter.setOnItemClickListener {
 //                //Save state
-//                recyclerviewState = commentsList.layoutManager?.onSaveInstanceState()
+                recyclerviewState = commentsList.layoutManager?.onSaveInstanceState()
 //                //Call delete api
                 if (isNetworkAvailable)
                     viewModel.deleteComment(it)
