@@ -10,6 +10,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseVerify
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.BodyUpdateProfile
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseProfile
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseWallet
+import com.jmzd.ghazal.storeappmvvm.data.models.profile_comments.ResponseProfileComments
 import com.jmzd.ghazal.storeappmvvm.data.models.search.ResponseSearch
 import com.jmzd.ghazal.storeappmvvm.data.models.wallet.BodyIncreaseWallet
 import com.jmzd.ghazal.storeappmvvm.data.models.wallet.ResponseIncreaseWallet
@@ -54,5 +55,7 @@ interface ApiServices {
     @PUT("auth/update")
     suspend fun updateProfile(@Body body : BodyUpdateProfile) : Response<ResponseProfile>
 
+    @GET("auth/comments")
+    suspend fun getProfileComments() : Response<ResponseProfileComments>
 
 }
