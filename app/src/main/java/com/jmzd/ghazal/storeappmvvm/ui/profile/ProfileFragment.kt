@@ -81,6 +81,11 @@ class ProfileFragment : BaseFragment(), ImagePickerResultListener {
                     findNavController().navigate(R.id.action_to_increase_wallet_fragment)
                 }
 
+                //profile comments
+                menuCommentsLay.setOnClickListener {
+                    findNavController().navigate(R.id.action_to_profile_comments_fragment)
+                }
+
             }
         }
         //observers
