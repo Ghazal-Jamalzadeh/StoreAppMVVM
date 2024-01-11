@@ -5,8 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProfileAddresses
-import com.jmzd.ghazal.storeappmvvm.data.models.profile_favorite.ResponseProfileFavorites
-import com.jmzd.ghazal.storeappmvvm.data.repository.AdressesRepository
+import com.jmzd.ghazal.storeappmvvm.data.repository.AddressesRepository
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.utils.network.ResponseHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +14,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileAddressesViewModel @Inject constructor(private val repository: AdressesRepository) : ViewModel() {
+class ProfileAddressesViewModel @Inject constructor(private val repository: AddressesRepository) : ViewModel() {
 
     //profile addresses
     private val _profileAddressesLiveData = MutableLiveData<MyResponse<ResponseProfileAddresses>>()
