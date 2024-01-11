@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentProfileAddressBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
@@ -32,7 +34,18 @@ class ProfileAddressFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         //init views
         binding.apply {
-
+            //Toolbar
+            toolbar.apply {
+                toolbarTitleTxt.text = getString(R.string.yourAddresses)
+                toolbarBackImg.setOnClickListener { findNavController().popBackStack() }
+                //Add
+                toolbarOptionImg.apply {
+                    setImageResource(R.drawable.location_plus)
+                    setOnClickListener {
+//                        findNavController().navigate(R.id.actionProfileToAddressAdd)
+                    }
+                }
+            }
         }
     }
 
