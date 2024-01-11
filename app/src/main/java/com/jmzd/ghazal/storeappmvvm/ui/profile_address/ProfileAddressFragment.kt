@@ -7,13 +7,18 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmzd.ghazal.storeappmvvm.R
+import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProfileAddresses
+import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProfileAddresses.ResponseProfileAddressesItem
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentProfileAddressBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileAddressesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProfileAddressFragment : BaseFragment() {
@@ -24,6 +29,10 @@ class ProfileAddressFragment : BaseFragment() {
 
     //viewModel
     private val viewModel by viewModels<ProfileAddressesViewModel>()
+
+
+    @Inject
+    lateinit var addressesAdapter: AddressesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,7 +82,7 @@ class ProfileAddressFragment : BaseFragment() {
                         addressList.hideShimmer()
                         response.data?.let { data ->
                             if (data.isNotEmpty()) {
-                                //initRecycler(data)
+                                initRecycler(data)
                             } else {
                                 emptyLay.isVisible = true
                                 addressList.isVisible = false
@@ -90,6 +99,19 @@ class ProfileAddressFragment : BaseFragment() {
         }
     }
 
+
+
+    private fun initRecycler(data: List<ResponseProfileAddressesItem>) {
+        binding.apply {
+            addressesAdapter.setData(data)
+            addressList.setupRecyclerview(LinearLayoutManager(requireContext()), addressesAdapter)
+            //Click
+            addressesAdapter.setOnItemClickListener {
+//                val direction = ProfileAddressFragmentDirections.actionProfileToAddressAdd().setData(it)
+//                findNavController().navigate(direction)
+            }
+        }
+    }
 
     override fun onNetworkLost() {
     }
