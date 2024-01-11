@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProfileAddresses
+import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProvinceList
 import com.jmzd.ghazal.storeappmvvm.data.repository.AddressesRepository
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.utils.network.ResponseHandler
@@ -20,6 +21,10 @@ class ProfileAddressesViewModel @Inject constructor(private val repository: Addr
     private val _profileAddressesLiveData = MutableLiveData<MyResponse<ResponseProfileAddresses>>()
     val profileAddressesLiveData: LiveData<MyResponse<ResponseProfileAddresses>> = _profileAddressesLiveData
 
+    //province list
+    private val _provinceListLiveData = MutableLiveData<MyResponse<ResponseProvinceList>>()
+    val provinceListLiveData: LiveData<MyResponse<ResponseProvinceList>> = _provinceListLiveData
+
     //--- api call ---//
     fun getProfileAddresses() = viewModelScope.launch {
 
@@ -28,6 +33,15 @@ class ProfileAddressesViewModel @Inject constructor(private val repository: Addr
         val response: Response<ResponseProfileAddresses> = repository.getProfileAddresses()
 
         _profileAddressesLiveData.value = ResponseHandler(response).generateResponse()
+    }
+
+    fun getProvinceList() = viewModelScope.launch {
+
+        _provinceListLiveData.value = MyResponse.Loading()
+
+        val response: Response<ResponseProvinceList> = repository.getProvinceList()
+
+        _provinceListLiveData.value = ResponseHandler(response).generateResponse()
     }
 
 
