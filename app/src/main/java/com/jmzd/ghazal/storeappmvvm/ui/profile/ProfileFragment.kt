@@ -91,6 +91,11 @@ class ProfileFragment : BaseFragment(), ImagePickerResultListener {
                     findNavController().navigate(R.id.action_to_profile_favorites_fragment)
                 }
 
+                //profile addresses
+                menuAddressesLay.setOnClickListener {
+                    findNavController().navigate(R.id.action_to_profile_addresses_fragment)
+                }
+
 
 
             }

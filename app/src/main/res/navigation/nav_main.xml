@@ -128,6 +128,13 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_to_profile_addresses_fragment"
+            app:destination="@id/profileAddressFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </navigation>
 
     <!-- main actions -->
@@ -208,6 +215,11 @@
         android:name="com.jmzd.ghazal.storeappmvvm.ui.profile_favorite.ProfileFavoriteFragment"
         android:label="ProfileFavoriteFragment"
         tools:layout="@layout/fragment_profile_favorite"/>
+    <fragment
+        android:id="@+id/profileAddressFragment"
+        android:name="com.jmzd.ghazal.storeappmvvm.ui.profile_address.ProfileAddressFragment"
+        android:label="ProfileAddressFragment"
+        tools:layout="@layout/fragment_profile_address"/>
 
 
 </navigation>
