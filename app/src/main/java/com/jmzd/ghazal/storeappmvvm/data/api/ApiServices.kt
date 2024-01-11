@@ -1,5 +1,6 @@
 package com.jmzd.ghazal.storeappmvvm.data.api
 
+import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProfileAddresses
 import com.jmzd.ghazal.storeappmvvm.data.models.categories.ResponseCategories
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseDiscount
@@ -68,5 +69,8 @@ interface ApiServices {
 
     @DELETE("auth/favorites/{id}")
     suspend fun deleteFavorite(@Path("id") id :Int) : Response<ResponseDeleteComment>
+
+    @GET("auth/addresses")
+    suspend fun getProfileAddresses() : Response<ResponseProfileAddresses>
 
 }

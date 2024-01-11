@@ -1,72 +1,66 @@
 package com.jmzd.ghazal.storeappmvvm.data.models.address
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
-data class ResponseProfileAddresses(
-    @SerializedName("current_page")
-    val currentPage: Int?, // 1
-    @SerializedName("data")
-    val `data`: List<Data?>?,
-    @SerializedName("first_page_url")
-    val firstPageUrl: String?, // http://larashop.site/api/v1/auth/comments?page=1
-    @SerializedName("from")
-    val from: Int?, // 1
-    @SerializedName("last_page")
-    val lastPage: Int?, // 3
-    @SerializedName("last_page_url")
-    val lastPageUrl: String?, // http://larashop.site/api/v1/auth/comments?page=3
-    @SerializedName("links")
-    val links: List<Link?>?,
-    @SerializedName("next_page_url")
-    val nextPageUrl: String?, // http://larashop.site/api/v1/auth/comments?page=2
-    @SerializedName("path")
-    val path: String?, // http://larashop.site/api/v1/auth/comments
-    @SerializedName("per_page")
-    val perPage: Int?, // 1
-    @SerializedName("prev_page_url")
-    val prevPageUrl: Any?, // null
-    @SerializedName("to")
-    val to: Int?, // 1
-    @SerializedName("total")
-    val total: Int? // 3
-) {
-    data class Data(
+
+class ResponseProfileAddresses : ArrayList<ResponseProfileAddresses.ResponseProfileAddressesItem>() {
+    @Parcelize
+    data class ResponseProfileAddressesItem(
         @SerializedName("approved")
-        val approved: Int?, // 0
-        @SerializedName("comment")
-        val comment: String?, // عالیه
+        val approved: String?, // 1
+        @SerializedName("city")
+        val city: @RawValue City?,
+        @SerializedName("city_id")
+        val cityId: String?, // 329
         @SerializedName("created_at")
-        val createdAt: String?, // 2023-01-23T08:29:37.000000Z
+        val createdAt: String?, // 2023-05-20T08:02:52.000000Z
+        @SerializedName("deleted_at")
+        val deletedAt: @RawValue Any?, // null
+        @SerializedName("floor")
+        val floor: String?, // 5
         @SerializedName("id")
-        val id: Int?, // 8
-        @SerializedName("product")
-        val product: Product?,
-        @SerializedName("product_id")
-        val productId: Int?, // 27
-        @SerializedName("rate")
-        val rate: Int?, // 4
+        val id: Int?, // 7
+        @SerializedName("latitude")
+        val latitude: String?, // 4.00000000
+        @SerializedName("longitude")
+        val longitude: String?, // 5.00000000
+        @SerializedName("plate_number")
+        val plateNumber: String?, // 845
+        @SerializedName("postal_address")
+        val postalAddress: String?, // تهران - خیابان اینجا
+        @SerializedName("postal_code")
+        val postalCode: String?, // 5784567895
+        @SerializedName("province")
+        val province: @RawValue Province?,
+        @SerializedName("province_id")
+        val provinceId: String?, // 8
+        @SerializedName("receiver_cellphone")
+        val receiverCellphone: String?, // 09121112233
+        @SerializedName("receiver_firstname")
+        val receiverFirstname: String?, // محمد
+        @SerializedName("receiver_lastname")
+        val receiverLastname: String?, // نوری
         @SerializedName("updated_at")
-        val updatedAt: String?, // 2023-01-23T08:29:37.000000Z
+        val updatedAt: String?, // 2023-06-07T09:12:31.000000Z
         @SerializedName("user_id")
-        val userId: Int? // 6
-    ) {
-        data class Product(
+        val userId: String? // 1
+    ) : Parcelable {
+        data class City(
             @SerializedName("id")
-            val id: Int?, // 27
-            @SerializedName("image")
-            val image: String?, // /storage/cache/600-0-0-width-iU4wWNM58WPlfMVXWPHDjUz5qwV0Aps6MTt3C8Kl.jpg
+            val id: Int?, // 329
             @SerializedName("title")
-            val title: String? // گوشی موبایل شیائومی مدل POCO X3 Pro M2102J20SG
+            val title: String? // تهران
+        )
+
+        data class Province(
+            @SerializedName("id")
+            val id: Int?, // 8
+            @SerializedName("title")
+            val title: String? // تهران
         )
     }
-
-    data class Link(
-        @SerializedName("active")
-        val active: Boolean?, // false
-        @SerializedName("label")
-        val label: String?, // &laquo; قبلی
-        @SerializedName("url")
-        val url: String? // http://larashop.site/api/v1/auth/comments?page=1
-    )
 }
