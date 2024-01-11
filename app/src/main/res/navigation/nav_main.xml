@@ -198,7 +198,7 @@
         android:name="com.jmzd.ghazal.storeappmvvm.ui.wallet.IncreaseWalletFragment"
         android:label="IncreaseWalletFragment"
         tools:layout="@layout/fragment_increase_wallet"/>
-    <dialog
+    <fragment
         android:id="@+id/profileCommentsFragment"
         android:name="com.jmzd.ghazal.storeappmvvm.ui.profile_comments.ProfileCommentsFragment"
         android:label="ProfileCommentsFragment"
