@@ -1,6 +1,7 @@
 package com.jmzd.ghazal.storeappmvvm.data.api
 
 import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProfileAddresses
+import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProvinceList
 import com.jmzd.ghazal.storeappmvvm.data.models.categories.ResponseCategories
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseDiscount
@@ -72,5 +73,8 @@ interface ApiServices {
 
     @GET("auth/addresses")
     suspend fun getProfileAddresses() : Response<ResponseProfileAddresses>
+
+    @GET("auth/address/provinces")
+    suspend fun getProvinceList() : Response<ResponseProvinceList>
 
 }
