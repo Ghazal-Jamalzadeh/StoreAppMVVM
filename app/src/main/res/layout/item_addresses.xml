@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <!--Card-->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_7mdp"
+        android:theme="@style/ColoredShadowDark"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/_8mdp"
+        app:cardElevation="@dimen/_5mdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <!--Container-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10mdp">
+            <!--Title-->
+            <TextView
+                android:id="@+id/nameTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/eerieBlack"
+                android:textSize="@dimen/_10font_mdp"
+                app:fontPath="fonts/iransans_bold.ttf"
+                app:layout_constraintEnd_toEndOf="@+id/line1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!--Line-->
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:alpha="0.5"
+                android:background="@color/water"
+                app:layout_constraintTop_toBottomOf="@id/nameTxt" />
+            <!--Province-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/provinceLay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5mdp"
+                android:layout_marginTop="@dimen/_10mdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guide"
+                app:layout_constraintTop_toBottomOf="@id/line1">
+
+                <TextView
+                    android:id="@+id/provinceTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/_5mdp"
+                    android:gravity="center"
+                    android:text="@string/province"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_8font_mdp"
+                    app:drawableEndCompat="@drawable/house_building_mini"
+                    app:drawableTint="@color/gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/provinceTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_5mdp"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical|right"
+                    android:maxLines="1"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_9font_mdp"
+                    app:fontPath="fonts/iransans_bold.ttf"
+                    app:layout_constraintBottom_toBottomOf="@id/provinceTitle"
+                    app:layout_constraintEnd_toStartOf="@id/provinceTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/provinceTitle"
+                    tools:ignore="RtlHardcoded" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--Guide-->
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+            <!--City-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cityLay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:layout_marginEnd="@dimen/_5mdp"
+                app:layout_constraintEnd_toStartOf="@id/guide"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line1">
+
+                <TextView
+                    android:id="@+id/cityTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/_5mdp"
+                    android:gravity="center"
+                    android:text="@string/city"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_8font_mdp"
+                    app:drawableEndCompat="@drawable/buildings"
+                    app:drawableTint="@color/gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/cityTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_5mdp"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical|right"
+                    android:maxLines="1"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_9font_mdp"
+                    app:fontPath="fonts/iransans_bold.ttf"
+                    app:layout_constraintBottom_toBottomOf="@id/cityTitle"
+                    app:layout_constraintEnd_toStartOf="@id/cityTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/cityTitle"
+                    tools:ignore="RtlHardcoded" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--Location-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/locationLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10mdp"
+                app:layout_constraintTop_toBottomOf="@id/provinceLay">
+
+                <TextView
+                    android:id="@+id/locationTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/_5mdp"
+                    android:gravity="center"
+                    android:text="@string/address"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_8font_mdp"
+                    app:drawableEndCompat="@drawable/map_location_dot_mini"
+                    app:drawableTint="@color/gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/locationTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_5mdp"
+                    android:gravity="top|right"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_9font_mdp"
+                    app:fontPath="fonts/iransans_bold.ttf"
+                    app:layout_constraintEnd_toStartOf="@id/locationTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/locationTitle"
+                    tools:ignore="RtlHardcoded" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--Postal-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/postalLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10mdp"
+                app:layout_constraintTop_toBottomOf="@id/locationLay">
+
+                <TextView
+                    android:id="@+id/postalTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/_5mdp"
+                    android:gravity="center"
+                    android:text="@string/postalCode"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_8font_mdp"
+                    app:drawableEndCompat="@drawable/mailbox"
+                    app:drawableTint="@color/gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/postalTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_5mdp"
+                    android:gravity="center_vertical|right"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_9font_mdp"
+                    app:fontPath="fonts/iransans_bold.ttf"
+                    app:layout_constraintBottom_toBottomOf="@id/postalTitle"
+                    app:layout_constraintEnd_toStartOf="@id/postalTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/postalTitle"
+                    tools:ignore="RtlHardcoded" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--Phone-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/phoneLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10mdp"
+                app:layout_constraintTop_toBottomOf="@id/postalLay">
+
+                <TextView
+                    android:id="@+id/phoneTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/_5mdp"
+                    android:gravity="center"
+                    android:text="@string/phoneNumber2"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_8font_mdp"
+                    app:drawableEndCompat="@drawable/phone_mini"
+                    app:drawableTint="@color/gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/phoneTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_5mdp"
+                    android:gravity="center_vertical|right"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_9font_mdp"
+                    app:fontPath="fonts/iransans_bold.ttf"
+                    app:layout_constraintBottom_toBottomOf="@id/phoneTitle"
+                    app:layout_constraintEnd_toStartOf="@id/phoneTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/phoneTitle"
+                    tools:ignore="RtlHardcoded" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
