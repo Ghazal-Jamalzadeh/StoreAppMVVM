@@ -104,5 +104,18 @@
         <item name="startIconTint">@color/mediumTurquoise</item>
     </style>
 
+    <style name="MediumTurquoiseDropDownMenu" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        <item name="boxBackgroundColor">@color/cultured</item>
+        <item name="boxCornerRadiusTopStart">@dimen/_10mdp</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/_10mdp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/_10mdp</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/_10mdp</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="hintAnimationEnabled">true</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="hintTextColor">@color/gray</item>
+        <item name="startIconTint">@color/mediumTurquoise</item>
+    </style>
+
 
 </resources>

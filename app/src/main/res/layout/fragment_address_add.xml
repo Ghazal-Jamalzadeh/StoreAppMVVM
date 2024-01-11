@@ -1,14 +1,323 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile_address_add.AddressAddFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    android:background="@color/white">
+    <!--Toolbar-->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/toolbarLay"
+        style="@style/ColoredShadowDark"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="@dimen/_8mdp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="p">
 
-</FrameLayout>
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_base" />
+
+    </com.google.android.material.card.MaterialCardView>
+    <!--Scroll-->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollLay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:paddingTop="@dimen/_10mdp"
+        android:paddingBottom="@dimen/_10mdp"
+        app:layout_constraintBottom_toTopOf="@id/submitBtn"
+        app:layout_constraintEnd_toEndOf="@id/submitBtn"
+        app:layout_constraintStart_toStartOf="@id/submitBtn"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarLay">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!--Guide-->
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+            <!--Title-->
+            <TextView
+                android:id="@+id/recipientTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recipientInfo"
+                android:textColor="@color/eerieBlack"
+                android:textSize="@dimen/_10font_mdp"
+                app:fontPath="fonts/iransans_bold.ttf"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!--Line-->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="@dimen/_5mdp"
+                android:alpha="0.7"
+                android:background="@color/water"
+                app:layout_constraintBottom_toBottomOf="@id/recipientTitle"
+                app:layout_constraintEnd_toStartOf="@id/recipientTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/recipientTitle" />
+            <!--Name-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nameInpLay"
+                style="@style/MediumTurquoiseTextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5mdp"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:hint="@string/name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guide"
+                app:layout_constraintTop_toBottomOf="@id/recipientTitle"
+                app:startIconDrawable="@drawable/user_mini"
+                app:startIconTint="@color/darkStrategy">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nameEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_10font_mdp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--Family-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/familyInpLay"
+                style="@style/MediumTurquoiseTextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_5mdp"
+                android:hint="@string/family"
+                app:layout_constraintEnd_toStartOf="@id/guide"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/nameInpLay"
+                app:startIconDrawable="@drawable/user_mini"
+                app:startIconTint="@color/darkStrategy">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/familyEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_10font_mdp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--Phone-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/phoneInpLay"
+                style="@style/MediumTurquoiseTextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:hint="@string/phone"
+                app:layout_constraintTop_toBottomOf="@id/nameInpLay"
+                app:startIconDrawable="@drawable/phone_mini"
+                app:startIconTint="@color/darkStrategy">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phoneEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_10font_mdp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--Title-->
+            <TextView
+                android:id="@+id/addressTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:text="@string/addressInfo"
+                android:textColor="@color/eerieBlack"
+                android:textSize="@dimen/_10font_mdp"
+                app:fontPath="fonts/iransans_bold.ttf"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/phoneInpLay" />
+            <!--Line-->
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="@dimen/_5mdp"
+                android:alpha="0.7"
+                android:background="@color/water"
+                app:layout_constraintBottom_toBottomOf="@id/addressTitle"
+                app:layout_constraintEnd_toStartOf="@id/addressTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/addressTitle" />
+            <!--Province-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/provinceInpLay"
+                style="@style/MediumTurquoiseDropDownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5mdp"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:hint="@string/province2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guide"
+                app:layout_constraintTop_toBottomOf="@id/addressTitle"
+                app:startIconDrawable="@drawable/house_building_mini"
+                app:startIconTint="@color/darkStrategy">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/provinceAutoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_10font_mdp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--City-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/cityInpLay"
+                style="@style/MediumTurquoiseDropDownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:layout_marginEnd="@dimen/_5mdp"
+                android:hint="@string/city2"
+                android:visibility="gone"
+                app:layout_constraintEnd_toStartOf="@id/guide"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/addressTitle"
+                app:startIconDrawable="@drawable/buildings"
+                app:startIconTint="@color/darkStrategy">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/cityAutoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_10font_mdp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--Floor-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/floorInpLay"
+                style="@style/MediumTurquoiseTextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5mdp"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:hint="@string/floor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guide"
+                app:layout_constraintTop_toBottomOf="@id/provinceInpLay"
+                app:startIconDrawable="@drawable/map_location_dot_mini"
+                app:startIconTint="@color/darkStrategy">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/floorEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_10font_mdp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--Plate-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/plateInpLay"
+                style="@style/MediumTurquoiseTextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:layout_marginEnd="@dimen/_5mdp"
+                android:hint="@string/plateNumber"
+                app:layout_constraintEnd_toStartOf="@id/guide"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/provinceInpLay"
+                app:startIconDrawable="@drawable/map_location_dot_mini"
+                app:startIconTint="@color/darkStrategy">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/plateEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_10font_mdp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--Postal-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/postalInpLay"
+                style="@style/MediumTurquoiseTextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:hint="@string/postalCode2"
+                app:layout_constraintTop_toBottomOf="@id/floorInpLay"
+                app:startIconDrawable="@drawable/map_location_dot_mini"
+                app:startIconTint="@color/darkStrategy">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/postalEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_10font_mdp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--Address-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/addressInpLay"
+                style="@style/MediumTurquoiseTextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:hint="@string/address2"
+                app:layout_constraintTop_toBottomOf="@id/postalInpLay"
+                app:startIconDrawable="@drawable/map_location_dot_mini"
+                app:startIconTint="@color/darkStrategy">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addressEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_10font_mdp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+    <!--Button-->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/submitBtn"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40mdp"
+        android:layout_margin="@dimen/_20mdp"
+        android:background="@drawable/bg_gradient_rounded"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        android:text="@string/submitData"
+        android:textColor="@color/white"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

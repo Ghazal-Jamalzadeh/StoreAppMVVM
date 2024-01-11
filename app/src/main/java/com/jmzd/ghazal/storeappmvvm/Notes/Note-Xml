@@ -544,3 +544,67 @@ RatingBar-----------------------------------------------------------------------
                 android:stepSize="1"
                 app:layout_constraintEnd_toEndOf="@id/line1"
                 app:layout_constraintTop_toBottomOf="@id/line1" />
+
+
+DropDown ft TextInputLayout-------------------------------------------------------------------------
+ما خیلی راحت ادیت تکست رو میبریم توی این تکست اینپوت لایوت ها
+و این لیبل هاشون میره بالا موقع تایپ
+چالشی که داریم اینه که چطور اسپینرها رو ببریم توی این حالت
+کاستومایز کردن خود اسپینر سخته و نمیصرفه
+ولی خود متریال یک ویویی داره به اسم autoCompleteTextView
+که از قدیم هم توی اندروید بوده
+از زمان اندروید ۴ - بیش از ده ساله که توی اندروید هست
+میاد یه چیزایی رو اون زیر ساجست میده به کاربر
+و حالت دراپ داون هم داره
+و خیلی خوب هم با تکست اینپوت لایوت مچ میشن
+ولی باید استایل بدیم بهش
+و برای ست کردن تکست پیش فرضش هم یه مقدار چالش خواهیم داشت
+
+نکته مهم اینکه میایم
+android:inputType="none"
+قرار میدیم که کاربر نتونه چیزی رو وارد کنه خودش
+
+            <!--Province-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/provinceInpLay"
+                style="@style/MediumTurquoiseDropDownMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5mdp"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:hint="@string/province2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guide"
+                app:layout_constraintTop_toBottomOf="@id/addressTitle"
+                app:startIconDrawable="@drawable/house_building_mini"
+                app:startIconTint="@color/darkStrategy">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/provinceAutoTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_10font_mdp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+استایل
+خیلی شبیه استایلیه که برای تکست اسنپوت لایوت زدیم ولی چند تا نکته ریز داره
+پرنتش خیلی مهمه. که حالت فیلد باکس دراپ داون باشه
+برای آشنایی بیشتر با این استایلا وارد سایت متریال دیزاین ۲ بشین
+مثلا میخواید بدونید فرق قیلد باکس با اوت لاین چیه
+صرفا همین پرنت رو تغییر میدیم و بقیه اتریبیوت ها فرق خاصی با استایل تکست اینپوت لایوت ندارن
+    <style name="MediumTurquoiseDropDownMenu" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+        <item name="boxBackgroundColor">@color/cultured</item>
+        <item name="boxCornerRadiusTopStart">@dimen/_10mdp</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/_10mdp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/_10mdp</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/_10mdp</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="hintAnimationEnabled">true</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="hintTextColor">@color/gray</item>
+        <item name="startIconTint">@color/mediumTurquoise</item>
+    </style>
