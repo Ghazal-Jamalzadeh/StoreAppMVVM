@@ -60,7 +60,7 @@ class ProfileAddressFragment : BaseFragment() {
                 toolbarOptionImg.apply {
                     setImageResource(R.drawable.location_plus)
                     setOnClickListener {
-//                        findNavController().navigate(R.id.actionProfileToAddressAdd)
+                        findNavController().navigate(R.id.action_profileAddressFragment_to_addressAddFragment)
                     }
                 }
             }

@@ -192,7 +192,11 @@
                 app:argType="string" />
             <action
                 android:id="@+id/action_categoriesProductsFragment_to_categoriesFiltersFragment"
-                app:destination="@id/categoriesFiltersFragment" />
+                app:destination="@id/categoriesFiltersFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
         </fragment>
     </navigation>
     <dialog
@@ -219,7 +223,20 @@
         android:id="@+id/profileAddressFragment"
         android:name="com.jmzd.ghazal.storeappmvvm.ui.profile_address.ProfileAddressFragment"
         android:label="ProfileAddressFragment"
-        tools:layout="@layout/fragment_profile_address"/>
+        tools:layout="@layout/fragment_profile_address">
+        <action
+            android:id="@+id/action_profileAddressFragment_to_addressAddFragment"
+            app:destination="@id/addressAddFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
+    <fragment
+        android:id="@+id/addressAddFragment"
+        android:name="com.jmzd.ghazal.storeappmvvm.ui.profile_address_add.AddressAddFragment"
+        android:label="AddressAddFragment"
+        tools:layout="@layout/fragment_address_add"/>
 
 
 </navigation>
