@@ -25,6 +25,10 @@ class ProfileAddressesViewModel @Inject constructor(private val repository: Addr
     private val _provinceListLiveData = MutableLiveData<MyResponse<ResponseProvinceList>>()
     val provinceListLiveData: LiveData<MyResponse<ResponseProvinceList>> = _provinceListLiveData
 
+    //city list
+    private val _cityListLiveData = MutableLiveData<MyResponse<ResponseProvinceList>>()
+    val cityListLiveData: LiveData<MyResponse<ResponseProvinceList>> = _cityListLiveData
+
     //--- api call ---//
     fun getProfileAddresses() = viewModelScope.launch {
 
@@ -42,6 +46,15 @@ class ProfileAddressesViewModel @Inject constructor(private val repository: Addr
         val response: Response<ResponseProvinceList> = repository.getProvinceList()
 
         _provinceListLiveData.value = ResponseHandler(response).generateResponse()
+    }
+
+    fun getCityList(provinceId : Int) = viewModelScope.launch {
+
+        _cityListLiveData.value = MyResponse.Loading()
+
+        val response: Response<ResponseProvinceList> = repository.getCityList(provinceId)
+
+        _cityListLiveData.value = ResponseHandler(response).generateResponse()
     }
 
 
