@@ -1,0 +1,9 @@
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/_10mdp"
+    android:paddingVertical="@dimen/_5mdp"
+    android:ellipsize="end"
+    android:textSize="@dimen/_10font_mdp"
+    android:maxLines="1"
+    android:textColor="@color/darkStrategy"/>

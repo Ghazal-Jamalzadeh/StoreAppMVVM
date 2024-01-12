@@ -590,7 +590,7 @@ android:inputType="none"
             </com.google.android.material.textfield.TextInputLayout>
 
 
-استایل
+استایل------------------------------------
 خیلی شبیه استایلیه که برای تکست اسنپوت لایوت زدیم ولی چند تا نکته ریز داره
 پرنتش خیلی مهمه. که حالت فیلد باکس دراپ داون باشه
 برای آشنایی بیشتر با این استایلا وارد سایت متریال دیزاین ۲ بشین
@@ -608,3 +608,40 @@ android:inputType="none"
         <item name="hintTextColor">@color/gray</item>
         <item name="startIconTint">@color/mediumTurquoise</item>
     </style>
+
+کد مربوط به نمایش دیتا داخل دراپ داون---------------------------
+تقریبا از نظر عملکرد شبیه به اسپینر هست
+توی اسپینر چیکار میکردیم؟
+نیاز به یک لیستی داشتیم که به واسطه اون لیست آداپتر رو در میکردیم
+بعد از پر کردن آداپتر اون آداپتر رو در اختیار اسپینر قرار میدادیم
+و نمایش میداد
+اینجا هم سازوکار همونه
+
+    private val provincesNamesList = mutableListOf<String>()
+    private lateinit var provincesAdapter: ArrayAdapter<String>
+    private var provinceId = 0
+
+    if (data.isNotEmpty()) {
+
+    لیست اسم ها که قراره نشون بدیم
+        data.forEach {
+            provincesNamesList.add(it.title!!)
+        }
+
+        آداپتر رو مثل آداپتر اسپینر پر میکنیم
+        لایه ای که بهش میدیم کاستوم هست
+        provincesAdapter = ArrayAdapter<String>(
+            requireContext(), R.layout.dropdown_menu_popup_item, provincesNamesList
+        )
+
+        ست کردن آداپتر روی اتو کامپیلیت تکست ویو و کلیک لیسنر
+        provinceAutoTxt.apply {
+            setAdapter(provincesAdapter)
+            setOnItemClickListener { _, _, position, _ ->
+                provinceId = data[position].id!!
+                body.provinceId = provinceId.toString()
+                if (isNetworkAvailable)
+                    viewModel.callCitiesListApi(provinceId)
+            }
+        }
+    }
