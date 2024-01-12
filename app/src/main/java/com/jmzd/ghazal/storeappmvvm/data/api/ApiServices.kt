@@ -77,4 +77,7 @@ interface ApiServices {
     @GET("auth/address/provinces")
     suspend fun getProvinceList() : Response<ResponseProvinceList>
 
+    @GET("auth/address/provinces")
+    suspend fun getCityList(@Query("provinceId") provinceId : Int) : Response<ResponseProvinceList>
+
 }
