@@ -8,12 +8,14 @@ import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.jmzd.ghazal.storeappmvvm.R
+import com.jmzd.ghazal.storeappmvvm.data.models.address.BodySubmitAddress
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentAddressAddBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileAddressesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddressAddFragment : BaseFragment() {
@@ -34,6 +36,10 @@ class AddressAddFragment : BaseFragment() {
     private val citiesNamesList = mutableListOf<String>()
     private lateinit var citiesAdapter: ArrayAdapter<String>
     private var addressId = 0
+
+    //body
+    @Inject
+    lateinit var body : BodySubmitAddress
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
