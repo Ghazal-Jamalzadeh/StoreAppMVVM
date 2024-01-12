@@ -6,4 +6,5 @@ import javax.inject.Inject
 class AddressesRepository @Inject constructor(private val api : ApiServices) {
     suspend fun getProfileAddresses() = api.getProfileAddresses()
     suspend fun getProvinceList() = api.getProvinceList()
+    suspend fun getCityList(provinceId : Int) = api.getCityList(provinceId)
 }
