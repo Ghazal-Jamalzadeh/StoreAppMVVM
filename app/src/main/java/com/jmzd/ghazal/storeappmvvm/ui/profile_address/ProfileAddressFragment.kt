@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmzd.ghazal.storeappmvvm.R
@@ -13,11 +14,14 @@ import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProfileAddresses
 import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProfileAddresses.ResponseProfileAddressesItem
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentProfileAddressBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.utils.events.EventBus
+import com.jmzd.ghazal.storeappmvvm.utils.events.Events
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileAddressesViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -68,6 +72,14 @@ class ProfileAddressFragment : BaseFragment() {
 
         //observers
         observeProfileAddressesLiveData()
+
+        //Auto update profile
+        lifecycleScope.launch {
+            EventBus.subscribe<Events.IsUpdateAddress> {
+                if (isNetworkAvailable)
+                    viewModel.getProfileAddresses()
+            }
+        }
     }
 
     private fun observeProfileAddressesLiveData() {

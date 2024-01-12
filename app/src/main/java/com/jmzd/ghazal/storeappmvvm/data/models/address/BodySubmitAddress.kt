@@ -11,9 +11,9 @@ data class BodySubmitAddress(
     @SerializedName("floor")
     var floor: String? = null, // طبقه
     @SerializedName("latitude")
-    var latitude: String? = null, // عرض جغرافیایی
+    var latitude: String? = "35.0" , // عرض جغرافیایی
     @SerializedName("longitude")
-    var longitude: String? = null, // طول جغرافیایی
+    var longitude: String? = "54.0", // طول جغرافیایی
     @SerializedName("plateNumber")
     var plateNumber: String? = null, // شماره پلاک
     @SerializedName("postalAddress")

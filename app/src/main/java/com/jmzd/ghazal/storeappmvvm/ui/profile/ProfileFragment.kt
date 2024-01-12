@@ -112,6 +112,7 @@ class ProfileFragment : BaseFragment(), ImagePickerResultListener {
                     viewModel.getProfileData()
             }
         }
+
     }
 
     //--- observers ---//
