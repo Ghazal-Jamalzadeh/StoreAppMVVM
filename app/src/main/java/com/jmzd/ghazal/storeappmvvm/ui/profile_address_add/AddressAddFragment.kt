@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentAddressAddBinding
@@ -29,6 +30,11 @@ class AddressAddFragment : BaseFragment() {
     private lateinit var provincesAdapter: ArrayAdapter<String>
     private var provinceId = 0
 
+    //city
+    private val citiesNamesList = mutableListOf<String>()
+    private lateinit var citiesAdapter: ArrayAdapter<String>
+    private var addressId = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -50,6 +56,7 @@ class AddressAddFragment : BaseFragment() {
 
         //observers
         observeProvinceListLiveData()
+        observeCityListLiveData()
     }
 
     private fun observeProvinceListLiveData() {
@@ -72,8 +79,43 @@ class AddressAddFragment : BaseFragment() {
                                     setOnItemClickListener { _, _, position, _ ->
                                         provinceId = data[position].id!!
 //                                        body.provinceId = provinceId.toString()
-//                                        if (isNetworkAvailable)
-//                                            viewModel.callCitiesListApi(provinceId)
+                                        if (isNetworkAvailable)
+                                            viewModel.getCityList(provinceId)
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    is MyResponse.Error -> {
+                        root.showSnackBar(response.message!!)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun observeCityListLiveData() {
+        binding.apply {
+            viewModel.cityListLiveData.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is MyResponse.Loading -> {}
+
+                    is MyResponse.Success -> {
+                        response.data?.let { data ->
+                            cityInpLay.isVisible = true
+                            if (data.isNotEmpty()) {
+                                citiesNamesList.clear()
+                                data.forEach {
+                                    citiesNamesList.add(it.title!!)
+                                }
+                                citiesAdapter = ArrayAdapter<String>(
+                                    requireContext(), R.layout.dropdown_menu_popup_item, citiesNamesList
+                                )
+                                cityAutoTxt.apply {
+                                    setAdapter(citiesAdapter)
+                                    setOnItemClickListener { _, _, position, _ ->
+//                                        body.cityId = data[position].id!!.toString()
                                     }
                                 }
                             }
