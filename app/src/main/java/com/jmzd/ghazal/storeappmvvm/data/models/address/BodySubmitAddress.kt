@@ -5,27 +5,27 @@ import com.google.gson.annotations.SerializedName
 
 data class BodySubmitAddress(
     @SerializedName("addressId")
-    val addressId: String?, // برای ویرایش
+    var addressId: String? = null, // برای ویرایش
     @SerializedName("cityId")
-    val cityId: String?, // شناسه شهر
+    var cityId: String? = null, // شناسه شهر
     @SerializedName("floor")
-    val floor: String?, // طبقه
+    var floor: String? = null, // طبقه
     @SerializedName("latitude")
-    val latitude: String?, // عرض جغرافیایی
+    var latitude: String? = null, // عرض جغرافیایی
     @SerializedName("longitude")
-    val longitude: String?, // طول جغرافیایی
+    var longitude: String? = null, // طول جغرافیایی
     @SerializedName("plateNumber")
-    val plateNumber: String?, // شماره پلاک
+    var plateNumber: String? = null, // شماره پلاک
     @SerializedName("postalAddress")
-    val postalAddress: String?, // آدرس پستی
+    var postalAddress: String? = null, // آدرس پستی
     @SerializedName("postalCode")
-    val postalCode: String?, // کد پستی
+    var postalCode: String? = null, // کد پستی
     @SerializedName("provinceId")
-    val provinceId: String?, // شناسه استان
+    var provinceId: String? = null, // شناسه استان
     @SerializedName("receiverCellphone")
-    val receiverCellphone: String?, // تلفن همراه گیرنده
+    var receiverCellphone: String? = null, // تلفن همراه گیرنده
     @SerializedName("receiverFirstname")
-    val receiverFirstname: String?, // نام گیرنده
+    var receiverFirstname: String? = null, // نام گیرنده
     @SerializedName("receiverLastname")
-    val receiverLastname: String? // نام خانوادگی گیرنده
+    var receiverLastname: String? = null // نام خانوادگی گیرنده
 )
