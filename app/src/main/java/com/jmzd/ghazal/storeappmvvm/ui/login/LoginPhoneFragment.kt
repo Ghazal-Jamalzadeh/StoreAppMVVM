@@ -2,7 +2,6 @@ package com.jmzd.ghazal.storeappmvvm.ui.login
 
 import android.animation.Animator
 import android.os.Bundle
-import android.provider.SyncStateContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +15,8 @@ import com.jmzd.ghazal.storeappmvvm.data.models.login.BodyLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.login.ResponseLogin
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginPhoneBinding
 import com.jmzd.ghazal.storeappmvvm.ui.MainActivity
-import com.jmzd.ghazal.storeappmvvm.utils.IS_CALLED_VERIFY
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.utils.constants.IS_CALLED_VERIFY
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.enableLoading
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.hideKeyboard
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar

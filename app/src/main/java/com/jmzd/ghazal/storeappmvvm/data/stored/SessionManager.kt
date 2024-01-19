@@ -7,8 +7,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.jmzd.ghazal.storeappmvvm.utils.SESSION_AUTH_DATA
-import com.jmzd.ghazal.storeappmvvm.utils.USER_TOKEN_DATA
+import com.jmzd.ghazal.storeappmvvm.utils.constants.SESSION_AUTH_DATA
+import com.jmzd.ghazal.storeappmvvm.utils.constants.USER_TOKEN_DATA
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,8 +14,8 @@ import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.search.ResponseSearch
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentSearchBinding
 import com.jmzd.ghazal.storeappmvvm.ui.search.adapters.SearchAdapter
-import com.jmzd.ghazal.storeappmvvm.utils.NEW
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.utils.constants.NEW
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showKeyboard
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar

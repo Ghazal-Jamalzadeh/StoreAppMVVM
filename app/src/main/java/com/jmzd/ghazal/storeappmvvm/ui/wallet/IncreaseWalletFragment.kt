@@ -15,7 +15,6 @@ import com.jmzd.ghazal.storeappmvvm.utils.extensions.moneySeparating
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.openBrowser
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
-import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.WalletViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

@@ -5,14 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jmzd.ghazal.storeappmvvm.data.models.categories.FilterCategoryModel
-import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
-import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseDiscount
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseProducts
-import com.jmzd.ghazal.storeappmvvm.data.models.search.ResponseSearch
 import com.jmzd.ghazal.storeappmvvm.data.models.search_filter.FilterModel
 import com.jmzd.ghazal.storeappmvvm.data.repository.CategoryProductsRepository
 import com.jmzd.ghazal.storeappmvvm.data.repository.SearchFilterRepository
-import com.jmzd.ghazal.storeappmvvm.utils.*
+import com.jmzd.ghazal.storeappmvvm.utils.constants.*
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.utils.network.ResponseHandler
 import dagger.hilt.android.lifecycle.HiltViewModel

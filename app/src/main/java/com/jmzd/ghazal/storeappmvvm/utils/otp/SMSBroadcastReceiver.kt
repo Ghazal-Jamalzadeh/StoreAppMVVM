@@ -1,4 +1,4 @@
-package academy.nouri.storeapp.utils.otp
+package com.jmzd.ghazal.storeappmvvm.utils.otp
 
 import android.content.BroadcastReceiver
 import android.content.Context

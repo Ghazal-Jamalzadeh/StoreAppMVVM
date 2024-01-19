@@ -6,6 +6,7 @@ import com.jmzd.ghazal.storeappmvvm.BuildConfig
 import com.jmzd.ghazal.storeappmvvm.data.api.ApiServices
 import com.jmzd.ghazal.storeappmvvm.data.stored.SessionManager
 import com.jmzd.ghazal.storeappmvvm.utils.*
+import com.jmzd.ghazal.storeappmvvm.utils.constants.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -3,7 +3,7 @@ package com.jmzd.ghazal.storeappmvvm.data.repository
 import android.content.Context
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.search_filter.FilterModel
-import com.jmzd.ghazal.storeappmvvm.utils.*
+import com.jmzd.ghazal.storeappmvvm.utils.constants.*
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_favorite.ResponseProfileFavorites.*
 import com.jmzd.ghazal.storeappmvvm.databinding.ItemMyFavoritesBinding
-import com.jmzd.ghazal.storeappmvvm.utils.BASE_URL_IMAGE
+import com.jmzd.ghazal.storeappmvvm.utils.constants.BASE_URL_IMAGE
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseDiffUtils
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.loadImage
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.moneySeparating

@@ -1,8 +1,8 @@
 package com.jmzd.ghazal.storeappmvvm.data.repository
 
 import com.jmzd.ghazal.storeappmvvm.data.api.ApiServices
-import com.jmzd.ghazal.storeappmvvm.utils.ELECTRONIC_DEVICES
-import com.jmzd.ghazal.storeappmvvm.utils.GENERAL
+import com.jmzd.ghazal.storeappmvvm.utils.constants.ELECTRONIC_DEVICES
+import com.jmzd.ghazal.storeappmvvm.utils.constants.GENERAL
 import javax.inject.Inject
 
 class HomeRepository @Inject constructor(private val api : ApiServices) {

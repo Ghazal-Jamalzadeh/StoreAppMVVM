@@ -2,13 +2,13 @@ package com.jmzd.ghazal.storeappmvvm.viewmodel
 
 import android.os.Parcelable
 import androidx.lifecycle.*
-import androidx.navigation.NavType
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseDiscount
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseProducts
 import com.jmzd.ghazal.storeappmvvm.data.repository.HomeRepository
-import com.jmzd.ghazal.storeappmvvm.utils.NEW
-import com.jmzd.ghazal.storeappmvvm.utils.SORT
+import com.jmzd.ghazal.storeappmvvm.utils.*
+import com.jmzd.ghazal.storeappmvvm.utils.constants.NEW
+import com.jmzd.ghazal.storeappmvvm.utils.constants.SORT
 import com.jmzd.ghazal.storeappmvvm.utils.enums.ProductsCategories
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.utils.network.ResponseHandler

@@ -23,6 +23,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseWallet
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentProfileBinding
 import com.jmzd.ghazal.storeappmvvm.utils.*
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.utils.constants.*
 import com.jmzd.ghazal.storeappmvvm.utils.events.EventBus
 import com.jmzd.ghazal.storeappmvvm.utils.events.Events
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.*

@@ -1,6 +1,5 @@
 package com.jmzd.ghazal.storeappmvvm.ui.profile_orders.adapters
 
-import academy.nouri.storeapp.utils.extensions.convertDateToFarsi
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
@@ -12,6 +11,7 @@ import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_order.ResponseProfileOrdersList.Data
 import com.jmzd.ghazal.storeappmvvm.databinding.ItemOrdersBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseDiffUtils
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.convertDateToFarsi
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.moneySeparating
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import dagger.hilt.android.qualifiers.ApplicationContext

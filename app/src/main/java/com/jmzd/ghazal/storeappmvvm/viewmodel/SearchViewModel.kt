@@ -1,5 +1,6 @@
 package com.jmzd.ghazal.storeappmvvm.viewmodel
 
+import android.os.Build.VERSION_CODES.Q
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +9,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.search.ResponseSearch
 import com.jmzd.ghazal.storeappmvvm.data.models.search_filter.FilterModel
 import com.jmzd.ghazal.storeappmvvm.data.repository.SearchFilterRepository
 import com.jmzd.ghazal.storeappmvvm.data.repository.SearchRepository
-import com.jmzd.ghazal.storeappmvvm.utils.SORT
+import com.jmzd.ghazal.storeappmvvm.utils.constants.SORT
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.utils.network.ResponseHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,7 +37,7 @@ class SearchViewModel @Inject constructor(
     //--- search ---//
     fun getSearchQueries(search : String , sort : String): Map<String, String> {
         val queries: HashMap<String, String> = HashMap()
-        queries[com.jmzd.ghazal.storeappmvvm.utils.Q] = search
+        queries[com.jmzd.ghazal.storeappmvvm.utils.constants.Q] = search
         queries[SORT] = sort
         return queries
     }

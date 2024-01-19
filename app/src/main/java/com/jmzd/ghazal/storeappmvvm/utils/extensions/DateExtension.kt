@@ -1,6 +1,7 @@
-package academy.nouri.storeapp.utils.extensions
+package com.jmzd.ghazal.storeappmvvm.utils.extensions
 
-import academy.nouri.storeapp.utils.views.TimeUtils
+import com.jmzd.ghazal.storeappmvvm.utils.date_and_time.TimeUtils
+
 
 fun String.convertDateToFarsi(): String {
     val dateSplit = this.split("-")

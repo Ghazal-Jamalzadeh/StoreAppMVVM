@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_comments.ResponseProfileComments.*
 import com.jmzd.ghazal.storeappmvvm.databinding.ItemMyCommentsBinding
-import com.jmzd.ghazal.storeappmvvm.utils.BASE_URL_IMAGE
+import com.jmzd.ghazal.storeappmvvm.utils.constants.BASE_URL_IMAGE
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseDiffUtils
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.loadImage
 import javax.inject.Inject

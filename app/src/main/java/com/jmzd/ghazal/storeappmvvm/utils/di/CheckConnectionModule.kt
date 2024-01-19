@@ -6,7 +6,7 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.os.Build
-import com.jmzd.ghazal.storeappmvvm.utils.NAMED_VPN
+import com.jmzd.ghazal.storeappmvvm.utils.constants.NAMED_VPN
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

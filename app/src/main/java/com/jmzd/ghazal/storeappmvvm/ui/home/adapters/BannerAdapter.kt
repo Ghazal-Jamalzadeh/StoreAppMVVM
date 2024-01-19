@@ -4,10 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners.ResponseBannersItem
 import com.jmzd.ghazal.storeappmvvm.databinding.ItemBannersBinding
-import com.jmzd.ghazal.storeappmvvm.utils.BASE_URL_IMAGE_WITH_STORAGE
+import com.jmzd.ghazal.storeappmvvm.utils.constants.BASE_URL_IMAGE_WITH_STORAGE
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseDiffUtils
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.loadImage
 import javax.inject.Inject
