@@ -6,21 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_order.ResponseProfileOrdersList
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentProfileOrdersBinding
-import com.jmzd.ghazal.storeappmvvm.utils.CANCELED
-import com.jmzd.ghazal.storeappmvvm.utils.DELIVERED
-import com.jmzd.ghazal.storeappmvvm.utils.PENDING
+import com.jmzd.ghazal.storeappmvvm.ui.profile_orders.adapters.OrdersAdapter
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.utils.constants.CANCELED
+import com.jmzd.ghazal.storeappmvvm.utils.constants.DELIVERED
+import com.jmzd.ghazal.storeappmvvm.utils.constants.PENDING
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
-import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileOrdersViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ProfileOrdersFragment : BaseFragment() {
@@ -34,6 +36,10 @@ class ProfileOrdersFragment : BaseFragment() {
 
     //args
     private val args by navArgs<ProfileOrdersFragmentArgs>()
+
+    //adapter
+    @Inject
+    lateinit var ordersAdapter: OrdersAdapter
 
     //other
     private var status = ""
@@ -108,8 +114,8 @@ class ProfileOrdersFragment : BaseFragment() {
     //--- recycler ---//
     private fun initRecycler(data: List<ResponseProfileOrdersList.Data>) {
         binding.apply {
-//            ordersAdapter.setData(data)
-//            ordersList.setupRecyclerview(LinearLayoutManager(requireContext()), ordersAdapter)
+            ordersAdapter.setData(data)
+            ordersList.setupRecyclerview(LinearLayoutManager(requireContext()), ordersAdapter)
         }
     }
 

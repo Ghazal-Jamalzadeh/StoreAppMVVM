@@ -1,4 +1,4 @@
-package com.jmzd.ghazal.storeappmvvm.utils
+package com.jmzd.ghazal.storeappmvvm.utils.constants
 
 //TAG
 const val TAG = "TagTest"

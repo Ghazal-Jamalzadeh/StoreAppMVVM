@@ -1,4 +1,4 @@
-package com.jmzd.ghazal.storeappmvvm.utils
+package com.jmzd.ghazal.storeappmvvm.utils.base
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
