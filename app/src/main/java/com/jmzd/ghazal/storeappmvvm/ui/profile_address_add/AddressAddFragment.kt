@@ -1,5 +1,6 @@
 package com.jmzd.ghazal.storeappmvvm.ui.profile_address_add
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.address.BodySubmitAddress
+import com.jmzd.ghazal.storeappmvvm.databinding.DialogDeleteAddressBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentAddressAddBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.events.EventBus
@@ -20,6 +22,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.events.Events
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.enableLoading
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.setTint
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.transparentCorners
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileAddressesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -80,7 +83,7 @@ class AddressAddFragment : BaseFragment() {
                         setImageResource(R.drawable.trash_can)
                         setTint(R.color.red)
                         setOnClickListener {
-//                            showDeleteAddressDialog()
+                            showDeleteAddressDialog()
                         }
                     }
                     //Set data
@@ -129,6 +132,7 @@ class AddressAddFragment : BaseFragment() {
         observeSubmitAddressLiveData()
     }
 
+    //--- observers ---//
     private fun observeProvinceListLiveData() {
         binding.apply {
             viewModel.provinceListLiveData.observe(viewLifecycleOwner) { response ->
@@ -224,7 +228,26 @@ class AddressAddFragment : BaseFragment() {
         }
     }
 
+    //--- Dialog ---//
+    private fun showDeleteAddressDialog() {
+        val dialog = Dialog(requireContext())
+        val dialogBinding = DialogDeleteAddressBinding.inflate(layoutInflater)
+        dialog.transparentCorners()
+        dialog.setContentView(dialogBinding.root)
 
+        dialogBinding.noBtn.setOnClickListener { dialog.dismiss() }
+
+        dialogBinding.yesBtn.setOnClickListener {
+            dialog.dismiss()
+            if (isNetworkAvailable)
+                viewModel.removeAddress(addressId)
+        }
+
+        dialog.show()
+    }
+
+
+    //--- life cycle ---//
     override fun onNetworkLost() {
     }
 
