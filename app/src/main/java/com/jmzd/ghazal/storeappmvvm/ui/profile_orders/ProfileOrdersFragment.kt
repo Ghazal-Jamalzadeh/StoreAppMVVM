@@ -10,6 +10,7 @@ import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.jmzd.ghazal.storeappmvvm.R
+import com.jmzd.ghazal.storeappmvvm.data.models.profile_order.ResponseProfileOrdersList
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentProfileOrdersBinding
 import com.jmzd.ghazal.storeappmvvm.utils.CANCELED
 import com.jmzd.ghazal.storeappmvvm.utils.DELIVERED
@@ -87,7 +88,7 @@ class ProfileOrdersFragment : BaseFragment() {
                         ordersList.hideShimmer()
                         response.data?.let { data ->
                             if (data.data.isNotEmpty()) {
-//                                initRecycler(data.data)
+                                initRecycler(data.data)
                             } else {
                                 emptyLay.isVisible = true
                                 ordersList.isVisible = false
@@ -104,6 +105,13 @@ class ProfileOrdersFragment : BaseFragment() {
         }
     }
 
+    //--- recycler ---//
+    private fun initRecycler(data: List<ResponseProfileOrdersList.Data>) {
+        binding.apply {
+//            ordersAdapter.setData(data)
+//            ordersList.setupRecyclerview(LinearLayoutManager(requireContext()), ordersAdapter)
+        }
+    }
 
     //--- lifecycle ---//
     override fun onNetworkLost() {
