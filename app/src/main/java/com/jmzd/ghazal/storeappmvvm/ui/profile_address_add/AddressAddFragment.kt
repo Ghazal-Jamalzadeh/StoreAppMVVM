@@ -130,6 +130,7 @@ class AddressAddFragment : BaseFragment() {
         observeProvinceListLiveData()
         observeCityListLiveData()
         observeSubmitAddressLiveData()
+        observeRemoveAddressLiveData()
     }
 
     //--- observers ---//
@@ -219,6 +220,31 @@ class AddressAddFragment : BaseFragment() {
                             findNavController().popBackStack()
                         }
                     }
+                    is MyResponse.Error -> {
+                        submitBtn.enableLoading(false)
+                        root.showSnackBar(response.message!!)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun observeRemoveAddressLiveData() {
+        binding.apply {
+            viewModel.removeAddressLiveData.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is MyResponse.Loading -> {
+                        submitBtn.enableLoading(true)
+                    }
+
+                    is MyResponse.Success -> {
+                        submitBtn.enableLoading(false)
+                        response.data?.let {
+                            lifecycleScope.launch { EventBus.publish(Events.IsUpdateAddress) }
+                            findNavController().popBackStack()
+                        }
+                    }
+
                     is MyResponse.Error -> {
                         submitBtn.enableLoading(false)
                         root.showSnackBar(response.message!!)
