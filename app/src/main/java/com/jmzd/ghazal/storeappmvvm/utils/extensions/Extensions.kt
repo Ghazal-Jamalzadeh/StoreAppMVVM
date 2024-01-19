@@ -5,16 +5,19 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.net.Uri
 import android.provider.MediaStore
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.request.CachePolicy
@@ -93,4 +96,8 @@ fun getRealFileFromUri(context: Context, uri: Uri): String? {
 fun Uri.openBrowser(context: Context) {
     val intent = Intent(Intent.ACTION_VIEW, this)
     ContextCompat.startActivity(context, intent, null)
+}
+
+fun ImageView.setTint(@ColorRes color: Int) {
+    ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(ContextCompat.getColor(context, color)))
 }

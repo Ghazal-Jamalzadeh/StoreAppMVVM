@@ -469,3 +469,8 @@ Payment gateway-----------------------------------------------------------------
 به معنی جعبه شن هست که هرچی ازش برداریم کم نمیشه
 برا همین صرفا دکمه های پرداخت موفق و ناموفق برای بازگشت به اپ رو مستقیم میبینیم
 
+SetTint extension------------------------------------------------------------------------------------
+با این انوتیشن میایم محدودش میکنیم به کالر ریسورس اینتیجرهایی رو که میگیریم
+fun ImageView.setTint(@ColorRes color: Int) {
+    ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(ContextCompat.getColor(context, color)))
+}

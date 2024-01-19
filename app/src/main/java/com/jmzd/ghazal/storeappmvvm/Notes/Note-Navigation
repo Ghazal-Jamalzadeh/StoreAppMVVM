@@ -116,3 +116,54 @@
 فرگمنت به نستد
 نستد به فرگمنت
 ارسال اطلاعات در این حالت ها
+
+
+Navigation and parcelable-------------------------------------------------------------------------
+برای فرستادن یک کلاس به یک صفحه دیگه
+اون کلاس باید پارسیلبل شه
+
+ResponseProfileAddresses.kt
+
+1- add @Parcelize annotation to the top of the class
+دقت کنید مال کاتلین رو بیارید نه اندروید
+
+2- extend : Parcelable
+پارسیلبل برای ما در واقع اون دیتا تایپ های اصلی رو میفرسته
+کلاس ها و دیتا تایپ های داخلی کلاسمون میایم از rawValue استفاده میکنیم
+
+3- add @rawValue annotation before custom data types
+val city: @RawValue City?,
+این رو هم دقت کنید از کاتلین ایکس بیارید نه اندروید
+
+4- navigation -> select destination fragment -> Arguments -> + -> Type -> custom Parcelable ->
+select the model
+
+نتیجه
+    <fragment
+        android:id="@+id/addressAddFragment"
+        android:name="com.jmzd.ghazal.storeappmvvm.ui.profile_address_add.AddressAddFragment"
+        android:label="AddressAddFragment"
+        tools:layout="@layout/fragment_address_add">
+        <argument
+            android:name="addressData"
+            app:argType="com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProfileAddresses$ResponseProfileAddressesItem"
+            app:nullable="true" />
+    </fragment>
+
+5- how to set default value to parcelable?
+اینجا ما نیازی به دیفالت ولیو نداریم ولی اگه داشتیم چطوری باید اعمال کنیم
+
+6- navigate to new screen and send data
+                val direction = ProfileAddressFragmentDirections.actionProfileAddressFragmentToAddressAddFragment().setAddressData(it)
+                findNavController().navigate(direction)
+
+7- receive data
+    //nav args
+    private val args by navArgs<AddressAddFragmentArgs>()
+
+hint : <FragmentName + Args>
+
+دسترسی به محتویات آرگومان ها در کد از طریق کد زیر
+args.addressData
+
+

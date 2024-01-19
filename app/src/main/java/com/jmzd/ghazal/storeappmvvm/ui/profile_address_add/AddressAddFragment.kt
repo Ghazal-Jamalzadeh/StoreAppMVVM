@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.graphics.drawable.DrawableCompat.setTint
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.address.BodySubmitAddress
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentAddressAddBinding
@@ -16,6 +18,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.events.EventBus
 import com.jmzd.ghazal.storeappmvvm.utils.events.Events
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.enableLoading
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.setTint
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileAddressesViewModel
@@ -47,6 +50,9 @@ class AddressAddFragment : BaseFragment() {
     @Inject
     lateinit var body : BodySubmitAddress
 
+    //nav args
+    private val args by navArgs<AddressAddFragmentArgs>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -65,36 +71,38 @@ class AddressAddFragment : BaseFragment() {
         binding.apply {
             toolbar.apply {
                 //Args
-//                if (args.data != null) {
-//                    toolbarTitleTxt.text = getString(R.string.editAddress)
-//                    toolbarOptionImg.apply {
-//                        setImageResource(R.drawable.trash_can)
-//                        setTint(R.color.red)
-//                        setOnClickListener { showDeleteAddressDialog() }
-//                    }
+                if (args.addressData != null) {
+                    toolbarTitleTxt.text = getString(R.string.editAddress)
+                    toolbarOptionImg.apply {
+                        setImageResource(R.drawable.trash_can)
+                        setTint(R.color.red)
+                        setOnClickListener {
+//                            showDeleteAddressDialog()
+                        }
+                    }
                     //Set data
-//                    args.data?.apply {
-//                        addressId = id!!
-//                        body.addressId = id.toString()
-//                        nameEdt.setText(receiverFirstname)
-//                        familyEdt.setText(receiverLastname)
-//                        phoneEdt.setText(receiverCellphone)
-//                        body.provinceId = province?.id.toString()
-//                        provinceAutoTxt.setText(province?.title)
-//                        cityInpLay.isVisible = true
-//                        body.cityId = cityId
-//                        cityAutoTxt.setText(city?.title)
-//                        floorEdt.setText(floor)
-//                        plateEdt.setText(plateNumber)
-//                        postalEdt.setText(postalCode)
-//                        addressEdt.setText(postalAddress)
-//                    }
-//                } else {
-//                    toolbarTitleTxt.text = getString(R.string.addNewAddress)
-//                    toolbarOptionImg.isVisible = false
-//                }
-//                //Back
-//                toolbarBackImg.setOnClickListener { findNavController().popBackStack() }
+                    args.addressData?.apply {
+                        addressId = id!!
+                        body.addressId = id.toString()
+                        nameEdt.setText(receiverFirstname)
+                        familyEdt.setText(receiverLastname)
+                        phoneEdt.setText(receiverCellphone)
+                        body.provinceId = province?.id.toString()
+                        provinceAutoTxt.setText(province?.title)
+                        cityInpLay.isVisible = true
+                        body.cityId = cityId
+                        cityAutoTxt.setText(city?.title)
+                        floorEdt.setText(floor)
+                        plateEdt.setText(plateNumber)
+                        postalEdt.setText(postalCode)
+                        addressEdt.setText(postalAddress)
+                    }
+                } else {
+                    toolbarTitleTxt.text = getString(R.string.addNewAddress)
+                    toolbarOptionImg.isVisible = false
+                }
+                //Back
+                toolbarBackImg.setOnClickListener { findNavController().popBackStack() }
             }
 
             //Submit

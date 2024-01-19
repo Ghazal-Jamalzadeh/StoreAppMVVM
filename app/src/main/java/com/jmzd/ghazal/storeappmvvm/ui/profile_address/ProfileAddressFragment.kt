@@ -119,8 +119,8 @@ class ProfileAddressFragment : BaseFragment() {
             addressList.setupRecyclerview(LinearLayoutManager(requireContext()), addressesAdapter)
             //Click
             addressesAdapter.setOnItemClickListener {
-//                val direction = ProfileAddressFragmentDirections.actionProfileToAddressAdd().setData(it)
-//                findNavController().navigate(direction)
+                val direction = ProfileAddressFragmentDirections.actionProfileAddressFragmentToAddressAddFragment().setAddressData(it)
+                findNavController().navigate(direction)
             }
         }
     }

@@ -236,7 +236,13 @@
         android:id="@+id/addressAddFragment"
         android:name="com.jmzd.ghazal.storeappmvvm.ui.profile_address_add.AddressAddFragment"
         android:label="AddressAddFragment"
-        tools:layout="@layout/fragment_address_add"/>
+        tools:layout="@layout/fragment_address_add">
+        <argument
+            android:name="addressData"
+            app:argType="com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProfileAddresses$ResponseProfileAddressesItem"
+            app:nullable="true"
+            android:defaultValue = "@null"/>
+    </fragment>
 
 
 </navigation>
