@@ -17,6 +17,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseWallet
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_comments.ResponseDeleteComment
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_comments.ResponseProfileComments
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_favorite.ResponseProfileFavorites
+import com.jmzd.ghazal.storeappmvvm.data.models.profile_order.ResponseProfileOrdersList
 import com.jmzd.ghazal.storeappmvvm.data.models.search.ResponseSearch
 import com.jmzd.ghazal.storeappmvvm.data.models.wallet.BodyIncreaseWallet
 import com.jmzd.ghazal.storeappmvvm.data.models.wallet.ResponseIncreaseWallet
@@ -89,6 +90,6 @@ interface ApiServices {
     suspend fun removeAddress(@Path("address_id") addressId : Int) : Response<ResponseDeleteComment>
 
     @GET("auth/orders")
-    suspend fun getOrdersList(@Query("status") status : String) : Response<ResponseProvinceList>
+    suspend fun getOrdersList(@Query("status") status : String) : Response<ResponseProfileOrdersList>
 
 }
