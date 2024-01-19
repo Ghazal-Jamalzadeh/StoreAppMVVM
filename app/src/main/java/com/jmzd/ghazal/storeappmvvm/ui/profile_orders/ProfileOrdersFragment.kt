@@ -15,6 +15,8 @@ import com.jmzd.ghazal.storeappmvvm.utils.CANCELED
 import com.jmzd.ghazal.storeappmvvm.utils.DELIVERED
 import com.jmzd.ghazal.storeappmvvm.utils.PENDING
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
+import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileOrdersViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -67,8 +69,43 @@ class ProfileOrdersFragment : BaseFragment() {
                 toolbarOptionImg.isVisible = false
             }
         }
+
+        //observers
+        observeOrdersLiveData()
     }
 
+    //--- observers ---//
+    private fun observeOrdersLiveData() {
+        binding.apply {
+            viewModel.profileOrdersLiveData.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is MyResponse.Loading -> {
+                        ordersList.showShimmer()
+                    }
+
+                    is MyResponse.Success -> {
+                        ordersList.hideShimmer()
+                        response.data?.let { data ->
+                            if (data.data.isNotEmpty()) {
+//                                initRecycler(data.data)
+                            } else {
+                                emptyLay.isVisible = true
+                                ordersList.isVisible = false
+                            }
+                        }
+                    }
+
+                    is MyResponse.Error -> {
+                        ordersList.hideShimmer()
+                        root.showSnackBar(response.message!!)
+                    }
+                }
+            }
+        }
+    }
+
+
+    //--- lifecycle ---//
     override fun onNetworkLost() {
     }
 
