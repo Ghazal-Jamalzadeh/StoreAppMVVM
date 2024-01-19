@@ -8,6 +8,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.address.BodySubmitAddress
 import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProfileAddresses
 import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProvinceList
 import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseSubmitAddress
+import com.jmzd.ghazal.storeappmvvm.data.models.profile_comments.ResponseDeleteComment
 import com.jmzd.ghazal.storeappmvvm.data.repository.AddressesRepository
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.utils.network.ResponseHandler
@@ -34,6 +35,11 @@ class ProfileAddressesViewModel @Inject constructor(private val repository: Addr
     //submit address
     private val _submitAddressLiveData = MutableLiveData<MyResponse<ResponseSubmitAddress>>()
     val submitAddressLiveData: LiveData<MyResponse<ResponseSubmitAddress>> = _submitAddressLiveData
+
+    //remove address
+    private val _removeAddressLiveData = MutableLiveData<MyResponse<ResponseDeleteComment>>()
+    val removeAddressLiveData: LiveData<MyResponse<ResponseDeleteComment>> = _removeAddressLiveData
+
 
     //--- api call ---//
     fun getProfileAddresses() = viewModelScope.launch {
@@ -71,6 +77,18 @@ class ProfileAddressesViewModel @Inject constructor(private val repository: Addr
 
         _submitAddressLiveData.value = ResponseHandler(response).generateResponse()
     }
+
+
+    fun removeAddress(addressId : Int) = viewModelScope.launch {
+
+        _removeAddressLiveData.value = MyResponse.Loading()
+
+        val response: Response<ResponseDeleteComment> = repository.removeAddress(addressId)
+
+        _removeAddressLiveData.value = ResponseHandler(response).generateResponse()
+    }
+
+
 
 
 
