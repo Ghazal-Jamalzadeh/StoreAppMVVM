@@ -135,6 +135,14 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_to_profile_orders_fragment"
+            app:destination="@id/profileOrdersFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
     </navigation>
 
     <!-- main actions -->
@@ -242,6 +250,15 @@
             app:argType="com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProfileAddresses$ResponseProfileAddressesItem"
             app:nullable="true"
             android:defaultValue = "@null"/>
+    </fragment>
+    <fragment
+        android:id="@+id/profileOrdersFragment"
+        android:name="com.jmzd.ghazal.storeappmvvm.ui.profile_orders.ProfileOrdersFragment"
+        android:label="ProfileOrdersFragment"
+        tools:layout="@layout/fragment_profile_orders">
+        <argument
+            android:name="status"
+            app:argType="string" />
     </fragment>
 
 

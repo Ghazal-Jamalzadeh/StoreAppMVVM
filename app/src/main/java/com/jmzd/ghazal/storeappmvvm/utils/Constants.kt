@@ -61,6 +61,7 @@ const val METHOD = "_method"
 const val MULTIPART_FROM_DATA = "multipart/form-data"
 const val UTF_8 = "UTF-8"
 
+//order status
 const val PENDING = "pending"
 const val CANCELED = "canceled"
 const val DELIVERED = "delivered"

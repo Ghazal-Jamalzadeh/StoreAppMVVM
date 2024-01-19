@@ -95,9 +95,24 @@ class ProfileFragment : BaseFragment(), ImagePickerResultListener {
                 menuAddressesLay.setOnClickListener {
                     findNavController().navigate(R.id.action_to_profile_addresses_fragment)
                 }
+            }
 
+            //order items
+            orderLay.apply {
+                //delivered
+                menuDeliveredLay.setOnClickListener {
+                    navigateToOrdersPage(DELIVERED)
+                }
 
+                //pending
+                menuPendingLay.setOnClickListener {
+                    navigateToOrdersPage(PENDING)
+                }
 
+                //canceled
+                menuCanceledLay.setOnClickListener {
+                    navigateToOrdersPage(CANCELED)
+                }
             }
         }
         //observers
@@ -247,6 +262,12 @@ class ProfileFragment : BaseFragment(), ImagePickerResultListener {
     }
 
     override fun onMultiImagePick(uris: List<Uri>?) {
+    }
+
+    //--- navigation ---//
+    private fun navigateToOrdersPage(status : String){
+        val direction = ProfileFragmentDirections.actionToProfileOrdersFragment(status)
+        findNavController().navigate(direction)
     }
 
     //--- life cycle ---//
