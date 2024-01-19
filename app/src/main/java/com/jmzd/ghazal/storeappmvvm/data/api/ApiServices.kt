@@ -87,4 +87,8 @@ interface ApiServices {
 
     @DELETE("auth/address/remove/{address_id}")
     suspend fun removeAddress(@Path("address_id") addressId : Int) : Response<ResponseDeleteComment>
+
+    @GET("auth/orders")
+    suspend fun getOrdersList(@Query("status") status : String) : Response<ResponseProvinceList>
+
 }
