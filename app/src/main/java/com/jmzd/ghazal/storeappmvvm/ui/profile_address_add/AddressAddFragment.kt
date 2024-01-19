@@ -44,6 +44,8 @@ class AddressAddFragment : BaseFragment() {
     //city
     private val citiesNamesList = mutableListOf<String>()
     private lateinit var citiesAdapter: ArrayAdapter<String>
+
+    //address
     private var addressId = 0
 
     //body
@@ -52,6 +54,7 @@ class AddressAddFragment : BaseFragment() {
 
     //nav args
     private val args by navArgs<AddressAddFragmentArgs>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

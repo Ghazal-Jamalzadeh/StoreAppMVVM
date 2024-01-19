@@ -645,3 +645,17 @@ android:inputType="none"
             }
         }
     }
+
+ست کردن مقدار پیش فرض داخل دراپ داون---------------------
+provinceAutoTxt.setText(province?.title)
+
+SetTint extension------------------------------------------------------------------------------------
+با این انوتیشن میایم محدودش میکنیم به کالر ریسورس اینتیجرهایی رو که میگیریم
+fun ImageView.setTint(@ColorRes color: Int) {
+    ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(ContextCompat.getColor(context, color)))
+}
+
+.apply----------------------------------------------------------------------------------------------
+وقتی دو تا اپلای تو در تو داریم
+وقتی نو داخلیه باشیم المان های مربوط به هر دو تا اپلای رو به راحتی میشناسه
+

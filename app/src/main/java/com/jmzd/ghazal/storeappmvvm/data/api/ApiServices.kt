@@ -85,4 +85,6 @@ interface ApiServices {
     @POST("auth/address")
     suspend fun submitAddress(@Body body: BodySubmitAddress) : Response<ResponseSubmitAddress>
 
+    @DELETE("auth/address/remove/{address_id}")
+    suspend fun removeAddress(@Path("address_id") addressId : Int) : Response<ResponseDeleteComment>
 }
