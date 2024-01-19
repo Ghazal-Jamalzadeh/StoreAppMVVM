@@ -9,4 +9,5 @@ class AddressesRepository @Inject constructor(private val api : ApiServices) {
     suspend fun getProvinceList() = api.getProvinceList()
     suspend fun getCityList(provinceId : Int) = api.getCityList(provinceId)
     suspend fun submitAddress(body : BodySubmitAddress) = api.submitAddress(body)
+    suspend fun removeAddress(addressId : Int ) = api.removeAddress(addressId)
 }
