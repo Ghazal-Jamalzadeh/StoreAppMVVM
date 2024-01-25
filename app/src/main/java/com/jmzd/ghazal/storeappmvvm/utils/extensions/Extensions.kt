@@ -21,6 +21,8 @@ import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.request.CachePolicy
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.snackbar.Snackbar
 import com.jmzd.ghazal.storeappmvvm.R
 import java.text.DecimalFormat
@@ -48,6 +50,13 @@ fun ImageView.loadImage(url: String) {
         diskCachePolicy(CachePolicy.ENABLED)
         error(R.drawable.placeholder)
     }
+}
+
+fun ImageView.loadImageWithGlide(url: String) {
+    Glide.with(context) // از خود ایمیج ویو کانتکس رو میگیریم
+        .load(url)
+        .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+        .into(this)
 }
 
 fun View.changeVisibility(isShownLoading: Boolean, container: View) {

@@ -1,5 +1,6 @@
 package com.jmzd.ghazal.storeappmvvm.ui.detail
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +9,14 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseDetail
+import com.jmzd.ghazal.storeappmvvm.databinding.DialogImageBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentDetailBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.utils.constants.BASE_URL_IMAGE
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.changeVisibility
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.loadImageWithGlide
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.transparentCorners
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.DetailViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
@@ -86,12 +91,35 @@ class DetailFragment : BaseFragment() {
 
     //--- init views ---//
     private fun initDetailViews(data: ResponseDetail) {
+        loadImage(data.image!!)
 //        PRODUCT_ID = data.id!!
 //        initDetailHeaderView(data)
 //        initDetailInfoView(data)
 //        initDetailTimerView(data)
 //        setupViewPager()
 //        initDetailBottomView(data)
+    }
+
+    private fun loadImage(data: String) {
+        binding.detailHeaderLay.productImg.apply {
+            val image = "$BASE_URL_IMAGE$data"
+            loadImageWithGlide(image)
+            //Click
+            setOnClickListener {
+                showImageDialog(image)
+            }
+        }
+    }
+
+    private fun showImageDialog(imageUrl: String) {
+        val dialog = Dialog(requireContext())
+        val dialogBinding = DialogImageBinding.inflate(layoutInflater)
+        dialog.transparentCorners()
+        dialog.setContentView(dialogBinding.root)
+        //Load image
+        dialogBinding.productImg.loadImageWithGlide(imageUrl)
+        //Show
+        dialog.show()
     }
 
     //--- life cycle ---//
