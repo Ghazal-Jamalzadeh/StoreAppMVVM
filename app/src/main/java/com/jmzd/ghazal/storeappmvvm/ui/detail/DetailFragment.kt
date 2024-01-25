@@ -5,7 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.HorizontalScrollView
+import androidx.core.text.HtmlCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseDetail
@@ -21,6 +25,8 @@ import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.DetailViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DetailFragment : BaseFragment() {
@@ -37,6 +43,7 @@ class DetailFragment : BaseFragment() {
 
     //other
     private var productId = 0
+    private var isNeededToColor = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -93,7 +100,7 @@ class DetailFragment : BaseFragment() {
     private fun initDetailViews(data: ResponseDetail) {
         loadImage(data.image!!)
 //        PRODUCT_ID = data.id!!
-//        initDetailHeaderView(data)
+        initDetailHeaderView(data)
 //        initDetailInfoView(data)
 //        initDetailTimerView(data)
 //        setupViewPager()
@@ -120,6 +127,51 @@ class DetailFragment : BaseFragment() {
         dialogBinding.productImg.loadImageWithGlide(imageUrl)
         //Show
         dialog.show()
+    }
+
+
+    private fun initDetailHeaderView(data: ResponseDetail) {
+        loadImage(data.image!!)
+        //Header
+        binding.detailHeaderLay.apply {
+            productTitle.text = data.title
+            //Desc
+            if (data.description.isNullOrEmpty().not()) {
+                val info = HtmlCompat.fromHtml(data.description.toString(), HtmlCompat.FROM_HTML_MODE_COMPACT)
+                productInfo.text = info
+            } else {
+                productInfo.isVisible = false
+            }
+            //Colors
+//            if (data.colors!!.isNotEmpty()) {
+//                isNeededToColor = true
+//                setupChip(data.colors.toMutableList())
+//                //Rtl scrollview
+//                lifecycleScope.launch {
+//                    delay(100)
+//                    colorsScroll.fullScroll(HorizontalScrollView.FOCUS_RIGHT)
+//                }
+//            } else {
+//                isNeededToColor = false
+//                line1.isVisible = false
+//                colorsTitle.isVisible = false
+//                colorsScroll.isVisible = false
+//            }
+            //Favorite
+//            updateFavUI(data.isAddToFavorite!!.toInt())
+//            favImg.setOnClickListener {
+//                if (isNetworkAvailable) {
+//                    viewModel.callProductLike(productId)
+//                }
+//            }
+            //Images
+//            if (data.images != null) {
+//                if (data.images.isNotEmpty()) {
+//                    data.images.add(0, data.image)
+//                    initImagesRecycler(data.images)
+//                }
+//            }
+        }
     }
 
     //--- life cycle ---//
