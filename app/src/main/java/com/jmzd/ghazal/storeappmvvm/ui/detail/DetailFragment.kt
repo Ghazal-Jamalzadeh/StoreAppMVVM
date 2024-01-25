@@ -25,6 +25,9 @@ class DetailFragment : BaseFragment() {
     //args
     private val args by navArgs<DetailFragmentArgs>()
 
+    //other
+    private var productId = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -35,6 +38,16 @@ class DetailFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //Args
+        args.let {
+            productId = it.productId
+        }
+        //call api
+        if (productId > 0){
+            if (isNetworkAvailable){
+                viewModel.getDetail(productId)
+            }
+        }
         //init views
         binding.apply {
 
