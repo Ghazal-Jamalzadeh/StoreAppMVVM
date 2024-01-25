@@ -35,6 +35,7 @@ class OrdersAdapter @Inject constructor(@ApplicationContext private val context:
 
     override fun getItemId(position: Int) = position.toLong()
 
+
     inner class ViewHolder(private val binding: ItemOrdersBinding) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(item: Data) {
