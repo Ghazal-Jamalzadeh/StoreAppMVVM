@@ -278,7 +278,8 @@ class HomeFragment : BaseFragment() {
         )
         //Click
         discountAdapter.setOnItemClickListener {
-
+            val direction = HomeFragmentDirections.actionToDetailFragment(it)
+            findNavController().navigate(direction)
         }
     }
 

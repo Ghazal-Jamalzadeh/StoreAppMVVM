@@ -53,14 +53,18 @@ class DiscountAdapter @Inject constructor(@ApplicationContext private val contex
                     setTextColor(ContextCompat.getColor(context, R.color.salmon))
                 }
                 //Click
-                root.setOnClickListener { }
+                root.setOnClickListener {
+                    onItemClickListener?.let {
+                        it(item.id!!)
+                    }
+                }
             }
         }
     }
 
-    private var onItemClickListener: ((String) -> Unit)? = null
+    private var onItemClickListener: ((Int) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (String) -> Unit) {
+    fun setOnItemClickListener(listener: (Int) -> Unit) {
         onItemClickListener = listener
     }
 
