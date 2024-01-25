@@ -659,3 +659,53 @@ fun ImageView.setTint(@ColorRes color: Int) {
 وقتی دو تا اپلای تو در تو داریم
 وقتی نو داخلیه باشیم المان های مربوط به هر دو تا اپلای رو به راحتی میشناسه
 
+ScrollView------------------------------------------------------------------------------------------
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/detailScroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbarSize="0dp">// برای اینکه اون بیلبیلک بغل اسکرول ویو دیده نشه
+
+TabLayout & ViewPager-------------------------------------------------------------------------------
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!--Tab layout-->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/detailTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabGravity="fill" // تب ها رو به چه صورت بچینه. کلش رو بگیره و فیل شه؟ بره چپ بره راست وسط ...
+            app:tabIndicatorColor="@color/royalBlue" // خط زیر تب سلکت شده
+            app:tabMode="fixed" // تو کل عرض فیکس شه و اسکرول نشه
+            app:tabSelectedTextAppearance="@style/TabLayoutFontBold" // اعمال فونت و استایل به تب. چون فونت اتوماتبک ست نمیشه روی تب لایوت
+            app:tabSelectedTextColor="@color/royalBlue" //رنگ
+            app:tabTextAppearance="@style/TabLayoutFontNormal" // فونت و استایل
+            app:tabTextColor="@color/silver" />  // رنگ
+        <!--View pager-->
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/detailViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_180mdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detailTabLayout" />
+
+    </LinearLayout>
+
+استایل ها----------------------------------------
+    <!--Tab layout-->
+    <style name="TabLayoutFontNormal" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="fontFamily">@font/iransans</item>
+        <item name="android:fontFamily">@font/iransans</item>
+        <item name="android:textSize">@dimen/_10font_mdp</item>
+    </style>
+
+    <style name="TabLayoutFontBold" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="fontFamily">@font/iransans_bold</item>
+        <item name="android:fontFamily">@font/iransans_bold</item>
+        <item name="android:textSize">@dimen/_10font_mdp</item>
+    </style>

@@ -1,14 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.detail.DetailFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    android:background="@color/cultured"
+    >
+    <!--Container-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/containerLay"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+        <!--Scroll-->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/detailScroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbarSize="0dp">
 
-</FrameLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <!--Header-->
+                <include
+                    android:id="@+id/detailHeaderLay"
+                    layout="@layout/detail_header" />
+                <!--Info-->
+                <include
+                    android:id="@+id/detailInfoLay"
+                    layout="@layout/detail_info" />
+                <!--Discount-->
+                <include
+                    android:id="@+id/detailTimerLay"
+                    layout="@layout/detail_timer" />
+                <!--Pager-->
+                <include
+                    android:id="@+id/detailPagerLay"
+                    layout="@layout/detail_pager" />
+                <!--Empty-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_80mdp" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+        <!--Bottom-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/detailBottomLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <include
+                android:id="@+id/detailBottom"
+                layout="@layout/detail_price_cart" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--Loading-->
+    <ProgressBar
+        android:id="@+id/detailLoading"
+        android:layout_width="@dimen/_25mdp"
+        android:layout_height="@dimen/_25mdp"
+        android:theme="@style/DarkProgressbar"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

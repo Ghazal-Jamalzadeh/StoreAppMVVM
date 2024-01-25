@@ -117,5 +117,19 @@
         <item name="startIconTint">@color/mediumTurquoise</item>
     </style>
 
+    <!--Tab layout-->
+    <style name="TabLayoutFontNormal" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="fontFamily">@font/iransans</item>
+        <item name="android:fontFamily">@font/iransans</item>
+        <item name="android:textSize">@dimen/_10font_mdp</item>
+    </style>
+
+    <style name="TabLayoutFontBold" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="fontFamily">@font/iransans_bold</item>
+        <item name="android:fontFamily">@font/iransans_bold</item>
+        <item name="android:textSize">@dimen/_10font_mdp</item>
+    </style>
+
+
 
 </resources>

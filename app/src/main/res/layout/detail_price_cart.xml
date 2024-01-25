@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_60mdp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="0dp">
+    <!--Container-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--Line-->
+        <View
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:alpha="0.3"
+            android:background="@color/lavender"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--Add to cart-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addToCartBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_40mdp"
+            android:layout_margin="@dimen/_15mdp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:outlineAmbientShadowColor="@color/caribbeanGreen"
+            android:outlineSpotShadowColor="@color/caribbeanGreen"
+            android:text="@string/addToCart"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/caribbeanGreen"
+            app:cornerRadius="@dimen/_50mdp"
+            app:elevation="@dimen/_10mdp"
+            app:icon="@drawable/cart_circle_plus"
+            app:iconGravity="end"
+            app:iconTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:targetApi="p" />
+        <!--Old price-->
+        <TextView
+            android:id="@+id/oldPriceTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15mdp"
+            android:textColor="@color/eerieBlack"
+            android:textSize="@dimen/_12font_mdp"
+            app:layout_constraintBottom_toTopOf="@id/finalPriceTxt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/addToCartBtn" />
+        <!--Final price-->
+        <TextView
+            android:id="@+id/finalPriceTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15mdp"
+            android:textColor="@color/caribbeanGreen"
+            android:textSize="@dimen/_14font_mdp"
+            app:fontPath="fonts/iransans_bold.ttf"
+            app:layout_constraintBottom_toBottomOf="@id/addToCartBtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/addToCartBtn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

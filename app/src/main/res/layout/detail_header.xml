@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/ColoredShadowLight"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="@dimen/_8mdp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_10mdp">
+        <!--Image-->
+        <ImageView
+            android:id="@+id/productImg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_180mdp"
+            android:padding="@dimen/_10mdp"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--Back-->
+        <ImageView
+            android:id="@+id/backImg"
+            style="@style/ColoredShadowDark"
+            android:layout_width="@dimen/_35mdp"
+            android:layout_height="@dimen/_35mdp"
+            android:layout_margin="@dimen/_15mdp"
+            android:background="@drawable/bg_circle_white"
+            android:elevation="@dimen/_15mdp"
+            android:padding="@dimen/_11mdp"
+            android:src="@drawable/chevron_left"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/darkStrategy" />
+        <!--Fav-->
+        <ImageView
+            android:id="@+id/favImg"
+            style="@style/ColoredShadowDark"
+            android:layout_width="@dimen/_35mdp"
+            android:layout_height="@dimen/_35mdp"
+            android:layout_marginTop="@dimen/_10mdp"
+            android:background="@drawable/bg_circle_white"
+            android:elevation="@dimen/_15mdp"
+            android:padding="@dimen/_9mdp"
+            android:src="@drawable/stars"
+            app:layout_constraintStart_toStartOf="@+id/backImg"
+            app:layout_constraintTop_toBottomOf="@id/backImg"
+            app:tint="@color/gray" />
+        <!--Fav Loading-->
+        <ProgressBar
+            android:id="@+id/favLoading"
+            android:layout_width="@dimen/_15mdp"
+            android:layout_height="@dimen/_15mdp"
+            android:layout_marginTop="@dimen/_20mdp"
+            android:theme="@style/DarkProgressbar"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/backImg"
+            app:layout_constraintStart_toStartOf="@+id/backImg"
+            app:layout_constraintTop_toBottomOf="@+id/backImg" />
+        <!--Images-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/productImagesList"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/_10mdp"
+            android:clipToPadding="false"
+            android:paddingVertical="@dimen/_10mdp"
+            app:layout_constraintBottom_toBottomOf="@id/productImg"
+            app:layout_constraintEnd_toEndOf="@+id/productImg"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--Title-->
+        <TextView
+            android:id="@+id/productTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_15mdp"
+            android:layout_marginTop="@dimen/_10mdp"
+            android:lineSpacingExtra="@dimen/_3mdp"
+            android:textColor="@color/darkStrategy"
+            android:textSize="@dimen/_12font_mdp"
+            app:fontPath="fonts/iransans_bold.ttf"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/productImg" />
+        <!--Info-->
+        <kr.co.prnd.readmore.ReadMoreTextView
+            android:id="@+id/productInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10mdp"
+            android:lineSpacingExtra="@dimen/_3mdp"
+            android:textColor="@color/dimGray"
+            android:textSize="@dimen/_9font_mdp"
+            app:layout_constraintEnd_toEndOf="@id/productTitle"
+            app:layout_constraintStart_toStartOf="@id/productTitle"
+            app:layout_constraintTop_toBottomOf="@id/productTitle"
+            app:readMoreColor="@color/dodgerBlue"
+            app:readMoreMaxLine="4"
+            app:readMoreText="@string/showMore" />
+        <!--Line-->
+        <View
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/_15mdp"
+            android:layout_marginTop="@dimen/_10mdp"
+            android:alpha="0.5"
+            android:background="@color/water"
+            app:layout_constraintTop_toBottomOf="@id/productInfo" />
+        <!--Colors Title-->
+        <TextView
+            android:id="@+id/colorsTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_15mdp"
+            android:lineSpacingExtra="@dimen/_3mdp"
+            android:text="@string/colors"
+            android:textColor="@color/eerieBlack"
+            android:textSize="@dimen/_10font_mdp"
+            app:layout_constraintBottom_toBottomOf="@id/colorsScroll"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/colorsScroll" />
+        <!--Colors chips-->
+        <HorizontalScrollView
+            android:id="@+id/colorsScroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5mdp"
+            android:clipToPadding="false"
+            android:fadingEdge="horizontal"
+            android:requiresFadingEdge="horizontal"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/colorsTitle"
+            app:layout_constraintTop_toBottomOf="@+id/line1">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/colorsChipGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_5mdp"
+                app:chipSpacing="0dp"
+                app:selectionRequired="true"
+                app:singleLine="true"
+                app:singleSelection="true" />
+        </HorizontalScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/ColoredShadowLight"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_7mdp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="@dimen/_8mdp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_10mdp">
+        <!--Brand-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/brandLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_15mdp"
+            android:layout_marginTop="@dimen/_10mdp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/brandTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/_5mdp"
+                android:gravity="center"
+                android:text="@string/brand"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_8font_mdp"
+                app:drawableEndCompat="@drawable/rectangles_mixed_mini"
+                app:drawableTint="@color/gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/brandTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_5mdp"
+                android:gravity="center_vertical"
+                android:textColor="@color/eerieBlack"
+                android:textSize="@dimen/_9font_mdp"
+                app:layout_constraintBottom_toBottomOf="@id/brandTitle"
+                app:layout_constraintEnd_toStartOf="@id/brandTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/brandTitle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--Line-->
+        <View
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/_15mdp"
+            android:layout_marginTop="@dimen/_8mdp"
+            android:alpha="0.5"
+            android:background="@color/water"
+            app:layout_constraintTop_toBottomOf="@id/brandLay" />
+        <!--Category-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/categoryLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_15mdp"
+            android:layout_marginTop="@dimen/_8mdp"
+            app:layout_constraintTop_toBottomOf="@id/line1">
+
+            <TextView
+                android:id="@+id/categoryTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/_5mdp"
+                android:gravity="center"
+                android:text="@string/category"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_8font_mdp"
+                app:drawableEndCompat="@drawable/list_tree_mini"
+                app:drawableTint="@color/gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/categoryTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_5mdp"
+                android:gravity="center_vertical"
+                android:textColor="@color/eerieBlack"
+                android:textSize="@dimen/_9font_mdp"
+                app:layout_constraintBottom_toBottomOf="@id/categoryTitle"
+                app:layout_constraintEnd_toStartOf="@id/categoryTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/categoryTitle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--Line-->
+        <View
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/_15mdp"
+            android:layout_marginTop="@dimen/_8mdp"
+            android:alpha="0.5"
+            android:background="@color/water"
+            app:layout_constraintTop_toBottomOf="@id/categoryLay" />
+        <!--Guarantee-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/guaranteeLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_15mdp"
+            android:layout_marginTop="@dimen/_8mdp"
+            app:layout_constraintTop_toBottomOf="@id/line2">
+
+            <TextView
+                android:id="@+id/guaranteeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/_5mdp"
+                android:gravity="center"
+                android:text="@string/guarantee"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_8font_mdp"
+                app:drawableEndCompat="@drawable/life_ring_mini"
+                app:drawableTint="@color/gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/guaranteeTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_5mdp"
+                android:gravity="center_vertical"
+                android:textColor="@color/eerieBlack"
+                android:textSize="@dimen/_9font_mdp"
+                app:layout_constraintBottom_toBottomOf="@id/guaranteeTitle"
+                app:layout_constraintEnd_toStartOf="@id/guaranteeTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/guaranteeTitle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--Line-->
+        <View
+            android:id="@+id/line3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/_15mdp"
+            android:layout_marginTop="@dimen/_8mdp"
+            android:alpha="0.5"
+            android:background="@color/water"
+            app:layout_constraintTop_toBottomOf="@id/guaranteeLay" />
+        <!--Quantity-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/quantityLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_15mdp"
+            android:layout_marginTop="@dimen/_8mdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line3">
+
+            <TextView
+                android:id="@+id/quantityTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/_5mdp"
+                android:gravity="center"
+                android:text="@string/quantity"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_8font_mdp"
+                app:drawableEndCompat="@drawable/cart_flatbed_boxes_mini"
+                app:drawableTint="@color/gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/quantityTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_5mdp"
+                android:gravity="center_vertical"
+                android:textColor="@color/eerieBlack"
+                android:textSize="@dimen/_9font_mdp"
+                app:layout_constraintBottom_toBottomOf="@id/quantityTitle"
+                app:layout_constraintEnd_toStartOf="@id/quantityTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/quantityTitle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--Line-->
+        <View
+            android:id="@+id/line4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/_15mdp"
+            android:layout_marginTop="@dimen/_8mdp"
+            android:alpha="0.5"
+            android:background="@color/water"
+            app:layout_constraintTop_toBottomOf="@id/quantityLay" />
+        <!--Comments-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/commentsLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_15mdp"
+            android:layout_marginTop="@dimen/_8mdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line4">
+
+            <TextView
+                android:id="@+id/commentsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/_5mdp"
+                android:gravity="center"
+                android:text="@string/commentsCount"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_8font_mdp"
+                app:drawableEndCompat="@drawable/comments_mini"
+                app:drawableTint="@color/gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/commentsTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_5mdp"
+                android:gravity="center_vertical"
+                android:textColor="@color/eerieBlack"
+                android:textSize="@dimen/_9font_mdp"
+                app:layout_constraintBottom_toBottomOf="@id/commentsTitle"
+                app:layout_constraintEnd_toStartOf="@id/commentsTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/commentsTitle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--Line-->
+        <View
+            android:id="@+id/line5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/_15mdp"
+            android:layout_marginTop="@dimen/_8mdp"
+            android:alpha="0.5"
+            android:background="@color/water"
+            app:layout_constraintTop_toBottomOf="@id/commentsLay" />
+        <!--Rate-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/rateLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_15mdp"
+            android:layout_marginTop="@dimen/_8mdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line5">
+
+            <TextView
+                android:id="@+id/rateTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/_5mdp"
+                android:gravity="center"
+                android:text="@string/usersRate"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_8font_mdp"
+                app:drawableEndCompat="@drawable/stars_mini"
+                app:drawableTint="@color/gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/rateTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_5mdp"
+                android:gravity="center_vertical"
+                android:textColor="@color/eerieBlack"
+                android:textSize="@dimen/_9font_mdp"
+                app:layout_constraintBottom_toBottomOf="@id/rateTitle"
+                app:layout_constraintEnd_toStartOf="@id/rateTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/rateTitle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--Special-->
+        <TextView
+            android:id="@+id/specialTitle"
+            android:layout_width="@dimen/_150mdp"
+            android:layout_height="@dimen/_25mdp"
+            android:layout_marginStart="@dimen/mines45mdp"
+            android:layout_marginTop="@dimen/_20mdp"
+            android:background="@color/crayola"
+            android:drawablePadding="@dimen/_5mdp"
+            android:gravity="center"
+            android:rotation="-45"
+            android:text="@string/specialProduct"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10font_mdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

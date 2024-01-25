@@ -28,6 +28,8 @@
         <entry key="..\:/AndroidProjects/StoreAppMVVM/app/src/main/res/layout/item_search_list.xml" value="0.5" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM/app/src/main/res/layout/item_search_list_shimmer.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM/app/src/main/res/menu/menu_home.xml" value="0.2" />
+        <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/detail_header.xml" value="0.2" />
+        <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/detail_pager.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/dialog_delete_address.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/dropdown_menu_popup_item.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/fragment_address_add.xml" value="0.33" />
