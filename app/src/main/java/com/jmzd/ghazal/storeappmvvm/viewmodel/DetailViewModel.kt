@@ -23,7 +23,7 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
     val detailLiveData: LiveData<MyResponse<ResponseDetail>> = _detailLiveData
 
     //--- api call ---//
-    private fun getDetail(productId : String) = viewModelScope.launch {
+    private fun getDetail(productId : Int) = viewModelScope.launch {
 
         _detailLiveData.value = MyResponse.Loading()
 

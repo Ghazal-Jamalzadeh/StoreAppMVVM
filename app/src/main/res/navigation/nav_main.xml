@@ -148,7 +148,8 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" >
+        </action>
 
     </navigation>
 
@@ -276,7 +277,15 @@
         android:id="@+id/detailFragment"
         android:name="com.jmzd.ghazal.storeappmvvm.ui.detail.DetailFragment"
         android:label="DetailFragment"
-        tools:layout="@layout/fragment_detail"/>
+        tools:layout="@layout/fragment_detail">
+
+        <argument
+            android:name="productId"
+            app:argType="integer"
+
+            />
+
+    </fragment>
 
 
 

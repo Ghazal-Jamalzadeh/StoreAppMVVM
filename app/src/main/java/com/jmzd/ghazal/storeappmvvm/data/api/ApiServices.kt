@@ -94,5 +94,5 @@ interface ApiServices {
     suspend fun getOrdersList(@Query("status") status : String) : Response<ResponseProfileOrdersList>
 
     @GET("product/{product_id}")
-    suspend fun getDetail(@Path("product_id") productId : String) : Response<ResponseDetail>
+    suspend fun getDetail(@Path("product_id") productId : Int) : Response<ResponseDetail>
 }

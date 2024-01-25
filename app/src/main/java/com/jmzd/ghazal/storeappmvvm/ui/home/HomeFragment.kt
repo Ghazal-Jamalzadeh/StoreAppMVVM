@@ -22,10 +22,12 @@ import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseProducts
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseProfile
 import com.jmzd.ghazal.storeappmvvm.databinding.DialogCheckVpnBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentHomeBinding
+import com.jmzd.ghazal.storeappmvvm.ui.categories.CategoriesFragmentDirections
 import com.jmzd.ghazal.storeappmvvm.ui.home.adapters.BannerAdapter
 import com.jmzd.ghazal.storeappmvvm.ui.home.adapters.DiscountAdapter
 import com.jmzd.ghazal.storeappmvvm.ui.home.adapters.ProductsAdapter
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.utils.constants.PRODUCT
 import com.jmzd.ghazal.storeappmvvm.utils.enums.ProductsCategories
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.*
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
@@ -253,8 +255,14 @@ class HomeFragment : BaseFragment() {
             setInfinite(true)
         }
         //Click
-        bannerAdapter.setOnItemClickListener {
-
+        bannerAdapter.setOnItemClickListener { sendData, type ->
+            if (type == PRODUCT) {
+                val direction = HomeFragmentDirections.actionToDetailFragment(sendData.toInt())
+                findNavController().navigate(direction)
+            } else {
+                val direction = CategoriesFragmentDirections.actionCategoriesFragmentToCategoriresProductsFragment(sendData)
+                findNavController().navigate(direction)
+            }
         }
         //Indicator
         binding.apply {
@@ -282,7 +290,6 @@ class HomeFragment : BaseFragment() {
         )
         //Click
         adapter.setOnItemClickListener {
-
         }
     }
 
@@ -367,7 +374,6 @@ class HomeFragment : BaseFragment() {
 
             is MyResponse.Error -> {
                 recyclerView.hideShimmer()
-                //TODO
                 binding.root.showSnackBar(request.message!!)
             }
         }

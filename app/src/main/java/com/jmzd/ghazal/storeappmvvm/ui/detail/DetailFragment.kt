@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentDetailBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.viewmodel.DetailViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,7 +20,10 @@ class DetailFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     //viewModel
-    private val viewModel by viewModels<LoginViewModel>()
+    private val viewModel by viewModels<DetailViewModel>()
+
+    //args
+    private val args by navArgs<DetailFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

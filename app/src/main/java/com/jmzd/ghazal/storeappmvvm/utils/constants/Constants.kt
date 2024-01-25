@@ -65,3 +65,7 @@ const val UTF_8 = "UTF-8"
 const val PENDING = "pending"
 const val CANCELED = "canceled"
 const val DELIVERED = "delivered"
+
+//banners types
+const val PRODUCT = "product"
+const val SPECIAL = "special"

@@ -10,12 +10,12 @@ class ResponseBanners : ArrayList<ResponseBannersItem>(){
         val image: String?, // media/images/banners/tLuGegnINYbXLOoEmcFO5OG8Xej52W8beg1cUUbC.jpg
         @SerializedName("link")
         val link: String?, // category
-        @SerializedName("link_id")
-        val linkId: String?, // 11
+        @SerializedName("link_id") // اگر پروداکت باشد آیدی را برمیگرداند.
+        val linkId: String?, // 11 //
         @SerializedName("title")
         val title: String?, // کالاهای دیجیتالی
         @SerializedName("url_link")
-        val urlLink: UrlLink?
+        val urlLink: UrlLink? // اگر کتگوری باشد این آبجکت را برمیگرداند
     ) {
         data class UrlLink(
             @SerializedName("id")
