@@ -142,6 +142,13 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_to_detail_fragment"
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
     </navigation>
 
@@ -207,11 +214,14 @@
                 app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
         </fragment>
     </navigation>
+
+    <!-- profile -->
     <dialog
         android:id="@+id/profileEditFragment"
         android:name="com.jmzd.ghazal.storeappmvvm.ui.profile_edit.ProfileEditFragment"
         android:label="ProfileEditFragment"
         tools:layout="@layout/fragment_profile_edit"/>
+
     <dialog
         android:id="@+id/increaseWalletFragment"
         android:name="com.jmzd.ghazal.storeappmvvm.ui.wallet.IncreaseWalletFragment"
@@ -260,6 +270,14 @@
             android:name="status"
             app:argType="string" />
     </fragment>
+
+    <!-- detail -->
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.jmzd.ghazal.storeappmvvm.ui.detail.DetailFragment"
+        android:label="DetailFragment"
+        tools:layout="@layout/fragment_detail"/>
+
 
 
 </navigation>

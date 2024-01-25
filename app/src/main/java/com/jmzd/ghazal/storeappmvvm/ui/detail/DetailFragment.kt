@@ -11,7 +11,7 @@ import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CategoriesProductFragment : BaseFragment() {
+class DetailFragment : BaseFragment() {
 
     //binding
     private var _binding: FragmentDetailBinding? = null
