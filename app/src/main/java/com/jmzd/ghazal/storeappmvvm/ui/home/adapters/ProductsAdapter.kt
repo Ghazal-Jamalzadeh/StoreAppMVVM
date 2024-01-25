@@ -70,14 +70,17 @@ class ProductsAdapter @Inject constructor(@ApplicationContext private val contex
                 }
                 //Click
                 root.setOnClickListener {
+                    onItemClickListener?.let {
+                        it(item.id!!)
+                    }
                 }
             }
         }
     }
 
-    private var onItemClickListener: ((String) -> Unit)? = null
+    private var onItemClickListener: ((Int) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (String) -> Unit) {
+    fun setOnItemClickListener(listener: (Int) -> Unit) {
         onItemClickListener = listener
     }
 

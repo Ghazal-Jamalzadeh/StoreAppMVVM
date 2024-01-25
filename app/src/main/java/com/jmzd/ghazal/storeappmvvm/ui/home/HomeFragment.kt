@@ -291,6 +291,8 @@ class HomeFragment : BaseFragment() {
         )
         //Click
         adapter.setOnItemClickListener {
+            val direction = HomeFragmentDirections.actionToDetailFragment(it)
+            findNavController().navigate(direction)
         }
     }
 
