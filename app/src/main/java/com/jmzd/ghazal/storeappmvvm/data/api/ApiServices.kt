@@ -5,6 +5,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProfileAddresses
 import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProvinceList
 import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseSubmitAddress
 import com.jmzd.ghazal.storeappmvvm.data.models.categories.ResponseCategories
+import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseDetail
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseDiscount
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseProducts
@@ -92,4 +93,6 @@ interface ApiServices {
     @GET("auth/orders")
     suspend fun getOrdersList(@Query("status") status : String) : Response<ResponseProfileOrdersList>
 
+    @GET("product/{product_id}")
+    suspend fun getDetail(@Path("product_id") productId : String) : Response<ResponseDetail>
 }
