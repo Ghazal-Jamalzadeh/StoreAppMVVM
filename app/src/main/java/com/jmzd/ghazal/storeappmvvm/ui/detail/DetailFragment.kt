@@ -176,7 +176,7 @@ class DetailFragment : BaseFragment() {
             //Images
             if (data.images != null) {
                 if (data.images.isNotEmpty()) {
-                    data.images.add(0, data.image)
+                    data.images.toMutableList().add(0, data.image)
                     initImagesRecycler(data.images)
                 }
             }
