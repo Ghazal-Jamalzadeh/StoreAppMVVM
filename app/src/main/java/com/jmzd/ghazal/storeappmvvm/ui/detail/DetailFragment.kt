@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.HorizontalScrollView
+import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -17,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.tabs.TabLayout
@@ -71,7 +73,7 @@ class DetailFragment : BaseFragment() {
     private var productId = 0
     private var isNeededToColor = false
     private var likeCount = ""
-
+    private var addedToCart = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -132,7 +134,7 @@ class DetailFragment : BaseFragment() {
         initDetailInfoView(data)
         initDetailTimerView(data)
         setupViewPager()
-//        initDetailBottomView(data)
+        initDetailBottomView(data)
     }
 
     private fun loadImage(data: String) {
@@ -368,6 +370,44 @@ class DetailFragment : BaseFragment() {
             detailViewPager.isUserInputEnabled = false
         }
     }
+
+    private fun initDetailBottomView(data: ResponseDetail) {
+        addedToCart = data.isAddToCart!!
+        binding.detailBottom.apply {
+            //Exist in cart
+            if (data.isAddToCart == 1) {
+                updateAddToCartUI(addToCartBtn)
+            }
+            //Price
+            finalPriceTxt.text = data.finalPrice?.moneySeparating()
+            //Click
+            addToCartBtn.setOnClickListener {
+//                if (addedToCart == 0) {
+//                    if (data.quantity.toString().toInt() > 0) {
+//                        if (isNeededToColor) {
+//                            if (bodyCart.colorId == null)
+//                                root.showSnackBar(getString(R.string.selectTheOneOfColors))
+//                            else
+//                                viewModelCart.callAddTOCartApi(productId, bodyCart)
+//                        } else {
+//                            viewModelCart.callAddTOCartApi(productId, bodyCart)
+//                        }
+//                    } else {
+//                        root.showSnackBar(getString(R.string.shouldExistsProductInStore))
+//                    }
+//                }
+            }
+        }
+    }
+
+    private fun updateAddToCartUI(btn: MaterialButton) {
+        btn.apply {
+            setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.royalBlue))
+            icon = ContextCompat.getDrawable(requireContext(), R.drawable.cart_circle_check)
+            text = getString(R.string.existsInCart)
+        }
+    }
+
 
     //--- life cycle ---//
     override fun onNetworkLost() {
