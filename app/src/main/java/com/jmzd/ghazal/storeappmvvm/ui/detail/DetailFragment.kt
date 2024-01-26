@@ -12,12 +12,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseDetail
 import com.jmzd.ghazal.storeappmvvm.databinding.DialogImageBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentDetailBinding
+import com.jmzd.ghazal.storeappmvvm.ui.detail.adapters.ImagesAdapter
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.constants.BASE_URL_IMAGE
 import com.jmzd.ghazal.storeappmvvm.utils.constants.COLOR_BLACK
@@ -29,6 +31,7 @@ import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DetailFragment : BaseFragment() {
@@ -42,6 +45,10 @@ class DetailFragment : BaseFragment() {
 
     //args
     private val args by navArgs<DetailFragmentArgs>()
+
+    //adapter
+    @Inject
+    lateinit var imagesAdapter: ImagesAdapter
 
     //other
     private var productId = 0
@@ -167,12 +174,12 @@ class DetailFragment : BaseFragment() {
                 }
             }
             //Images
-//            if (data.images != null) {
-//                if (data.images.isNotEmpty()) {
-//                    data.images.add(0, data.image)
-//                    initImagesRecycler(data.images)
-//                }
-//            }
+            if (data.images != null) {
+                if (data.images.isNotEmpty()) {
+                    data.images.add(0, data.image)
+                    initImagesRecycler(data.images)
+                }
+            }
         }
     }
 
@@ -209,6 +216,15 @@ class DetailFragment : BaseFragment() {
     private fun updateFavUI(count: Int) {
         binding.detailHeaderLay.favImg.apply {
             if (count == 1) setTint(R.color.salmon) else setTint(R.color.gray)
+        }
+    }
+
+    private fun initImagesRecycler(data: List<String>) {
+        imagesAdapter.setData(data)
+        binding.detailHeaderLay.productImagesList.setupRecyclerview(LinearLayoutManager(requireContext()), imagesAdapter)
+        //Click
+        imagesAdapter.setOnItemClickListener {
+            loadImage(it)
         }
     }
 

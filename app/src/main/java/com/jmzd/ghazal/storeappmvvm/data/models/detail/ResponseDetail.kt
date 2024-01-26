@@ -39,7 +39,7 @@ data class ResponseDetail(
     @SerializedName("image")
     val image: String?, // /storage/cache/400-0-0-width-iU4wWNM58WPlfMVXWPHDjUz5qwV0Aps6MTt3C8Kl.jpg
     @SerializedName("images")
-    val images: List<String?>?,
+    val images: List<String>?,
     @SerializedName("is_add_to_cart")
     val isAddToCart: Int?, // 0
     @SerializedName("is_add_to_favorite")

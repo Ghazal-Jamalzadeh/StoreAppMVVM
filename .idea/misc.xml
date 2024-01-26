@@ -33,6 +33,7 @@
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/dialog_delete_address.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/dialog_image.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/dropdown_menu_popup_item.xml" value="0.2" />
+        <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/empty.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/fragment_address_add.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/fragment_cart.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/fragment_categories.xml" value="0.2" />
@@ -53,6 +54,7 @@
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/item_my_comments_shimmer.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/item_my_favorites.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/item_order_product.xml" value="0.2" />
+        <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/item_product_images.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/profile_user_info.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/profile_user_menu.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/profile_user_order.xml" value="0.2" />
