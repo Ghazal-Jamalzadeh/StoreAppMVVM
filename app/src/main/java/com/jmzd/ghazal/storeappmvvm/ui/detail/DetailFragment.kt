@@ -1,5 +1,6 @@
 package com.jmzd.ghazal.storeappmvvm.ui.detail
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -24,6 +25,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.constants.BASE_URL_IMAGE
 import com.jmzd.ghazal.storeappmvvm.utils.constants.COLOR_BLACK
 import com.jmzd.ghazal.storeappmvvm.utils.constants.COLOR_WHITE
+import com.jmzd.ghazal.storeappmvvm.utils.constants.SPECIAL
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.*
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.DetailViewModel
@@ -53,6 +55,8 @@ class DetailFragment : BaseFragment() {
     //other
     private var productId = 0
     private var isNeededToColor = false
+    private var likeCount = ""
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -110,7 +114,7 @@ class DetailFragment : BaseFragment() {
         loadImage(data.image!!)
 //        PRODUCT_ID = data.id!!
         initDetailHeaderView(data)
-//        initDetailInfoView(data)
+        initDetailInfoView(data)
 //        initDetailTimerView(data)
 //        setupViewPager()
 //        initDetailBottomView(data)
@@ -227,6 +231,35 @@ class DetailFragment : BaseFragment() {
             loadImage(it)
         }
     }
+
+    @SuppressLint("SetTextI18n")
+    private fun initDetailInfoView(data: ResponseDetail) {
+        binding.detailInfoLay.apply {
+            //brand
+            if (data.brand != null) {
+                brandTxt.text = data.brand.title?.fa
+            } else {
+                brandLay.isVisible = false
+                line1.isVisible = false
+            }
+            //Guarantee
+            if (data.guarantee.isNullOrEmpty().not()) {
+                guaranteeTxt.text = data.guarantee
+            } else {
+                guaranteeLay.isVisible = false
+                line3.isVisible = false
+            }
+            //General
+            categoryTxt.text = data.category?.title
+            quantityTxt.text = "${data.quantity} ${getString(R.string.item)}"
+            commentsTxt.text = "${data.commentsCount} ${getString(R.string.comment)}"
+            likeCount = data.likesCount.toString()
+            rateTxt.text = "${data.likesCount} ${getString(R.string.rate)}"
+            //Special
+            specialTitle.isVisible = data.status == SPECIAL
+        }
+    }
+
 
     //--- life cycle ---//
     override fun onNetworkLost() {
