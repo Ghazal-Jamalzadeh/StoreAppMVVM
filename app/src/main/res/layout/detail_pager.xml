@@ -22,11 +22,10 @@
             app:tabGravity="fill"
             app:tabIndicatorColor="@color/royalBlue"
             app:tabMode="fixed"
+            app:tabTextAppearance="@style/TabLayoutFontNormal"
             app:tabSelectedTextColor="@color/royalBlue"
             app:tabTextColor="@color/silver" />
-<!--
-            app:tabTextAppearance="@style/TabLayoutFontNormal"
--->
+
         <!--View pager-->
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/detailViewPager"

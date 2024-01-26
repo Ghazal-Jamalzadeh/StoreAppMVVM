@@ -16,13 +16,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
+import com.google.android.material.tabs.TabLayout
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseDetail
 import com.jmzd.ghazal.storeappmvvm.databinding.DialogImageBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentDetailBinding
 import com.jmzd.ghazal.storeappmvvm.ui.detail.adapters.ImagesAdapter
+import com.jmzd.ghazal.storeappmvvm.ui.detail.adapters.PagerAdapter
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.constants.BASE_URL_IMAGE
 import com.jmzd.ghazal.storeappmvvm.utils.constants.COLOR_BLACK
@@ -56,6 +59,10 @@ class DetailFragment : BaseFragment() {
     //adapter
     @Inject
     lateinit var imagesAdapter: ImagesAdapter
+
+    //view pager
+    @Inject
+    lateinit var pagerAdapter: PagerAdapter
 
     //timer
     private lateinit var countDownTimer: CountDownTimer
@@ -124,7 +131,7 @@ class DetailFragment : BaseFragment() {
         initDetailHeaderView(data)
         initDetailInfoView(data)
         initDetailTimerView(data)
-//        setupViewPager()
+        setupViewPager()
 //        initDetailBottomView(data)
     }
 
@@ -330,6 +337,37 @@ class DetailFragment : BaseFragment() {
         }
     }
 
+
+    private fun setupViewPager() {
+        binding.detailPagerLay.apply {
+            detailTabLayout.addTab(detailTabLayout.newTab().setText(getString(R.string.comments)))
+            detailTabLayout.addTab(detailTabLayout.newTab().setText(getString(R.string.features)))
+            detailTabLayout.addTab(detailTabLayout.newTab().setText(getString(R.string.priceChart)))
+            //View pager adapter
+            detailViewPager.adapter = pagerAdapter
+            //Select
+            detailTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    if (tab != null) detailViewPager.currentItem = tab.position
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+                }
+
+                override fun onTabReselected(tab: TabLayout.Tab?) {}
+            })
+            //View pager
+            detailViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    detailTabLayout.selectTab(detailTabLayout.getTabAt(position))
+                }
+            })
+            //Disable swipe
+            detailViewPager.isUserInputEnabled = false
+        }
+    }
 
     //--- life cycle ---//
     override fun onNetworkLost() {
