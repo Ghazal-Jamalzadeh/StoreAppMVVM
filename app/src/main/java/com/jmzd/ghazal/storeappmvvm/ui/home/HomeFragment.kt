@@ -260,7 +260,7 @@ class HomeFragment : BaseFragment() {
                 val direction = HomeFragmentDirections.actionToDetailFragment(sendData.toInt())
                 findNavController().navigate(direction)
             } else {
-                val direction = CategoriesFragmentDirections.actionCategoriesFragmentToCategoriresProductsFragment(sendData)
+                val direction = CategoriesFragmentDirections.actionToCategoriresProductsFragment(sendData)
                 findNavController().navigate(direction)
             }
         }

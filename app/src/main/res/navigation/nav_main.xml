@@ -151,6 +151,19 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim" >
         </action>
 
+        <action
+            android:id="@+id/action_to_categoriresProductsFragment"
+            app:destination="@id/nav_categories"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" >
+
+            <argument
+                android:name="slug"
+                app:argType="string" />
+        </action>
+
     </navigation>
 
     <!-- main actions -->
