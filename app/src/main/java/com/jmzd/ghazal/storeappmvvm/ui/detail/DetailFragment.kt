@@ -12,11 +12,16 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipDrawable
+import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseDetail
 import com.jmzd.ghazal.storeappmvvm.databinding.DialogImageBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentDetailBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.constants.BASE_URL_IMAGE
+import com.jmzd.ghazal.storeappmvvm.utils.constants.COLOR_BLACK
+import com.jmzd.ghazal.storeappmvvm.utils.constants.COLOR_WHITE
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.changeVisibility
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.loadImageWithGlide
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
@@ -143,21 +148,21 @@ class DetailFragment : BaseFragment() {
                 productInfo.isVisible = false
             }
             //Colors
-//            if (data.colors!!.isNotEmpty()) {
-//                isNeededToColor = true
-//                setupChip(data.colors.toMutableList())
-//                //Rtl scrollview
-//                lifecycleScope.launch {
-//                    delay(100)
-//                    colorsScroll.fullScroll(HorizontalScrollView.FOCUS_RIGHT)
-//                }
-//            } else {
-//                isNeededToColor = false
-//                line1.isVisible = false
-//                colorsTitle.isVisible = false
-//                colorsScroll.isVisible = false
-//            }
-            //Favorite
+            if (data.colors!!.isNotEmpty()) {
+                isNeededToColor = true
+                setupChip(data.colors.toMutableList())
+                //Rtl scrollview
+                lifecycleScope.launch {
+                    delay(100)
+                    colorsScroll.fullScroll(HorizontalScrollView.FOCUS_RIGHT)
+                }
+            } else {
+                isNeededToColor = false
+                line1.isVisible = false
+                colorsTitle.isVisible = false
+                colorsScroll.isVisible = false
+            }
+//            Favorite
 //            updateFavUI(data.isAddToFavorite!!.toInt())
 //            favImg.setOnClickListener {
 //                if (isNetworkAvailable) {
@@ -171,6 +176,36 @@ class DetailFragment : BaseFragment() {
 //                    initImagesRecycler(data.images)
 //                }
 //            }
+        }
+    }
+
+    private fun setupChip(list: MutableList<ResponseDetail.Color>) {
+        list.forEach {
+            val chip = Chip(requireContext())
+            val drawable = ChipDrawable.createFromAttributes(
+                requireContext(), null, 0,
+                R.style.DetailChipsBackground
+            )
+            chip.setChipDrawable(drawable)
+            //Color
+            val color = if (it.hexCode?.lowercase() == COLOR_WHITE) {
+                COLOR_BLACK
+            } else {
+                it.hexCode
+            }
+            chip.setTextColor(android.graphics.Color.parseColor(color))
+            chip.text = it.title
+            chip.id = it.id!!
+            chip.setTextAppearanceResource(R.style.DetailChipsText)
+
+            binding.detailHeaderLay.colorsChipGroup.apply {
+                addView(chip)
+                //Click
+                chip.setOnCheckedChangeListener { _, isChecked ->
+//                    if (isChecked)
+//                        bodyCart.colorId = chip.id.toString()
+                }
+            }
         }
     }
 

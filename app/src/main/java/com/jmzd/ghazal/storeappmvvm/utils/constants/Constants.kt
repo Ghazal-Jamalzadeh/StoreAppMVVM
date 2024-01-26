@@ -69,3 +69,7 @@ const val DELIVERED = "delivered"
 //banners types
 const val PRODUCT = "product"
 const val SPECIAL = "special"
+
+//colors
+const val COLOR_WHITE = "#ffffff"
+const val COLOR_BLACK = "#000000"
