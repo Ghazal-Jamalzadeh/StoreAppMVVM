@@ -2,7 +2,9 @@ package com.jmzd.ghazal.storeappmvvm.ui.detail
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.graphics.Paint
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,6 +35,9 @@ import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -51,6 +56,9 @@ class DetailFragment : BaseFragment() {
     //adapter
     @Inject
     lateinit var imagesAdapter: ImagesAdapter
+
+    //timer
+    private lateinit var countDownTimer: CountDownTimer
 
     //other
     private var productId = 0
@@ -115,7 +123,7 @@ class DetailFragment : BaseFragment() {
 //        PRODUCT_ID = data.id!!
         initDetailHeaderView(data)
         initDetailInfoView(data)
-//        initDetailTimerView(data)
+        initDetailTimerView(data)
 //        setupViewPager()
 //        initDetailBottomView(data)
     }
@@ -260,6 +268,68 @@ class DetailFragment : BaseFragment() {
         }
     }
 
+    private fun initDetailTimerView(data: ResponseDetail) {
+        binding.detailTimerLay.apply {
+            if (data.discountedPrice?.toInt()!! > 0) {
+                if (data.endTime.isNullOrEmpty().not()) {
+                    priceDiscountLay.isVisible = true
+                    val date = data.endTime!!.split("T")[0]
+                    discountTimer(date)
+                    countDownTimer.start()
+                } else {
+                    priceDiscountLay.isVisible = false
+                }
+                //Discount
+                binding.detailBottom.oldPriceTxt.apply {
+                    text = data.productPrice.toString().toInt().moneySeparating()
+                    paintFlags = this.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                }
+            } else {
+                priceDiscountLay.isVisible = false
+            }
+        }
+    }
+
+    private fun discountTimer(fullDate: String) {
+        val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+        val date: Date = formatter.parse(fullDate) as Date
+        val currentMillis = System.currentTimeMillis()
+        val finalMillis = date.time - currentMillis
+        countDownTimer = object : CountDownTimer(finalMillis, 1_000) {
+            override fun onTick(millisUntilFinished: Long) {
+                //Calculate time
+                var timer = millisUntilFinished
+                val day: Long = TimeUnit.MILLISECONDS.toDays(timer)
+                timer -= TimeUnit.DAYS.toMillis(day)
+                val hours: Long = TimeUnit.MILLISECONDS.toHours(timer)
+                timer -= TimeUnit.HOURS.toMillis(hours)
+                val minutes: Long = TimeUnit.MILLISECONDS.toMinutes(timer)
+                timer -= TimeUnit.MINUTES.toMillis(minutes)
+                val seconds: Long = TimeUnit.MILLISECONDS.toSeconds(timer)
+                //View
+                try {
+                    binding.detailTimerLay.timerLay.apply {
+                        if (day > 0) {
+                            dayLay.isVisible = true
+                            dayTxt.text = day.toString()
+                        } else {
+                            dayLay.isVisible = false
+                        }
+                        hourTxt.text = hours.toString()
+                        minuteTxt.text = minutes.toString()
+                        secondTxt.text = seconds.toString()
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+
+            override fun onFinish() {
+
+            }
+        }
+    }
+
 
     //--- life cycle ---//
     override fun onNetworkLost() {
@@ -268,6 +338,7 @@ class DetailFragment : BaseFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
+        if (this::countDownTimer.isInitialized) countDownTimer.cancel()
         _binding = null
     }
 
