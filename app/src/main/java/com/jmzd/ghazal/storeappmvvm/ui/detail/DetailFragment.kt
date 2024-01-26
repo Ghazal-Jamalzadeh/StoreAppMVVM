@@ -22,10 +22,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.constants.BASE_URL_IMAGE
 import com.jmzd.ghazal.storeappmvvm.utils.constants.COLOR_BLACK
 import com.jmzd.ghazal.storeappmvvm.utils.constants.COLOR_WHITE
-import com.jmzd.ghazal.storeappmvvm.utils.extensions.changeVisibility
-import com.jmzd.ghazal.storeappmvvm.utils.extensions.loadImageWithGlide
-import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
-import com.jmzd.ghazal.storeappmvvm.utils.extensions.transparentCorners
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.*
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.DetailViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
@@ -163,12 +160,12 @@ class DetailFragment : BaseFragment() {
                 colorsScroll.isVisible = false
             }
 //            Favorite
-//            updateFavUI(data.isAddToFavorite!!.toInt())
-//            favImg.setOnClickListener {
-//                if (isNetworkAvailable) {
+            updateFavUI(data.isAddToFavorite!!.toInt())
+            favImg.setOnClickListener {
+                if (isNetworkAvailable) {
 //                    viewModel.callProductLike(productId)
-//                }
-//            }
+                }
+            }
             //Images
 //            if (data.images != null) {
 //                if (data.images.isNotEmpty()) {
@@ -206,6 +203,12 @@ class DetailFragment : BaseFragment() {
 //                        bodyCart.colorId = chip.id.toString()
                 }
             }
+        }
+    }
+
+    private fun updateFavUI(count: Int) {
+        binding.detailHeaderLay.favImg.apply {
+            if (count == 1) setTint(R.color.salmon) else setTint(R.color.gray)
         }
     }
 
