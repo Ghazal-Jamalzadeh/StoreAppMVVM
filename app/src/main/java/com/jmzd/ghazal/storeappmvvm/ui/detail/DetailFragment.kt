@@ -34,6 +34,8 @@ import com.jmzd.ghazal.storeappmvvm.utils.constants.BASE_URL_IMAGE
 import com.jmzd.ghazal.storeappmvvm.utils.constants.COLOR_BLACK
 import com.jmzd.ghazal.storeappmvvm.utils.constants.COLOR_WHITE
 import com.jmzd.ghazal.storeappmvvm.utils.constants.SPECIAL
+import com.jmzd.ghazal.storeappmvvm.utils.events.EventBus
+import com.jmzd.ghazal.storeappmvvm.utils.events.Events
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.*
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.CartViewModel
@@ -106,11 +108,10 @@ class DetailFragment : BaseFragment() {
         //Back
         binding.detailHeaderLay.backImg.setOnClickListener { findNavController().popBackStack() }
 
-
-
         //observers
         observeDetailLiveData()
         observeLikeLiveData()
+        observeAddToCartLiveData()
     }
     //--- observers ---//
     private fun observeDetailLiveData() {
@@ -165,6 +166,36 @@ class DetailFragment : BaseFragment() {
 
                     is MyResponse.Error -> {
                         favLoading.changeVisibility(false, favImg)
+                        root.showSnackBar(response.message!!)
+                    }
+                }
+            }
+        }
+    }
+
+
+    private fun observeAddToCartLiveData() {
+        binding.detailBottom.apply {
+            cartViewModel.addToCartLiveData.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is MyResponse.Loading -> {
+                        addToCartBtn.enableLoading(true)
+                    }
+
+                    is MyResponse.Success -> {
+                        addToCartBtn.enableLoading(false)
+                        response.data?.let { data ->
+                            root.showSnackBar(data.message!!)
+                            addedToCart = 1
+                            updateAddToCartUI(addToCartBtn)
+                            lifecycleScope.launch {
+                                EventBus.publish(Events.IsUpdateCart)
+                            }
+                        }
+                    }
+
+                    is MyResponse.Error -> {
+                        addToCartBtn.enableLoading(false)
                         root.showSnackBar(response.message!!)
                     }
                 }
