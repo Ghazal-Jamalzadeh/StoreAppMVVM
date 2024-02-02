@@ -126,6 +126,42 @@ class DetailFragment : BaseFragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
+    private fun observeLikeLiveData() {
+        binding.detailHeaderLay.apply {
+            viewModel.likeLiveData.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is MyResponse.Loading -> {
+                        favLoading.changeVisibility(true, favImg)
+                    }
+
+                    is MyResponse.Success -> {
+                        favLoading.changeVisibility(false, favImg)
+                        response.data?.let { data ->
+                            updateFavUI(data.count!!)
+                            binding.detailInfoLay.apply {
+                                if (data.count == 1)
+                                //rateTxt.text = "${likeCount.toInt() + 1} ${getString(R.string.rate)}"
+                                    rateTxt.text = "${rateTxt.text.toString().dropLast(7).toInt() + 1} " +
+                                            getString(R.string.rate)
+                                else
+                                //rateTxt.text = "${likeCount.toInt() - 1} ${getString(R.string.rate)}"
+                                    rateTxt.text = "${rateTxt.text.toString().dropLast(7).toInt() - 1} " +
+                                            getString(R.string.rate)
+                            }
+                        }
+                    }
+
+                    is MyResponse.Error -> {
+                        favLoading.changeVisibility(false, favImg)
+                        root.showSnackBar(response.message!!)
+                    }
+                }
+            }
+        }
+    }
+
+
     //--- init views ---//
     private fun initDetailViews(data: ResponseDetail) {
         loadImage(data.image!!)
@@ -191,7 +227,7 @@ class DetailFragment : BaseFragment() {
             updateFavUI(data.isAddToFavorite!!.toInt())
             favImg.setOnClickListener {
                 if (isNetworkAvailable) {
-//                    viewModel.callProductLike(productId)
+                    viewModel.likeProduct(productId)
                 }
             }
             //Images
