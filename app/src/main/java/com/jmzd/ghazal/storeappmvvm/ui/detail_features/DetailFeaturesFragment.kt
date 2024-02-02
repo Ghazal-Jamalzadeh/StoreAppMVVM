@@ -7,15 +7,18 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseProductFeatures
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentDetailFeaturesBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.changeVisibility
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.DetailViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DetailFeaturesFragment : BaseFragment() {
@@ -26,6 +29,10 @@ class DetailFeaturesFragment : BaseFragment() {
 
     //viewModel
     private val viewModel by activityViewModels<DetailViewModel>()
+
+    //adapter
+    @Inject
+    lateinit var featuresAdapter: FeaturesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -84,8 +91,8 @@ class DetailFeaturesFragment : BaseFragment() {
     }
 
     private fun initRecycler(data: List<ResponseProductFeatures.ResponseProductFeaturesItem>) {
-//        featuresAdapter.setData(data)
-//        binding.featuresList.setupRecyclerview(LinearLayoutManager(requireContext()), featuresAdapter)
+        featuresAdapter.setData(data)
+        binding.featuresList.setupRecyclerview(LinearLayoutManager(requireContext()), featuresAdapter)
     }
 
 
