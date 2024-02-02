@@ -19,6 +19,9 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailViewModel @Inject constructor(private val repository: DetailRepository) : ViewModel() {
 
+    //product id
+    private val _productIdLiveData = MutableLiveData<Int>()
+    val productIdLiveData: LiveData<Int> = _productIdLiveData
     //detail
     private val _detailLiveData = MutableLiveData<MyResponse<ResponseDetail>>()
     val detailLiveData: LiveData<MyResponse<ResponseDetail>> = _detailLiveData
@@ -28,6 +31,11 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
     //features
     private val _featuresLiveData = MutableLiveData<MyResponse<ResponseProductFeatures>>()
     val featuresLiveData: LiveData<MyResponse<ResponseProductFeatures>> = _featuresLiveData
+
+    //--- getter & setter ---//
+    fun setProductId(id: Int) {
+        _productIdLiveData.value = id
+    }
 
     //--- api call ---//
     fun getDetail(productId : Int) = viewModelScope.launch {

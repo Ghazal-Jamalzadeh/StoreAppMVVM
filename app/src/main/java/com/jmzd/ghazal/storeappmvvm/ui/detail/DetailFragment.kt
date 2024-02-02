@@ -12,6 +12,7 @@ import android.widget.HorizontalScrollView
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -56,7 +57,7 @@ class DetailFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     //viewModel
-    private val viewModel by viewModels<DetailViewModel>()
+    private val viewModel by activityViewModels<DetailViewModel>()
     private val cartViewModel by viewModels<CartViewModel>()
 
     //args
@@ -96,6 +97,7 @@ class DetailFragment : BaseFragment() {
         //Args
         args.let {
             productId = it.productId
+            viewModel.setProductId(productId)
         }
         //call api
         if (productId > 0){
