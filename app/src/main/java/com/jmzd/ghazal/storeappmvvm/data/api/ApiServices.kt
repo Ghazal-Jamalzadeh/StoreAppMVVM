@@ -1,9 +1,11 @@
 package com.jmzd.ghazal.storeappmvvm.data.api
 
+import com.jmzd.ghazal.storeappmvvm.data.models.SimpleResponse
 import com.jmzd.ghazal.storeappmvvm.data.models.address.BodySubmitAddress
 import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProfileAddresses
 import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProvinceList
 import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseSubmitAddress
+import com.jmzd.ghazal.storeappmvvm.data.models.cart.BodyAddToCart
 import com.jmzd.ghazal.storeappmvvm.data.models.categories.ResponseCategories
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseDetail
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
@@ -99,4 +101,7 @@ interface ApiServices {
 
     @POST("product/{post_id}/like")
     suspend fun postLikeProduct(@Path("post_id") postId : Int) : Response<ResponseProductLike>
+
+    @POST("product/{productId}/add_to_cart")
+    suspend fun addToCart(@Path("product_id") provinceId: Int , @Body body : BodyAddToCart) : Response<SimpleResponse>
 }

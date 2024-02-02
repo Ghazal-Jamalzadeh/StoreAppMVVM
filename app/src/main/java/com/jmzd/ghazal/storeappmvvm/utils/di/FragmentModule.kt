@@ -1,6 +1,8 @@
 package com.jmzd.ghazal.storeappmvvm.utils.di
 
+import com.jmzd.ghazal.storeappmvvm.data.models.SimpleResponse
 import com.jmzd.ghazal.storeappmvvm.data.models.address.BodySubmitAddress
+import com.jmzd.ghazal.storeappmvvm.data.models.cart.BodyAddToCart
 import com.jmzd.ghazal.storeappmvvm.data.models.login.BodyLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.BodyUpdateProfile
 import com.jmzd.ghazal.storeappmvvm.data.models.wallet.BodyIncreaseWallet
@@ -24,4 +26,8 @@ object FragmentModule {
 
     @Provides
     fun bodySubmitAddress() = BodySubmitAddress()
+
+    @Provides
+    fun bodyAddToCart() = BodyAddToCart()
+
 }
