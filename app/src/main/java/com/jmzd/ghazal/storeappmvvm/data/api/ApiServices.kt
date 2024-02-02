@@ -7,6 +7,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProvinceList
 import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseSubmitAddress
 import com.jmzd.ghazal.storeappmvvm.data.models.cart.BodyAddToCart
 import com.jmzd.ghazal.storeappmvvm.data.models.categories.ResponseCategories
+import com.jmzd.ghazal.storeappmvvm.data.models.comments.ResponseCommentsList
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseDetail
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseProductFeatures
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
@@ -108,4 +109,7 @@ interface ApiServices {
 
     @GET("product/{product_id}/features")
     suspend fun getDetailFeatures(@Path("product_id") provinceId: Int) : Response<ResponseProductFeatures>
+
+    @GET("product/{product_id}/comments")
+    suspend fun getDetailComments(@Path("product_id") productId: Int) : Response<ResponseCommentsList>
 }
