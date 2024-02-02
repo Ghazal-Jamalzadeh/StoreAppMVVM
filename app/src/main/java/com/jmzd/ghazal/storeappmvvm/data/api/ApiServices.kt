@@ -103,5 +103,5 @@ interface ApiServices {
     suspend fun postLikeProduct(@Path("post_id") postId : Int) : Response<ResponseProductLike>
 
     @POST("product/{productId}/add_to_cart")
-    suspend fun addToCart(@Path("product_id") provinceId: Int , @Body body : BodyAddToCart) : Response<SimpleResponse>
+    suspend fun addToCart(@Path("productId") provinceId: Int , @Body body : BodyAddToCart) : Response<SimpleResponse>
 }
