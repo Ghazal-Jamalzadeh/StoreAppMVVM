@@ -23,6 +23,7 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.tabs.TabLayout
 import com.jmzd.ghazal.storeappmvvm.R
+import com.jmzd.ghazal.storeappmvvm.data.models.cart.BodyAddToCart
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseDetail
 import com.jmzd.ghazal.storeappmvvm.databinding.DialogImageBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentDetailBinding
@@ -35,9 +36,11 @@ import com.jmzd.ghazal.storeappmvvm.utils.constants.COLOR_WHITE
 import com.jmzd.ghazal.storeappmvvm.utils.constants.SPECIAL
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.*
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.viewmodel.CartViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.DetailViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.multibindings.IntKey
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -54,9 +57,14 @@ class DetailFragment : BaseFragment() {
 
     //viewModel
     private val viewModel by viewModels<DetailViewModel>()
+    private val cartViewModel by viewModels<CartViewModel>()
 
     //args
     private val args by navArgs<DetailFragmentArgs>()
+
+    //body
+    @Inject
+    lateinit var bodyCart : BodyAddToCart
 
     //adapter
     @Inject
@@ -98,8 +106,11 @@ class DetailFragment : BaseFragment() {
         //Back
         binding.detailHeaderLay.backImg.setOnClickListener { findNavController().popBackStack() }
 
+
+
         //observers
         observeDetailLiveData()
+        observeLikeLiveData()
     }
     //--- observers ---//
     private fun observeDetailLiveData() {
@@ -263,8 +274,8 @@ class DetailFragment : BaseFragment() {
                 addView(chip)
                 //Click
                 chip.setOnCheckedChangeListener { _, isChecked ->
-//                    if (isChecked)
-//                        bodyCart.colorId = chip.id.toString()
+                    if (isChecked)
+                        bodyCart.colorId = chip.id.toString()
                 }
             }
         }
@@ -418,20 +429,20 @@ class DetailFragment : BaseFragment() {
             finalPriceTxt.text = data.finalPrice?.moneySeparating()
             //Click
             addToCartBtn.setOnClickListener {
-//                if (addedToCart == 0) {
-//                    if (data.quantity.toString().toInt() > 0) {
-//                        if (isNeededToColor) {
-//                            if (bodyCart.colorId == null)
-//                                root.showSnackBar(getString(R.string.selectTheOneOfColors))
-//                            else
-//                                viewModelCart.callAddTOCartApi(productId, bodyCart)
-//                        } else {
-//                            viewModelCart.callAddTOCartApi(productId, bodyCart)
-//                        }
-//                    } else {
-//                        root.showSnackBar(getString(R.string.shouldExistsProductInStore))
-//                    }
-//                }
+                if (addedToCart == 0) {
+                    if (data.quantity.toString().toInt() > 0) {
+                        if (isNeededToColor) {
+                            if (bodyCart.colorId == null)
+                                root.showSnackBar(getString(R.string.selectTheOneOfColors))
+                            else
+                                cartViewModel.addToCart(productId, bodyCart)
+                        } else {
+                            cartViewModel.addToCart(productId, bodyCart)
+                        }
+                    } else {
+                        root.showSnackBar(getString(R.string.shouldExistsProductInStore))
+                    }
+                }
             }
         }
     }
