@@ -8,6 +8,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseSubmitAddress
 import com.jmzd.ghazal.storeappmvvm.data.models.cart.BodyAddToCart
 import com.jmzd.ghazal.storeappmvvm.data.models.categories.ResponseCategories
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseDetail
+import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseProductFeatures
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseDiscount
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseProducts
@@ -104,4 +105,7 @@ interface ApiServices {
 
     @POST("product/{productId}/add_to_cart")
     suspend fun addToCart(@Path("productId") provinceId: Int , @Body body : BodyAddToCart) : Response<SimpleResponse>
+
+    @GET("product/{product_id}/features")
+    suspend fun getDetailFeatures(@Path("product_id") provinceId: Int) : Response<ResponseProductFeatures>
 }
