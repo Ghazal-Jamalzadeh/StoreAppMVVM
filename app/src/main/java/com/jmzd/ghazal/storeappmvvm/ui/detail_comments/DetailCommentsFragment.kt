@@ -6,16 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmzd.ghazal.storeappmvvm.data.models.comments.ResponseCommentsList
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentDetailCommentsBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.changeVisibility
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.DetailViewModel
-import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DetailCommentsFragment : BaseFragment() {
@@ -26,6 +27,10 @@ class DetailCommentsFragment : BaseFragment() {
 
     //viewModel
     private val viewModel by activityViewModels<DetailViewModel>()
+
+    //adapter
+    @Inject
+    lateinit var commentsAdapter: CommentsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -85,10 +90,10 @@ class DetailCommentsFragment : BaseFragment() {
     }
 
     private fun initRecycler(data: List<ResponseCommentsList.Data>) {
-//        commentsAdapter.setData(data)
-//        binding.commentsList.setupRecyclerview(
-//            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, true), commentsAdapter
-//        )
+        commentsAdapter.setData(data)
+        binding.commentsList.setupRecyclerview(
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, true), commentsAdapter
+        )
     }
 
     override fun onNetworkLost() {
