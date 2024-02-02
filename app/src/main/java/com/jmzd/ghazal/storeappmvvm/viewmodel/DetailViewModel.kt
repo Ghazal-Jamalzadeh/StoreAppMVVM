@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseDetail
+import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseProductFeatures
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_favorite.ResponseProductLike
 import com.jmzd.ghazal.storeappmvvm.data.repository.DetailRepository
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
@@ -24,7 +25,9 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
     //like post
     private val _likeLiveData = MutableLiveData<MyResponse<ResponseProductLike>>()
     val likeLiveData: LiveData<MyResponse<ResponseProductLike>> = _likeLiveData
-
+    //features
+    private val _featuresLiveData = MutableLiveData<MyResponse<ResponseProductFeatures>>()
+    val featuresLiveData: LiveData<MyResponse<ResponseProductFeatures>> = _featuresLiveData
 
     //--- api call ---//
     fun getDetail(productId : Int) = viewModelScope.launch {
@@ -36,7 +39,6 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
         _detailLiveData.value = ResponseHandler(response).generateResponse()
     }
 
-    //--- api call ---//
     fun likeProduct(productId : Int) = viewModelScope.launch {
 
         _likeLiveData.value = MyResponse.Loading()
@@ -46,6 +48,14 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
         _likeLiveData.value = ResponseHandler(response).generateResponse()
     }
 
+    fun getFeatures(productId : Int) = viewModelScope.launch {
+
+        _featuresLiveData.value = MyResponse.Loading()
+
+        val response: Response<ResponseProductFeatures> = repository.getDetailFeatures(productId)
+
+        _featuresLiveData.value = ResponseHandler(response).generateResponse()
+    }
 
 
 
