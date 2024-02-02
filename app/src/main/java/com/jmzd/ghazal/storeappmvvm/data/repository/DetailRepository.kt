@@ -6,4 +6,5 @@ import javax.inject.Inject
 class DetailRepository @Inject constructor(private val api : ApiServices) {
     suspend fun getDetail(productId : Int) = api.getDetail(productId)
     suspend fun postLikeProduct(productId : Int) = api.postLikeProduct(productId)
+    suspend fun getDetailFeatures(productId : Int) = api.getDetailFeatures(productId)
 }
