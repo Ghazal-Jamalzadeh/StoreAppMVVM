@@ -17,7 +17,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseProfile
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseWallet
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_comments.ResponseDeleteComment
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_comments.ResponseProfileComments
-import com.jmzd.ghazal.storeappmvvm.data.models.profile_favorite.ResponsePostLike
+import com.jmzd.ghazal.storeappmvvm.data.models.profile_favorite.ResponseProductLike
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_favorite.ResponseProfileFavorites
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_order.ResponseProfileOrdersList
 import com.jmzd.ghazal.storeappmvvm.data.models.search.ResponseSearch
@@ -98,5 +98,5 @@ interface ApiServices {
     suspend fun getDetail(@Path("product_id") productId : Int) : Response<ResponseDetail>
 
     @POST("product/{post_id}/like")
-    suspend fun postLikeProduct(@Path("post_id") postId : Int) : Response<ResponsePostLike>
+    suspend fun postLikeProduct(@Path("post_id") postId : Int) : Response<ResponseProductLike>
 }

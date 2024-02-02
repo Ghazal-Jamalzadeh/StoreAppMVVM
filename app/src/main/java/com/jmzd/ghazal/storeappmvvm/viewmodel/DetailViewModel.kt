@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.jmzd.ghazal.storeappmvvm.data.models.categories.ResponseCategories
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseDetail
+import com.jmzd.ghazal.storeappmvvm.data.models.profile_favorite.ResponseProductLike
 import com.jmzd.ghazal.storeappmvvm.data.repository.DetailRepository
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.utils.network.ResponseHandler
@@ -21,6 +21,10 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
     //detail
     private val _detailLiveData = MutableLiveData<MyResponse<ResponseDetail>>()
     val detailLiveData: LiveData<MyResponse<ResponseDetail>> = _detailLiveData
+    //like post
+    private val _likeLiveData = MutableLiveData<MyResponse<ResponseProductLike>>()
+    val likeLiveData: LiveData<MyResponse<ResponseProductLike>> = _likeLiveData
+
 
     //--- api call ---//
     fun getDetail(productId : Int) = viewModelScope.launch {
@@ -31,6 +35,18 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
 
         _detailLiveData.value = ResponseHandler(response).generateResponse()
     }
+
+    //--- api call ---//
+    fun likeProduct(productId : Int) = viewModelScope.launch {
+
+        _likeLiveData.value = MyResponse.Loading()
+
+        val response: Response<ResponseProductLike> = repository.postLikeProduct(productId)
+
+        _likeLiveData.value = ResponseHandler(response).generateResponse()
+    }
+
+
 
 
 

@@ -3,7 +3,7 @@ package com.jmzd.ghazal.storeappmvvm.data.models.profile_favorite
 
 import com.google.gson.annotations.SerializedName
 
-data class ResponsePostLike(
+data class ResponseProductLike(
     @SerializedName("count")
     val count: Int?, // 1
     @SerializedName("message")
