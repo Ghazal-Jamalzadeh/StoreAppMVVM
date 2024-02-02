@@ -8,6 +8,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentDetailFeaturesBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.DetailViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,6 +45,8 @@ class DetailFeaturesFragment : BaseFragment() {
 
         }
     }
+
+
 
     override fun onNetworkLost() {
     }
