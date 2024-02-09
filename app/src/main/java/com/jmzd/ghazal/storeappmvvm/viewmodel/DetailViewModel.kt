@@ -9,6 +9,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.comments.BodySendComment
 import com.jmzd.ghazal.storeappmvvm.data.models.comments.ResponseCommentsList
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseDetail
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseProductFeatures
+import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseProductPriceChart
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_favorite.ResponseProductLike
 import com.jmzd.ghazal.storeappmvvm.data.repository.DetailRepository
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
@@ -40,8 +41,9 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
     //send comment
     private val _sendCommentLiveData = MutableLiveData<MyResponse<SimpleResponse>>()
     val sendCommentLiveData: LiveData<MyResponse<SimpleResponse>> = _sendCommentLiveData
-
-
+    //price chart
+    private val _priceChartLiveData = MutableLiveData<MyResponse<ResponseProductPriceChart>>()
+    val priceChartLiveData: LiveData<MyResponse<ResponseProductPriceChart>> = _priceChartLiveData
 
     //--- getter & setter ---//
     fun setProductId(id: Int) {
@@ -95,7 +97,14 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
         _sendCommentLiveData.value = ResponseHandler(response).generateResponse()
     }
 
+    fun getPriceChart(productId : Int) = viewModelScope.launch {
 
+        _priceChartLiveData.value = MyResponse.Loading()
+
+        val response: Response<ResponseProductPriceChart> = repository.getPriceChart(productId)
+
+        _priceChartLiveData.value = ResponseHandler(response).generateResponse()
+    }
 
 
 
