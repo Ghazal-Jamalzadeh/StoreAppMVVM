@@ -11,6 +11,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.comments.BodySendComment
 import com.jmzd.ghazal.storeappmvvm.data.models.comments.ResponseCommentsList
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseDetail
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseProductFeatures
+import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseProductPriceChart
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseBanners
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseDiscount
 import com.jmzd.ghazal.storeappmvvm.data.models.home.ResponseProducts
@@ -116,4 +117,7 @@ interface ApiServices {
 
     @POST("product/{product_id}/comments")
     suspend fun sendComment(@Path("product_id") productId: Int , @Body body : BodySendComment) : Response<SimpleResponse>
+
+    @GET("product/{product_id}/price-chart")
+    suspend fun getPriceChart(@Path("product_id") productId: Int) : Response<ResponseProductPriceChart>
 }
