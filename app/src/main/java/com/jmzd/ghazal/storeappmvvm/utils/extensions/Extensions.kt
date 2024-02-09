@@ -6,6 +6,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Typeface
 import android.net.Uri
 import android.provider.MediaStore
 import android.view.View
@@ -74,6 +75,10 @@ fun Int.moneySeparating(): String {
     return "${DecimalFormat("#,###.##").format(this)} تومان"
 }
 
+fun Int.moneySeparatingWithoutToman(): String {
+    return DecimalFormat("#,###.##").format(this)
+}
+
 fun RecyclerView.setupRecyclerview(myLayoutManager: RecyclerView.LayoutManager, myAdapter: RecyclerView.Adapter<*>) {
     this.apply {
         layoutManager = myLayoutManager
@@ -109,4 +114,8 @@ fun Uri.openBrowser(context: Context) {
 
 fun ImageView.setTint(@ColorRes color: Int) {
     ImageViewCompat.setImageTintList(this, ColorStateList.valueOf(ContextCompat.getColor(context, color)))
+}
+
+fun setTypefaceNormal(context: Context): Typeface {
+    return Typeface.createFromAsset(context.assets,"fonts/iransans.ttf")
 }
