@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentDetailChartBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.viewmodel.DetailViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,7 +20,7 @@ class DetailChartFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     //viewModel
-    private val viewModel by viewModels<LoginViewModel>()
+    private val viewModel by activityViewModels<DetailViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,9 +32,11 @@ class DetailChartFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //init views
-        binding.apply {
 
+        //Get id
+        viewModel.productIdLiveData.observe(viewLifecycleOwner) {
+            if (isNetworkAvailable)
+                viewModel.getPriceChart(it)
         }
     }
 
