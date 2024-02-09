@@ -7,6 +7,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProvinceList
 import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseSubmitAddress
 import com.jmzd.ghazal.storeappmvvm.data.models.cart.BodyAddToCart
 import com.jmzd.ghazal.storeappmvvm.data.models.categories.ResponseCategories
+import com.jmzd.ghazal.storeappmvvm.data.models.comments.BodySendComment
 import com.jmzd.ghazal.storeappmvvm.data.models.comments.ResponseCommentsList
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseDetail
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseProductFeatures
@@ -112,4 +113,7 @@ interface ApiServices {
 
     @GET("product/{product_id}/comments")
     suspend fun getDetailComments(@Path("product_id") productId: Int) : Response<ResponseCommentsList>
+
+    @POST("product/{product_id}/comments")
+    suspend fun sendComment(@Path("product_id") productId: Int , @Body body : BodySendComment) : Response<SimpleResponse>
 }
