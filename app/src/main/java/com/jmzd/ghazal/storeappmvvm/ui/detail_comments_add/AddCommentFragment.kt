@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.comments.BodySendComment
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentAddCommentBinding
 import com.jmzd.ghazal.storeappmvvm.utils.constants.PRODUCT_ID
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.enableLoading
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
+import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.DetailViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,8 +67,36 @@ class AddCommentFragment : BottomSheetDialogFragment() {
                 }
             }
         }
+
+        //observers
+        observeSendCommentLiveData()
     }
 
+    //--- observers ---//
+    private fun observeSendCommentLiveData() {
+        binding.apply {
+            viewModel.sendCommentLiveData.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is MyResponse.Loading -> {
+                        submitBtn.enableLoading(true)
+                    }
+
+                    is MyResponse.Success -> {
+                        submitBtn.enableLoading(false)
+                        response.data?.let { data ->
+                            Toast.makeText(requireContext(), data.message, Toast.LENGTH_SHORT).show()
+                            this@AddCommentFragment.dismiss()
+                        }
+                    }
+
+                    is MyResponse.Error -> {
+                        submitBtn.enableLoading(false)
+                        root.showSnackBar(response.message!!)
+                    }
+                }
+            }
+        }
+    }
 
 
     override fun onDestroy() {
