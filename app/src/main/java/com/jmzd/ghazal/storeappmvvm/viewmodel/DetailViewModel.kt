@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jmzd.ghazal.storeappmvvm.data.models.SimpleResponse
+import com.jmzd.ghazal.storeappmvvm.data.models.comments.BodySendComment
 import com.jmzd.ghazal.storeappmvvm.data.models.comments.ResponseCommentsList
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseDetail
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseProductFeatures
@@ -35,6 +37,10 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
     //comments
     private val _commentsLiveData = MutableLiveData<MyResponse<ResponseCommentsList>>()
     val commentsLiveData: LiveData<MyResponse<ResponseCommentsList>> = _commentsLiveData
+    //send comment
+    private val _sendCommentLiveData = MutableLiveData<MyResponse<SimpleResponse>>()
+    val sendCommentLiveData: LiveData<MyResponse<SimpleResponse>> = _sendCommentLiveData
+
 
 
     //--- getter & setter ---//
@@ -79,6 +85,17 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
 
         _commentsLiveData.value = ResponseHandler(response).generateResponse()
     }
+
+    fun sendComment(productId : Int , body : BodySendComment) = viewModelScope.launch {
+
+        _sendCommentLiveData.value = MyResponse.Loading()
+
+        val response: Response<SimpleResponse> = repository.sendComment(productId , body)
+
+        _sendCommentLiveData.value = ResponseHandler(response).generateResponse()
+    }
+
+
 
 
 
