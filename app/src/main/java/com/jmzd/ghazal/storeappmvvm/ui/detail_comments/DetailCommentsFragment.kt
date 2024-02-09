@@ -53,6 +53,11 @@ class DetailCommentsFragment : BaseFragment() {
         //init views
         binding.apply {
 
+            //add new comment
+            addNewCommentTxt.setOnClickListener{
+
+            }
+
         }
 
         //observers

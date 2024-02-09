@@ -167,3 +167,29 @@ hint : <FragmentName + Args>
 args.addressData
 
 
+Send arguments in different way---------------------------------------------------------------------
+خب ما همیشه میومدیم آرگیومنت رو داخل نویگیشن تعریف میکردیم و میفرستادیم
+ولی یک کار دیگه هم میشه کرد
+این کد رو در نظر بگیرید که مربوط هست به فرگمنت اضافه کردن کامنت
+    <dialog
+        android:id="@+id/addCommentFragment"
+        android:name="com.jmzd.ghazal.storeappmvvm.ui.detail_comments_add.AddCommentFragment"
+        android:label="fragment_add_comment"
+        tools:layout="@layout/fragment_add_comment" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </dialog>
+
+حالا ما میایم این آرگیونت رو از اینجا در میاریم و به یک شکل دیگه تعریف میکنیم که در ادامه توضیح میدیم
+
+    <dialog
+        android:id="@+id/addCommentFragment"
+        android:name="com.jmzd.ghazal.storeappmvvm.ui.detail_comments_add.AddCommentFragment"
+        android:label="fragment_add_comment"
+        tools:layout="@layout/fragment_add_comment" />
+
+
+
+
+
