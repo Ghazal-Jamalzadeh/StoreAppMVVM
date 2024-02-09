@@ -98,6 +98,10 @@ class AddCommentFragment : BottomSheetDialogFragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewModel.sendCommentLiveData.removeObservers(viewLifecycleOwner)
+    }
 
     override fun onDestroy() {
         super.onDestroy()
