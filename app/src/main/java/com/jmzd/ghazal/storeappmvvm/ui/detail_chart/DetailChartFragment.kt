@@ -8,6 +8,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentDetailChartBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.changeVisibility
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
+import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.DetailViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,7 +41,57 @@ class DetailChartFragment : BaseFragment() {
             if (isNetworkAvailable)
                 viewModel.getPriceChart(it)
         }
+
+        //observers
+        observePriceChartLiveData()
     }
+
+    //--- observers ---//
+    private fun observePriceChartLiveData() {
+        binding.apply {
+            viewModel.priceChartLiveData.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is MyResponse.Loading -> {
+                        featuresLoading.changeVisibility(true, pricesChart)
+                    }
+
+                    is MyResponse.Success -> {
+                        featuresLoading.changeVisibility(false, pricesChart)
+                        /*response.data?.let { data ->
+                            daysList.clear()
+                            daysListForTooltip.clear()
+                            pricesList.clear()
+
+                            if (data.isNotEmpty()) {
+                                for (i in data.indices) {
+                                    daysListForTooltip.add(data[i].day!!)
+                                    daysList.add(data[i].day!!.drop(5))
+                                    if (data[i].price!! > 0)
+                                        pricesList.add(Entry(i.toFloat(), data[i].price!!.toFloat()))
+                                }
+                                //Init chart
+                                lifecycleScope.launch {
+                                    delay(100)
+                                    if (pricesList.isNotEmpty()) {
+                                        pricesChart.setupMyChart(
+                                            DaysFormatter(daysList), pricesList, daysList.size,
+                                            daysListForTooltip
+                                        )
+                                    }
+                                }
+                            }
+                        }*/
+                    }
+
+                    is MyResponse.Error -> {
+                        featuresLoading.changeVisibility(false, pricesChart)
+                        root.showSnackBar(response.message!!)
+                    }
+                }
+            }
+        }
+    }
+
 
     override fun onNetworkLost() {
     }
