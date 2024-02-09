@@ -10,4 +10,5 @@ class DetailRepository @Inject constructor(private val api : ApiServices) {
     suspend fun getDetailFeatures(productId : Int) = api.getDetailFeatures(productId)
     suspend fun getDetailComments(productId : Int) = api.getDetailComments(productId)
     suspend fun sendComment(productId : Int , body : BodySendComment) = api.sendComment(productId , body)
+    suspend fun getPriceChart(productId : Int ) = api.getPriceChart(productId)
 }
