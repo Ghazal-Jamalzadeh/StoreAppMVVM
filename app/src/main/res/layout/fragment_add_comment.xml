@@ -1,14 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.detail_comments_add.AddCommentFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    android:background="@drawable/bg_top_rounded_white"
+    android:paddingVertical="@dimen/_15mdp">
+    <!--Close-->
+    <ImageView
+        android:id="@+id/closeImg"
+        android:layout_width="@dimen/_20mdp"
+        android:layout_height="@dimen/_20mdp"
+        android:layout_marginEnd="@dimen/_15mdp"
+        android:padding="@dimen/_1mdp"
+        android:src="@drawable/xmark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/darkStrategy" />
+    <!--Title-->
     <TextView
+        android:id="@+id/titleTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addNewComment"
+        android:textColor="@color/darkStrategy"
+        android:textSize="@dimen/_12font_mdp"
+        app:layout_constraintBottom_toBottomOf="@+id/closeImg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!--Line-->
+    <View
+        android:id="@+id/line1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="@dimen/_15mdp"
+        android:layout_marginTop="@dimen/_15mdp"
+        android:alpha="0.5"
+        android:background="@color/water"
+        app:layout_constraintTop_toBottomOf="@id/titleTxt" />
+    <!--Rate title-->
+    <TextView
+        android:id="@+id/rateTitleTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15mdp"
+        android:text="@string/yourRate"
+        android:textColor="@color/darkStrategy"
+        android:textSize="@dimen/_12font_mdp"
+        app:layout_constraintEnd_toEndOf="@id/closeImg"
+        app:layout_constraintTop_toBottomOf="@id/line1" />
+    <!--Slider-->
+    <com.google.android.material.slider.Slider
+        android:id="@+id/rateSlider"
+        style="@style/MyRangeStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15mdp"
+        android:stepSize="1"
+        android:valueFrom="1"
+        android:valueTo="5"
+        app:labelBehavior="withinBounds"
+        app:layout_constraintEnd_toEndOf="@id/closeImg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rateTitleTxt" />
+    <!--Rate title-->
+    <TextView
+        android:id="@+id/commentTitleTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5mdp"
+        android:text="@string/yourComment"
+        android:textColor="@color/darkStrategy"
+        android:textSize="@dimen/_12font_mdp"
+        app:layout_constraintEnd_toEndOf="@id/closeImg"
+        app:layout_constraintTop_toBottomOf="@id/rateSlider" />
+    <!--EditTex-->
+    <EditText
+        android:id="@+id/commentEdt"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_100mdp"
+        android:layout_marginTop="@dimen/_10mdp"
+        android:background="@drawable/bg_rounded_cultured"
+        android:gravity="top"
+        android:hint="@string/writeYourComment"
+        android:padding="@dimen/_10mdp"
+        android:textColor="@color/eerieBlack"
+        android:textColorHint="@color/gray"
+        android:textSize="@dimen/_10font_mdp"
+        app:layout_constraintEnd_toEndOf="@id/rateSlider"
+        app:layout_constraintStart_toStartOf="@id/rateSlider"
+        app:layout_constraintTop_toBottomOf="@id/commentTitleTxt" />
+    <!--Submit-->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/submitBtn"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40mdp"
+        android:layout_marginTop="@dimen/_20mdp"
+        android:background="@drawable/bg_gradient_rounded"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        android:text="@string/submitNewComment"
+        android:textColor="@color/white"
+        app:backgroundTint="@null"
+        app:layout_constraintEnd_toEndOf="@id/commentEdt"
+        app:layout_constraintStart_toStartOf="@id/commentEdt"
+        app:layout_constraintTop_toBottomOf="@+id/commentEdt" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
