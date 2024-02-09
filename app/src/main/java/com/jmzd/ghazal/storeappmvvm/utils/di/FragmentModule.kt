@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import com.jmzd.ghazal.storeappmvvm.data.models.SimpleResponse
 import com.jmzd.ghazal.storeappmvvm.data.models.address.BodySubmitAddress
 import com.jmzd.ghazal.storeappmvvm.data.models.cart.BodyAddToCart
+import com.jmzd.ghazal.storeappmvvm.data.models.comments.BodySendComment
 import com.jmzd.ghazal.storeappmvvm.data.models.login.BodyLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.BodyUpdateProfile
 import com.jmzd.ghazal.storeappmvvm.data.models.wallet.BodyIncreaseWallet
@@ -34,5 +35,8 @@ object FragmentModule {
 
     @Provides
     fun bodyAddToCart() = BodyAddToCart()
+
+    @Provides
+    fun bodySendComment() = BodySendComment()
 
 }
