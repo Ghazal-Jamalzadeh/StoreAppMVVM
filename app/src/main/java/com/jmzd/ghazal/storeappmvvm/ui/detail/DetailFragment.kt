@@ -31,10 +31,7 @@ import com.jmzd.ghazal.storeappmvvm.databinding.FragmentDetailBinding
 import com.jmzd.ghazal.storeappmvvm.ui.detail.adapters.ImagesAdapter
 import com.jmzd.ghazal.storeappmvvm.ui.detail.adapters.PagerAdapter
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
-import com.jmzd.ghazal.storeappmvvm.utils.constants.BASE_URL_IMAGE
-import com.jmzd.ghazal.storeappmvvm.utils.constants.COLOR_BLACK
-import com.jmzd.ghazal.storeappmvvm.utils.constants.COLOR_WHITE
-import com.jmzd.ghazal.storeappmvvm.utils.constants.SPECIAL
+import com.jmzd.ghazal.storeappmvvm.utils.constants.*
 import com.jmzd.ghazal.storeappmvvm.utils.events.EventBus
 import com.jmzd.ghazal.storeappmvvm.utils.events.Events
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.*
@@ -206,6 +203,7 @@ class DetailFragment : BaseFragment() {
 
     //--- init views ---//
     private fun initDetailViews(data: ResponseDetail) {
+        PRODUCT_ID = data.id ?: 0
         loadImage(data.image!!)
 //        PRODUCT_ID = data.id!!
         initDetailHeaderView(data)

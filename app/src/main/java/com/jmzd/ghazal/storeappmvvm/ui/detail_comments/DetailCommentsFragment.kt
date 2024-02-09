@@ -12,6 +12,7 @@ import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.comments.ResponseCommentsList
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentDetailCommentsBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.utils.constants.PRODUCT_ID
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.changeVisibility
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
@@ -47,6 +48,7 @@ class DetailCommentsFragment : BaseFragment() {
 
         //Get id
         viewModel.productIdLiveData.observe(viewLifecycleOwner) {
+            PRODUCT_ID = it
             if (isNetworkAvailable)
                 viewModel.getComments(it)
         }

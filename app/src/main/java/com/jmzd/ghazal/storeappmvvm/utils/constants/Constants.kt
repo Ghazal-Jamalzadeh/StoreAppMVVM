@@ -73,3 +73,6 @@ const val SPECIAL = "special"
 //colors
 const val COLOR_WHITE = "#ffffff"
 const val COLOR_BLACK = "#000000"
+
+//args
+var PRODUCT_ID = 0
