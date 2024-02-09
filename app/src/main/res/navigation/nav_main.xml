@@ -297,8 +297,21 @@
             app:argType="integer"
 
             />
+        <action
+            android:id="@+id/action_detailFragment_to_addCommentFragment"
+            app:destination="@id/addCommentFragment" />
 
     </fragment>
+
+    <dialog
+        android:id="@+id/addCommentFragment"
+        android:name="com.jmzd.ghazal.storeappmvvm.ui.detail_comments_add.AddCommentFragment"
+        android:label="fragment_add_comment"
+        tools:layout="@layout/fragment_add_comment" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </dialog>
 
 
 

@@ -12,7 +12,7 @@ import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CategoriesProductFragment : BottomSheetDialogFragment() {
+class AddCommentFragment : BottomSheetDialogFragment() {
 
     //binding
     private var _binding: FragmentAddCommentBinding? = null
@@ -38,7 +38,7 @@ class CategoriesProductFragment : BottomSheetDialogFragment() {
         binding.apply {
 
             //Close
-//            closeImg.setOnClickListener { this@ProfileEditFragment.dismiss() }
+            closeImg.setOnClickListener { this@AddCommentFragment.dismiss() }
 
         }
     }
