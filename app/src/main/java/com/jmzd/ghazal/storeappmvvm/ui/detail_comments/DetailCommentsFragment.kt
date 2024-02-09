@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.comments.ResponseCommentsList
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentDetailCommentsBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
@@ -55,7 +57,7 @@ class DetailCommentsFragment : BaseFragment() {
 
             //add new comment
             addNewCommentTxt.setOnClickListener{
-
+                findNavController().navigate(R.id.action_detailFragment_to_addCommentFragment)
             }
 
         }
