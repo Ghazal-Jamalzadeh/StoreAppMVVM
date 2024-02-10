@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.cart.ResponseCartList
@@ -19,6 +20,8 @@ import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.constants.DECREMENT
 import com.jmzd.ghazal.storeappmvvm.utils.constants.DELETE
 import com.jmzd.ghazal.storeappmvvm.utils.constants.INCREMENT
+import com.jmzd.ghazal.storeappmvvm.utils.events.EventBus
+import com.jmzd.ghazal.storeappmvvm.utils.events.Events
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.moneySeparating
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
@@ -26,6 +29,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.CartViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CartFragment : BaseFragment() {
@@ -66,6 +70,7 @@ class CartFragment : BaseFragment() {
 
         //observers
         observeCartListLiveData()
+        observeUpdateCartLiveData()
     }
 
     //--- observers ---//
@@ -120,6 +125,32 @@ class CartFragment : BaseFragment() {
         }
     }
 
+    private fun observeUpdateCartLiveData() {
+        binding.apply {
+            viewModel.updateCartLiveData.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is MyResponse.Loading -> {}
+
+                    is MyResponse.Success -> {
+                        response.data?.let {
+                            //update result
+                            if (isNetworkAvailable)
+                                viewModel.getCartList()
+                            //Update badge
+                            lifecycleScope.launch {
+                                EventBus.publish(Events.IsUpdateCart)
+                            }
+                        }
+                    }
+
+                    is MyResponse.Error -> {
+                        root.showSnackBar(response.message!!)
+                    }
+                }
+            }
+        }
+    }
+
     //--- recycler ---//
     private fun initRecyclerView(list: List<ResponseCartList.OrderItem>) {
         cartAdapter.setData(list)
@@ -153,6 +184,17 @@ class CartFragment : BaseFragment() {
         }
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        //we don't need this piece of code in current scenario
+        //در صورتی که موقع برگشت از صفحه شیپمنت نیاز به آپدیت بج یا لیست داشتید اینجا صدا بزنید
+
+        //Update badge
+        lifecycleScope.launch {
+            EventBus.publish(Events.IsUpdateCart)
+        }
+    }
 
 
     override fun onNetworkLost() {

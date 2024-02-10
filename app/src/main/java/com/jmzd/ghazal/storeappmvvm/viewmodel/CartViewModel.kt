@@ -27,16 +27,9 @@ class CartViewModel @Inject constructor(private val repository: CartRepository) 
     //cart list
     private val _cartListLiveData = MutableLiveData<MyResponse<ResponseCartList>>()
     val cartListLiveData: LiveData<MyResponse<ResponseCartList>> = _cartListLiveData
-    //increment
-    private val _incrementLiveData = MutableLiveData<MyResponse<ResponseUpdateCart>>()
-    val incrementLiveData: LiveData<MyResponse<ResponseUpdateCart>> = _incrementLiveData
-    //decrement
-    private val _decrementLiveData = MutableLiveData<MyResponse<ResponseUpdateCart>>()
-    val decrementLiveData: LiveData<MyResponse<ResponseUpdateCart>> = _decrementLiveData
-    //delete product
-    private val _deleteProductLiveData = MutableLiveData<MyResponse<ResponseUpdateCart>>()
-    val deleteProductLiveData: LiveData<MyResponse<ResponseUpdateCart>> = _deleteProductLiveData
-
+    //update cart
+    private val _updateCartLiveData = MutableLiveData<MyResponse<ResponseUpdateCart>>()
+    val updateCartLiveData: LiveData<MyResponse<ResponseUpdateCart>> = _updateCartLiveData
 
     //--- api call ---//
     fun addToCart(productId : Int , body : BodyAddToCart) = viewModelScope.launch {
@@ -59,31 +52,31 @@ class CartViewModel @Inject constructor(private val repository: CartRepository) 
 
     fun increment(id : Int) = viewModelScope.launch {
 
-        _incrementLiveData.value = MyResponse.Loading()
+        _updateCartLiveData.value = MyResponse.Loading()
 
         val response: Response<ResponseUpdateCart> = repository.cartIncrement(id)
 
-        _incrementLiveData.value = ResponseHandler(response).generateResponse()
+        _updateCartLiveData.value = ResponseHandler(response).generateResponse()
     }
 
 
     fun decrement(id : Int) = viewModelScope.launch {
 
-        _decrementLiveData.value = MyResponse.Loading()
+        _updateCartLiveData.value = MyResponse.Loading()
 
         val response: Response<ResponseUpdateCart> = repository.cartDecrement(id)
 
-        _decrementLiveData.value = ResponseHandler(response).generateResponse()
+        _updateCartLiveData.value = ResponseHandler(response).generateResponse()
     }
 
 
     fun deleteProduct(id : Int) = viewModelScope.launch {
 
-        _deleteProductLiveData.value = MyResponse.Loading()
+        _updateCartLiveData.value = MyResponse.Loading()
 
         val response: Response<ResponseUpdateCart> = repository.cartDeleteProduct(id)
 
-        _deleteProductLiveData.value = ResponseHandler(response).generateResponse()
+        _updateCartLiveData.value = ResponseHandler(response).generateResponse()
     }
 
 
