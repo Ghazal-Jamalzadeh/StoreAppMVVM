@@ -6,6 +6,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProfileAddresses
 import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProvinceList
 import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseSubmitAddress
 import com.jmzd.ghazal.storeappmvvm.data.models.cart.BodyAddToCart
+import com.jmzd.ghazal.storeappmvvm.data.models.cart.ResponseCartList
 import com.jmzd.ghazal.storeappmvvm.data.models.categories.ResponseCategories
 import com.jmzd.ghazal.storeappmvvm.data.models.comments.BodySendComment
 import com.jmzd.ghazal.storeappmvvm.data.models.comments.ResponseCommentsList
@@ -120,4 +121,7 @@ interface ApiServices {
 
     @GET("product/{product_id}/price-chart")
     suspend fun getPriceChart(@Path("product_id") productId: Int) : Response<ResponseProductPriceChart>
+
+    @GET("cart")
+    suspend fun getCartList() : Response<ResponseCartList>
 }
