@@ -7,4 +7,7 @@ import javax.inject.Inject
 class CartRepository @Inject constructor(private val api : ApiServices) {
     suspend fun addToCart(productId : Int, body : BodyAddToCart ) = api.addToCart(productId , body)
     suspend fun getCartList() = api.getCartList()
+    suspend fun cartIncrement(id : Int ) = api.cartIncrement(id)
+    suspend fun cartDecrement(id : Int ) = api.cartDecrement(id)
+    suspend fun cartDelete(id : Int ) = api.cartDelete(id)
 }
