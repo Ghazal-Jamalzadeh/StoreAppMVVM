@@ -15,7 +15,7 @@ data class ResponseCartList(
     @SerializedName("items_price")
     val itemsPrice: Int?, // 0
     @SerializedName("order_items")
-    val orderItems: List<OrderItem?>?,
+    val orderItems: List<OrderItem>?,
     @SerializedName("quantity")
     val quantity: Int?, // 0
     @SerializedName("status")

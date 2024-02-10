@@ -8,12 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmzd.ghazal.storeappmvvm.R
+import com.jmzd.ghazal.storeappmvvm.data.models.cart.ResponseCartList
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentCartBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginPhoneBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginVerifyBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.moneySeparating
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.CartViewModel
@@ -29,6 +32,9 @@ class CartFragment : BaseFragment() {
 
     //viewModel
     private val viewModel by viewModels<CartViewModel>()
+
+    //adapter
+    lateinit var cartAdapter : CartAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -82,7 +88,7 @@ class CartFragment : BaseFragment() {
                                     }
                                     //Toolbar txt
                                     toolbarPriceTxt.text = data.itemsPrice.toString().toInt().moneySeparating()
-//                                    initRecyclerView(data.orderItems)
+                                    initRecyclerView(data.orderItems)
                                 } else {
                                     emptyLay.isVisible = true
                                     cartsList.isVisible = false
@@ -106,6 +112,39 @@ class CartFragment : BaseFragment() {
             }
         }
     }
+
+    //--- recycler ---//
+    private fun initRecyclerView(list: List<ResponseCartList.OrderItem>) {
+        cartAdapter.setData(list)
+        val linearlayoutManager = LinearLayoutManager(requireContext())
+        binding.apply {
+            cartsList.setupRecyclerview(linearlayoutManager, cartAdapter)
+            //Auto scroll
+//            cartsList.layoutManager?.onRestoreInstanceState(recyclerViewState)
+            //Click
+//            cartAdapter.setOnItemClickListener { id, type ->
+//                //Save state
+//                recyclerViewState = cartsList.layoutManager?.onSaveInstanceState()
+//                when (type) {
+//                    INCREMENT -> {
+//                        if (isNetworkAvailable)
+//                            viewModel.callIncrementCartApi(id)
+//                    }
+//
+//                    DECREMENT -> {
+//                        if (isNetworkAvailable)
+//                            viewModel.callDecrementDataCartApi(id)
+//                    }
+//
+//                    DELETE -> {
+//                        if (isNetworkAvailable)
+//                            viewModel.callDeleteProductApi(id)
+//                    }
+//                }
+//            }
+        }
+    }
+
 
 
     override fun onNetworkLost() {
