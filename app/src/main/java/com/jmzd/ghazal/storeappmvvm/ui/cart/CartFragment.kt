@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.cart.ResponseCartList
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentCartBinding
@@ -65,7 +66,16 @@ class CartFragment : BaseFragment() {
 
         //init views
         binding.apply {
-
+            //Fab animation
+            cartsList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    if (dy > 0 && continueFABtn.isExtended)
+                        continueFABtn.shrink()
+                    else if (dy < 0 && !continueFABtn.isExtended)
+                        continueFABtn.extend()
+                }
+            })
         }
 
         //observers

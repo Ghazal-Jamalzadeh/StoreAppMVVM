@@ -795,7 +795,7 @@ Constraints min & max height & width--------------------------------------------
 چرا برای عرض یک مینیموم و ماکسیمومی رو در نظر گرفتیم؟
 برای اینکه نمیخوایم ارتفاع لایه ما از یک حدی کمتر و از یک حدی بیشتر باشه
 
-Bottom nav bdge-------------------------------------------------------------------------------------
+Bottom nav badge------------------------------------------------------------------------------------
 خود باتم نویگیشن یک کدی داره که میتونی بج اضافه کنی یا پاک کنی
 
 برای پاک کردن بج
@@ -808,3 +808,28 @@ bottomNav.getOrCreateBadge(R.id.cartFragment).apply {
    backgroundColor = ContextCompat.getColor(this@MainActivity, R.color.caribbeanGreen)
   }
 
+show / hide items with recyclerView Scroll event----------------------------------------------------
+این کد توی صفحه سبد خرید برای دکمه ادامه استفاده شده
+
+        binding.apply {
+
+            //Fab animation
+            از کجا بفهمیم ریسایکلر داره اسکرول میشه؟
+            با این لیسنر
+            که هم اسکرول چپ و راست رو تشخیص میده هم بالا و پایین
+            cartsList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+
+                    ما اسکرول عمودی و روی محور وای رو نیاز داریم
+                    ما به جای fab عادی از extended استفاده کردیم
+                    که این isExtended به همین ویژگیش اشاره داره
+                    if (dy > 0 && continueFABtn.isExtended)
+
+                        شرینک یعنی حالت جمع شده. جمعش کن
+                        continueFABtn.shrink()
+                    else if (dy < 0 && !continueFABtn.isExtended)
+                        continueFABtn.extend()
+                }
+            })
+        }
