@@ -9,5 +9,5 @@ class CartRepository @Inject constructor(private val api : ApiServices) {
     suspend fun getCartList() = api.getCartList()
     suspend fun cartIncrement(id : Int ) = api.cartIncrement(id)
     suspend fun cartDecrement(id : Int ) = api.cartDecrement(id)
-    suspend fun cartDelete(id : Int ) = api.cartDelete(id)
+    suspend fun cartDeleteProduct(id : Int ) = api.cartDeleteProduct(id)
 }
