@@ -134,4 +134,8 @@ interface ApiServices {
 
     @DELETE("cart/{id}")
     suspend fun cartDeleteProduct(@Path("id") id : Int ) : Response<ResponseUpdateCart>
+
+    @GET("cart/continue")
+    suspend fun cartContinue() : Response<ResponseCartList>
+
 }
