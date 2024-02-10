@@ -71,6 +71,7 @@ class CartFragment : BaseFragment() {
         //observers
         observeCartListLiveData()
         observeUpdateCartLiveData()
+        observeContinueLiveData()
     }
 
     //--- observers ---//
@@ -91,12 +92,12 @@ class CartFragment : BaseFragment() {
                                 if (data.orderItems.isNotEmpty()) {
                                     emptyLay.isVisible = false
                                     cartsList.isVisible = true
+                                    //show fab (continue)
                                     continueFABtn.isVisible = true
-                                    //Continue
                                     continueFABtn.setOnClickListener {
 //                                        isNavigateToShipping = true
-//                                        if (isNetworkAvailable)
-//                                            viewModel.callCartContinueApi()
+                                        if (isNetworkAvailable)
+                                            viewModel.cartContinue()
                                     }
                                     //Toolbar txt
                                     toolbarPriceTxt.text = data.itemsPrice.toString().toInt().moneySeparating()
@@ -178,6 +179,29 @@ class CartFragment : BaseFragment() {
                     DELETE -> {
                         if (isNetworkAvailable)
                             viewModel.deleteProduct(id)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun observeContinueLiveData() {
+        binding.apply {
+            viewModel.continueLiveData.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is MyResponse.Loading -> {}
+
+                    is MyResponse.Success -> {
+                        response.data?.let {
+                            //Navigate
+//                            if (isNavigateToShipping)
+//                                findNavController().navigate(R.id.actionToShipping)
+//                            isNavigateToShipping = false
+                        }
+                    }
+
+                    is MyResponse.Error -> {
+                        root.showSnackBar(response.message!!)
                     }
                 }
             }
