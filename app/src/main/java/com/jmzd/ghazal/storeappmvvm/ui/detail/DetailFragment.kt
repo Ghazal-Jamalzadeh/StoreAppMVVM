@@ -185,6 +185,7 @@ class DetailFragment : BaseFragment() {
                             root.showSnackBar(data.message!!)
                             addedToCart = 1
                             updateAddToCartUI(addToCartBtn)
+                            //update badge
                             lifecycleScope.launch {
                                 EventBus.publish(Events.IsUpdateCart)
                             }

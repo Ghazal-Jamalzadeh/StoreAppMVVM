@@ -795,6 +795,16 @@ Constraints min & max height & width--------------------------------------------
 چرا برای عرض یک مینیموم و ماکسیمومی رو در نظر گرفتیم؟
 برای اینکه نمیخوایم ارتفاع لایه ما از یک حدی کمتر و از یک حدی بیشتر باشه
 
+Bottom nav bdge-------------------------------------------------------------------------------------
+خود باتم نویگیشن یک کدی داره که میتونی بج اضافه کنی یا پاک کنی
 
+برای پاک کردن بج
+باید آیدی اون آیتم رو بهش بدیم
+bottomNav.removeBadge(R.id.cartFragment)
 
+برای اضافه کردن بج
+bottomNav.getOrCreateBadge(R.id.cartFragment).apply {
+   number = data.quantity.toString().toInt()
+   backgroundColor = ContextCompat.getColor(this@MainActivity, R.color.caribbeanGreen)
+  }
 
