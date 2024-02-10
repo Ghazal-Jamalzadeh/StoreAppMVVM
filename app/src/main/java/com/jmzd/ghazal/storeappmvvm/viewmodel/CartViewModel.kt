@@ -30,6 +30,9 @@ class CartViewModel @Inject constructor(private val repository: CartRepository) 
     //update cart
     private val _updateCartLiveData = MutableLiveData<MyResponse<ResponseUpdateCart>>()
     val updateCartLiveData: LiveData<MyResponse<ResponseUpdateCart>> = _updateCartLiveData
+    //continue
+    private val _continueLiveData = MutableLiveData<MyResponse<ResponseCartList>>()
+    val continueLiveData: LiveData<MyResponse<ResponseCartList>> = _continueLiveData
 
     //--- api call ---//
     fun addToCart(productId : Int , body : BodyAddToCart) = viewModelScope.launch {
@@ -77,6 +80,16 @@ class CartViewModel @Inject constructor(private val repository: CartRepository) 
         val response: Response<ResponseUpdateCart> = repository.cartDeleteProduct(id)
 
         _updateCartLiveData.value = ResponseHandler(response).generateResponse()
+    }
+
+
+    fun cartContinue() = viewModelScope.launch {
+
+        _continueLiveData.value = MyResponse.Loading()
+
+        val response: Response<ResponseCartList> = repository.cartContinue()
+
+        _continueLiveData.value = ResponseHandler(response).generateResponse()
     }
 
 
