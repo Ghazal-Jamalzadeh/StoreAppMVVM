@@ -2,6 +2,7 @@ package com.jmzd.ghazal.storeappmvvm.ui.cart
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,9 @@ class CartFragment : BaseFragment() {
 
     //adapter
     lateinit var cartAdapter : CartAdapter
+
+    //save recycler view state
+    private var recyclerViewState: Parcelable? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -120,11 +124,11 @@ class CartFragment : BaseFragment() {
         binding.apply {
             cartsList.setupRecyclerview(linearlayoutManager, cartAdapter)
             //Auto scroll
-//            cartsList.layoutManager?.onRestoreInstanceState(recyclerViewState)
+            cartsList.layoutManager?.onRestoreInstanceState(recyclerViewState)
             //Click
-//            cartAdapter.setOnItemClickListener { id, type ->
+            cartAdapter.setOnItemClickListener { id, type ->
 //                //Save state
-//                recyclerViewState = cartsList.layoutManager?.onSaveInstanceState()
+                recyclerViewState = cartsList.layoutManager?.onSaveInstanceState()
 //                when (type) {
 //                    INCREMENT -> {
 //                        if (isNetworkAvailable)
@@ -141,7 +145,7 @@ class CartFragment : BaseFragment() {
 //                            viewModel.callDeleteProductApi(id)
 //                    }
 //                }
-//            }
+            }
         }
     }
 
