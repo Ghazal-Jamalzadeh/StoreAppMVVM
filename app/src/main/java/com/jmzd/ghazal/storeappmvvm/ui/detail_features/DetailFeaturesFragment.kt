@@ -1,6 +1,7 @@
 package com.jmzd.ghazal.storeappmvvm.ui.detail_features
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,9 +46,12 @@ class DetailFeaturesFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         //Get id
         viewModel.productIdLiveData.observe(viewLifecycleOwner) {
             if (isNetworkAvailable)
+                Log.d("tagTest", "features api called with $it ")
                 viewModel.getFeatures(it)
         }
 

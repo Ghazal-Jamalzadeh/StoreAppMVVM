@@ -5,15 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.github.mikephil.charting.components.AxisBase
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentDetailChartBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.utils.constants.PRODUCT_ID
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.changeVisibility
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupMyChart
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
 import com.jmzd.ghazal.storeappmvvm.viewmodel.DetailViewModel
-import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DetailChartFragment : BaseFragment() {
@@ -24,6 +30,11 @@ class DetailChartFragment : BaseFragment() {
 
     //viewModel
     private val viewModel by activityViewModels<DetailViewModel>()
+
+    //list
+    private val daysList = arrayListOf<String>()
+    private val daysListForTooltip = arrayListOf<String>()
+    private val pricesList = ArrayList<Entry>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +53,8 @@ class DetailChartFragment : BaseFragment() {
                 viewModel.getPriceChart(it)
         }
 
+        viewModel.getPriceChart(PRODUCT_ID)
+
         //observers
         observePriceChartLiveData()
     }
@@ -57,7 +70,7 @@ class DetailChartFragment : BaseFragment() {
 
                     is MyResponse.Success -> {
                         featuresLoading.changeVisibility(false, pricesChart)
-                        /*response.data?.let { data ->
+                        response.data?.let { data ->
                             daysList.clear()
                             daysListForTooltip.clear()
                             pricesList.clear()
@@ -80,7 +93,7 @@ class DetailChartFragment : BaseFragment() {
                                     }
                                 }
                             }
-                        }*/
+                        }
                     }
 
                     is MyResponse.Error -> {
@@ -100,6 +113,17 @@ class DetailChartFragment : BaseFragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    inner class DaysFormatter(private val daysList: ArrayList<String>) : IndexAxisValueFormatter() {
+        override fun getAxisLabel(value: Float, axis: AxisBase?): String? {
+            val index = value.toInt()
+            return if (index < daysList.size) {
+                daysList[index]
+            } else {
+                null
+            }
+        }
     }
 
 }

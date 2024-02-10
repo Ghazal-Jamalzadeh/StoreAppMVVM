@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.jmzd.ghazal.storeappmvvm.ui.detail_charts.DetailChartFragment
+import com.jmzd.ghazal.storeappmvvm.ui.detail_chart.DetailChartFragment
 import com.jmzd.ghazal.storeappmvvm.ui.detail_comments.DetailCommentsFragment
 import com.jmzd.ghazal.storeappmvvm.ui.detail_features.DetailFeaturesFragment
 

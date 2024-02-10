@@ -53,7 +53,8 @@ class MainActivity : BaseActivity() {
                when(destination.id){
                    R.id.splashFragment ,
                    R.id.loginPhoneFragment ,
-                   R.id.loginVerifyFragment
+                   R.id.loginVerifyFragment ,
+                       R.id.detailFragment ,
                    -> bottomNav.isVisible = false
                    else -> bottomNav.isVisible = true
                }
