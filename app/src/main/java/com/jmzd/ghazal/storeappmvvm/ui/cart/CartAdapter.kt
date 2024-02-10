@@ -15,6 +15,9 @@ import com.jmzd.ghazal.storeappmvvm.data.models.cart.ResponseCartList.*
 import com.jmzd.ghazal.storeappmvvm.databinding.ItemCartBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseDiffUtils
 import com.jmzd.ghazal.storeappmvvm.utils.constants.BASE_URL_IMAGE
+import com.jmzd.ghazal.storeappmvvm.utils.constants.DECREMENT
+import com.jmzd.ghazal.storeappmvvm.utils.constants.DELETE
+import com.jmzd.ghazal.storeappmvvm.utils.constants.INCREMENT
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.loadImage
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.moneySeparating
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -95,9 +98,9 @@ class CartAdapter @Inject constructor(@ApplicationContext private val context: C
                     }
                 }
                 //Click
-//                itemPlusImg.setOnClickListener { onItemClickListener?.let { it(item.id!!, INCREMENT) } }
-//                itemMinusImg.setOnClickListener { onItemClickListener?.let { it(item.id!!, DECREMENT) } }
-//                itemTrashImg.setOnClickListener { onItemClickListener?.let { it(item.id!!, DELETE) } }
+                itemPlusImg.setOnClickListener { onItemClickListener?.let { it(item.id!!, INCREMENT) } }
+                itemMinusImg.setOnClickListener { onItemClickListener?.let { it(item.id!!, DECREMENT) } }
+                itemTrashImg.setOnClickListener { onItemClickListener?.let { it(item.id!!, DELETE) } }
             }
         }
     }

@@ -76,3 +76,8 @@ const val COLOR_BLACK = "#000000"
 
 //args
 var PRODUCT_ID = 0
+
+//update cart
+const val INCREMENT = "increment"
+const val DECREMENT = "decrement"
+const val DELETE = "delete"
