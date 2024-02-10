@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jmzd.ghazal.storeappmvvm.data.models.SimpleResponse
 import com.jmzd.ghazal.storeappmvvm.data.models.cart.BodyAddToCart
+import com.jmzd.ghazal.storeappmvvm.data.models.cart.ResponseCartList
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseDetail
 import com.jmzd.ghazal.storeappmvvm.data.repository.CartRepository
 import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
@@ -22,7 +23,9 @@ class CartViewModel @Inject constructor(private val repository: CartRepository) 
     //detail
     private val _addToCartLiveData = MutableLiveData<MyResponse<SimpleResponse>>()
     val addToCartLiveData: LiveData<MyResponse<SimpleResponse>> = _addToCartLiveData
-
+    //cart list
+    private val _cartListLiveData = MutableLiveData<MyResponse<ResponseCartList>>()
+    val cartListLiveData: LiveData<MyResponse<ResponseCartList>> = _cartListLiveData
 
     //--- api call ---//
     fun addToCart(productId : Int , body : BodyAddToCart) = viewModelScope.launch {
@@ -33,5 +36,16 @@ class CartViewModel @Inject constructor(private val repository: CartRepository) 
 
         _addToCartLiveData.value = ResponseHandler(response).generateResponse()
     }
+
+    fun getCartList() = viewModelScope.launch {
+
+        _cartListLiveData.value = MyResponse.Loading()
+
+        val response: Response<ResponseCartList> = repository.getCartList()
+
+        _cartListLiveData.value = ResponseHandler(response).generateResponse()
+    }
+
+
 
 }
