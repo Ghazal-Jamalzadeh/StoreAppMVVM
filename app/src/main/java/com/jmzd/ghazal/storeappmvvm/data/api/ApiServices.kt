@@ -131,4 +131,7 @@ interface ApiServices {
 
     @PUT("cart/{id}/decrement")
     suspend fun cartDecrement(@Path("id") id : Int ) : Response<ResponseUpdateCart>
+
+    @PUT("cart/{id}")
+    suspend fun cartDelete(@Path("id") id : Int ) : Response<ResponseUpdateCart>
 }
