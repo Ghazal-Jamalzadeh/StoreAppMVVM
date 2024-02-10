@@ -16,6 +16,9 @@ import com.jmzd.ghazal.storeappmvvm.databinding.FragmentCartBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginPhoneBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginVerifyBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.utils.constants.DECREMENT
+import com.jmzd.ghazal.storeappmvvm.utils.constants.DELETE
+import com.jmzd.ghazal.storeappmvvm.utils.constants.INCREMENT
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.moneySeparating
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
@@ -127,24 +130,25 @@ class CartFragment : BaseFragment() {
             cartsList.layoutManager?.onRestoreInstanceState(recyclerViewState)
             //Click
             cartAdapter.setOnItemClickListener { id, type ->
-//                //Save state
+                //Save state
                 recyclerViewState = cartsList.layoutManager?.onSaveInstanceState()
-//                when (type) {
-//                    INCREMENT -> {
-//                        if (isNetworkAvailable)
-//                            viewModel.callIncrementCartApi(id)
-//                    }
-//
-//                    DECREMENT -> {
-//                        if (isNetworkAvailable)
-//                            viewModel.callDecrementDataCartApi(id)
-//                    }
-//
-//                    DELETE -> {
-//                        if (isNetworkAvailable)
-//                            viewModel.callDeleteProductApi(id)
-//                    }
-//                }
+                //handle clicks
+                when (type) {
+                    INCREMENT -> {
+                        if (isNetworkAvailable)
+                            viewModel.increment(id)
+                    }
+
+                    DECREMENT -> {
+                        if (isNetworkAvailable)
+                            viewModel.decrement(id)
+                    }
+
+                    DELETE -> {
+                        if (isNetworkAvailable)
+                            viewModel.deleteProduct(id)
+                    }
+                }
             }
         }
     }
