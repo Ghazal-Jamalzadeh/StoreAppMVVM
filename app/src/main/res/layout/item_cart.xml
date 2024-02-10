@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ColoredShadowLight"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/_10mdp"
+    android:layout_marginTop="@dimen/_5mdp"
+    android:layout_marginBottom="@dimen/_5mdp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/_3mdp"
+    app:cardElevation="@dimen/_5mdp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--Image-->
+        <ImageView
+            android:id="@+id/itemImg"
+            android:layout_width="@dimen/_100mdp"
+            android:layout_height="@dimen/_80mdp"
+            android:padding="@dimen/_15mdp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
+        <!--Controller-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/controllerLay"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_30mdp"
+            android:layout_marginHorizontal="@dimen/_10mdp"
+            android:layout_marginVertical="@dimen/_5mdp"
+            android:background="@drawable/bg_rounded_cultured"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/itemImg"
+            app:layout_constraintStart_toStartOf="@id/itemImg"
+            app:layout_constraintTop_toBottomOf="@id/itemImg">
+            <!--Trash-->
+            <ImageView
+                android:id="@+id/itemTrashImg"
+                android:layout_width="@dimen/_25mdp"
+                android:layout_height="@dimen/_25mdp"
+                android:padding="@dimen/_7mdp"
+                android:src="@drawable/trash_can"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/red" />
+            <!--Minus-->
+            <ImageView
+                android:id="@+id/itemMinusImg"
+                android:layout_width="@dimen/_25mdp"
+                android:layout_height="@dimen/_25mdp"
+                android:padding="@dimen/_7mdp"
+                android:src="@drawable/minus"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/salmon" />
+            <!--Count-->
+            <TextView
+                android:id="@+id/itemCountTxt"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginHorizontal="@dimen/_3mdp"
+                android:gravity="center"
+                android:textColor="@color/eerieBlack"
+                android:textSize="@dimen/_14font_mdp"
+                app:layout_constraintBottom_toBottomOf="@id/itemPlusImg"
+                app:layout_constraintEnd_toStartOf="@id/itemPlusImg"
+                app:layout_constraintStart_toEndOf="@id/itemMinusImg"
+                app:layout_constraintTop_toTopOf="@id/itemPlusImg" />
+            <!--Plus-->
+            <ImageView
+                android:id="@+id/itemPlusImg"
+                android:layout_width="@dimen/_25mdp"
+                android:layout_height="@dimen/_25mdp"
+                android:padding="@dimen/_7mdp"
+                android:src="@drawable/plus"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/royalBlue" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--Title-->
+        <TextView
+            android:id="@+id/itemTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10mdp"
+            android:layout_marginTop="@dimen/_5mdp"
+            android:ellipsize="end"
+            android:lineSpacingExtra="@dimen/_3mdp"
+            android:maxLines="2"
+            android:textColor="@color/darkStrategy"
+            android:textSize="@dimen/_10font_mdp"
+            app:layout_constraintEnd_toStartOf="@id/itemImg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="عنوان محصول" />
+        <!--Guarantee-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/guaranteeLay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5mdp"
+            app:layout_constraintEnd_toEndOf="@+id/itemTitle"
+            app:layout_constraintStart_toStartOf="@+id/itemTitle"
+            app:layout_constraintTop_toBottomOf="@id/itemTitle">
+
+            <TextView
+                android:id="@+id/guaranteeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/_5mdp"
+                android:gravity="center"
+                android:text="@string/guarantee"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_7font_mdp"
+                app:drawableEndCompat="@drawable/life_ring_light_mini"
+                app:drawableTint="@color/gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/guaranteeTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_5mdp"
+                android:gravity="center_vertical"
+                android:textColor="@color/eerieBlack"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textSize="@dimen/_7font_mdp"
+                app:layout_constraintEnd_toStartOf="@id/guaranteeTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/guaranteeTitle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--Color-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/colorLay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5mdp"
+            app:layout_constraintEnd_toEndOf="@+id/itemTitle"
+            app:layout_constraintStart_toStartOf="@+id/itemTitle"
+            app:layout_constraintTop_toBottomOf="@id/guaranteeLay">
+
+            <TextView
+                android:id="@+id/colorTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/_5mdp"
+                android:gravity="center"
+                android:text="@string/color"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_7font_mdp"
+                app:drawableEndCompat="@drawable/swatchbook_light_mini"
+                app:drawableTint="@color/gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/colorTxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_5mdp"
+                android:gravity="center_vertical"
+                android:textColor="@color/eerieBlack"
+                android:textSize="@dimen/_7font_mdp"
+                app:layout_constraintBottom_toBottomOf="@id/colorTitle"
+                app:layout_constraintEnd_toStartOf="@id/colorTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/colorTitle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--Price-->
+        <TextView
+            android:id="@+id/itemPriceDiscount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/darkTurquoise"
+            android:textSize="@dimen/_10font_mdp"
+            app:layout_constraintBottom_toTopOf="@+id/itemPrice"
+            app:layout_constraintEnd_toEndOf="@+id/itemTitle"
+            app:layout_constraintStart_toStartOf="@+id/itemTitle"
+            tools:text="2.000 تومان" />
+        <!--Price discount-->
+        <TextView
+            android:id="@+id/itemPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/darkTurquoise"
+            android:textSize="@dimen/_12font_mdp"
+            app:layout_constraintBottom_toBottomOf="@id/controllerLay"
+            app:layout_constraintEnd_toEndOf="@+id/itemTitle"
+            app:layout_constraintStart_toStartOf="@+id/itemTitle"
+            tools:text="2.000 تومان" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
