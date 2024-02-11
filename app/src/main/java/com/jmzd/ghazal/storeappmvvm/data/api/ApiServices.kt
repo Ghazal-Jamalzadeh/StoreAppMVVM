@@ -29,6 +29,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.profile_favorite.ResponseProduct
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_favorite.ResponseProfileFavorites
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_order.ResponseProfileOrdersList
 import com.jmzd.ghazal.storeappmvvm.data.models.search.ResponseSearch
+import com.jmzd.ghazal.storeappmvvm.data.models.shipping.ResponseShipping
 import com.jmzd.ghazal.storeappmvvm.data.models.wallet.BodyIncreaseWallet
 import com.jmzd.ghazal.storeappmvvm.data.models.wallet.ResponseIncreaseWallet
 import okhttp3.RequestBody
@@ -137,5 +138,10 @@ interface ApiServices {
 
     @GET("cart/continue")
     suspend fun cartContinue() : Response<ResponseCartList>
+
+    @GET("shipping")
+    suspend fun getShipping() : Response<ResponseShipping>
+
+
 
 }
