@@ -1,14 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/ghostWhite"
     tools:context=".ui.shipping.ShippingFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!--Toolbar-->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/toolbarLay"
+        style="@style/ColoredShadowDark"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="@dimen/_8mdp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="p">
 
-</FrameLayout>
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_base" />
+
+    </com.google.android.material.card.MaterialCardView>
+    <!--Title-->
+    <TextView
+        android:id="@+id/invoiceTitle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_80mdp"
+        android:layout_marginTop="@dimen/mines5mdp"
+        android:background="@drawable/bg_gradient_blue"
+        android:gravity="center"
+        android:paddingBottom="@dimen/_15mdp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_18font_mdp"
+        app:fontPath="fonts/iransans_bold.ttf"
+        app:layout_constraintTop_toBottomOf="@id/toolbarLay" />
+    <!--Scroll-->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollLay"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/invoiceTitle"
+        android:fillViewport="true"
+        android:layout_marginTop="@dimen/mines20mdp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <!--Container-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_60mdp">
+            <!--Products-->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/productsLay"
+                style="@style/ColoredShadowDark"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_20mdp"
+                app:cardCornerRadius="@dimen/_8mdp"
+                app:cardElevation="@dimen/_8mdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_max="@dimen/_200mdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:targetApi="p">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/productsList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:paddingHorizontal="@dimen/_10mdp"
+                    android:paddingVertical="@dimen/_10mdp" />
+
+            </com.google.android.material.card.MaterialCardView>
+            <!--Wallet-->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/walletLay"
+                style="@style/ColoredShadowDark"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_45mdp"
+                android:layout_marginHorizontal="@dimen/_20mdp"
+                android:layout_marginTop="@dimen/_10mdp"
+                app:cardCornerRadius="@dimen/_8mdp"
+                app:cardElevation="@dimen/_8mdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/productsLay"
+                tools:targetApi="p">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|right"
+                    android:layout_marginEnd="@dimen/_10mdp"
+                    android:text="@string/yourWalletBalance"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_10font_mdp"
+                    tools:ignore="RtlHardcoded" />
+
+                <TextView
+                    android:id="@+id/walletTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|left"
+                    android:layout_marginStart="@dimen/_10mdp"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_12font_mdp"
+                    app:fontPath="fonts/iransans_bold.ttf"
+                    tools:ignore="RtlHardcoded" />
+
+                <ProgressBar
+                    android:id="@+id/walletLoading"
+                    android:layout_width="@dimen/_15mdp"
+                    android:layout_height="@dimen/_15mdp"
+                    android:layout_gravity="center_vertical|left"
+                    android:layout_marginStart="@dimen/_20mdp"
+                    android:theme="@style/DarkProgressbar"
+                    tools:ignore="RtlHardcoded" />
+
+            </com.google.android.material.card.MaterialCardView>
+            <!--Address-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/addressLay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/walletLay"
+                tools:targetApi="p">
+
+                <include
+                    android:id="@+id/shippingAddressLay"
+                    layout="@layout/shipping_address" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--Discount-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/discountLay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addressLay"
+                tools:targetApi="p">
+
+                <include
+                    android:id="@+id/shippingDiscountLay"
+                    layout="@layout/shipping_coupon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+    <!--Button-->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/submitBtn"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40mdp"
+        android:layout_margin="@dimen/_20mdp"
+        android:layout_marginTop="@dimen/_20mdp"
+        android:background="@drawable/bg_gradient_rounded"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:stateListAnimator="@null"
+        android:text="@string/pay"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12font_mdp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+    <!--Group-->
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/containerGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="invoiceTitle,scrollLay,submitBtn" />
+    <!--Loading-->
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="@dimen/_25mdp"
+        android:layout_height="@dimen/_25mdp"
+        android:layout_gravity="center_vertical|left"
+        android:layout_marginStart="@dimen/_20mdp"
+        android:theme="@style/DarkProgressbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="RtlHardcoded" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

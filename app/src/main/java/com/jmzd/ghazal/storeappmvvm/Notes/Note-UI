@@ -833,3 +833,19 @@ show / hide items with recyclerView Scroll event--------------------------------
                 }
             })
         }
+
+Group-----------------------------------------------------------------------------------------------
+وقتی این گروپ رو مثلا گان کنیم تمام اون سه تا ویو که آیدیشون رو دادیم گان میشن
+مثل اینه هر سه تاشون توی یک کانسترینت لایوت باشن
+ولی استقلال بیشتری دارن اینجوری
+و مجبور نیستن همه توی یکی باشن
+
+همچینین گروپ خیلی خیلی خیلی سبک نر از کانسترینت لایوت هست
+
+ <androidx.constraintlayout.widget.Group
+        android:id="@+id/containerGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="invoiceTitle,scrollLay,submitBtn" />
+

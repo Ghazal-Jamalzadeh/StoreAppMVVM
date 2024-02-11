@@ -57,6 +57,8 @@
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/fragment_profile_edit.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/fragment_profile_favorite.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/fragment_profile_orders.xml" value="0.3681640625" />
+        <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/fragment_search.xml" value="0.2" />
+        <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/fragment_shipping.xml" value="0.18" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/item_addresses.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/item_cart.xml" value="0.1" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/item_comment.xml" value="0.2" />
@@ -69,6 +71,7 @@
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/profile_user_info.xml" value="0.2" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/profile_user_menu.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/profile_user_order.xml" value="0.2" />
+        <entry key="..\:/AndroidProjects/StoreAppMVVM3/app/src/main/res/layout/shipping_coupon.xml" value="0.2" />
       </map>
     </option>
   </component>

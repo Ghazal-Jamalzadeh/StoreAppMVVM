@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentSearchBinding
+import com.jmzd.ghazal.storeappmvvm.databinding.FragmentShippingBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ShippingFragment : BaseFragment() {
 
     //binding
-    private var _binding: FragmentSearchBinding? = null
+    private var _binding: FragmentShippingBinding? = null
     private val binding get() = _binding!!
 
     //viewModel
@@ -24,7 +25,7 @@ class ShippingFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentSearchBinding.inflate(layoutInflater)
+        _binding = FragmentShippingBinding.inflate(layoutInflater)
         return binding.root
     }
 

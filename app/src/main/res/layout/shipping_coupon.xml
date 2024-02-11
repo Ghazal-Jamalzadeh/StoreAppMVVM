@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/ColoredShadowDark"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20mdp"
+        android:layout_marginBottom="@dimen/_30mdp"
+        app:cardCornerRadius="@dimen/_8mdp"
+        app:cardElevation="@dimen/_8mdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="p">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10mdp">
+            <!--Title-->
+            <TextView
+                android:id="@+id/couponTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/discountCode"
+                android:textColor="@color/eerieBlack"
+                android:textSize="@dimen/_9font_mdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!--Check-->
+            <TextView
+                android:id="@+id/checkTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/checkCode"
+                android:textColor="@color/royalBlue"
+                android:textSize="@dimen/_9mdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/couponTitle" />
+            <!--Loading-->
+            <ProgressBar
+                android:id="@+id/couponLoading"
+                android:layout_width="@dimen/_15mdp"
+                android:layout_height="@dimen/_15mdp"
+                android:layout_gravity="center_vertical|left"
+                android:layout_marginStart="@dimen/_10mdp"
+                android:theme="@style/DarkProgressbar"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/couponTitle"
+                tools:ignore="RtlHardcoded" />
+            <!--Remove-->
+            <TextView
+                android:id="@+id/removeTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/removeCode"
+                android:textColor="@color/red"
+                android:textSize="@dimen/_10mdp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/couponTitle" />
+            <!--Line-->
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:alpha="0.5"
+                android:background="@color/water"
+                app:layout_constraintTop_toBottomOf="@id/couponTitle" />
+            <!--Code-->
+            <EditText
+                android:id="@+id/codeEdt"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_33mdp"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:background="@drawable/bg_circle_cultured"
+                android:gravity="center_vertical|right"
+                android:hint="@string/writeDiscountCode"
+                android:maxLines="1"
+                android:paddingHorizontal="@dimen/_10mdp"
+                android:textColor="@color/eerieBlack"
+                android:textColorHint="@color/silver"
+                android:textSize="@dimen/_10font_mdp"
+                app:drawableTint="@color/darkStrategy"
+                app:fontPath="fonts/iransans_bold.ttf"
+                app:layout_constraintEnd_toEndOf="@id/line1"
+                app:layout_constraintStart_toStartOf="@id/line1"
+                app:layout_constraintTop_toBottomOf="@id/line1"
+                tools:ignore="RtlHardcoded" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

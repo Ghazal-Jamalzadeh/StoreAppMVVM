@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/ColoredShadowDark"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_20mdp"
+        android:layout_marginVertical="@dimen/_10mdp"
+        app:cardCornerRadius="@dimen/_8mdp"
+        app:cardElevation="@dimen/_8mdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="p">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10mdp">
+            <!--Title-->
+            <TextView
+                android:id="@+id/addressTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/yourAddress"
+                android:textColor="@color/eerieBlack"
+                android:textSize="@dimen/_9font_mdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!--Change-->
+            <TextView
+                android:id="@+id/changeAddressTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/changeAddress"
+                android:visibility="gone"
+                android:textColor="@color/royalBlue"
+                android:textSize="@dimen/_9mdp"
+                app:fontPath="iransans_bold.ttf"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/addressTitle" />
+            <!--Line-->
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_10mdp"
+                android:alpha="0.5"
+                android:background="@color/water"
+                app:layout_constraintTop_toBottomOf="@id/addressTitle" />
+            <!--Name-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/recipientNameLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10mdp"
+                app:layout_constraintTop_toBottomOf="@id/line1">
+
+                <TextView
+                    android:id="@+id/recipientNameTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/_5mdp"
+                    android:gravity="center"
+                    android:text="@string/recipientName"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_8font_mdp"
+                    app:drawableEndCompat="@drawable/user_mini"
+                    app:drawableTint="@color/gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/recipientNameTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_5mdp"
+                    android:gravity="center_vertical|right"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_9font_mdp"
+                    app:fontPath="fonts/iransans_bold.ttf"
+                    app:layout_constraintBottom_toBottomOf="@id/recipientNameTitle"
+                    app:layout_constraintEnd_toStartOf="@id/recipientNameTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/recipientNameTitle"
+                    tools:ignore="RtlHardcoded" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--Location-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/locationLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10mdp"
+                app:layout_constraintTop_toBottomOf="@id/recipientNameLay">
+
+                <TextView
+                    android:id="@+id/locationTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/_5mdp"
+                    android:gravity="center"
+                    android:text="@string/address"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_8font_mdp"
+                    app:drawableEndCompat="@drawable/map_location_dot_mini"
+                    app:drawableTint="@color/gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/locationTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_5mdp"
+                    android:gravity="center_vertical|right"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_9font_mdp"
+                    app:fontPath="fonts/iransans_bold.ttf"
+                    app:layout_constraintBottom_toBottomOf="@id/locationTitle"
+                    app:layout_constraintEnd_toStartOf="@id/locationTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/locationTitle"
+                    tools:ignore="RtlHardcoded" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--Phone-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/phoneLay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10mdp"
+                app:layout_constraintTop_toBottomOf="@id/locationLay">
+
+                <TextView
+                    android:id="@+id/phoneTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/_5mdp"
+                    android:gravity="center"
+                    android:text="@string/phoneNumber2"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_8font_mdp"
+                    app:drawableEndCompat="@drawable/phone_mini"
+                    app:drawableTint="@color/gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/phoneTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_5mdp"
+                    android:gravity="center_vertical|right"
+                    android:textColor="@color/eerieBlack"
+                    android:textSize="@dimen/_9font_mdp"
+                    app:fontPath="fonts/iransans_bold.ttf"
+                    app:layout_constraintBottom_toBottomOf="@id/phoneTitle"
+                    app:layout_constraintEnd_toStartOf="@id/phoneTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/phoneTitle"
+                    tools:ignore="RtlHardcoded" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
