@@ -1,10 +1,7 @@
 package com.jmzd.ghazal.storeappmvvm.data.api
 
 import com.jmzd.ghazal.storeappmvvm.data.models.SimpleResponse
-import com.jmzd.ghazal.storeappmvvm.data.models.address.BodySubmitAddress
-import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProfileAddresses
-import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProvinceList
-import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseSubmitAddress
+import com.jmzd.ghazal.storeappmvvm.data.models.address.*
 import com.jmzd.ghazal.storeappmvvm.data.models.cart.BodyAddToCart
 import com.jmzd.ghazal.storeappmvvm.data.models.cart.ResponseCartList
 import com.jmzd.ghazal.storeappmvvm.data.models.cart.ResponseUpdateCart
@@ -141,6 +138,9 @@ interface ApiServices {
 
     @GET("shipping")
     suspend fun getShipping() : Response<ResponseShipping>
+
+    @PUT("shipping/set/address")
+    suspend fun shippingSetAddress(@Body body: BodySetAddressForShipping) : Response<ResponseSetAddressForShipping>
 
 
 
