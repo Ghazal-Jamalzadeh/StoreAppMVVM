@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jmzd.ghazal.storeappmvvm.R
@@ -207,7 +208,7 @@ class CartFragment : BaseFragment() {
                         response.data?.let {
                             //Navigate
 //                            if (isNavigateToShipping)
-//                                findNavController().navigate(R.id.actionToShipping)
+                                findNavController().navigate(R.id.action_to_shipping_fragment)
 //                            isNavigateToShipping = false
                         }
                     }
