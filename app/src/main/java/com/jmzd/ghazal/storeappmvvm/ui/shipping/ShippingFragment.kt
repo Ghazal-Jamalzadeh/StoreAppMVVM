@@ -1,6 +1,7 @@
 package com.jmzd.ghazal.storeappmvvm.ui.shipping
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -106,20 +107,20 @@ class ShippingFragment : BaseFragment() {
                 initRecycler(order.orderItems)
             }
             //Addresses
-//            if (data.addresses.isNullOrEmpty().not()) {
-//                data.addresses?.get(0)?.let { address ->
-//                    setAddressData(address)
-//                }
-//                //More address
-//                if (data.addresses!!.size > 1) {
-//                    shippingAddressLay.changeAddressTxt.apply {
-//                        isVisible = true
-//                        setOnClickListener {
+            if (data.addresses.isNullOrEmpty().not()) {
+                data.addresses?.get(0)?.let { address ->
+                    setAddressData(address)
+                }
+                //More address
+                if (data.addresses!!.size > 1) {
+                    shippingAddressLay.changeAddressTxt.apply {
+                        isVisible = true
+                        setOnClickListener {
 //                            showChangeAddressDialog(data.addresses)
-//                        }
-//                    }
-//                }
-//            }
+                        }
+                    }
+                }
+            }
             //Payment
 //            submitBtn.setOnClickListener {
 //                if (data.addresses.isNullOrEmpty().not()) {
@@ -130,6 +131,21 @@ class ShippingFragment : BaseFragment() {
 //                }
 //            }
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun setAddressData(address: ResponseShipping.Addresse) {
+        //Body
+//        bodySetAddress.addressId = address.id.toString()
+        //Set data
+        binding.shippingAddressLay.apply {
+            recipientNameTxt.text = "${address.receiverFirstname} ${address.receiverLastname}"
+            locationTxt.text = address.postalAddress
+            phoneTxt.text = address.receiverCellphone
+        }
+        //Call set address
+//        if (isNetworkAvailable)
+//            viewModel.callSetAddressApi(bodySetAddress)
     }
 
     //--- recyclers ---//
