@@ -31,6 +31,7 @@ import com.jmzd.ghazal.storeappmvvm.viewmodel.CartViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CartFragment : BaseFragment() {
@@ -43,6 +44,7 @@ class CartFragment : BaseFragment() {
     private val viewModel by viewModels<CartViewModel>()
 
     //adapter
+    @Inject
     lateinit var cartAdapter : CartAdapter
 
     //save recycler view state
