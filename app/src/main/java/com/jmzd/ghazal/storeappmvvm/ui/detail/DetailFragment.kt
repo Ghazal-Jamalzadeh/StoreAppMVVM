@@ -35,7 +35,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.constants.*
 import com.jmzd.ghazal.storeappmvvm.utils.events.EventBus
 import com.jmzd.ghazal.storeappmvvm.utils.events.Events
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.*
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.viewmodel.CartViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -115,18 +115,18 @@ class DetailFragment : BaseFragment() {
         binding.apply {
             viewModel.detailLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         detailLoading.changeVisibility(true, containerLay)
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         detailLoading.changeVisibility(false, containerLay)
                         response.data?.let { data ->
                             initDetailViews(data)
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         detailLoading.changeVisibility(false, containerLay)
                         root.showSnackBar(response.message!!)
                     }
@@ -140,11 +140,11 @@ class DetailFragment : BaseFragment() {
         binding.detailHeaderLay.apply {
             viewModel.likeLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         favLoading.changeVisibility(true, favImg)
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         favLoading.changeVisibility(false, favImg)
                         response.data?.let { data ->
                             updateFavUI(data.count!!)
@@ -161,7 +161,7 @@ class DetailFragment : BaseFragment() {
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         favLoading.changeVisibility(false, favImg)
                         root.showSnackBar(response.message!!)
                     }
@@ -175,11 +175,11 @@ class DetailFragment : BaseFragment() {
         binding.detailBottom.apply {
             cartViewModel.addToCartLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         addToCartBtn.enableLoading(true)
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         addToCartBtn.enableLoading(false)
                         response.data?.let { data ->
                             root.showSnackBar(data.message!!)
@@ -192,7 +192,7 @@ class DetailFragment : BaseFragment() {
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         addToCartBtn.enableLoading(false)
                         root.showSnackBar(response.message!!)
                     }

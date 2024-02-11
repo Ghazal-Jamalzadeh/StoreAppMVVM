@@ -10,7 +10,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.search_filter.FilterModel
 import com.jmzd.ghazal.storeappmvvm.data.repository.CategoryProductsRepository
 import com.jmzd.ghazal.storeappmvvm.data.repository.SearchFilterRepository
 import com.jmzd.ghazal.storeappmvvm.utils.constants.*
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.utils.network.ResponseHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -25,8 +25,8 @@ class CategoryProductsViewModel @Inject constructor(
     ViewModel() {
 
     //products live data
-    private val _productsLiveData = MutableLiveData<MyResponse<ResponseProducts>>()
-    val productsLiveData: LiveData<MyResponse<ResponseProducts>> = _productsLiveData
+    private val _productsLiveData = MutableLiveData<NetworkRequest<ResponseProducts>>()
+    val productsLiveData: LiveData<NetworkRequest<ResponseProducts>> = _productsLiveData
 
     //search filter
     private val _filterLiveData = MutableLiveData<MutableList<FilterModel>>()
@@ -75,7 +75,7 @@ class CategoryProductsViewModel @Inject constructor(
     fun getProductsByCategory(slug: String, queries: Map<String, String>) =
         viewModelScope.launch {
 
-            _productsLiveData.value = MyResponse.Loading()
+            _productsLiveData.value = NetworkRequest.Loading()
 
             val response: Response<ResponseProducts> = repository.getProducts(slug, queries)
 

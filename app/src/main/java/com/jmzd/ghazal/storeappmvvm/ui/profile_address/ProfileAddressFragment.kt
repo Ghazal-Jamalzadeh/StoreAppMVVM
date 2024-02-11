@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmzd.ghazal.storeappmvvm.R
-import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProfileAddresses
 import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseProfileAddresses.ResponseProfileAddressesItem
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentProfileAddressBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
@@ -18,7 +17,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.events.EventBus
 import com.jmzd.ghazal.storeappmvvm.utils.events.Events
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileAddressesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -86,11 +85,11 @@ class ProfileAddressFragment : BaseFragment() {
         binding.apply {
             viewModel.profileAddressesLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         addressList.showShimmer()
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         addressList.hideShimmer()
                         response.data?.let { data ->
                             if (data.isNotEmpty()) {
@@ -102,7 +101,7 @@ class ProfileAddressFragment : BaseFragment() {
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         addressList.hideShimmer()
                         root.showSnackBar(response.message!!)
                     }

@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_comments.ResponseDeleteComment
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_favorite.ResponseProfileFavorites
 import com.jmzd.ghazal.storeappmvvm.data.repository.ProfileFavoritesRepository
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.utils.network.ResponseHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -18,17 +18,17 @@ import javax.inject.Inject
 class ProfileFavoritesViewModel @Inject constructor(private val repository: ProfileFavoritesRepository) : ViewModel() {
 
     //profile favorites
-    private val _profileFavoritesLiveData = MutableLiveData<MyResponse<ResponseProfileFavorites>>()
-    val profileFavoritesLiveData: LiveData<MyResponse<ResponseProfileFavorites>> = _profileFavoritesLiveData
+    private val _profileFavoritesLiveData = MutableLiveData<NetworkRequest<ResponseProfileFavorites>>()
+    val profileFavoritesLiveData: LiveData<NetworkRequest<ResponseProfileFavorites>> = _profileFavoritesLiveData
 
     //delete favorite
-    private val _deleteFavoriteLiveData = MutableLiveData<MyResponse<ResponseDeleteComment>>()
-    val deleteFavoriteLiveData: LiveData<MyResponse<ResponseDeleteComment>> = _deleteFavoriteLiveData
+    private val _deleteFavoriteLiveData = MutableLiveData<NetworkRequest<ResponseDeleteComment>>()
+    val deleteFavoriteLiveData: LiveData<NetworkRequest<ResponseDeleteComment>> = _deleteFavoriteLiveData
 
     //--- api call ---//
     fun getFavorites() = viewModelScope.launch {
 
-        _profileFavoritesLiveData.value = MyResponse.Loading()
+        _profileFavoritesLiveData.value = NetworkRequest.Loading()
 
         val response: Response<ResponseProfileFavorites> = repository.getFavorites()
 
@@ -37,7 +37,7 @@ class ProfileFavoritesViewModel @Inject constructor(private val repository: Prof
 
     fun deleteFavorite(id : Int) = viewModelScope.launch {
 
-        _deleteFavoriteLiveData.value = MyResponse.Loading()
+        _deleteFavoriteLiveData.value = NetworkRequest.Loading()
 
         val response: Response<ResponseDeleteComment> = repository.deleteFavorite(id)
 

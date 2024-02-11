@@ -21,13 +21,12 @@ import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseProfile
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.ResponseWallet
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentProfileBinding
-import com.jmzd.ghazal.storeappmvvm.utils.*
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.constants.*
 import com.jmzd.ghazal.storeappmvvm.utils.events.EventBus
 import com.jmzd.ghazal.storeappmvvm.utils.events.Events
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.*
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.WalletViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -135,13 +134,13 @@ class ProfileFragment : BaseFragment(), ImagePickerResultListener {
     @SuppressLint("SetTextI18n")
     private fun observeProfileLiveData() {
         binding.apply {
-            viewModel.profileLiveData.observe(viewLifecycleOwner) { response: MyResponse<ResponseProfile> ->
+            viewModel.profileLiveData.observe(viewLifecycleOwner) { response: NetworkRequest<ResponseProfile> ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         loading.isVisible = true
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         loading.isVisible = false
                         response.data?.let { data ->
                             //Avatar
@@ -168,7 +167,7 @@ class ProfileFragment : BaseFragment(), ImagePickerResultListener {
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         loading.isVisible = false
                         root.showSnackBar(response.message!!)
                     }
@@ -179,20 +178,20 @@ class ProfileFragment : BaseFragment(), ImagePickerResultListener {
 
     private fun observeWalletBalanceLiveData() {
         binding.infoLay.apply {
-            walletViewModel.walletBalanceLiveData.observe(viewLifecycleOwner) { response: MyResponse<ResponseWallet> ->
+            walletViewModel.walletBalanceLiveData.observe(viewLifecycleOwner) { response: NetworkRequest<ResponseWallet> ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         walletLoading.changeVisibility(true, walletTxt)
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         walletLoading.changeVisibility(false, walletTxt)
                         response.data?.let { data: ResponseWallet ->
                             walletTxt.text = data.wallet.toString().toInt().moneySeparating()
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         walletLoading.changeVisibility(false, walletTxt)
                         root.showSnackBar(response.message!!)
                     }
@@ -205,17 +204,17 @@ class ProfileFragment : BaseFragment(), ImagePickerResultListener {
         binding.apply {
             viewModel.avatarLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         avatarLoading.isVisible = true
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         avatarLoading.isVisible = false
                         if (isNetworkAvailable)
                             viewModel.getProfileData()
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         avatarLoading.isVisible = false
                         root.showSnackBar(response.message!!)
                     }

@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.core.graphics.drawable.DrawableCompat.setTint
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -23,7 +22,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.extensions.enableLoading
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.setTint
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.transparentCorners
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileAddressesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -138,9 +137,9 @@ class AddressAddFragment : BaseFragment() {
         binding.apply {
             viewModel.provinceListLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {}
+                    is NetworkRequest.Loading -> {}
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         response.data?.let { data ->
                             if (data.isNotEmpty()) {
                                 data.forEach {
@@ -162,7 +161,7 @@ class AddressAddFragment : BaseFragment() {
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         root.showSnackBar(response.message!!)
                     }
                 }
@@ -174,9 +173,9 @@ class AddressAddFragment : BaseFragment() {
         binding.apply {
             viewModel.cityListLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {}
+                    is NetworkRequest.Loading -> {}
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         response.data?.let { data ->
                             cityInpLay.isVisible = true
                             if (data.isNotEmpty()) {
@@ -197,7 +196,7 @@ class AddressAddFragment : BaseFragment() {
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         root.showSnackBar(response.message!!)
                     }
                 }
@@ -209,18 +208,18 @@ class AddressAddFragment : BaseFragment() {
         binding.apply {
             viewModel.submitAddressLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         submitBtn.enableLoading(true)
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         submitBtn.enableLoading(false)
                         response.data?.let {
                             lifecycleScope.launch { EventBus.publish(Events.IsUpdateAddress) }
                             findNavController().popBackStack()
                         }
                     }
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         submitBtn.enableLoading(false)
                         root.showSnackBar(response.message!!)
                     }
@@ -233,11 +232,11 @@ class AddressAddFragment : BaseFragment() {
         binding.apply {
             viewModel.removeAddressLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         submitBtn.enableLoading(true)
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         submitBtn.enableLoading(false)
                         response.data?.let {
                             lifecycleScope.launch { EventBus.publish(Events.IsUpdateAddress) }
@@ -245,7 +244,7 @@ class AddressAddFragment : BaseFragment() {
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         submitBtn.enableLoading(false)
                         root.showSnackBar(response.message!!)
                     }

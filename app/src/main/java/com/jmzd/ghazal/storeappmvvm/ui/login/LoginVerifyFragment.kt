@@ -29,7 +29,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.enableLoading
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.hideKeyboard
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.utils.otp.SMSBroadcastReceiver
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -130,16 +130,16 @@ class LoginVerifyFragment : BaseFragment() {
     //--- observers ---//
     private fun observeLoginLiveData() {
         binding.apply {
-            viewModel.loginLiveData.observe(viewLifecycleOwner) { response: MyResponse<ResponseLogin>? ->
+            viewModel.loginLiveData.observe(viewLifecycleOwner) { response: NetworkRequest<ResponseLogin>? ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         sendAgainBtn.enableLoading(true)
                     }
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         sendAgainBtn.enableLoading(false)
                         root.showSnackBar(response.message!!)
                     }
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         sendAgainBtn.enableLoading(false)
                         response.data.let {
                             handleTimer().start()
@@ -152,17 +152,17 @@ class LoginVerifyFragment : BaseFragment() {
 
     private fun observeVerifyLiveData() {
         binding.apply {
-            viewModel.verifyLiveData.observe(viewLifecycleOwner) { response: MyResponse<ResponseVerify>? ->
+            viewModel.verifyLiveData.observe(viewLifecycleOwner) { response: NetworkRequest<ResponseVerify>? ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         timerLay.alpha = 0.3f
                     }
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         timerLay.alpha = 1.0f
 
                         root.showSnackBar(response.message!!)
                     }
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         timerLay.alpha = 1.0f
 
                         response.data.let { data :ResponseVerify?  ->

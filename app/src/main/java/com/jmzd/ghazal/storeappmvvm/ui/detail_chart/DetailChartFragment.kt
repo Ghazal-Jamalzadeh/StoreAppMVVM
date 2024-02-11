@@ -15,7 +15,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.constants.PRODUCT_ID
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.changeVisibility
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupMyChart
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.viewmodel.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -64,11 +64,11 @@ class DetailChartFragment : BaseFragment() {
         binding.apply {
             viewModel.priceChartLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         featuresLoading.changeVisibility(true, pricesChart)
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         featuresLoading.changeVisibility(false, pricesChart)
                         response.data?.let { data ->
                             daysList.clear()
@@ -96,7 +96,7 @@ class DetailChartFragment : BaseFragment() {
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         featuresLoading.changeVisibility(false, pricesChart)
                         root.showSnackBar(response.message!!)
                     }

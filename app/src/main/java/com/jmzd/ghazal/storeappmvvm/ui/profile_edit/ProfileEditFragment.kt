@@ -17,7 +17,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.events.EventBus
 import com.jmzd.ghazal.storeappmvvm.utils.events.Events
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.enableLoading
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog
@@ -94,11 +94,11 @@ class ProfileEditFragment : BottomSheetDialogFragment() {
         binding.apply {
             viewModel.profileLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         loading.isVisible = true
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         loading.isVisible = false
                         response.data?.let { data ->
                             if (data.firstname.isNullOrEmpty().not())
@@ -112,7 +112,7 @@ class ProfileEditFragment : BottomSheetDialogFragment() {
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         loading.isVisible = false
                         root.showSnackBar(response.message!!)
                     }
@@ -125,11 +125,11 @@ class ProfileEditFragment : BottomSheetDialogFragment() {
         binding.apply {
             viewModel.updateProfileLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         submitBtn.enableLoading(true)
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         submitBtn.enableLoading(false)
                         response.data?.let {
                             lifecycleScope.launch {
@@ -139,7 +139,7 @@ class ProfileEditFragment : BottomSheetDialogFragment() {
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         submitBtn.enableLoading(false)
                         root.showSnackBar(response.message!!)
                     }

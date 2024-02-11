@@ -14,7 +14,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.extensions.enableLoading
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.moneySeparating
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.openBrowser
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.viewmodel.WalletViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -78,11 +78,11 @@ class IncreaseWalletFragment : BottomSheetDialogFragment() {
         binding.apply {
             viewModel.increaseWalletLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         submitBtn.enableLoading(true)
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         submitBtn.enableLoading(false)
                         response.data?.let { data ->
                             Uri.parse(data.startPay).openBrowser(requireContext())
@@ -90,7 +90,7 @@ class IncreaseWalletFragment : BottomSheetDialogFragment() {
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         submitBtn.enableLoading(false)
                         root.showSnackBar(response.message!!)
                     }

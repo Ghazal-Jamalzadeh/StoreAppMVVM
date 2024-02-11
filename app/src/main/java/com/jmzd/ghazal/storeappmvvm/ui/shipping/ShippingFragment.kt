@@ -12,6 +12,7 @@ import com.jmzd.ghazal.storeappmvvm.databinding.FragmentSearchBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentShippingBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
+import com.jmzd.ghazal.storeappmvvm.viewmodel.ShippingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,7 +23,7 @@ class ShippingFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     //viewModel
-    private val viewModel by viewModels<LoginViewModel>()
+    private val viewModel by viewModels<ShippingViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +35,11 @@ class ShippingFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //api call
+        if(isNetworkAvailable){
+            viewModel.getShipping()
+        }
+
         //init views
         binding.apply {
             //Toolbar
@@ -44,6 +50,31 @@ class ShippingFragment : BaseFragment() {
             }
         }
     }
+
+    //--- observers ---//
+//    private fun loadShippingData() {
+//        binding.apply {
+//            viewModel.shippingLiveData.observe(viewLifecycleOwner) { response ->
+//                when (response) {
+//                    is NetworkRequest.Loading -> {
+//                        loading.isVisible(true, containerGroup)
+//                    }
+//
+//                    is NetworkRequest.Success -> {
+//                        loading.isVisible(false, containerGroup)
+//                        response.data?.let { data ->
+//                            initShippingViews(data)
+//                        }
+//                    }
+//
+//                    is NetworkRequest.Error -> {
+//                        loading.isVisible(false, containerGroup)
+//                        root.showSnackBar(response.error!!)
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     override fun onNetworkLost() {
     }

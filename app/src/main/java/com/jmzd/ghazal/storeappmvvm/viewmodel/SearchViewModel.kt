@@ -1,6 +1,5 @@
 package com.jmzd.ghazal.storeappmvvm.viewmodel
 
-import android.os.Build.VERSION_CODES.Q
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,7 +9,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.search_filter.FilterModel
 import com.jmzd.ghazal.storeappmvvm.data.repository.SearchFilterRepository
 import com.jmzd.ghazal.storeappmvvm.data.repository.SearchRepository
 import com.jmzd.ghazal.storeappmvvm.utils.constants.SORT
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.utils.network.ResponseHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -24,8 +23,8 @@ class SearchViewModel @Inject constructor(
     ) : ViewModel(){
 
     //search
-    private val _searchLiveData = MutableLiveData<MyResponse<ResponseSearch>>()
-    val searchLiveData: LiveData<MyResponse<ResponseSearch>> = _searchLiveData
+    private val _searchLiveData = MutableLiveData<NetworkRequest<ResponseSearch>>()
+    val searchLiveData: LiveData<NetworkRequest<ResponseSearch>> = _searchLiveData
     //search filter
     private val _filterLiveData = MutableLiveData<MutableList<FilterModel>>()
     val filterLiveData: LiveData<MutableList<FilterModel>> = _filterLiveData
@@ -44,7 +43,7 @@ class SearchViewModel @Inject constructor(
 
     fun search(queries : Map<String , String>) = viewModelScope.launch {
 
-        _searchLiveData.value = MyResponse.Loading()
+        _searchLiveData.value = NetworkRequest.Loading()
 
         val response: Response<ResponseSearch> = repository.search(queries)
 

@@ -30,7 +30,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.constants.PRODUCT
 import com.jmzd.ghazal.storeappmvvm.utils.enums.ProductsCategories
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.*
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.viewmodel.HomeViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileViewModel
 import com.todkars.shimmer.ShimmerRecyclerView
@@ -124,17 +124,17 @@ class HomeFragment : BaseFragment() {
     //--- observers ---//
     private fun observeProfileLiveData() {
         binding.apply {
-            profileViewModel.profileLiveData.observe(viewLifecycleOwner) { response: MyResponse<ResponseProfile>? ->
+            profileViewModel.profileLiveData.observe(viewLifecycleOwner) { response: NetworkRequest<ResponseProfile>? ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         avatarLoading.isVisible = true
                     }
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         avatarLoading.isVisible = false
 
                         root.showSnackBar(response.message!!)
                     }
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         avatarLoading.isVisible = false
 
                         response.data?.let {
@@ -156,17 +156,17 @@ class HomeFragment : BaseFragment() {
 
     private fun observeBannersLiveData() {
         binding.apply {
-            viewModel.bannersLiveData.observe(viewLifecycleOwner) { response: MyResponse<ResponseBanners>? ->
+            viewModel.bannersLiveData.observe(viewLifecycleOwner) { response: NetworkRequest<ResponseBanners>? ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         bannerLoading.changeVisibility(true , bannerList)
                     }
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         bannerLoading.changeVisibility(false , bannerList)
 
                         root.showSnackBar(response.message!!)
                     }
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         bannerLoading.changeVisibility(false , bannerList)
 
                         response.data?.let {
@@ -184,16 +184,16 @@ class HomeFragment : BaseFragment() {
 
     private fun observeDiscountsLiveData() {
         binding.apply {
-            viewModel.discountsLiveData.observe(viewLifecycleOwner) { response: MyResponse<ResponseDiscount>? ->
+            viewModel.discountsLiveData.observe(viewLifecycleOwner) { response: NetworkRequest<ResponseDiscount>? ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         discountList.showShimmer()
                     }
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         discountList.hideShimmer()
                         root.showSnackBar(response.message!!)
                     }
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         discountList.hideShimmer()
 
                         response.data?.let { data ->
@@ -351,16 +351,16 @@ class HomeFragment : BaseFragment() {
 
     //--- other ---//
     private fun handleProductsRequest(
-        request: MyResponse<ResponseProducts>,
+        request: NetworkRequest<ResponseProducts>,
         recyclerView: ShimmerRecyclerView,
         adapter: ProductsAdapter
     ) {
         when (request) {
-            is MyResponse.Loading -> {
+            is NetworkRequest.Loading -> {
                 recyclerView.showShimmer()
             }
 
-            is MyResponse.Success -> {
+            is NetworkRequest.Success -> {
                 recyclerView.hideShimmer()
                 request.data?.let { data ->
                     data.subCategory?.let { subCats ->
@@ -375,7 +375,7 @@ class HomeFragment : BaseFragment() {
                 }
             }
 
-            is MyResponse.Error -> {
+            is NetworkRequest.Error -> {
                 recyclerView.hideShimmer()
                 binding.root.showSnackBar(request.message!!)
             }

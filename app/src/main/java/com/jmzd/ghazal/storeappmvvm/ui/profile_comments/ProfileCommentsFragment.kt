@@ -15,7 +15,7 @@ import com.jmzd.ghazal.storeappmvvm.databinding.FragmentProfileCommentsBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileCommentsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -72,11 +72,11 @@ class ProfileCommentsFragment : BaseFragment() {
         binding.apply {
             viewModel.profileCommentsLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         commentsList.showShimmer()
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         commentsList.hideShimmer()
                         response.data?.let { data ->
                             if (data.data.isNotEmpty()) {
@@ -88,7 +88,7 @@ class ProfileCommentsFragment : BaseFragment() {
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         commentsList.hideShimmer()
                         root.showSnackBar(response.message!!)
                     }
@@ -101,16 +101,16 @@ class ProfileCommentsFragment : BaseFragment() {
         binding.apply {
             viewModel.deleteCommentLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {}
+                    is NetworkRequest.Loading -> {}
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         response.data?.let {
                             if (isNetworkAvailable)
                                 viewModel.getProfileComments()
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         root.showSnackBar(response.message!!)
                     }
                 }

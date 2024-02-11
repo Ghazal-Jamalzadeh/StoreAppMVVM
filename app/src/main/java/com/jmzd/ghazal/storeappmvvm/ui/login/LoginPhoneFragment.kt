@@ -20,7 +20,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.constants.IS_CALLED_VERIFY
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.enableLoading
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.hideKeyboard
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -123,16 +123,16 @@ class LoginPhoneFragment : BaseFragment() {
 
     private fun observeLoginLiveData() {
         binding.apply {
-            viewModel.loginLiveData.observe(viewLifecycleOwner) { response: MyResponse<ResponseLogin>? ->
+            viewModel.loginLiveData.observe(viewLifecycleOwner) { response: NetworkRequest<ResponseLogin>? ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         sendPhoneBtn.enableLoading(true)
                     }
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         sendPhoneBtn.enableLoading(false)
                         root.showSnackBar(response.message!!)
                     }
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         sendPhoneBtn.enableLoading(false)
                         response.data.let {
                             if (IS_CALLED_VERIFY) {

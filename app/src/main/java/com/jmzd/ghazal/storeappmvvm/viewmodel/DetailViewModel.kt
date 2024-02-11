@@ -12,7 +12,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseProductFeatures
 import com.jmzd.ghazal.storeappmvvm.data.models.detail.ResponseProductPriceChart
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_favorite.ResponseProductLike
 import com.jmzd.ghazal.storeappmvvm.data.repository.DetailRepository
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.utils.network.ResponseHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -27,23 +27,23 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
     private val _productIdLiveData = MutableLiveData<Int>()
     val productIdLiveData: LiveData<Int> = _productIdLiveData
     //detail
-    private val _detailLiveData = MutableLiveData<MyResponse<ResponseDetail>>()
-    val detailLiveData: LiveData<MyResponse<ResponseDetail>> = _detailLiveData
+    private val _detailLiveData = MutableLiveData<NetworkRequest<ResponseDetail>>()
+    val detailLiveData: LiveData<NetworkRequest<ResponseDetail>> = _detailLiveData
     //like post
-    private val _likeLiveData = MutableLiveData<MyResponse<ResponseProductLike>>()
-    val likeLiveData: LiveData<MyResponse<ResponseProductLike>> = _likeLiveData
+    private val _likeLiveData = MutableLiveData<NetworkRequest<ResponseProductLike>>()
+    val likeLiveData: LiveData<NetworkRequest<ResponseProductLike>> = _likeLiveData
     //features
-    private val _featuresLiveData = MutableLiveData<MyResponse<ResponseProductFeatures>>()
-    val featuresLiveData: LiveData<MyResponse<ResponseProductFeatures>> = _featuresLiveData
+    private val _featuresLiveData = MutableLiveData<NetworkRequest<ResponseProductFeatures>>()
+    val featuresLiveData: LiveData<NetworkRequest<ResponseProductFeatures>> = _featuresLiveData
     //comments
-    private val _commentsLiveData = MutableLiveData<MyResponse<ResponseCommentsList>>()
-    val commentsLiveData: LiveData<MyResponse<ResponseCommentsList>> = _commentsLiveData
+    private val _commentsLiveData = MutableLiveData<NetworkRequest<ResponseCommentsList>>()
+    val commentsLiveData: LiveData<NetworkRequest<ResponseCommentsList>> = _commentsLiveData
     //send comment
-    private val _sendCommentLiveData = MutableLiveData<MyResponse<SimpleResponse>>()
-    val sendCommentLiveData: LiveData<MyResponse<SimpleResponse>> = _sendCommentLiveData
+    private val _sendCommentLiveData = MutableLiveData<NetworkRequest<SimpleResponse>>()
+    val sendCommentLiveData: LiveData<NetworkRequest<SimpleResponse>> = _sendCommentLiveData
     //price chart
-    private val _priceChartLiveData = MutableLiveData<MyResponse<ResponseProductPriceChart>>()
-    val priceChartLiveData: LiveData<MyResponse<ResponseProductPriceChart>> = _priceChartLiveData
+    private val _priceChartLiveData = MutableLiveData<NetworkRequest<ResponseProductPriceChart>>()
+    val priceChartLiveData: LiveData<NetworkRequest<ResponseProductPriceChart>> = _priceChartLiveData
 
     //--- getter & setter ---//
     fun setProductId(id: Int) {
@@ -53,7 +53,7 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
     //--- api call ---//
     fun getDetail(productId : Int) = viewModelScope.launch {
 
-        _detailLiveData.value = MyResponse.Loading()
+        _detailLiveData.value = NetworkRequest.Loading()
 
         val response: Response<ResponseDetail> = repository.getDetail(productId)
 
@@ -62,7 +62,7 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
 
     fun likeProduct(productId : Int) = viewModelScope.launch {
 
-        _likeLiveData.value = MyResponse.Loading()
+        _likeLiveData.value = NetworkRequest.Loading()
 
         val response: Response<ResponseProductLike> = repository.postLikeProduct(productId)
 
@@ -71,7 +71,7 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
 
     fun getFeatures(productId : Int) = viewModelScope.launch {
 
-        _featuresLiveData.value = MyResponse.Loading()
+        _featuresLiveData.value = NetworkRequest.Loading()
 
         val response: Response<ResponseProductFeatures> = repository.getDetailFeatures(productId)
 
@@ -81,7 +81,7 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
 
     fun getComments(productId : Int) = viewModelScope.launch {
 
-        _commentsLiveData.value = MyResponse.Loading()
+        _commentsLiveData.value = NetworkRequest.Loading()
 
         val response: Response<ResponseCommentsList> = repository.getDetailComments(productId)
 
@@ -90,7 +90,7 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
 
     fun sendComment(productId : Int , body : BodySendComment) = viewModelScope.launch {
 
-        _sendCommentLiveData.value = MyResponse.Loading()
+        _sendCommentLiveData.value = NetworkRequest.Loading()
 
         val response: Response<SimpleResponse> = repository.sendComment(productId , body)
 
@@ -99,7 +99,7 @@ class DetailViewModel @Inject constructor(private val repository: DetailReposito
 
     fun getPriceChart(productId : Int) = viewModelScope.launch {
 
-        _priceChartLiveData.value = MyResponse.Loading()
+        _priceChartLiveData.value = NetworkRequest.Loading()
 
         val response: Response<ResponseProductPriceChart> = repository.getPriceChart(productId)
 

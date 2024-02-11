@@ -13,9 +13,8 @@ import com.jmzd.ghazal.storeappmvvm.databinding.FragmentAddCommentBinding
 import com.jmzd.ghazal.storeappmvvm.utils.constants.PRODUCT_ID
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.enableLoading
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.viewmodel.DetailViewModel
-import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -77,11 +76,11 @@ class AddCommentFragment : BottomSheetDialogFragment() {
         binding.apply {
             viewModel.sendCommentLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         submitBtn.enableLoading(true)
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         submitBtn.enableLoading(false)
                         response.data?.let { data ->
                             Toast.makeText(requireContext(), data.message, Toast.LENGTH_SHORT).show()
@@ -89,7 +88,7 @@ class AddCommentFragment : BottomSheetDialogFragment() {
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         submitBtn.enableLoading(false)
                         root.showSnackBar(response.message!!)
                     }

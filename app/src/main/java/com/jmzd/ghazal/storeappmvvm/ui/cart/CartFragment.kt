@@ -3,7 +3,6 @@ package com.jmzd.ghazal.storeappmvvm.ui.cart
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Parcelable
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.cart.ResponseCartList
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentCartBinding
-import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginPhoneBinding
-import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginVerifyBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.constants.DECREMENT
 import com.jmzd.ghazal.storeappmvvm.utils.constants.DELETE
@@ -27,9 +24,8 @@ import com.jmzd.ghazal.storeappmvvm.utils.events.Events
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.moneySeparating
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.viewmodel.CartViewModel
-import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -94,11 +90,11 @@ class CartFragment : BaseFragment() {
         binding.apply {
             viewModel.cartListLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         loading.isVisible = true
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         loading.isVisible = false
                         response.data?.let { data ->
                             if (data.orderItems != null) {
@@ -130,7 +126,7 @@ class CartFragment : BaseFragment() {
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         loading.isVisible = false
                         root.showSnackBar(response.message!!)
                     }
@@ -143,9 +139,9 @@ class CartFragment : BaseFragment() {
         binding.apply {
             viewModel.updateCartLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {}
+                    is NetworkRequest.Loading -> {}
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         response.data?.let {
                             //update result
                             if (isNetworkAvailable)
@@ -157,7 +153,7 @@ class CartFragment : BaseFragment() {
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         root.showSnackBar(response.message!!)
                     }
                 }
@@ -202,9 +198,9 @@ class CartFragment : BaseFragment() {
         binding.apply {
             viewModel.continueLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {}
+                    is NetworkRequest.Loading -> {}
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         response.data?.let {
                             //Navigate
 //                            if (isNavigateToShipping)
@@ -213,7 +209,7 @@ class CartFragment : BaseFragment() {
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         root.showSnackBar(response.message!!)
                     }
                 }

@@ -19,7 +19,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.constants.NEW
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showKeyboard
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.viewmodel.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -98,11 +98,11 @@ class SearchFragment : BaseFragment() {
         binding.apply {
             viewModel.searchLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         searchList.showShimmer()
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         searchList.hideShimmer()
                         response.data?.let { data ->
                             data.products?.let { products ->
@@ -119,7 +119,7 @@ class SearchFragment : BaseFragment() {
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         searchList.hideShimmer()
                         root.showSnackBar(response.message!!)
                     }

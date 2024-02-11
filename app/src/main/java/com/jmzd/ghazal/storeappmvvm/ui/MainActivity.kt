@@ -1,6 +1,5 @@
 package com.jmzd.ghazal.storeappmvvm.ui
 
-import android.net.NetworkRequest
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
@@ -17,7 +16,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.events.EventBus
 import com.jmzd.ghazal.storeappmvvm.utils.events.Events
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
 import com.jmzd.ghazal.storeappmvvm.utils.network.InternetConnectionChecker
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.utils.otp.AppSignatureHelper
 import com.jmzd.ghazal.storeappmvvm.viewmodel.CartViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -127,10 +126,10 @@ class MainActivity : BaseActivity() {
         binding.apply {
             cartViewModel.cartListLiveData.observe(this@MainActivity) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         response.data?.let { data ->
                             if (data.quantity != null) {
                                 if (data.quantity.toString().toInt() > 0) {
@@ -147,7 +146,7 @@ class MainActivity : BaseActivity() {
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         root.showSnackBar(response.message!!)
                     }
                 }

@@ -16,7 +16,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.constants.PRODUCT_ID
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.changeVisibility
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.viewmodel.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -73,11 +73,11 @@ class DetailCommentsFragment : BaseFragment() {
         binding.apply {
             viewModel.commentsLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         commentsLoading.changeVisibility(true, commentsList)
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         commentsLoading.changeVisibility(false, commentsList)
                         response.data?.let { data ->
                             if (data.data.isNotEmpty()) {
@@ -89,7 +89,7 @@ class DetailCommentsFragment : BaseFragment() {
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         commentsLoading.changeVisibility(false, commentsList)
                         root.showSnackBar(response.message!!)
                     }

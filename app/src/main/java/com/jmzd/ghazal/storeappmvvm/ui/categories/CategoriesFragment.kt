@@ -1,29 +1,22 @@
 package com.jmzd.ghazal.storeappmvvm.ui.categories
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.categories.ResponseCategories
-import com.jmzd.ghazal.storeappmvvm.databinding.FragmentCartBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentCategoriesBinding
-import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginPhoneBinding
-import com.jmzd.ghazal.storeappmvvm.databinding.FragmentLoginVerifyBinding
 import com.jmzd.ghazal.storeappmvvm.ui.categories.adapters.CategoryAdapter
-import com.jmzd.ghazal.storeappmvvm.ui.search.adapters.FilterAdapter
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.viewmodel.CategoriesViewModel
-import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -71,18 +64,18 @@ class CategoriesFragment : BaseFragment() {
         binding.apply {
             viewModel.categoriesLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         categoriesList.showShimmer()
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         categoriesList.hideShimmer()
                         response.data?.let { data ->
                             initCategoriesRecycler(data)
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         categoriesList.hideShimmer()
                         root.showSnackBar(response.message!!)
                     }

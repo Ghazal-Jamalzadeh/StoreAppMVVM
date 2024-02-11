@@ -19,7 +19,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.constants.DELIVERED
 import com.jmzd.ghazal.storeappmvvm.utils.constants.PENDING
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
-import com.jmzd.ghazal.storeappmvvm.utils.network.MyResponse
+import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ProfileOrdersViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -86,11 +86,11 @@ class ProfileOrdersFragment : BaseFragment() {
         binding.apply {
             viewModel.profileOrdersLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
-                    is MyResponse.Loading -> {
+                    is NetworkRequest.Loading -> {
                         ordersList.showShimmer()
                     }
 
-                    is MyResponse.Success -> {
+                    is NetworkRequest.Success -> {
                         ordersList.hideShimmer()
                         response.data?.let { data ->
                             if (data.data.isNotEmpty()) {
@@ -102,7 +102,7 @@ class ProfileOrdersFragment : BaseFragment() {
                         }
                     }
 
-                    is MyResponse.Error -> {
+                    is NetworkRequest.Error -> {
                         ordersList.hideShimmer()
                         root.showSnackBar(response.message!!)
                     }
