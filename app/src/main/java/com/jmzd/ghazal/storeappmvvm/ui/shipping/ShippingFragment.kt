@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentSearchBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentShippingBinding
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
@@ -33,7 +36,12 @@ class ShippingFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         //init views
         binding.apply {
-
+            //Toolbar
+            toolbar.apply {
+                toolbarTitleTxt.text = getString(R.string.invoiceWithDeliveryPrice)
+                toolbarOptionImg.isVisible = false
+                toolbarBackImg.setOnClickListener { findNavController().popBackStack() }
+            }
         }
     }
 
