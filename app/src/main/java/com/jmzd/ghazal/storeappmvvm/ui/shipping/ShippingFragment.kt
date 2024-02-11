@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmzd.ghazal.storeappmvvm.R
+import com.jmzd.ghazal.storeappmvvm.data.models.address.BodySetAddressForShipping
 import com.jmzd.ghazal.storeappmvvm.data.models.shipping.ResponseShipping
 import com.jmzd.ghazal.storeappmvvm.databinding.DialogChangeAddressBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentSearchBinding
@@ -41,6 +42,10 @@ class ShippingFragment : BaseFragment() {
 
     @Inject
     lateinit var addressesAdapter: AddressesAdapter
+
+    //body
+    @Inject
+    lateinit var bodySetAddress : BodySetAddressForShipping
 
     //other
     private var finalPrice = 0
@@ -140,7 +145,7 @@ class ShippingFragment : BaseFragment() {
     @SuppressLint("SetTextI18n")
     private fun setAddressData(address: ResponseShipping.Addresse) {
         //Body
-//        bodySetAddress.addressId = address.id.toString()
+        bodySetAddress.addressId = address.id.toString()
         //Set data
         binding.shippingAddressLay.apply {
             recipientNameTxt.text = "${address.receiverFirstname} ${address.receiverLastname}"
@@ -148,8 +153,8 @@ class ShippingFragment : BaseFragment() {
             phoneTxt.text = address.receiverCellphone
         }
         //Call set address
-//        if (isNetworkAvailable)
-//            viewModel.callSetAddressApi(bodySetAddress)
+        if (isNetworkAvailable)
+            viewModel.setAddress(bodySetAddress)
     }
 
     //--- recyclers ---//
