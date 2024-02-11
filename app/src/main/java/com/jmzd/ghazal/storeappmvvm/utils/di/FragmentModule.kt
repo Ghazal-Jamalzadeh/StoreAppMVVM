@@ -2,6 +2,7 @@ package com.jmzd.ghazal.storeappmvvm.utils.di
 
 import androidx.fragment.app.Fragment
 import com.jmzd.ghazal.storeappmvvm.data.models.SimpleResponse
+import com.jmzd.ghazal.storeappmvvm.data.models.address.BodySetAddressForShipping
 import com.jmzd.ghazal.storeappmvvm.data.models.address.BodySubmitAddress
 import com.jmzd.ghazal.storeappmvvm.data.models.cart.BodyAddToCart
 import com.jmzd.ghazal.storeappmvvm.data.models.comments.BodySendComment
@@ -38,5 +39,10 @@ object FragmentModule {
 
     @Provides
     fun bodySendComment() = BodySendComment()
+
+    @Provides
+    fun bodySetAddressForShipping() = BodySetAddressForShipping()
+
+
 
 }
