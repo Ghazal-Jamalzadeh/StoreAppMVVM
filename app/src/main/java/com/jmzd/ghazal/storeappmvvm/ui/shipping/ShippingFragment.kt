@@ -23,6 +23,7 @@ import com.jmzd.ghazal.storeappmvvm.utils.extensions.*
 import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ShippingViewModel
+import com.jmzd.ghazal.storeappmvvm.viewmodel.WalletViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -35,6 +36,7 @@ class ShippingFragment : BaseFragment() {
 
     //viewModel
     private val viewModel by viewModels<ShippingViewModel>()
+    private val walletViewModel by viewModels<WalletViewModel>()
 
     //adapters
     @Inject
@@ -63,6 +65,7 @@ class ShippingFragment : BaseFragment() {
         //api call
         if(isNetworkAvailable){
             viewModel.getShipping()
+            walletViewModel.getWalletBalance()
         }
 
         //init views
@@ -77,6 +80,7 @@ class ShippingFragment : BaseFragment() {
 
         //observers
         observeShippingLiveData()
+        obsereveWalletBalance()
     }
 
     //--- observers ---//
@@ -97,6 +101,31 @@ class ShippingFragment : BaseFragment() {
 
                     is NetworkRequest.Error -> {
                         loading.changeVisibility(false, containerGroup)
+                        root.showSnackBar(response.message!!)
+                    }
+                }
+            }
+        }
+    }
+
+
+    private fun obsereveWalletBalance() {
+        binding.apply {
+            walletViewModel.walletBalanceLiveData.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is NetworkRequest.Loading -> {
+                        walletLoading.changeVisibility(true, walletTxt)
+                    }
+
+                    is NetworkRequest.Success -> {
+                        walletLoading.changeVisibility(false, walletTxt)
+                        response.data?.let { data ->
+                            walletTxt.text = data.wallet.toString().toInt().moneySeparating()
+                        }
+                    }
+
+                    is NetworkRequest.Error -> {
+                        walletLoading.changeVisibility(false, walletTxt)
                         root.showSnackBar(response.message!!)
                     }
                 }
