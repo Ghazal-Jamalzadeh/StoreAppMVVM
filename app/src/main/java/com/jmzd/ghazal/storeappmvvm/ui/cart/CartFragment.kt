@@ -47,6 +47,11 @@ class CartFragment : BaseFragment() {
     //save recycler view state
     private var recyclerViewState: Parcelable? = null
 
+    //flags
+    //single observe ham mishod estefade kard ke too project haye ghabl zadim
+    //vali in ravesh flag gozari ham ok e kamelan kar mikone
+    private var isNavigateToShipping : Boolean = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -104,7 +109,7 @@ class CartFragment : BaseFragment() {
                                     //show fab (continue)
                                     continueFABtn.isVisible = true
                                     continueFABtn.setOnClickListener {
-//                                        isNavigateToShipping = true
+                                        isNavigateToShipping = true
                                         if (isNetworkAvailable)
                                             viewModel.cartContinue()
                                     }
@@ -203,9 +208,9 @@ class CartFragment : BaseFragment() {
                     is NetworkRequest.Success -> {
                         response.data?.let {
                             //Navigate
-//                            if (isNavigateToShipping)
+                            if (isNavigateToShipping)
                                 findNavController().navigate(R.id.action_to_shipping_fragment)
-//                            isNavigateToShipping = false
+                            isNavigateToShipping = false
                         }
                     }
 
