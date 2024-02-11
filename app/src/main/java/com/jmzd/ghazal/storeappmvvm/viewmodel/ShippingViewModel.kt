@@ -17,14 +17,12 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class ShippingViewModel @Inject constructor(private val repository: ShippingRepository) : ViewModel() {
+class ShippingViewModel @Inject constructor(private val repository: ShippingRepository) :
+    ViewModel() {
 
     //shipping
     private val _shippingLiveData = MutableLiveData<NetworkRequest<ResponseShipping>>()
     val shippingLiveData: LiveData<NetworkRequest<ResponseShipping>> = _shippingLiveData
-    //set address
-    private val _setAddressLiveData = MutableLiveData<NetworkRequest<ResponseSetAddressForShipping>>()
-    val setAddressLiveData: LiveData<NetworkRequest<ResponseSetAddressForShipping>> = _setAddressLiveData
 
     //--- api call ---//
     fun getShipping() = viewModelScope.launch {
@@ -36,13 +34,8 @@ class ShippingViewModel @Inject constructor(private val repository: ShippingRepo
         _shippingLiveData.value = ResponseHandler(response).generateResponse()
     }
 
-    fun setAddress(body : BodySetAddressForShipping) = viewModelScope.launch {
-
-        _setAddressLiveData.value = NetworkRequest.Loading()
-
-        val response: Response<ResponseSetAddressForShipping> = repository.setAddress(body)
-
-        _setAddressLiveData.value = ResponseHandler(response).generateResponse()
+    fun setAddress(body: BodySetAddressForShipping) = viewModelScope.launch {
+       repository.setAddress(body)
     }
 
 }
