@@ -12,18 +12,18 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.shipping.ResponseShipping
+import com.jmzd.ghazal.storeappmvvm.databinding.DialogChangeAddressBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentSearchBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentShippingBinding
+import com.jmzd.ghazal.storeappmvvm.ui.shipping.adapters.AddressesAdapter
 import com.jmzd.ghazal.storeappmvvm.ui.shipping.adapters.ShippingAdapter
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
-import com.jmzd.ghazal.storeappmvvm.utils.extensions.changeVisibility
-import com.jmzd.ghazal.storeappmvvm.utils.extensions.moneySeparating
-import com.jmzd.ghazal.storeappmvvm.utils.extensions.setupRecyclerview
-import com.jmzd.ghazal.storeappmvvm.utils.extensions.showSnackBar
+import com.jmzd.ghazal.storeappmvvm.utils.extensions.*
 import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ShippingViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ShippingFragment : BaseFragment() {
@@ -36,7 +36,11 @@ class ShippingFragment : BaseFragment() {
     private val viewModel by viewModels<ShippingViewModel>()
 
     //adapters
+    @Inject
     lateinit var shippingAdapter : ShippingAdapter
+
+    @Inject
+    lateinit var addressesAdapter: AddressesAdapter
 
     //other
     private var finalPrice = 0
@@ -116,7 +120,7 @@ class ShippingFragment : BaseFragment() {
                     shippingAddressLay.changeAddressTxt.apply {
                         isVisible = true
                         setOnClickListener {
-//                            showChangeAddressDialog(data.addresses)
+                            showChangeAddressDialog(data.addresses)
                         }
                     }
                 }
@@ -154,6 +158,23 @@ class ShippingFragment : BaseFragment() {
         binding.productsList.setupRecyclerview(LinearLayoutManager(requireContext()), shippingAdapter)
     }
 
+    //--- dialogs ---//
+    private fun showChangeAddressDialog(list: List<ResponseShipping.Addresse>) {
+        val dialog = Dialog(requireContext())
+        val dialogBinding = DialogChangeAddressBinding.inflate(layoutInflater)
+        dialog.transparentCorners()
+        dialog.setContentView(dialogBinding.root)
+        addressesAdapter.setData(list)
+        dialogBinding.addressList.setupRecyclerview(LinearLayoutManager(requireContext()), addressesAdapter)
+        //Click
+        addressesAdapter.setOnItemCLickListener { address ->
+            setAddressData(address)
+            //Dismiss
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
 
     override fun onNetworkLost() {
     }

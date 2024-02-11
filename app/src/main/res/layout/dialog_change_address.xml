@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_rounded_white"
+    android:paddingBottom="@dimen/_10mdp">
+    <!--Title-->
+    <TextView
+        android:id="@+id/titleTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/darkStrategy"
+        android:textSize="@dimen/_12font_mdp"
+        android:gravity="center"
+        android:layout_marginHorizontal="@dimen/_10mdp"
+        android:layout_marginTop="@dimen/_10mdp"
+        android:text="@string/selectYourAddress"
+        app:fontPath="fonts/iransans_bold.ttf"
+        app:layout_constraintEnd_toEndOf="@+id/line1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <!--Line-->
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/_10mdp"
+        android:alpha="0.5"
+        android:background="@color/water"
+        android:layout_below="@id/titleTxt"/>
+    <!--List-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/addressList"
+        android:layout_marginTop="@dimen/_5mdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/line1"/>
+
+</RelativeLayout>
