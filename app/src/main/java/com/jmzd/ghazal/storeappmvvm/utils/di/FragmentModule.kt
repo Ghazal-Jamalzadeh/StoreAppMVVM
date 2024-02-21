@@ -8,6 +8,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.cart.BodyAddToCart
 import com.jmzd.ghazal.storeappmvvm.data.models.comments.BodySendComment
 import com.jmzd.ghazal.storeappmvvm.data.models.login.BodyLogin
 import com.jmzd.ghazal.storeappmvvm.data.models.profile.BodyUpdateProfile
+import com.jmzd.ghazal.storeappmvvm.data.models.shipping.BodyCoupon
 import com.jmzd.ghazal.storeappmvvm.data.models.wallet.BodyIncreaseWallet
 import com.jmzd.ghazal.storeappmvvm.ui.detail.adapters.PagerAdapter
 import dagger.Module
@@ -42,6 +43,9 @@ object FragmentModule {
 
     @Provides
     fun bodySetAddressForShipping() = BodySetAddressForShipping()
+
+    @Provides
+    fun bodyCoupon() = BodyCoupon()
 
 
 

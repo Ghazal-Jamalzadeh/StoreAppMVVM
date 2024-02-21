@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 
 data class BodyCoupon(
     @SerializedName("couponId")
-    val couponId: String? // poff-20
+    var couponId: String? = null // poff-20
 )
