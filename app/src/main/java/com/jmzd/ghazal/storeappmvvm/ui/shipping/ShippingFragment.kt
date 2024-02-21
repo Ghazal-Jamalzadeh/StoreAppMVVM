@@ -2,6 +2,7 @@ package com.jmzd.ghazal.storeappmvvm.ui.shipping
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -106,6 +107,7 @@ class ShippingFragment : BaseFragment() {
         observeShippingLiveData()
         observeWalletBalance()
         observeCouponLiveData()
+        observePaymentLiveData()
     }
 
     //--- observers ---//
@@ -209,6 +211,36 @@ class ShippingFragment : BaseFragment() {
         }
     }
 
+
+    private fun observePaymentLiveData() {
+        binding.apply {
+            viewModel.paymentLiveData.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is NetworkRequest.Loading -> {
+                        submitBtn.enableLoading(true)
+                    }
+
+                    is NetworkRequest.Success -> {
+                        submitBtn.enableLoading(false)
+                        response.data?.let { data ->
+                            if (data.startPay != null)
+                                Uri.parse(data.startPay).openBrowser(requireContext())
+                            else
+                                root.showSnackBar(data.message!!)
+                            //Close
+                            findNavController().popBackStack(R.id.shippingFragment, true)
+                        }
+                    }
+
+                    is NetworkRequest.Error -> {
+                        submitBtn.enableLoading(false)
+                        root.showSnackBar(response.message!!)
+                    }
+                }
+            }
+        }
+    }
+
     //--- init views ---//
     @SuppressLint("SetTextI18n")
     private fun initShippingViews(data: ResponseShipping) {
@@ -236,14 +268,14 @@ class ShippingFragment : BaseFragment() {
                 }
             }
             //Payment
-//            submitBtn.setOnClickListener {
-//                if (data.addresses.isNullOrEmpty().not()) {
-//                    if (isNetworkAvailable)
-//                        viewModel.callPaymentApi(bodyCoupon)
-//                } else {
-//                    root.showSnackBar(getString(R.string.addressCanNotBeEmpty))
-//                }
-//            }
+            submitBtn.setOnClickListener {
+                if (data.addresses.isNullOrEmpty().not()) {
+                    if (isNetworkAvailable)
+                        viewModel.payment(bodyCoupon)
+                } else {
+                    root.showSnackBar(getString(R.string.addressCanNotBeEmpty))
+                }
+            }
         }
     }
 
