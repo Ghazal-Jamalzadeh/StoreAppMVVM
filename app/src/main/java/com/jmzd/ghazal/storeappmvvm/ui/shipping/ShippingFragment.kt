@@ -15,15 +15,14 @@ import com.jmzd.ghazal.storeappmvvm.data.models.address.BodySetAddressForShippin
 import com.jmzd.ghazal.storeappmvvm.data.models.shipping.BodyCoupon
 import com.jmzd.ghazal.storeappmvvm.data.models.shipping.ResponseShipping
 import com.jmzd.ghazal.storeappmvvm.databinding.DialogChangeAddressBinding
-import com.jmzd.ghazal.storeappmvvm.databinding.FragmentSearchBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentShippingBinding
 import com.jmzd.ghazal.storeappmvvm.ui.shipping.adapters.AddressesAdapter
 import com.jmzd.ghazal.storeappmvvm.ui.shipping.adapters.ShippingAdapter
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
 import com.jmzd.ghazal.storeappmvvm.utils.constants.ENABLE
+import com.jmzd.ghazal.storeappmvvm.utils.constants.PERCENT
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.*
 import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
-import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.ShippingViewModel
 import com.jmzd.ghazal.storeappmvvm.viewmodel.WalletViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -105,7 +104,7 @@ class ShippingFragment : BaseFragment() {
 
         //observers
         observeShippingLiveData()
-        obsereveWalletBalance()
+        observeWalletBalance()
         observeCouponLiveData()
     }
 
@@ -135,7 +134,7 @@ class ShippingFragment : BaseFragment() {
     }
 
 
-    private fun obsereveWalletBalance() {
+    private fun observeWalletBalance() {
         binding.apply {
             walletViewModel.walletBalanceLiveData.observe(viewLifecycleOwner) { response ->
                 when (response) {
@@ -176,7 +175,7 @@ class ShippingFragment : BaseFragment() {
                             removeTxt.isVisible = true
                             couponTitle.text = "${getString(R.string.discountCode)} (${data.title})"
                             //Status
-                       /*     if (data.status == ENABLE) {
+                            if (data.status == ENABLE) {
                                 coupon = data.code!!
                                 bodyCoupon.couponId = coupon
                                 //Type
@@ -196,7 +195,7 @@ class ShippingFragment : BaseFragment() {
                                     bodyCoupon.couponId = null
                                     binding.invoiceTitle.text = finalPrice.moneySeparating()
                                 }
-                            }*/
+                            }
                         }
                     }
 
@@ -216,7 +215,7 @@ class ShippingFragment : BaseFragment() {
         binding.apply {
             //Order
             data.order?.let { order ->
-//                finalPrice = order.finalPrice.toString().toInt()
+                finalPrice = order.finalPrice.toString().toInt()
                 invoiceTitle.text = order.finalPrice.toString().toInt().moneySeparating()
                 //Orders list
                 initRecycler(order.orderItems)

@@ -84,3 +84,4 @@ const val DELETE = "delete"
 
 //coupon
 const val ENABLE = "enable"
+const val PERCENT = "percent"
