@@ -26,6 +26,8 @@ import com.jmzd.ghazal.storeappmvvm.data.models.profile_favorite.ResponseProduct
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_favorite.ResponseProfileFavorites
 import com.jmzd.ghazal.storeappmvvm.data.models.profile_order.ResponseProfileOrdersList
 import com.jmzd.ghazal.storeappmvvm.data.models.search.ResponseSearch
+import com.jmzd.ghazal.storeappmvvm.data.models.shipping.BodyCoupon
+import com.jmzd.ghazal.storeappmvvm.data.models.shipping.ResponseCoupon
 import com.jmzd.ghazal.storeappmvvm.data.models.shipping.ResponseShipping
 import com.jmzd.ghazal.storeappmvvm.data.models.wallet.BodyIncreaseWallet
 import com.jmzd.ghazal.storeappmvvm.data.models.wallet.ResponseIncreaseWallet
@@ -142,6 +144,8 @@ interface ApiServices {
     @PUT("shipping/set/address")
     suspend fun shippingSetAddress(@Body body: BodySetAddressForShipping) : Response<ResponseSetAddressForShipping>
 
+    @GET("check/coupon")
+    suspend fun checkCoupon(@Body body : BodyCoupon) : Response<ResponseCoupon>
 
 
 }
