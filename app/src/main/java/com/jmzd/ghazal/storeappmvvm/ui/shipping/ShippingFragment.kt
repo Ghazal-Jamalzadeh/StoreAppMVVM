@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmzd.ghazal.storeappmvvm.R
 import com.jmzd.ghazal.storeappmvvm.data.models.address.BodySetAddressForShipping
+import com.jmzd.ghazal.storeappmvvm.data.models.shipping.BodyCoupon
 import com.jmzd.ghazal.storeappmvvm.data.models.shipping.ResponseShipping
 import com.jmzd.ghazal.storeappmvvm.databinding.DialogChangeAddressBinding
 import com.jmzd.ghazal.storeappmvvm.databinding.FragmentSearchBinding
@@ -49,8 +50,12 @@ class ShippingFragment : BaseFragment() {
     @Inject
     lateinit var bodySetAddress : BodySetAddressForShipping
 
+    @Inject
+    lateinit var bodyCoupon : BodyCoupon
+
     //other
     private var finalPrice = 0
+    private var coupon = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,6 +65,7 @@ class ShippingFragment : BaseFragment() {
         return binding.root
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //api call
@@ -75,6 +81,24 @@ class ShippingFragment : BaseFragment() {
                 toolbarTitleTxt.text = getString(R.string.invoiceWithDeliveryPrice)
                 toolbarOptionImg.isVisible = false
                 toolbarBackImg.setOnClickListener { findNavController().popBackStack() }
+            }
+
+            //Discount
+            shippingDiscountLay.apply {
+                checkTxt.setOnClickListener {
+                    coupon = codeEdt.text.toString()
+                    bodyCoupon.couponId = coupon
+                    if (isNetworkAvailable)
+                        viewModel.checkCoupon(bodyCoupon)
+                }
+                //Ato scroll
+                codeEdt.setOnTouchListener { view, _ ->
+                    view.performClick()
+                    binding.scrollLay.postDelayed({
+                        binding.scrollLay.fullScroll(View.FOCUS_DOWN)
+                    }, 300)
+                    false
+                }
             }
         }
 
