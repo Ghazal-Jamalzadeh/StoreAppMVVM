@@ -20,6 +20,7 @@ import com.jmzd.ghazal.storeappmvvm.databinding.FragmentShippingBinding
 import com.jmzd.ghazal.storeappmvvm.ui.shipping.adapters.AddressesAdapter
 import com.jmzd.ghazal.storeappmvvm.ui.shipping.adapters.ShippingAdapter
 import com.jmzd.ghazal.storeappmvvm.utils.base.BaseFragment
+import com.jmzd.ghazal.storeappmvvm.utils.constants.ENABLE
 import com.jmzd.ghazal.storeappmvvm.utils.extensions.*
 import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.viewmodel.LoginViewModel
@@ -105,6 +106,7 @@ class ShippingFragment : BaseFragment() {
         //observers
         observeShippingLiveData()
         obsereveWalletBalance()
+        observeCouponLiveData()
     }
 
     //--- observers ---//
@@ -150,6 +152,57 @@ class ShippingFragment : BaseFragment() {
 
                     is NetworkRequest.Error -> {
                         walletLoading.changeVisibility(false, walletTxt)
+                        root.showSnackBar(response.message!!)
+                    }
+                }
+            }
+        }
+    }
+
+
+    @SuppressLint("SetTextI18n")
+    private fun observeCouponLiveData() {
+        binding.shippingDiscountLay.apply {
+            viewModel.couponLiveData.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is NetworkRequest.Loading -> {
+                        couponLoading.changeVisibility(true, checkTxt)
+                    }
+
+                    is NetworkRequest.Success -> {
+                        couponLoading.changeVisibility(false, checkTxt)
+                        response.data?.let { data ->
+                            checkTxt.isVisible = false
+                            removeTxt.isVisible = true
+                            couponTitle.text = "${getString(R.string.discountCode)} (${data.title})"
+                            //Status
+                       /*     if (data.status == ENABLE) {
+                                coupon = data.code!!
+                                bodyCoupon.couponId = coupon
+                                //Type
+                                val discountPrice = if (data.type == PERCENT) {
+                                    finalPrice - ((finalPrice * data.percent.toString().toInt()) / 100)
+                                } else {
+                                    finalPrice - data.percent.toString().toInt()
+                                }
+                                binding.invoiceTitle.text = discountPrice.moneySeparating()
+                                //Remove
+                                removeTxt.setOnClickListener {
+                                    checkTxt.isVisible = true
+                                    removeTxt.isVisible = false
+                                    codeEdt.setText("")
+                                    couponTitle.text = getString(R.string.discountCode)
+                                    coupon = ""
+                                    bodyCoupon.couponId = null
+                                    binding.invoiceTitle.text = finalPrice.moneySeparating()
+                                }
+                            }*/
+                        }
+                    }
+
+                    is NetworkRequest.Error -> {
+                        bodyCoupon.couponId = null
+                        couponLoading.changeVisibility(false, checkTxt)
                         root.showSnackBar(response.message!!)
                     }
                 }
