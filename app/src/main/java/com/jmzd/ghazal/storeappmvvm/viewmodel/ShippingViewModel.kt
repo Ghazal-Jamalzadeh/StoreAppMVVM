@@ -9,6 +9,7 @@ import com.jmzd.ghazal.storeappmvvm.data.models.address.ResponseSetAddressForShi
 import com.jmzd.ghazal.storeappmvvm.data.models.shipping.BodyCoupon
 import com.jmzd.ghazal.storeappmvvm.data.models.shipping.ResponseCoupon
 import com.jmzd.ghazal.storeappmvvm.data.models.shipping.ResponseShipping
+import com.jmzd.ghazal.storeappmvvm.data.models.wallet.ResponseIncreaseWallet
 import com.jmzd.ghazal.storeappmvvm.data.repository.ShippingRepository
 import com.jmzd.ghazal.storeappmvvm.utils.network.NetworkRequest
 import com.jmzd.ghazal.storeappmvvm.utils.network.ResponseHandler
@@ -28,6 +29,9 @@ class ShippingViewModel @Inject constructor(private val repository: ShippingRepo
     //coupon
     private val _couponLiveData = MutableLiveData<NetworkRequest<ResponseCoupon>>()
     val couponLiveData: LiveData<NetworkRequest<ResponseCoupon>> = _couponLiveData
+    //coupon
+    private val _paymentLiveData = MutableLiveData<NetworkRequest<ResponseIncreaseWallet>>()
+    val paymentLiveData: LiveData<NetworkRequest<ResponseIncreaseWallet>> = _paymentLiveData
 
     //--- api call ---//
     fun getShipping() = viewModelScope.launch {
@@ -50,6 +54,15 @@ class ShippingViewModel @Inject constructor(private val repository: ShippingRepo
         val response: Response<ResponseCoupon> = repository.checkCoupon(body)
 
         _couponLiveData.value = ResponseHandler(response).generateResponse()
+    }
+
+    fun payment(body : BodyCoupon) = viewModelScope.launch {
+
+        _paymentLiveData.value = NetworkRequest.Loading()
+
+        val response: Response<ResponseIncreaseWallet> = repository.payment(body)
+
+        _paymentLiveData.value = ResponseHandler(response).generateResponse()
     }
 
 }
