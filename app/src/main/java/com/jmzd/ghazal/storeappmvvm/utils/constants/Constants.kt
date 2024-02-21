@@ -81,3 +81,6 @@ var PRODUCT_ID = 0
 const val INCREMENT = "increment"
 const val DECREMENT = "decrement"
 const val DELETE = "delete"
+
+//coupon
+const val ENABLE = "enable"
