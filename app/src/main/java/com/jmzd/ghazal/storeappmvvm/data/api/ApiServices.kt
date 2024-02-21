@@ -147,5 +147,7 @@ interface ApiServices {
     @GET("check/coupon")
     suspend fun checkCoupon(@Body body : BodyCoupon) : Response<ResponseCoupon>
 
+    @POST("payment")
+    suspend fun payment(@Body body : BodyCoupon) : Response<ResponseIncreaseWallet>
 
 }
